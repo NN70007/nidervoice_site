@@ -1,0 +1,4 @@
+# robots.txt — l'espace d'administration n'est pas à indexer.
+User-agent: *
+Allow: /
+Disallow: /espace/

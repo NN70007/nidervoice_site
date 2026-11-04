@@ -1,0 +1,144 @@
+# Publication automatique du serveur de l'espace d'administration (Google Apps Script).
+#
+# À chaque modification de espace/serveur/ (ou des tests) sur main :
+#   1. les tests du simulateur tournent ; s'ils échouent, rien n'est publié ;
+#   2. si le dépôt est configuré, le code est envoyé dans le projet Apps Script (clasp push),
+#      une nouvelle version est créée et le déploiement existant passe dessus (même adresse /exec) ;
+#   3. on vérifie que le serveur répond avec la bonne version.
+#
+# Configuration (facultative — sans elle, seuls les tests tournent et le job de publication s'arrête proprement) :
+#   Settings › Secrets and variables › Actions
+#     Variables : SCRIPT_ID      identifiant du projet Apps Script (Paramètres du projet › ID du script)
+#                 DEPLOYMENT_ID  identifiant du déploiement « Application Web » (Gérer les déploiements)
+#     Secret    : CLASPRC_JSON   contenu du fichier ~/.clasprc.json de clasp (compte jb@niedercorn.com)
+#
+# Retour en arrière : Actions › « Serveur Apps Script » › Run workflow, avec le numéro d'une ancienne version.
+# Pour tout couper : retirer l'accès « clasp » dans myaccount.google.com › Sécurité › Applications tierces.
+
+name: Serveur Apps Script
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'espace/serveur/**'
+      - 'espace/dev/gas-fake.js'
+      - 'espace/dev/test-serveur.js'
+      - '.github/workflows/serveur-apps-script.yml'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Numéro d'une ancienne version à remettre en ligne (vide = publier le code de main)"
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: serveur-apps-script
+  cancel-in-progress: false
+
+env:
+  CLASP_VERSION: 3.4.1
+
+jobs:
+  tests:
+    name: Tests du simulateur
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - name: Syntaxe du script
+        run: cp espace/serveur/Code.gs /tmp/Code.js && node --check /tmp/Code.js
+      - name: Tests serveur
+        run: node espace/dev/test-serveur.js
+
+  publier:
+    name: Publication dans Apps Script
+    needs: tests
+    # Sans les variables du dépôt, le job est simplement ignoré (pas d'échec).
+    if: vars.SCRIPT_ID != '' && vars.DEPLOYMENT_ID != ''
+    runs-on: ubuntu-latest
+    env:
+      SCRIPT_ID: ${{ vars.SCRIPT_ID }}
+      DEPLOYMENT_ID: ${{ vars.DEPLOYMENT_ID }}
+    steps:
+      - name: Vérifier la configuration
+        id: config
+        env:
+          CLASPRC_JSON: ${{ secrets.CLASPRC_JSON }}
+        run: |
+          if [ -z "$CLASPRC_JSON" ]; then
+            echo "::notice::Secret CLASPRC_JSON absent : publication automatique non configurée, rien n'est envoyé."
+            echo "pret=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "pret=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        if: steps.config.outputs.pret == 'true'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        if: steps.config.outputs.pret == 'true'
+        with:
+          node-version: 22
+      - name: Installer clasp
+        if: steps.config.outputs.pret == 'true'
+        run: npm install --global "@google/clasp@${CLASP_VERSION}"
+      - name: Identifiants (jamais affichés)
+        if: steps.config.outputs.pret == 'true'
+        env:
+          CLASPRC_JSON: ${{ secrets.CLASPRC_JSON }}
+        run: |
+          umask 077
+          printf '%s' "$CLASPRC_JSON" > "$HOME/.clasprc.json"
+      - name: Préparer le dossier envoyé
+        if: steps.config.outputs.pret == 'true'
+        run: |
+          echo "$SCRIPT_ID" | grep -qE '^[A-Za-z0-9_-]+$' || { echo "Variable SCRIPT_ID invalide"; exit 1; }
+          echo "$DEPLOYMENT_ID" | grep -qE '^[A-Za-z0-9_-]+$' || { echo "Variable DEPLOYMENT_ID invalide"; exit 1; }
+          mkdir -p build
+          cp espace/serveur/Code.gs espace/serveur/appsscript.json build/
+          printf '{"scriptId":"%s","rootDir":"."}' "$SCRIPT_ID" > build/.clasp.json
+          ls -la build
+      - name: Envoyer le code et créer une version
+        if: steps.config.outputs.pret == 'true' && inputs.version == ''
+        working-directory: build
+        run: |
+          clasp push --force
+          desc="GitHub ${GITHUB_SHA::7} $(grep -oP "VERSION: '\K[^']+" Code.gs)"
+          out=$(clasp --json create-version "$desc")
+          echo "$out"
+          num=$(printf '%s' "$out" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const m=s.match(/\{[\s\S]*\}/);process.stdout.write(String(JSON.parse(m[0]).versionNumber||""))})')
+          echo "$num" | grep -qE '^[0-9]+$'
+          echo "NUM=$num" >> "$GITHUB_ENV"
+          echo "DESC=$desc" >> "$GITHUB_ENV"
+          echo "ATTENDUE=$(grep -oP "VERSION: '\K[^']+" Code.gs)" >> "$GITHUB_ENV"
+      - name: Version demandée (retour en arrière)
+        if: steps.config.outputs.pret == 'true' && inputs.version != ''
+        env:
+          VERSION_DEMANDEE: ${{ inputs.version }}
+        run: |
+          echo "$VERSION_DEMANDEE" | grep -qE '^[0-9]+$' || { echo "Numéro de version invalide"; exit 1; }
+          echo "NUM=$VERSION_DEMANDEE" >> "$GITHUB_ENV"
+          echo "DESC=Retour à la version $VERSION_DEMANDEE (GitHub ${GITHUB_SHA::7})" >> "$GITHUB_ENV"
+          echo "ATTENDUE=" >> "$GITHUB_ENV"
+      - name: Mettre le déploiement sur cette version (même adresse)
+        if: steps.config.outputs.pret == 'true'
+        working-directory: build
+        run: |
+          clasp update-deployment "$DEPLOYMENT_ID" -V "$NUM" -d "$DESC"
+          clasp list-deployments | tee deps.txt
+          grep -F "$DEPLOYMENT_ID" deps.txt | grep -qE "@$NUM( |$)"
+      - name: Le serveur répond
+        if: steps.config.outputs.pret == 'true'
+        run: |
+          sleep 5
+          r=$(curl -sSL --max-time 60 "https://script.google.com/macros/s/${DEPLOYMENT_ID}/exec")
+          echo "$r"
+          echo "$r" | grep -q '"ok":true'
+          if [ -n "$ATTENDUE" ]; then echo "$r" | grep -qF "\"version\":\"$ATTENDUE\""; fi
+      - name: Effacer les identifiants
+        if: always()
+        run: rm -f "$HOME/.clasprc.json"

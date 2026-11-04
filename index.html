@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr" data-titre="{nom} — site en construction">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Site en construction</title>
+<meta name="description" content="Site en construction.">
+<meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css?v=20261104a">
+</head>
+<body>
+<header class="entete">
+  <div class="conteneur">
+    <a class="marque" href="./"><span class="monogramme" data-site="initiale" aria-hidden="true">·</span><span data-site="nom">Site en construction</span></a>
+    <span class="domaine" data-site="domaine"></span>
+  </div>
+</header>
+
+<main>
+  <div class="conteneur">
+    <section class="chantier" aria-labelledby="titre">
+      <span class="etiquette">En construction</span>
+      <h1 id="titre" data-site="nom">Site en construction</h1>
+      <p class="chapeau">Ce site est en cours de préparation. Les premières informations seront publiées ici très prochainement.</p>
+      <div class="barre" aria-hidden="true"><span></span></div>
+    </section>
+
+    <section id="actualites" aria-labelledby="titre-actus" hidden>
+      <h2 class="titre-section" id="titre-actus">Actualités</h2>
+      <div class="articles"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="pied">
+  <div class="conteneur">
+    <span>© <span data-annee></span> <span data-site="nom"></span></span>
+    <span data-site="domaine"></span>
+  </div>
+</footer>
+<script src="site.js?v=20261104a"></script>
+</body>
+</html>

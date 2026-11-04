@@ -1,0 +1,100 @@
+/* Socle — feuille de style du site public. Sobre, sans dépendance externe (polices système).
+   Pour personnaliser un site : changer --accent (et éventuellement --accent-doux). */
+:root {
+  --accent: #2f5bea;
+  --accent-doux: #e9eefd;
+  --fond: #fbfbfa;
+  --surface: #ffffff;
+  --encre: #17191c;
+  --encre-2: #4a5059;
+  --encre-3: #7a818b;
+  --trait: #e6e7ea;
+  --rayon: 14px;
+  --large: 760px;
+  --police: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --police-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #7d9bff;
+    --accent-doux: #1c2440;
+    --fond: #111214;
+    --surface: #18191c;
+    --encre: #eceef1;
+    --encre-2: #b4b9c1;
+    --encre-3: #868c95;
+    --trait: #2a2c31;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+  background: var(--fond); color: var(--encre);
+  font: 17px/1.65 var(--police);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+img { max-width: 100%; height: auto; display: block; }
+.conteneur { width: 100%; max-width: var(--large); margin: 0 auto; padding: 0 24px; }
+.visuellement-cache { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* En-tête */
+.entete { border-bottom: 1px solid var(--trait); background: color-mix(in srgb, var(--surface) 80%, transparent); }
+.entete .conteneur { display: flex; align-items: center; gap: 12px; min-height: 68px; }
+.marque { display: inline-flex; align-items: center; gap: 12px; color: var(--encre); text-decoration: none; font-weight: 650; letter-spacing: -.01em; font-size: 17px; }
+.monogramme {
+  width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center;
+  background: var(--encre); color: var(--fond); font-weight: 700; font-size: 16px; letter-spacing: 0;
+}
+.entete .domaine { margin-left: auto; color: var(--encre-3); font: 13px/1 var(--police-mono); }
+
+/* Contenu */
+main { flex: 1; padding: 64px 0 80px; }
+.chantier { padding: 40px 0 24px; }
+.etiquette {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px;
+  background: var(--accent-doux); color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: .02em;
+}
+.etiquette::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: pouls 2.4s ease-in-out infinite; }
+@keyframes pouls { 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .etiquette::before { animation: none; } }
+h1 { font-size: clamp(38px, 7vw, 60px); line-height: 1.05; letter-spacing: -.035em; margin: 22px 0 18px; font-weight: 750; }
+.chapeau { font-size: 19px; color: var(--encre-2); max-width: 34em; margin: 0; }
+.barre { margin-top: 44px; height: 4px; border-radius: 4px; background: var(--trait); overflow: hidden; max-width: 320px; }
+.barre span { display: block; height: 100%; width: 38%; background: var(--accent); border-radius: inherit; }
+
+/* Actualités */
+#actualites { margin-top: 56px; }
+.titre-section { font-size: 13px; text-transform: uppercase; letter-spacing: .12em; color: var(--encre-3); font-weight: 650; margin: 0 0 20px; }
+.articles { display: grid; gap: 22px; }
+.article {
+  background: var(--surface); border: 1px solid var(--trait); border-radius: var(--rayon); overflow: hidden;
+}
+.article img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--trait); }
+.article .corps { padding: 24px 26px 26px; }
+.article time { color: var(--encre-3); font-size: 14px; }
+.article h2 { font-size: 24px; line-height: 1.25; letter-spacing: -.015em; margin: 4px 0 12px; }
+.article p { margin: 0 0 12px; color: var(--encre-2); }
+.article p:last-child { margin-bottom: 0; }
+
+/* Pied de page */
+.pied { border-top: 1px solid var(--trait); color: var(--encre-3); font-size: 14px; }
+.pied .conteneur { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; padding-top: 22px; padding-bottom: 22px; }
+
+/* Page 404 */
+.erreur .code { font: 600 15px/1 var(--police-mono); color: var(--accent); letter-spacing: .08em; }
+.bouton {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 32px; padding: 12px 20px; border-radius: 10px;
+  background: var(--encre); color: var(--fond); text-decoration: none; font-weight: 600; font-size: 15px;
+}
+.bouton:hover { opacity: .88; }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  main { padding: 40px 0 56px; }
+  .entete .domaine { display: none; }
+  .article .corps { padding: 20px; }
+}

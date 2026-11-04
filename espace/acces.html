@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Accès</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="espace.css?v=20261104a">
+</head>
+<body>
+<div id="haut"></div>
+<main>
+  <div class="conteneur">
+    <div class="tete">
+      <div class="surtitre">Gestion</div>
+      <h1>Qui peut faire quoi</h1>
+      <p class="chapeau">Inscrivez une personne avec son adresse e-mail (ou plusieurs), puis cochez ses droits. Les changements s'appliquent dès sa prochaine action.
+        <b>Admin</b> : tout, y compris cette page. <b>Actualités</b> : rédiger et publier les articles.</p>
+    </div>
+
+    <div class="sous-tete"><h2>Personnes inscrites</h2><button class="btn btn-principal btn-petit" type="button" id="btn-ajouter">+ Ajouter une personne</button></div>
+    <div class="carte" id="liste"><div class="avis">Chargement…</div></div>
+
+    <div class="sous-tete"><h2>Journal</h2><span class="secondaire">Connexions, refus, droits et publications</span></div>
+    <div class="carte"><ul class="journal" id="journal"></ul></div>
+  </div>
+</main>
+<div id="bas"></div>
+
+<dialog id="dlg" aria-labelledby="dlg-titre">
+  <form class="dialogue" id="f" method="dialog">
+    <h2 id="dlg-titre">Ajouter une personne</h2>
+    <label class="champ"><span>Prénom et nom</span><input type="text" id="p-nom" maxlength="80" required autocomplete="off"></label>
+    <label class="champ"><span>Adresse(s) e-mail</span><input type="text" id="p-email" maxlength="400" required autocomplete="off" placeholder="Séparées par une virgule"></label>
+    <p class="aide">La personne pourra se connecter avec n'importe laquelle de ces adresses (cinq au plus).</p>
+    <div class="champ"><span>Droits</span>
+      <div class="cases">
+        <label><input type="checkbox" id="p-admin"> Admin</label>
+        <label><input type="checkbox" id="p-actus"> Actualités</label>
+        <label><input type="checkbox" id="p-actif" checked> Accès actif</label>
+      </div>
+    </div>
+    <label class="champ"><span>Note (facultatif)</span><input type="text" id="p-note" maxlength="200" autocomplete="off"></label>
+    <p class="message erreur" id="p-err" role="alert" hidden></p>
+    <div class="actions">
+      <div class="rangee">
+        <button type="button" class="btn btn-discret btn-petit" id="p-deco" title="Ferme ses sessions sur tous ses appareils, sans changer ses droits">Déconnecter partout</button>
+        <button type="button" class="btn btn-danger btn-petit" id="p-suppr">Supprimer</button>
+      </div>
+      <div class="droite"><button type="button" class="btn btn-discret" id="p-annuler">Annuler</button><button type="submit" class="btn btn-principal">Enregistrer</button></div>
+    </div>
+  </form>
+</dialog>
+
+<script src="config.js"></script>
+<script src="espace.js?v=20261104a"></script>
+<script src="page-acces.js?v=20261104a"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Actualités</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../espace.css?v=20261104a">
+</head>
+<body>
+<div id="haut"></div>
+<main>
+  <div class="conteneur">
+    <!-- Sans droit -->
+    <div class="carte avis" id="sans-droit" hidden>
+      <strong>Accès réservé.</strong>
+      <span id="sans-droit-texte">Votre accès ne comprend pas la publication des actualités.</span>
+      <p><a class="btn btn-discret btn-petit" href="../">← Retour à l'espace</a></p>
+    </div>
+
+    <!-- Liste des articles -->
+    <section id="vue-liste" hidden>
+      <div class="tete">
+        <div class="surtitre">Publication</div>
+        <h1>Actualités</h1>
+        <p class="chapeau">Les articles publiés ici apparaissent sur la page d'accueil du site, du plus récent au plus ancien. Chaque publication est enregistrée dans l'historique du dépôt GitHub, à votre nom.</p>
+      </div>
+      <div class="sous-tete"><h2 id="compte">Articles</h2><button class="btn btn-principal btn-petit" type="button" id="btn-nouveau">+ Nouvel article</button></div>
+      <p class="message erreur" id="liste-err" role="alert" hidden></p>
+      <div class="carte" id="liste"><div class="avis">Chargement…</div></div>
+    </section>
+
+    <!-- Rédaction -->
+    <section id="vue-edition" hidden>
+      <div class="tete">
+        <div class="surtitre"><button type="button" class="lien" id="btn-retour">← Tous les articles</button></div>
+        <h1 id="titre-edition">Nouvel article</h1>
+      </div>
+      <form class="carte dialogue" id="f-article" novalidate>
+        <div class="deux">
+          <label class="champ"><span>Titre</span><input type="text" id="a-titre" maxlength="300" required autocomplete="off"></label>
+          <label class="champ"><span>Date</span><input type="date" id="a-date" required></label>
+        </div>
+        <label class="champ"><span>Texte</span><textarea id="a-texte" maxlength="50000" placeholder="Une ligne vide sépare deux paragraphes."></textarea></label>
+        <div class="champ"><span>Image (facultative)</span>
+          <input type="file" id="a-image" accept="image/jpeg,image/png,image/webp">
+          <div class="apercu" id="apercu" hidden><img id="apercu-img" alt=""><button type="button" class="btn btn-danger btn-petit" id="btn-sans-image">Retirer l'image</button></div>
+        </div>
+        <p class="aide">L'image est réduite à 1600 pixels de large et enregistrée en JPEG avant l'envoi.</p>
+        <p class="message erreur" id="a-err" role="alert" hidden></p>
+        <div class="actions">
+          <button type="button" class="btn btn-danger" id="btn-supprimer" hidden>Supprimer l'article</button>
+          <div class="droite"><button type="button" class="btn btn-discret" id="btn-annuler">Annuler</button><button type="submit" class="btn btn-principal" id="btn-publier">Publier</button></div>
+        </div>
+      </form>
+    </section>
+  </div>
+</main>
+<div id="bas"></div>
+<script src="../config.js"></script>
+<script src="../espace.js?v=20261104a"></script>
+<script src="admin.js?v=20261104a"></script>
+</body>
+</html>

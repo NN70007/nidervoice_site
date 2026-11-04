@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Connexion</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="espace.css?v=20261104a">
+</head>
+<body>
+<div id="haut"></div>
+
+<main>
+  <div class="conteneur">
+    <!-- Connexion -->
+    <section class="carte connexion" id="connexion" aria-labelledby="titre-connexion" hidden>
+      <div class="surtitre">Accès réservé</div>
+      <h1 id="titre-connexion">Se connecter</h1>
+      <p class="chapeau">Espace d'administration du site. Seules les personnes inscrites peuvent entrer.</p>
+      <p class="message erreur" id="msg-erreur" role="alert" hidden></p>
+      <p class="message info" id="msg-info" role="status" hidden></p>
+
+      <div id="bloc-google" hidden>
+        <div id="g-btn"></div>
+        <div class="ou">ou</div>
+      </div>
+
+      <form id="f-email" novalidate>
+        <label class="champ"><span>Recevoir un code par e-mail</span>
+          <input type="email" id="in-email" autocomplete="email" placeholder="Votre adresse e-mail" required></label>
+        <button class="btn btn-principal btn-large" type="submit" id="btn-code">Recevoir un code</button>
+      </form>
+
+      <form id="f-code" novalidate hidden>
+        <label class="champ"><span>Code reçu par e-mail</span>
+          <input type="text" id="in-code" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••" required></label>
+        <button class="btn btn-principal btn-large" type="submit" id="btn-verif">Se connecter</button>
+        <p class="petit">Code valable 10 minutes. Pensez aux courriers indésirables. <button type="button" class="lien" id="btn-retour">Changer d'adresse</button></p>
+      </form>
+    </section>
+
+    <!-- Accueil connecté -->
+    <section id="accueil" hidden>
+      <div class="tete">
+        <div class="surtitre">Administration</div>
+        <h1 id="bonjour">Bonjour.</h1>
+        <p class="chapeau">Choisissez ce que vous souhaitez faire.</p>
+      </div>
+      <div class="tuiles" id="tuiles"></div>
+    </section>
+  </div>
+</main>
+
+<div id="bas"></div>
+<script src="config.js"></script>
+<script src="espace.js?v=20261104a"></script>
+<script src="page-accueil.js?v=20261104a"></script>
+</body>
+</html>
