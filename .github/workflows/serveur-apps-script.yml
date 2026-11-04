@@ -8,8 +8,7 @@
 #
 # Configuration (facultative — sans elle, seuls les tests tournent et le job de publication s'arrête proprement) :
 #   Settings › Secrets and variables › Actions
-#     Variables : SCRIPT_ID      identifiant du projet Apps Script (Paramètres du projet › ID du script)
-#                 DEPLOYMENT_ID  identifiant du déploiement « Application Web » (Gérer les déploiements)
+#     SCRIPT_ID et DEPLOYMENT_ID sont écrits plus bas (ce ne sont pas des secrets).
 #     Secret    : CLASPRC_JSON   contenu du fichier ~/.clasprc.json de clasp (compte jb@niedercorn.com)
 #
 # Retour en arrière : Actions › « Serveur Apps Script » › Run workflow, avec le numéro d'une ancienne version.
@@ -60,11 +59,10 @@ jobs:
     name: Publication dans Apps Script
     needs: tests
     # Sans les variables du dépôt, le job est simplement ignoré (pas d'échec).
-    if: vars.SCRIPT_ID != '' && vars.DEPLOYMENT_ID != ''
     runs-on: ubuntu-latest
     env:
-      SCRIPT_ID: ${{ vars.SCRIPT_ID }}
-      DEPLOYMENT_ID: ${{ vars.DEPLOYMENT_ID }}
+      SCRIPT_ID: 14tckECUJpuPL1_YYISfIbyT-tnlZE-Rp3FEhCc6kNZcPIQE-ob3Mk73u
+      DEPLOYMENT_ID: AKfycbwS339E9mj6faoczMi2cwlPCH8huduUOFikwxoWNCc6c7z3ZOQ-RkNab7xFyoA-LTHn
     steps:
       - name: Vérifier la configuration
         id: config
