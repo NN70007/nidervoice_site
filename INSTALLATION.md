@@ -163,3 +163,19 @@ Le serveur local répond aux appels de l'espace avec `Code.gs` simulé ; les pub
 - Les images des articles supprimés restent dans `assets/` (le serveur n'a pas le droit d'effacer des fichiers).
 - L'API GitHub ne renvoie pas le contenu des fichiers de plus de 1 Mo : `actualites.json` doit rester en dessous (plusieurs centaines d'articles).
 - `.htaccess` ne s'applique que sur un hébergement Apache (Hostinger, par exemple), pas sur GitHub Pages.
+
+## Publication automatique du script depuis GitHub (en place depuis le 04/11/2026)
+
+Toute modification de `espace/serveur/` envoyée sur `main` lance la procédure GitHub « Serveur Apps Script » : tests, envoi du code dans Apps Script (clasp), nouvelle version, et passage du déploiement existant sur cette version (même adresse `/exec`). Si un test échoue, rien n'est publié.
+
+- Identifiants du script et du déploiement : écrits dans `.github/workflows/serveur-apps-script.yml` (ce ne sont pas des secrets).
+- Clé : secret GitHub `CLASPRC_JSON` (compte jb@niedercorn.com, la même clé pour niderlabs_site et nidervoice_site).
+
+Pour refaire la clé (après révocation, par exemple), sans rien installer :
+1. API Apps Script activée sur jb@niedercorn.com : script.google.com/home/usersettings.
+2. Autoriser « clasp » : ouvrir le lien d'autorisation clasp (préparé par Claude), choisir jb@niedercorn.com, accepter. Google renvoie vers une adresse `http://localhost:8888/?…code=…` qui ne s'affiche pas : copier cette adresse.
+3. Échanger le code contre la clé dans le navigateur : la clé s'affiche dans une case de texte (format `.clasprc.json`), sans passer par Claude.
+4. La coller dans GitHub › Settings › Secrets and variables › Actions › secret `CLASPRC_JSON`, dans les deux dépôts. N'en garder aucune copie.
+
+Couper l'accès : myaccount.google.com › Sécurité › Applications tierces › retirer « clasp ».
+Revenir en arrière : GitHub › Actions › « Serveur Apps Script » › Run workflow avec le numéro d'une ancienne version.
