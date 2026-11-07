@@ -46,12 +46,16 @@
   .contact a { color: var(--texte); text-decoration: none; font-size: 17px; padding: 12px 22px; border: 1px solid rgba(133,183,235,.35); border-radius: 999px; background: rgba(12,68,124,.25); backdrop-filter: blur(6px); transition: border-color .2s, background .2s; }
   .contact a:hover, .contact a:focus-visible { border-color: var(--ciel); background: rgba(12,68,124,.5); outline: none; }
   footer { position: relative; text-align: center; font-size: 12px; letter-spacing: .06em; color: var(--doux); padding: 20px 0 24px; }
+  .slogan { margin: -12px 0 0; font-size: clamp(20px, 3.2vw, 30px); font-weight: 600; letter-spacing: -.01em; color: var(--texte); }
+  .slogan b { color: var(--ciel); font-weight: 600; }
+  .slogan .sep { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--ciel); margin: 0 .55em .2em; opacity: .8; }
 </style>
 </head>
 <body>
 <main>
   <div class="onde" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <h1 style="margin:0"><img class="logo" src="assets/nidervoice-logo-sombre.svg" alt="NiderVoice" width="520" height="114"></h1>
+  <p class="slogan">Dictée <b>0 % cloud</b><span class="sep" aria-hidden="true"></span><b>100 % locale</b></p>
   <span class="bientot">Bientôt disponible</span>
   <p class="contact" style="margin:0"><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p>
 </main>
