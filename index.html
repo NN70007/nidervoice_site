@@ -4,42 +4,56 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>NiderVoice</title>
-<meta name="description" content="NiderVoice">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b1a2c" media="(prefers-color-scheme: dark)">
+<meta name="description" content="NiderVoice — bientôt disponible.">
+<meta name="theme-color" content="#06111f">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <style>
-  :root { --fond: #ffffff; --encre-2: #5b6470; --trait: #e6e8ec; --lien: #0C447C; color-scheme: light dark; }
-  @media (prefers-color-scheme: dark) { :root { --fond: #0b1a2c; --encre-2: #a9b4c2; --trait: #22344a; --lien: #85B7EB; } }
+  :root { --navy: #0C447C; --ciel: #85B7EB; --fond: #06111f; --texte: #e8eef6; --doux: #8fa3bb; }
   * { box-sizing: border-box; }
-  html, body { height: 100%; margin: 0; }
+  html, body { margin: 0; height: 100%; }
   body {
-    background: var(--fond);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh;
+    min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;
+    background:
+      radial-gradient(1200px 700px at 50% 38%, rgba(12,68,124,.55), transparent 70%),
+      radial-gradient(600px 400px at 85% 90%, rgba(55,138,221,.18), transparent 70%),
+      var(--fond);
+    color: var(--texte);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+    overflow-x: hidden;
   }
-  main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 48px; text-align: center; }
-  .logo { width: min(460px, 82vw); height: auto; }
-  .logo-sombre { display: none; }
-  @media (prefers-color-scheme: dark) { .logo-clair { display: none; } .logo-sombre { display: block; } }
-  .contact { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-  .contact span { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--encre-2); }
-  .contact a { font-size: 18px; color: var(--lien); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
-  .contact a:hover, .contact a:focus-visible { border-bottom-color: currentColor; outline: none; }
-  footer { border-top: 1px solid var(--trait); padding: 18px 0 22px; text-align: center; font-size: 13px; color: var(--encre-2); }
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 70%);
+  }
+  main { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 40px; padding: 48px 0; }
+  .onde { display: flex; align-items: center; gap: 10px; height: 120px; }
+  .onde i { display: block; width: 10px; border-radius: 5px; background: linear-gradient(180deg, #ffffff, var(--ciel)); animation: pulse 1.6s ease-in-out infinite; opacity: .95; }
+  .onde i:nth-child(1), .onde i:nth-child(9) { height: 18px; animation-delay: -.2s; opacity: .5; }
+  .onde i:nth-child(2), .onde i:nth-child(8) { height: 36px; animation-delay: -.5s; opacity: .7; }
+  .onde i:nth-child(3), .onde i:nth-child(7) { height: 64px; animation-delay: -.9s; }
+  .onde i:nth-child(4), .onde i:nth-child(6) { height: 88px; animation-delay: -1.2s; }
+  .onde i:nth-child(5) { height: 116px; animation-delay: -.7s; }
+  @keyframes pulse { 0%,100% { transform: scaleY(.55); } 50% { transform: scaleY(1); } }
+  @media (prefers-reduced-motion: reduce) { .onde i { animation: none; } }
+  .logo { width: min(520px, 84vw); height: auto; filter: drop-shadow(0 10px 40px rgba(55,138,221,.25)); }
+  .bientot { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: .28em; text-transform: uppercase; color: var(--ciel); }
+  .bientot::before, .bientot::after { content: ""; width: 36px; height: 1px; background: linear-gradient(90deg, transparent, var(--ciel)); }
+  .bientot::after { transform: scaleX(-1); }
+  .contact a { color: var(--texte); text-decoration: none; font-size: 17px; padding: 12px 22px; border: 1px solid rgba(133,183,235,.35); border-radius: 999px; background: rgba(12,68,124,.25); backdrop-filter: blur(6px); transition: border-color .2s, background .2s; }
+  .contact a:hover, .contact a:focus-visible { border-color: var(--ciel); background: rgba(12,68,124,.5); outline: none; }
+  footer { position: relative; text-align: center; font-size: 12px; letter-spacing: .06em; color: var(--doux); padding: 20px 0 24px; }
 </style>
 </head>
 <body>
 <main>
-  <h1 style="margin:0">
-    <img class="logo logo-clair" src="assets/nidervoice-logo.svg" alt="NiderVoice" width="460" height="101">
-    <img class="logo logo-sombre" src="assets/nidervoice-logo-sombre.svg" alt="NiderVoice" width="460" height="101">
-  </h1>
-  <p class="contact">
-    <span>Contact</span>
-    <a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a>
-  </p>
+  <div class="onde" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <h1 style="margin:0"><img class="logo" src="assets/nidervoice-logo-sombre.svg" alt="NiderVoice" width="520" height="114"></h1>
+  <span class="bientot">Bientôt disponible</span>
+  <p class="contact" style="margin:0"><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p>
 </main>
 <footer>© 2026 NiderLabs</footer>
 </body>
