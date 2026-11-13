@@ -20,10 +20,24 @@ header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 header('X-Content-Type-Options: nosniff');
 
-function nv_reply(int $code, array $body): never
+function nv_reply(int $code, array $body, bool $thenMaintain = false): never
 {
     http_response_code($code);
     echo json_encode($body, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    if ($thenMaintain) {
+        // La réponse part tout de suite ; l'entretien se fait ensuite.
+        if (function_exists('litespeed_finish_request')) {
+            litespeed_finish_request();
+        } elseif (function_exists('fastcgi_finish_request')) {
+            fastcgi_finish_request();
+        }
+        try {
+            nv_purge();
+            nv_geo_maybe_update();
+        } catch (Throwable $e) {
+            error_log('NiderVoice licences, entretien : ' . $e->getMessage());
+        }
+    }
     exit;
 }
 
@@ -46,6 +60,8 @@ try {
                 'donnees' => $dir !== null,
                 'donnees_hors_public' => $dir !== null && !str_contains($dir, 'public_html'),
                 'geolocalisation' => $dir !== null && is_file(nv_geo_path()),
+                'geolocalisation_mois' => $dir !== null ? nv_meta_get('geo_month') : null,
+                'geolocalisation_erreur' => $dir !== null ? nv_meta_get('geo_error') : null,
             ]);
         }
         if (isset($_GET['cle'])) {
@@ -134,12 +150,6 @@ SQL);
     $status = (string) $stStatus->fetchColumn();
     $db->commit();
 
-    try {
-        nv_purge();
-    } catch (Throwable $e) {
-        error_log('NiderVoice licences, effacement : ' . $e->getMessage());
-    }
-
     $token = nv_sign_token([
         'v' => 1,
         'install' => $id,
@@ -148,7 +158,7 @@ SQL);
         'expires' => $now + NV_TOKEN_DAYS * 86400,
         'nonce' => $nonce,
     ]);
-    nv_reply(200, ['ok' => true, 'token' => $token]);
+    nv_reply(200, ['ok' => true, 'token' => $token], true);
 } catch (Throwable $e) {
     if (isset($db) && $db->inTransaction()) {
         $db->rollBack();

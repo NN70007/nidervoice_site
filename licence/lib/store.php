@@ -273,6 +273,28 @@ function nv_geo_update(): string
     throw new RuntimeException('Mise à jour impossible (' . implode(' ; ', $errors) . ')');
 }
 
+/**
+ * Mise à jour automatique de la base (absente ou de plus de 35 jours), au
+ * plus une tentative par jour, lancée après la réponse au logiciel.
+ */
+function nv_geo_maybe_update(): void
+{
+    $updated = (int) (nv_meta_get('geo_updated_at') ?? 0);
+    if (is_file(nv_geo_path()) && $updated > time() - 35 * 86400) {
+        return;
+    }
+    if ((int) (nv_meta_get('geo_attempt_at') ?? 0) > time() - 86400) {
+        return;
+    }
+    nv_meta_set('geo_attempt_at', (string) time());
+    try {
+        nv_geo_update();
+    } catch (Throwable $e) {
+        nv_meta_set('geo_error', mb_substr($e->getMessage(), 0, 300));
+        error_log('NiderVoice licences, géolocalisation : ' . $e->getMessage());
+    }
+}
+
 /* ---------- Effacement automatique ---------- */
 
 /** Une fois par jour au plus : regroupe et efface selon les durées annoncées. */
