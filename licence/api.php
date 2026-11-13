@@ -9,7 +9,7 @@
  * L'adresse de connexion sert uniquement à déduire pays et ville (si les
  * statistiques sont autorisées) ; elle n'est jamais enregistrée.
  *
- * Renvoyé : un jeton signé (Ed25519) valable 30 jours, indiquant si la
+ * Renvoyé : un jeton signé (ECDSA P-256) valable 30 jours, indiquant si la
  * licence est active ou désactivée.
  */
 declare(strict_types=1);
@@ -39,7 +39,7 @@ try {
             }
             nv_reply(200, [
                 'php' => PHP_VERSION,
-                'sodium' => function_exists('sodium_crypto_sign_keypair'),
+                'openssl' => function_exists('openssl_sign'),
                 'pdo_sqlite' => in_array('sqlite', PDO::getAvailableDrivers(), true),
                 'curl' => function_exists('curl_init'),
                 'zlib' => function_exists('gzopen'),

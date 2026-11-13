@@ -94,41 +94,52 @@ function nv_meta_set(string $k, string $v): void
         ->execute([$k, $v]);
 }
 
-/* ---------- Signature des jetons (Ed25519) ---------- */
+/* ---------- Signature des jetons (ECDSA P-256, SHA-256, via OpenSSL) ---------- */
 
-/** Clé de signature, créée une seule fois par le serveur lui-même. */
+/**
+ * Clé de signature, créée une seule fois par le serveur lui-même.
+ * @return array{0: OpenSSLAsymmetricKey, 1: string} clé privée, clé publique (point SEC1 non compressé)
+ */
 function nv_signing_key(): array
 {
     $file = nv_data_dir() . '/cle_signature.json';
-    if (is_file($file)) {
-        $k = json_decode((string) file_get_contents($file), true);
-        if (is_array($k) && isset($k['secret'], $k['public'])) {
-            return [base64_decode($k['secret']), base64_decode($k['public'])];
+    if (!is_file($file)) {
+        // Verrou : une seule clé est créée, même si deux demandes arrivent ensemble.
+        $lock = fopen($file . '.lock', 'c');
+        flock($lock, LOCK_EX);
+        try {
+            if (!is_file($file)) {
+                $key = openssl_pkey_new(['private_key_type' => OPENSSL_KEYTYPE_EC, 'curve_name' => 'prime256v1']);
+                if ($key === false || !openssl_pkey_export($key, $pem)) {
+                    throw new RuntimeException('Création de la clé impossible');
+                }
+                $json = json_encode([
+                    'avertissement' => 'CLÉ PRIVÉE des licences NiderVoice — ne jamais diffuser. À sauvegarder : si elle est perdue, les logiciels installés devront être mis à jour.',
+                    'cree_le' => gmdate('c'),
+                    'algorithme' => 'ECDSA P-256 / SHA-256',
+                    'cle_privee_pem' => $pem,
+                ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $tmp = $file . '.tmp';
+                file_put_contents($tmp, $json);
+                @chmod($tmp, 0600);
+                rename($tmp, $file);
+            }
+        } finally {
+            flock($lock, LOCK_UN);
+            fclose($lock);
         }
+    }
+    $k = json_decode((string) file_get_contents($file), true);
+    $key = is_array($k) ? openssl_pkey_get_private((string) ($k['cle_privee_pem'] ?? '')) : false;
+    if ($key === false) {
         throw new RuntimeException('Clé de signature illisible');
     }
-    // Verrou : une seule clé est créée, même si deux demandes arrivent ensemble.
-    $lock = fopen($file . '.lock', 'c');
-    flock($lock, LOCK_EX);
-    try {
-        if (!is_file($file)) {
-            $pair = sodium_crypto_sign_keypair();
-            $json = json_encode([
-                'avertissement' => 'CLÉ PRIVÉE des licences NiderVoice — ne jamais diffuser. À sauvegarder : si elle est perdue, les logiciels installés devront être mis à jour.',
-                'cree_le' => gmdate('c'),
-                'secret' => base64_encode(sodium_crypto_sign_secretkey($pair)),
-                'public' => base64_encode(sodium_crypto_sign_publickey($pair)),
-            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-            $tmp = $file . '.tmp';
-            file_put_contents($tmp, $json);
-            @chmod($tmp, 0600);
-            rename($tmp, $file);
-        }
-    } finally {
-        flock($lock, LOCK_UN);
-        fclose($lock);
+    $ec = openssl_pkey_get_details($key)['ec'] ?? null;
+    if (!$ec || ($ec['curve_name'] ?? '') !== 'prime256v1') {
+        throw new RuntimeException('Clé de signature inattendue');
     }
-    return nv_signing_key();
+    $public = "\x04" . str_pad($ec['x'], 32, "\0", STR_PAD_LEFT) . str_pad($ec['y'], 32, "\0", STR_PAD_LEFT);
+    return [$key, $public];
 }
 
 function nv_public_key_b64(): string
@@ -136,11 +147,13 @@ function nv_public_key_b64(): string
     return base64_encode(nv_signing_key()[1]);
 }
 
-/** Jeton = base64(charge utile JSON) "." base64(signature de la charge utile). */
+/** Jeton = base64(charge utile JSON) "." base64(signature DER de la charge utile). */
 function nv_sign_token(array $payload): string
 {
     $json = json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-    $sig = sodium_crypto_sign_detached($json, nv_signing_key()[0]);
+    if (!openssl_sign($json, $sig, nv_signing_key()[0], OPENSSL_ALGO_SHA256)) {
+        throw new RuntimeException('Signature impossible');
+    }
     return base64_encode($json) . '.' . base64_encode($sig);
 }
 
