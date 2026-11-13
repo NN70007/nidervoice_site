@@ -30,6 +30,24 @@ function nv_reply(int $code, array $body): never
 try {
     $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
     if ($method === 'GET') {
+        if (isset($_GET['etat'])) {
+            // Diagnostic sans secret : ce dont le service a besoin est-il présent ?
+            $dir = null;
+            try {
+                $dir = nv_data_dir();
+            } catch (Throwable $e) {
+            }
+            nv_reply(200, [
+                'php' => PHP_VERSION,
+                'sodium' => function_exists('sodium_crypto_sign_keypair'),
+                'pdo_sqlite' => in_array('sqlite', PDO::getAvailableDrivers(), true),
+                'curl' => function_exists('curl_init'),
+                'zlib' => function_exists('gzopen'),
+                'donnees' => $dir !== null,
+                'donnees_hors_public' => $dir !== null && !str_contains($dir, 'public_html'),
+                'geolocalisation' => $dir !== null && is_file(nv_geo_path()),
+            ]);
+        }
         if (isset($_GET['cle'])) {
             nv_reply(200, ['ok' => true, 'public_key' => nv_public_key_b64()]);
         }
