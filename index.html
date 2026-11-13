@@ -1,74 +1,191 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>NiderVoice</title>
-<meta name="description" content="NiderVoice — professional dictation, 100% local. Coming soon.">
-<meta name="theme-color" content="#06111f">
+<title>NiderVoice — logiciel de dictée, 100 % local</title>
+<meta name="description" content="NiderVoice — logiciel de dictée professionnel, 100 % local. Bientôt disponible.">
+<meta name="theme-color" content="#0C447C">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NiderVoice">
-<meta property="og:title" content="NiderVoice">
-<meta property="og:description" content="Professional dictation. 100% local. Coming soon.">
+<meta property="og:title" content="NiderVoice — Vous parlez, le texte s'écrit">
+<meta property="og:description" content="Logiciel de dictée professionnel, 100 % local. Bientôt disponible.">
 <meta property="og:url" content="https://nidervoice.com/">
 <meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="NiderVoice — Professional dictation, 100% local">
+<meta property="og:image:alt" content="NiderVoice">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preload" href="assets/fonts/inter-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  :root { --navy: #0C447C; --ciel: #85B7EB; --fond: #06111f; --texte: #e8eef6; --doux: #8fa3bb; }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; height: 100%; }
-  body {
-    min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;
-    background:
-      radial-gradient(1200px 700px at 50% 38%, rgba(12,68,124,.55), transparent 70%),
-      radial-gradient(600px 400px at 85% 90%, rgba(55,138,221,.18), transparent 70%),
-      var(--fond);
-    color: var(--texte);
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
-    overflow-x: hidden;
+  @font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/inter-latin-400-normal.woff2) format('woff2')}
+  @font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/inter-latin-500-normal.woff2) format('woff2')}
+  @font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/inter-latin-600-normal.woff2) format('woff2')}
+  :root{
+    --navy:#0C447C; --blue:#378ADD; --light:#5FA4E8; --paper:#F7FAFD;
+    --ink:#0B2340; --muted:#5B6B80;
   }
-  body::before {
-    content: ""; position: fixed; inset: 0; pointer-events: none;
-    background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-    background-size: 56px 56px;
-    mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 70%);
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased}
+  .page{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+
+  /* Gauche */
+  .left{display:flex;flex-direction:column;justify-content:space-between;padding:48px 64px;background:var(--paper)}
+  .lang{align-self:flex-start;display:flex;gap:4px;font-size:13px;font-weight:500}
+  .lang button{border:1px solid #D6E2EF;background:#fff;color:var(--muted);padding:5px 10px;border-radius:999px;cursor:pointer;font:inherit}
+  .lang button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+  .brand{display:flex;flex-direction:column;gap:40px;max-width:520px}
+  .brand img{width:min(100%,420px);height:auto}
+  .brand p{font-size:18px;line-height:1.6;color:var(--muted);max-width:440px}
+  .by{font-size:14px;color:var(--muted);letter-spacing:.02em}
+  .by strong{color:var(--navy);font-weight:600}
+
+  /* Droite */
+  .right{background:var(--navy);color:#fff;display:flex;flex-direction:column;justify-content:center;gap:40px;padding:64px;position:relative;overflow:hidden}
+  .right::before{content:"";position:absolute;inset:auto -10% -30% auto;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(95,164,232,.18),transparent 65%);pointer-events:none}
+  h1{font-size:clamp(36px,4.2vw,56px);line-height:1.08;font-weight:600;letter-spacing:-.02em;max-width:18ch;text-wrap:balance}
+  h1 em{font-style:normal;color:var(--light)}
+  .lead{font-size:18px;line-height:1.6;color:#D9E7F7;max-width:46ch}
+  .terms{display:flex;flex-wrap:wrap;gap:10px;list-style:none}
+  .terms li{font-size:14px;padding:7px 14px;border:1px solid rgba(255,255,255,.22);border-radius:999px;color:#E6F0FB}
+
+  /* Démonstration */
+  .demo{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:22px 24px;max-width:520px}
+  .demo-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9EC3EC;margin-bottom:14px}
+  .wave{display:flex;align-items:center;gap:5px;height:44px}
+  .wave span{width:5px;border-radius:3px;background:var(--blue)}
+  .wave span:nth-child(even){background:var(--light)}
+  .typed{font-size:17px;line-height:1.55;min-height:3.1em;color:#fff}
+  .caret{display:inline-block;width:2px;height:1.1em;background:var(--light);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .demo.typing .wave{display:none}
+  .demo:not(.typing) .typed{display:none}
+
+  .bottom{display:flex;flex-direction:column;gap:10px}
+  .privacy{font-size:15px;color:#D9E7F7}
+  .soon{font-size:22px;font-weight:600;color:#fff;padding-top:16px;margin-top:8px;border-top:2px solid var(--light);display:inline-block;align-self:flex-start}
+
+  /* Légende */
+  .legend{background:#fff;border-top:1px solid #E3ECF6;padding:44px 24px;text-align:center}
+  .legend p{max-width:640px;margin:0 auto;font-size:15px;line-height:1.7;color:var(--muted)}
+  .legend img{width:44px;height:44px;margin-bottom:16px}
+  .legend a{color:var(--navy);font-weight:500;text-decoration:none;border-bottom:1px solid rgba(12,68,124,.3)}
+  .contact a{display:inline-block;font-size:15px;color:#fff;text-decoration:none;padding:10px 18px;border:1px solid rgba(255,255,255,.3);border-radius:999px}
+  .contact a:hover,.contact a:focus-visible{border-color:#fff;outline:none}
+  footer{background:#fff;text-align:center;font-size:12px;color:#8A98AA;padding:0 24px 32px}
+  footer a{color:inherit}
+
+  [data-en]{display:none}
+  html[lang="en"] [data-fr]{display:none}
+  html[lang="en"] [data-en]{display:revert}
+
+  @media (max-width:860px){
+    .page{grid-template-columns:1fr}
+    .left{padding:24px 16px 40px;gap:32px}
+    .brand{gap:24px}
+    .right{padding:48px 16px;gap:28px}
+    .lead,.brand p{font-size:16px}
   }
-  main { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 40px; padding: 48px 0; }
-  .onde { display: flex; align-items: center; gap: 10px; height: 120px; }
-  .onde i { display: block; width: 10px; border-radius: 5px; background: linear-gradient(180deg, #ffffff, var(--ciel)); animation: pulse 1.6s ease-in-out infinite; opacity: .95; }
-  .onde i:nth-child(1), .onde i:nth-child(9) { height: 18px; animation-delay: -.2s; opacity: .5; }
-  .onde i:nth-child(2), .onde i:nth-child(8) { height: 36px; animation-delay: -.5s; opacity: .7; }
-  .onde i:nth-child(3), .onde i:nth-child(7) { height: 64px; animation-delay: -.9s; }
-  .onde i:nth-child(4), .onde i:nth-child(6) { height: 88px; animation-delay: -1.2s; }
-  .onde i:nth-child(5) { height: 116px; animation-delay: -.7s; }
-  @keyframes pulse { 0%,100% { transform: scaleY(.55); } 50% { transform: scaleY(1); } }
-  @media (prefers-reduced-motion: reduce) { .onde i { animation: none; } }
-  .logo { width: min(520px, 84vw); height: auto; filter: drop-shadow(0 10px 40px rgba(55,138,221,.25)); }
-  .bientot { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: .28em; text-transform: uppercase; color: var(--ciel); }
-  .bientot::before, .bientot::after { content: ""; width: 36px; height: 1px; background: linear-gradient(90deg, transparent, var(--ciel)); }
-  .bientot::after { transform: scaleX(-1); }
-  .contact a { color: var(--texte); text-decoration: none; font-size: 17px; padding: 12px 22px; border: 1px solid rgba(133,183,235,.35); border-radius: 999px; background: rgba(12,68,124,.25); backdrop-filter: blur(6px); transition: border-color .2s, background .2s; }
-  .contact a:hover, .contact a:focus-visible { border-color: var(--ciel); background: rgba(12,68,124,.5); outline: none; }
-  footer { position: relative; text-align: center; font-size: 12px; letter-spacing: .06em; color: var(--doux); padding: 20px 0 24px; }
-  .slogan { margin: -12px 0 0; font-size: clamp(20px, 3.2vw, 30px); font-weight: 600; letter-spacing: -.01em; color: var(--texte); }
-  .slogan b { color: var(--ciel); font-weight: 600; }
-  .slogan .sep { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--ciel); margin: 0 .55em .2em; opacity: .8; }
+  @media (prefers-reduced-motion:reduce){ .caret{animation:none} }
 </style>
 </head>
 <body>
-<main>
-  <div class="onde" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-  <h1 style="margin:0"><img class="logo" src="assets/nidervoice-logo-sombre.svg" alt="NiderVoice" width="520" height="114"></h1>
-  <p class="slogan">Professional dictation<span class="sep" aria-hidden="true"></span><b>100% local</b></p>
-  <span class="bientot">Coming soon</span>
-  <p class="contact" style="margin:0"><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p>
-</main>
-<footer>Conception : NiderLabs · Distribution, licences et assistance : GOKYO S.à r.l.-S, Luxembourg<br>© 2026 NiderLabs</footer>
+<div class="page">
+  <section class="left">
+    <div class="lang" role="group" aria-label="Langue">
+      <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <div class="brand">
+      <img src="assets/nidervoice-logo.svg" width="292" height="64" alt="NiderVoice">
+      <p data-fr>Le logiciel de dictée professionnel, 100&nbsp;% local.</p>
+      <p data-en>Professional dictation software, 100% local.</p>
+    </div>
+    <div class="by"><span data-fr>Une création</span><span data-en>By</span> <strong>NiderLabs</strong></div>
+  </section>
+
+  <section class="right">
+    <h1 data-fr>Vous parlez, le texte <em>s'écrit</em>.</h1>
+    <h1 data-en>You speak, the text <em>writes itself</em>.</h1>
+
+    <p class="lead" data-fr>Dictez directement dans vos documents, votre messagerie et vos logiciels habituels. La reconnaissance vocale fonctionne entièrement sur votre ordinateur, sans connexion à Internet.</p>
+    <p class="lead" data-en>Dictate straight into your documents, your e-mail and the software you already use. Speech recognition runs entirely on your computer, with no Internet connection.</p>
+
+    <div class="demo" id="demo" aria-live="off">
+      <div class="demo-label"><span data-fr>Exemple illustratif — texte fictif</span><span data-en>Illustrative example — fictitious text</span></div>
+      <div class="wave" aria-hidden="true"></div>
+      <div class="typed"><span id="typed"></span><span class="caret"></span></div>
+    </div>
+
+    <div class="bottom">
+      <p class="privacy" data-fr>Vos dictées ne quittent jamais votre ordinateur.</p>
+      <p class="privacy" data-en>Your dictation never leaves your computer.</p>
+      <p class="soon" data-fr>Bientôt disponible</p>
+      <p class="soon" data-en>Coming soon</p>
+      <p class="contact"><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p>
+    </div>
+  </section>
+</div>
+
+<section class="legend">
+  <img src="assets/favicon.svg" alt="" aria-hidden="true">
+  <p data-fr>NiderVoice utilise <a href="https://caladrii.com/" rel="noopener">Vox Caladrii FR</a>, un modèle de reconnaissance vocale entraîné à la terminologie radiologique française.</p>
+  <p data-en>NiderVoice uses <a href="https://caladrii.com/" rel="noopener">Vox Caladrii FR</a>, a speech recognition model trained on French radiology terminology.</p>
+</section>
+<footer><span data-fr>Outil de dictée. Ne constitue pas une aide au diagnostic.<br>Conception : NiderLabs · Distribution, licences et assistance : GOKYO S.à r.l.-S, Luxembourg</span><span data-en>Dictation tool. Not a diagnostic aid.<br>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><br>© 2026 NiderLabs</footer>
+
+<script>
+(function(){
+  var html=document.documentElement;
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click',function(){
+      html.lang=b.dataset.lang;
+      document.querySelectorAll('.lang button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      restart();
+    });
+  });
+
+  var texts={
+    fr:"Bonjour, je vous confirme notre réunion de jeudi à 14 heures. Bien cordialement.",
+    en:"Hello, I am confirming our meeting on Thursday at 2 pm. Kind regards."
+  };
+  var demo=document.getElementById('demo'), wave=demo.querySelector('.wave'), out=document.getElementById('typed');
+  var heights=[10,22,34,18,40,26,14,30,44,20,12,28,36,16,24,38,18,10,26,32];
+  heights.forEach(function(h){var s=document.createElement('span');s.style.height=h+'px';wave.appendChild(s)});
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var timer=null, frame=null;
+
+  function animateWave(){
+    var t=0;
+    frame=setInterval(function(){
+      t++;
+      wave.querySelectorAll('span').forEach(function(s,i){
+        var base=heights[i]; s.style.height=Math.max(6,base*(0.55+0.45*Math.abs(Math.sin((t+i*2)/4))))+'px';
+      });
+    },80);
+  }
+  function run(){
+    var txt=texts[html.lang]||texts.fr;
+    if(reduce){demo.classList.add('typing');out.textContent=txt;return}
+    demo.classList.remove('typing'); out.textContent='';
+    animateWave();
+    timer=setTimeout(function(){
+      clearInterval(frame); demo.classList.add('typing');
+      var i=0;
+      (function type(){
+        out.textContent=txt.slice(0,++i);
+        if(i<txt.length){timer=setTimeout(type,38)}
+        else{timer=setTimeout(run,4500)}
+      })();
+    },2200);
+  }
+  function stop(){clearTimeout(timer);clearInterval(frame)}
+  function restart(){stop();run()}
+  document.addEventListener('visibilitychange',function(){document.hidden?stop():restart()});
+  if(location.hash==='#final'){demo.classList.add('typing');out.textContent=texts.fr}else{run()}
+})();
+</script>
 </body>
 </html>
