@@ -1,0 +1,16 @@
+# ====== Licences NiderVoice ======
+# Seuls api.php (appelé par le logiciel) et admin.php (espace d'administration)
+# sont accessibles. Les fichiers internes et les données ne le sont jamais.
+Options -Indexes
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(lib|donnees)(/|$) - [F,L]
+</IfModule>
+<FilesMatch "\.(sqlite|json|mmdb|txt|lock|tmp|gz|md)$">
+  Require all denied
+</FilesMatch>
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Cache-Control "no-store"
+  Header always unset Expires
+</IfModule>
