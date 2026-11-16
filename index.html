@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>NiderVoice — logiciel de dictée, 100 % local</title>
 <meta name="description" content="NiderVoice — logiciel de dictée professionnel, 100 % local. Vos dictées ne quittent jamais votre ordinateur. Bientôt disponible.">
-<meta name="theme-color" content="#0C447C">
+<meta name="theme-color" content="#0A0E15">
+<meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
 <meta property="og:title" content="NiderVoice — Vous parlez, le texte s'écrit">
 <meta property="og:description" content="NiderVoice — logiciel de dictée professionnel, 100 % local. Bientôt disponible.">
@@ -15,357 +16,331 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="preload" href="assets/fonts/inter-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/source-serif-4-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/source-serif-4-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  @font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/inter-latin-400-normal.woff2) format('woff2')}
-  @font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/inter-latin-500-normal.woff2) format('woff2')}
-  @font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/inter-latin-600-normal.woff2) format('woff2')}
-  @font-face{font-family:"Source Serif";font-style:italic;font-weight:400;font-display:swap;src:url(assets/fonts/source-serif-4-latin-400-italic.woff2) format('woff2')}
+  @font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(assets/fonts/inter-latin-400-normal.woff2) format('woff2')}
+  @font-face{font-family:Inter;font-weight:500;font-display:swap;src:url(assets/fonts/inter-latin-500-normal.woff2) format('woff2')}
+  @font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(assets/fonts/inter-latin-600-normal.woff2) format('woff2')}
+  @font-face{font-family:Display;font-style:normal;font-weight:300;font-display:swap;src:url(assets/fonts/source-serif-4-latin-300-normal.woff2) format('woff2')}
+  @font-face{font-family:Display;font-style:italic;font-weight:300;font-display:swap;src:url(assets/fonts/source-serif-4-latin-300-italic.woff2) format('woff2')}
+  @font-face{font-family:Mono;font-weight:400;font-display:swap;src:url(assets/fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2')}
   :root{
-    --navy:#0C447C; --blue:#378ADD; --ink:#0B2340; --muted:#5B6B80;
-    --paper:#F4F7FA; --card:#FFFFFF; --line:#DCE4ED; --soft:#EAF1F8; --ok:#2E7D5B;
-    --serif:"Source Serif",Georgia,"Times New Roman",serif;
-    --w:1180px;
+    --bg:#0A0E15; --panel:#121A27; --panel2:#182233; --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+    --tx:#F2F5F9; --mut:#9AA6B6; --dim:#6B7787; --blue:#378ADD; --sky:#8CC0F2; --ok:#5CC08E;
+    --disp:Display,Georgia,"Times New Roman",serif; --mono:Mono,ui-monospace,Consolas,monospace;
   }
   *{box-sizing:border-box;margin:0}
-  html{scroll-behavior:smooth;scroll-padding-top:84px}
-  body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.55}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+    background:radial-gradient(900px 520px at 50% -120px,rgba(55,138,221,.22),transparent 70%),
+               linear-gradient(var(--line) 1px,transparent 1px) 0 0/100% 96px;
+    -webkit-mask-image:linear-gradient(#000 0,#000 55%,transparent 100%);mask-image:linear-gradient(#000 0,#000 55%,transparent 100%)}
   a{color:inherit}
   html:not([lang=fr]) [data-fr],html:not([lang=en]) [data-en],html:not([lang=es]) [data-es],html:not([lang=de]) [data-de]{display:none!important}
-  .wrap{max-width:var(--w);margin:0 auto;padding:0 28px}
-  :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+  :focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:6px}
+  .w{max-width:1160px;margin:0 auto;padding:0 28px}
+  .serif{font-family:var(--disp);font-weight:300;letter-spacing:-.025em;line-height:1.02}
+  .serif em{font-style:italic}
+  .label{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
 
-  /* En-tête */
-  header{position:sticky;top:0;z-index:20;background:rgba(244,247,250,.92);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
-  header.scrolled{border-bottom-color:var(--line)}
-  .bar{display:flex;align-items:center;gap:28px;height:72px}
-  .bar .logo img{display:block;height:30px;width:auto}
-  nav.menu{display:flex;gap:26px;margin-left:auto;font-size:14px;color:var(--muted)}
-  nav.menu a{text-decoration:none}
-  nav.menu a:hover{color:var(--ink)}
-  .lang{display:flex;gap:2px;font-size:12.5px;font-weight:500;color:var(--muted)}
-  .lang button{border:0;background:none;color:inherit;padding:4px 6px;cursor:pointer;font:inherit;border-radius:4px}
-  .lang button[aria-pressed="true"]{color:var(--ink);font-weight:600}
-  .btn{display:inline-flex;align-items:center;gap:10px;border-radius:8px;padding:12px 18px;font-size:14.5px;font-weight:500;text-decoration:none;border:1px solid var(--navy);transition:background .15s,color .15s}
-  .btn.primary{background:var(--navy);color:#fff}
-  .btn.primary:hover{background:var(--ink)}
-  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
-  .btn.ghost:hover{border-color:var(--ink)}
-  .bar .btn{padding:9px 14px;font-size:13.5px}
-  .arr{font-size:13px;opacity:.8}
+  header{position:fixed;inset:0 0 auto;z-index:30;transition:background .2s}
+  header.scrolled{background:rgba(10,14,21,.72);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .bar .logo img{display:block;height:28px;width:auto}
+  .lang{display:flex;padding:3px;border:1px solid var(--line2);border-radius:999px;background:rgba(10,14,21,.6)}
+  .lang button{font-family:var(--mono);font-size:11px;letter-spacing:.1em;border:0;background:none;color:var(--dim);padding:6px 11px;border-radius:999px;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:var(--panel2);color:var(--tx)}
+  .pill{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:12px 22px;font-size:14px;font-weight:500;text-decoration:none;transition:transform .15s}
+  .pill.light{background:#F6F8FB;color:#0A0E15;box-shadow:0 8px 30px -8px rgba(140,192,242,.45)}
+  .pill.light:hover{transform:translateY(-1px)}
+  .bar .pill{padding:9px 16px;font-size:13.5px}
 
-  /* Hero */
-  .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;padding-top:64px;padding-bottom:72px}
-  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
-  .kicker::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue)}
-  h1{font-size:clamp(42px,5.4vw,72px);line-height:1.02;letter-spacing:-.025em;font-weight:600;margin:22px 0 0;color:var(--ink)}
-  h1 .s,h2 .s{display:block;font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--navy)}
-  .lead{font-size:18px;color:var(--muted);max-width:30em;margin-top:24px}
-  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-  .figures{display:flex;gap:40px;margin-top:44px;padding-top:24px;border-top:1px solid var(--line)}
-  .figures b{display:block;font-size:26px;font-weight:600;letter-spacing:-.02em;color:var(--ink)}
-  .figures span{font-size:13px;color:var(--muted)}
-
-  /* Fenêtre de démonstration */
-  .app{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 0 rgba(11,35,64,.03),0 24px 60px -30px rgba(11,35,64,.35);overflow:hidden}
-  .app-top{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
-  .app-top img{height:20px;width:auto}
-  .live{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}
-  .live i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(46,125,91,.15)}
-  .app-tabs{display:flex;gap:20px;padding:12px 18px 0;font-size:12.5px;color:var(--muted)}
-  .app-tabs span:first-child{color:var(--ink);font-weight:500;border-bottom:2px solid var(--navy);padding-bottom:9px}
-  .app-body{padding:22px 20px 18px;border-top:1px solid var(--line)}
-  .field-label{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-  .typed{min-height:118px;margin-top:10px;font-size:17px;line-height:1.6;color:var(--ink)}
-  .caret{display:inline-block;width:2px;height:1.1em;background:var(--blue);vertical-align:-3px;margin-left:1px;animation:blink 1s steps(1) infinite}
+  .hero{padding:168px 28px 0;text-align:center}
+  .hero h1{font-size:clamp(46px,7.4vw,104px)}
+  .hero .lead{max-width:34em;margin:26px auto 0;color:var(--mut);font-size:18px}
+  .hero .pill{margin-top:34px}
+  .app{max-width:980px;margin:72px auto 0;border:1px solid var(--line2);border-radius:18px;background:linear-gradient(180deg,var(--panel),#0D131D);box-shadow:0 40px 120px -40px rgba(55,138,221,.35),0 0 0 6px rgba(255,255,255,.02);display:grid;grid-template-columns:210px 1fr;overflow:hidden;text-align:left}
+  .side{border-right:1px solid var(--line);padding:18px 14px;display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--mut)}
+  .side .me{display:flex;align-items:center;gap:9px;padding:4px 8px 16px;color:var(--tx);font-weight:500}
+  .side .me img{width:22px;height:22px}
+  .side span.it{padding:8px 10px;border-radius:8px}
+  .side span.it.on{background:rgba(255,255,255,.06);color:var(--tx)}
+  .side .bot{margin-top:auto;padding:10px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--dim)}
+  .main{padding:22px 26px 20px;display:flex;flex-direction:column;min-height:340px;min-width:0}
+  .top{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--mut)}
+  .live{margin-left:auto;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
+  .live i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(92,192,142,.14)}
+  .doc{flex:1;margin-top:16px;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.18);padding:20px 22px;font-size:16.5px;line-height:1.65;color:#E3E9F1;min-height:170px}
+  .caret{display:inline-block;width:2px;height:1.1em;background:var(--sky);vertical-align:-3px;margin-left:1px;animation:blink 1s steps(1) infinite}
   @keyframes blink{50%{opacity:0}}
-  .wave{display:flex;align-items:center;gap:4px;height:44px;margin-top:14px}
-  .wave span{display:block;width:5px;border-radius:3px;background:var(--blue);opacity:.85;transition:height .08s}
-  .demo.typing .wave span{opacity:.25}
-  .app-foot{display:flex;justify-content:space-between;gap:12px;padding:12px 20px;background:var(--soft);font-size:12px;color:var(--muted)}
-  .illus{font-size:11.5px;color:var(--muted);margin-top:10px;text-align:right}
+  .mic{display:flex;align-items:center;gap:14px;margin-top:16px;min-width:0}
+  .mic .btn{width:38px;height:38px;flex:none;border-radius:50%;background:var(--blue);display:grid;place-items:center;box-shadow:0 0 0 6px rgba(55,138,221,.18)}
+  .wave{display:flex;align-items:center;gap:3px;height:34px;flex:1;min-width:0;overflow:hidden}
+  .wave span{display:block;flex:none;width:3px;border-radius:2px;background:var(--sky);opacity:.85}
+  .demo.done .wave span{opacity:.2}
+  .illus{font-size:11.5px;color:var(--dim);margin-top:14px}
 
-  /* Sections */
-  section.block{padding:88px 0;border-top:1px solid var(--line)}
-  .num{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-  h2{font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.02em;font-weight:600;margin-top:14px}
-  .head{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:end;margin-bottom:44px}
-  .head p{color:var(--muted);font-size:16.5px}
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px}
-  .card h3{font-size:17px;font-weight:600;margin:14px 0 8px}
-  .card p{color:var(--muted);font-size:15px}
-  .tag{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);font-weight:500}
-  .ico{width:38px;height:38px;border-radius:9px;background:var(--soft);display:grid;place-items:center;color:var(--navy)}
+  section{padding:150px 0 0}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  h2.serif{font-size:clamp(38px,5vw,66px)}
+  .sub{color:var(--mut);font-size:17px;margin-top:22px;max-width:30em}
+  .card{border:1px solid var(--line2);border-radius:18px;background:linear-gradient(180deg,var(--panel),#0D131D);padding:30px}
+  .path{display:flex;align-items:center;gap:12px;margin:18px 0 6px}
+  .node{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;color:var(--mut);min-width:70px;text-align:center}
+  .node .c{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid var(--line2);color:var(--tx)}
+  .link{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--sky) 0 8px,transparent 8px 14px);opacity:.7}
+  .link.bad{background:repeating-linear-gradient(90deg,#E06A62 0 8px,transparent 8px 14px)}
+  .route+.route{margin-top:18px;padding-top:22px;border-top:1px solid var(--line)}
+  .route p{color:var(--mut);font-size:14.5px;margin-top:12px}
+  .route .label{color:var(--sky)}
+  .route.away .label{color:#E89A94}
 
-  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:18px}
-  .flow .st{padding:24px 22px;border-right:1px solid var(--line);position:relative}
-  .flow .st:last-child{border-right:0}
-  .flow .st b{display:block;font-size:15px;margin-top:12px}
-  .flow .st small{display:block;color:var(--muted);font-size:13px;margin-top:4px}
-  .flow .st.on{background:var(--soft)}
-  .flow .st .n{font-size:11.5px;color:var(--muted);letter-spacing:.08em}
+  .steps-title{text-align:center}
+  .steps{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;margin-top:70px}
+  .step{padding:22px 0 22px 26px;border-left:2px solid var(--line);min-height:44vh;display:flex;flex-direction:column;justify-content:center;transition:border-color .3s}
+  .step h3{font-family:var(--disp);font-weight:300;font-size:28px;letter-spacing:-.02em;margin-top:8px;color:var(--dim);transition:color .3s}
+  .step p{color:var(--dim);font-size:15.5px;margin-top:10px;max-width:26em;transition:color .3s}
+  .step.on{border-left-color:var(--tx)}
+  .step.on h3{color:var(--tx)}
+  .step.on p{color:var(--mut)}
+  .stage{position:sticky;top:18vh;height:64vh;display:flex;align-items:center}
+  .screen{width:100%;min-height:340px;position:relative}
+  .scene{position:absolute;inset:30px;opacity:0;transform:translateY(12px);transition:opacity .45s,transform .45s;display:flex;flex-direction:column;justify-content:center;pointer-events:none}
+  .scene.on{opacity:1;transform:none}
+  .big-wave{display:flex;align-items:center;justify-content:center;gap:5px;height:140px}
+  .big-wave span{width:6px;border-radius:3px;background:var(--sky);animation:bw 1.1s ease-in-out infinite}
+  @keyframes bw{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;padding:7px 12px;border-radius:999px;border:1px solid var(--line2);color:var(--mut)}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+  .cpu{margin:0 auto;width:150px;height:150px;border-radius:24px;border:1px solid var(--line2);display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,rgba(55,138,221,.25),transparent 70%)}
+  .rule{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .rule:last-child{border-bottom:0}
+  .rule .say{font-family:var(--mono);font-size:13px;color:var(--mut)}
+  .rule .ar{color:var(--dim)}
+  .fake{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#F4F6F9;color:#1B2430}
+  .fake .t{display:flex;gap:6px;padding:10px 12px;background:#E3E8EF}
+  .fake .t i{width:9px;height:9px;border-radius:50%;background:#C5CDD8}
+  .fake .b{padding:20px 22px;font-size:15px;line-height:1.7;min-height:200px}
+  .fake .b mark{background:rgba(55,138,221,.18);color:inherit;border-radius:3px;padding:0 2px}
 
-  .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .route{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px}
-  .route.ok{border-color:#B9D3EE;box-shadow:inset 0 3px 0 var(--blue)}
-  .route h3{font-size:18px;font-weight:600}
-  .path{display:flex;align-items:center;gap:10px;margin:24px 0;color:var(--navy)}
-  .path .node{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;color:var(--muted);min-width:64px}
-  .path .node svg{color:var(--navy)}
-  .path .link{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--blue) 0 8px,transparent 8px 14px);max-width:120px}
-  .route.away .path .link:last-of-type{background:repeating-linear-gradient(90deg,#B3261E 0 8px,transparent 8px 14px)}
-  .route p{color:var(--muted);font-size:15px}
-  .advice{margin-top:22px;font-family:var(--serif);font-style:italic;font-size:21px;color:var(--navy)}
+  .priv{text-align:center}
+  .priv .ico{width:40px;height:40px;margin:0 auto 18px;border-radius:12px;border:1px solid var(--line2);display:grid;place-items:center}
+  .four{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:48px;text-align:left}
+  .four b{display:block;font-size:15.5px;font-weight:600;margin:12px 0 6px}
+  .four p{color:var(--mut);font-size:14px}
+  .four .ic{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.06);display:grid;place-items:center;color:var(--sky)}
+  .models{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+  .models .card h3{font-family:var(--disp);font-weight:300;font-size:26px;letter-spacing:-.02em;margin-top:14px}
+  .models .card p{color:var(--mut);font-size:14.5px;margin-top:10px}
 
-  .closing{background:var(--navy);color:#fff;border-radius:16px;padding:64px 56px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
-  .closing .num{color:#A9C8EA}
-  .closing h2{color:#fff}
-  .closing h2 .s{color:#BFD8F3}
-  .closing p{color:#D3E3F4}
-  .closing .btn.primary{background:#fff;color:var(--navy);border-color:#fff}
-  .closing .btn.primary:hover{background:var(--soft)}
-  .closing .side{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
-  .soon{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#D3E3F4}
-  .soon i{width:7px;height:7px;border-radius:50%;background:#7FC4A0}
+  .final{text-align:center;padding:200px 28px 160px}
+  .final h2{font-size:clamp(48px,8vw,112px)}
+  .final .pill{margin-top:40px}
+  .soon{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:22px;font-size:13px;color:var(--mut)}
+  .soon i{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+  footer{border-top:1px solid var(--line);padding:36px 0 48px;font-size:12.5px;color:var(--dim)}
+  footer .w{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  footer p+p{margin-top:4px}
 
-  footer{padding:44px 0 56px;font-size:13px;color:var(--muted)}
-  footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
-  footer img{height:24px;width:auto;opacity:.9}
-  footer p{margin-top:6px}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+  .reveal.in{opacity:1;transform:none}
 
-  @media (max-width:960px){
-    nav.menu{display:none}
-    .hero,.head,.closing{grid-template-columns:1fr}
-    .hero{padding-top:36px;gap:40px}
-    .grid3,.compare{grid-template-columns:1fr}
-    .flow{grid-template-columns:1fr 1fr}
-    .flow .st:nth-child(2){border-right:0}
-    .flow .st:nth-child(-n+2){border-bottom:1px solid var(--line)}
-    .closing{padding:40px 28px}
-    .figures{gap:24px;flex-wrap:wrap}
+  @media (max-width:900px){
+    .bar .pill{display:none}
+    .app{grid-template-columns:1fr}
+    .side{display:none}
+    .split,.steps{grid-template-columns:1fr;gap:40px}
+    .stage{display:none}
+    .step{min-height:0;padding:18px 0 18px 20px}
+    .step h3,.step p{color:var(--tx)}
+    .step p{color:var(--mut)}
+    .four,.models{grid-template-columns:1fr 1fr}
+    section{padding-top:110px}
   }
   @media (max-width:560px){
-    .wrap{padding:0 18px}
-    .bar{gap:12px}
-    .bar .btn{display:none}
-    .lang{margin-left:auto}
-    .flow{grid-template-columns:1fr}
-    .flow .st{border-right:0;border-bottom:1px solid var(--line)}
-    section.block{padding:64px 0}
+    .w{padding:0 18px}
+    .hero{padding:128px 18px 0}
+    .four,.models{grid-template-columns:1fr}
+    .lang button{padding:6px 8px}
+    .card{padding:22px}
+    .scene{inset:22px}
+    .rule{font-size:14px}
   }
-  @media (prefers-reduced-motion:reduce){.caret{animation:none}html{scroll-behavior:auto}}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}.caret,.big-wave span{animation:none}.reveal{opacity:1;transform:none;transition:none}.scene{transition:none}
+  }
 </style>
 </head>
 <body>
-<header id="top">
-  <div class="wrap bar">
-    <a class="logo" href="#top" aria-label="NiderVoice"><img src="assets/nidervoice-logo.svg?v=20261113" width="156" height="30" alt="NiderVoice"></a>
-    <nav class="menu" aria-label="Sections">
-      <a href="#logiciel"><span data-fr>Le logiciel</span><span data-en>The software</span><span data-es>El programa</span><span data-de>Die Software</span></a>
-      <a href="#confidentialite"><span data-fr>Confidentialité</span><span data-en>Privacy</span><span data-es>Privacidad</span><span data-de>Datenschutz</span></a>
-      <a href="#modeles"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></a>
-    </nav>
+<header>
+  <div class="w bar">
+    <a class="logo" href="#" aria-label="NiderVoice"><img src="assets/nidervoice-logo-sombre.svg?v=20261116" width="146" height="28" alt="NiderVoice"></a>
     <div class="lang" role="group" aria-label="Langue / Language">
       <button type="button" data-lang="fr" aria-pressed="true">FR</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
       <button type="button" data-lang="es" aria-pressed="false">ES</button>
       <button type="button" data-lang="de" aria-pressed="false">DE</button>
     </div>
-    <a class="btn ghost" href="mailto:contact@nidervoice.com"><span data-fr>Nous écrire</span><span data-en>Contact us</span><span data-es>Escríbanos</span><span data-de>Schreiben Sie uns</span> <span class="arr" aria-hidden="true">↗</span></a>
+    <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Nous écrire</span><span data-en>Contact us</span><span data-es>Escríbanos</span><span data-de>Kontakt</span></a>
   </div>
 </header>
 
 <main>
-<div class="wrap hero">
-  <div>
-    <div class="kicker"><span data-fr>Logiciel de dictée professionnel</span><span data-en>Professional dictation software</span><span data-es>Programa de dictado profesional</span><span data-de>Professionelle Diktiersoftware</span></div>
-    <h1><span data-fr>Vous parlez.<span class="s">Le texte s'écrit.</span></span><span data-en>You speak.<span class="s">The text writes itself.</span></span><span data-es>Usted habla.<span class="s">El texto se escribe.</span></span><span data-de>Sie sprechen.<span class="s">Der Text schreibt sich.</span></span></h1>
-    <p class="lead" data-fr>NiderVoice s'installe sur votre ordinateur et écrit ce que vous dictez directement dans vos documents, votre messagerie et vos logiciels. Toute la reconnaissance vocale se fait sur place.</p><p class="lead" data-en>NiderVoice installs on your computer and writes what you dictate straight into your documents, your e-mail and your software. All speech recognition happens on the spot.</p><p class="lead" data-es>NiderVoice se instala en su ordenador y escribe lo que usted dicta directamente en sus documentos, su correo electrónico y sus programas. Todo el reconocimiento de voz se hace en el propio ordenador.</p><p class="lead" data-de>NiderVoice wird auf Ihrem Computer installiert und schreibt, was Sie diktieren, direkt in Ihre Dokumente, Ihre E-Mails und Ihre Programme. Die gesamte Spracherkennung erfolgt vor Ort.</p>
-    <div class="cta">
-      <a class="btn primary" href="#logiciel"><span data-fr>Découvrir le logiciel</span><span data-en>Discover the software</span><span data-es>Descubrir el programa</span><span data-de>Software entdecken</span> <span class="arr" aria-hidden="true">↓</span></a>
-      <a class="btn ghost" href="#confidentialite"><span data-fr>Où vont vos dictées ?</span><span data-en>Where does your dictation go?</span><span data-es>¿Adónde van sus dictados?</span><span data-de>Wohin gehen Ihre Diktate?</span> <span class="arr" aria-hidden="true">→</span></a>
-    </div>
-    <div class="figures">
-      <div><b>100&nbsp;%</b><span data-fr>local, sans connexion</span><span data-en>local, offline</span><span data-es>local, sin conexión</span><span data-de>lokal, offline</span></div>
-      <div><b>0</b><span data-fr>dictée envoyée à un serveur</span><span data-en>dictations sent to a server</span><span data-es>dictados enviados a un servidor</span><span data-de>Diktate an einen Server</span></div>
-      <div><b>≈ 100</b><span data-fr>langues reconnues</span><span data-en>languages recognised</span><span data-es>idiomas reconocidos</span><span data-de>erkannte Sprachen</span></div>
-    </div>
-  </div>
+<div class="hero">
+  <h1 class="serif"><span data-fr>Vous parlez, <em>le texte s'écrit.</em></span><span data-en>You speak, <em>the text writes itself.</em></span><span data-es>Usted habla, <em>el texto se escribe.</em></span><span data-de>Sie sprechen, <em>der Text schreibt sich.</em></span></h1>
+  <p class="lead" data-fr>NiderVoice écrit ce que vous dictez directement dans vos documents, votre messagerie et vos logiciels. Toute la reconnaissance vocale se fait sur votre ordinateur.</p><p class="lead" data-en>NiderVoice writes what you dictate straight into your documents, your e-mail and your software. All speech recognition happens on your computer.</p><p class="lead" data-es>NiderVoice escribe lo que usted dicta directamente en sus documentos, su correo y sus programas. Todo el reconocimiento de voz se hace en su ordenador.</p><p class="lead" data-de>NiderVoice schreibt, was Sie diktieren, direkt in Ihre Dokumente, E-Mails und Programme. Die gesamte Spracherkennung erfolgt auf Ihrem Computer.</p>
+  <a class="pill light" href="#comment"><span data-fr>Voir comment ça marche</span><span data-en>See how it works</span><span data-es>Ver cómo funciona</span><span data-de>So funktioniert es</span> <span aria-hidden="true">→</span></a>
 
-  <div>
-    <div class="app demo" id="demo" aria-live="off">
-      <div class="app-top">
-        <img src="assets/favicon.svg" width="20" height="20" alt="">
-        <b style="font-size:14px;font-weight:600">NiderVoice</b>
-        <span class="live"><i></i><span data-fr>Sur cet ordinateur · hors ligne</span><span data-en>On this computer · offline</span><span data-es>En este ordenador · sin conexión</span><span data-de>Auf diesem Computer · offline</span></span>
-      </div>
-      <div class="app-tabs" aria-hidden="true"><span data-fr>Dictée</span><span data-en>Dictation</span><span data-es>Dictado</span><span data-de>Diktat</span><span data-fr>Modèle</span><span data-en>Model</span><span data-es>Modelo</span><span data-de>Modell</span><span data-fr>Réglages</span><span data-en>Settings</span><span data-es>Ajustes</span><span data-de>Einstellungen</span></div>
-      <div class="app-body">
-        <div class="field-label"><span data-fr>Votre texte</span><span data-en>Your text</span><span data-es>Su texto</span><span data-de>Ihr Text</span></div>
-        <div class="typed"><span id="typed"></span><span class="caret"></span></div>
-        <div class="wave" aria-hidden="true"></div>
-      </div>
-      <div class="app-foot"><span data-fr>Modèle : Vox Caladrii FR</span><span data-en>Model: Vox Caladrii FR</span><span data-es>Modelo: Vox Caladrii FR</span><span data-de>Modell: Vox Caladrii FR</span><span data-fr>Rien n'est enregistré</span><span data-en>Nothing is stored</span><span data-es>No se guarda nada</span><span data-de>Nichts wird gespeichert</span></div>
+  <div class="app demo" id="demo" aria-live="off">
+    <div class="side" aria-hidden="true">
+      <div class="me"><img src="assets/favicon.svg" alt="">NiderVoice</div>
+      <span class="it on" data-fr>Dictée</span><span class="it on" data-en>Dictation</span><span class="it on" data-es>Dictado</span><span class="it on" data-de>Diktat</span>
+      <span class="it" data-fr>Modèles</span><span class="it" data-en>Models</span><span class="it" data-es>Modelos</span><span class="it" data-de>Modelle</span>
+      <span class="it" data-fr>Dictionnaire</span><span class="it" data-en>Dictionary</span><span class="it" data-es>Diccionario</span><span class="it" data-de>Wörterbuch</span>
+      <span class="it" data-fr>Réglages</span><span class="it" data-en>Settings</span><span class="it" data-es>Ajustes</span><span class="it" data-de>Einstellungen</span>
+      <span class="it" data-fr>Dépannage</span><span class="it" data-en>Troubleshooting</span><span class="it" data-es>Solución de problemas</span><span class="it" data-de>Fehlerbehebung</span>
+      <div class="bot">VOX CALADRII FR</div>
     </div>
-    <p class="illus"><span data-fr>Exemple illustratif — texte fictif</span><span data-en>Illustrative example — fictitious text</span><span data-es>Ejemplo ilustrativo — texto ficticio</span><span data-de>Illustratives Beispiel — fiktiver Text</span></p>
+    <div class="main">
+      <div class="top"><span data-fr>Message — à : équipe</span><span data-en>Message — to: team</span><span data-es>Mensaje — para: equipo</span><span data-de>Nachricht — an: Team</span><span class="live"><i></i><span data-fr>Sur cet ordinateur</span><span data-en>On this computer</span><span data-es>En este ordenador</span><span data-de>Auf diesem Computer</span></span></div>
+      <div class="doc"><span id="typed"></span><span class="caret"></span></div>
+      <div class="mic"><div class="btn"><svg width="14" height="18" viewBox="0 0 24 30" aria-hidden="true"><rect x="7" y="2" width="10" height="16" rx="5" fill="#fff"/><path d="M3 14a9 9 0 0 0 18 0M12 23v5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div><div class="wave" aria-hidden="true"></div></div>
+    </div>
   </div>
+  <p class="illus"><span data-fr>Exemple illustratif — texte fictif</span><span data-en>Illustrative example — fictitious text</span><span data-es>Ejemplo ilustrativo — texto ficticio</span><span data-de>Illustratives Beispiel — fiktiver Text</span></p>
 </div>
 
-<section class="block" id="logiciel">
-  <div class="wrap">
-    <div class="head">
-      <div>
-        <div class="num">01 / <span data-fr>Le logiciel</span><span data-en>The software</span><span data-es>El programa</span><span data-de>Die Software</span></div>
-        <h2><span data-fr>Vous dictez.<span class="s">NiderVoice écrit là où vous travaillez.</span></span><span data-en>You dictate.<span class="s">NiderVoice writes where you work.</span></span><span data-es>Usted dicta.<span class="s">NiderVoice escribe donde usted trabaja.</span></span><span data-de>Sie diktieren.<span class="s">NiderVoice schreibt, wo Sie arbeiten.</span></span></h2>
-      </div>
-      <p data-fr>Un raccourci ou un clic pour commencer : le texte s'affiche au fil de la parole, dans le logiciel ouvert devant vous. Vous relisez et vous validez, comme toujours.</p><p data-en>A shortcut or a click to start: the text appears as you speak, in the software open in front of you. You read it over and confirm it, as always.</p><p data-es>Un atajo o un clic para empezar: el texto aparece a medida que habla, en el programa que tiene abierto. Usted lo relee y lo valida, como siempre.</p><p data-de>Ein Tastenkürzel oder ein Klick genügt: Der Text erscheint, während Sie sprechen, in dem Programm, das vor Ihnen geöffnet ist. Sie lesen ihn und bestätigen ihn, wie immer.</p>
+<section id="confidentialite">
+  <div class="w split">
+    <div class="reveal">
+      <div class="label"><span data-fr>Confidentialité</span><span data-en>Privacy</span><span data-es>Privacidad</span><span data-de>Datenschutz</span></div>
+      <h2 class="serif" style="margin-top:16px"><span data-fr>Votre voix n'a rien à faire <em>sur un serveur.</em></span><span data-en>Your voice has no business <em>on a server.</em></span><span data-es>Su voz no tiene nada que hacer <em>en un servidor.</em></span><span data-de>Ihre Stimme hat <em>auf einem Server</em> nichts verloren.</span></h2>
+      <p class="sub" data-fr>Avec de nombreux services en ligne, la voix part vers des serveurs distants, parfois hors de l'Union européenne. Pour des informations confidentielles, ce transfert relève du RGPD et engage la responsabilité de la personne qui dicte.</p><p class="sub" data-en>With many online services, the voice is sent to remote servers, sometimes outside the European Union. For confidential information, this transfer falls under the GDPR and engages the responsibility of the person dictating.</p><p class="sub" data-es>Con muchos servicios en línea, la voz se envía a servidores remotos, a veces fuera de la Unión Europea. Para información confidencial, esta transferencia está sujeta al RGPD y compromete la responsabilidad de quien dicta.</p><p class="sub" data-de>Bei vielen Online-Diensten wird die Stimme an entfernte Server gesendet, teils außerhalb der Europäischen Union. Bei vertraulichen Informationen unterliegt diese Übermittlung der DSGVO, und die diktierende Person trägt die Verantwortung.</p>
     </div>
-
-    <div class="flow">
-      <div class="st"><span class="n">1</span><div class="ico"><svg width="18" height="22" viewBox="0 0 24 30" aria-hidden="true"><rect x="7" y="2" width="10" height="16" rx="5" fill="currentColor"/><path d="M3 14a9 9 0 0 0 18 0M12 23v5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></div><b data-fr>Votre voix</b><b data-en>Your voice</b><b data-es>Su voz</b><b data-de>Ihre Stimme</b><small data-fr>au micro de votre choix</small><small data-en>into the microphone of your choice</small><small data-es>con el micrófono que prefiera</small><small data-de>über ein Mikrofon Ihrer Wahl</small></div>
-      <div class="st"><span class="n">2</span><div class="ico"><svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor"><rect x="12" y="27" width="6" height="10" rx="3"/><rect x="21" y="20" width="6" height="24" rx="3"/><rect x="29" y="12" width="6" height="40" rx="3"/><rect x="37" y="20" width="6" height="24" rx="3"/><rect x="46" y="27" width="6" height="10" rx="3"/></g></svg></div><b data-fr>Modèle de reconnaissance</b><b data-en>Recognition model</b><b data-es>Modelo de reconocimiento</b><b data-de>Erkennungsmodell</b><small data-fr>sur votre ordinateur</small><small data-en>on your computer</small><small data-es>en su ordenador</small><small data-de>auf Ihrem Computer</small></div>
-      <div class="st on"><span class="n">3</span><div class="ico"><img src="assets/favicon.svg" width="22" height="22" alt=""></div><b>NiderVoice</b><small data-fr>met en forme et écrit</small><small data-en>formats and writes</small><small data-es>da formato y escribe</small><small data-de>formatiert und schreibt</small></div>
-      <div class="st"><span class="n">4</span><div class="ico"><svg width="18" height="22" viewBox="0 0 24 30" aria-hidden="true"><path d="M3 2h12l6 6v20H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 14h10M7 19h10M7 24h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><b data-fr>Vos documents</b><b data-en>Your documents</b><b data-es>Sus documentos</b><b data-de>Ihre Dokumente</b><small data-fr>traitement de texte, messagerie, logiciel métier</small><small data-en>word processor, e-mail, business software</small><small data-es>procesador de textos, correo, programa profesional</small><small data-de>Textverarbeitung, E-Mail, Fachsoftware</small></div>
-    </div>
-
-    <div class="grid3">
-      <div class="card"><span class="tag" data-fr>Partout</span><span class="tag" data-en>Everywhere</span><span class="tag" data-es>En todas partes</span><span class="tag" data-de>Überall</span>
-        <h3 data-fr>Écrit dans vos logiciels</h3><h3 data-en>Writes into your software</h3><h3 data-es>Escribe en sus programas</h3><h3 data-de>Schreibt in Ihre Programme</h3>
-        <p data-fr>Le texte arrive là où se trouve le curseur, comme si vous le tapiez au clavier. Aucun logiciel à changer.</p><p data-en>The text arrives where the cursor is, as if you were typing it. No software to change.</p><p data-es>El texto aparece donde está el cursor, como si lo escribiera con el teclado. No hay que cambiar de programa.</p><p data-de>Der Text erscheint an der Cursorposition, als würden Sie ihn tippen. Kein Programm muss ersetzt werden.</p></div>
-      <div class="card"><span class="tag" data-fr>Ponctuation dictée</span><span class="tag" data-en>Dictated punctuation</span><span class="tag" data-es>Puntuación dictada</span><span class="tag" data-de>Diktierte Zeichensetzung</span>
-        <h3 data-fr>Vous gardez la main</h3><h3 data-en>You stay in control</h3><h3 data-es>Usted mantiene el control</h3><h3 data-de>Sie behalten die Kontrolle</h3>
-        <p data-fr>« Point », « virgule », « à la ligne », « nouveau paragraphe » : la ponctuation et la mise en page suivent ce que vous dictez.</p><p data-en>"Full stop", "comma", "new line", "new paragraph": punctuation and layout follow what you dictate.</p><p data-es>«Punto», «coma», «punto y aparte», «nuevo párrafo»: la puntuación y el formato siguen lo que usted dicta.</p><p data-de>„Punkt“, „Komma“, „neue Zeile“, „neuer Absatz“: Zeichensetzung und Layout folgen Ihrem Diktat.</p></div>
-      <div class="card"><span class="tag" data-fr>Dictée fixée</span><span class="tag" data-en>Anchored dictation</span><span class="tag" data-es>Dictado fijado</span><span class="tag" data-de>Verankertes Diktat</span>
-        <h3 data-fr>Un champ, même quand vous regardez ailleurs</h3><h3 data-en>One field, even when you look elsewhere</h3><h3 data-es>Un campo, aunque mire a otra parte</h3><h3 data-de>Ein Feld, auch wenn Sie woanders hinschauen</h3>
-        <p data-fr>Fixez la dictée sur une zone de texte : chaque phrase s'y ajoute à la suite, pendant que vous consultez un autre document.</p><p data-en>Anchor dictation on a text field: each sentence is added there, one after the other, while you look at another document.</p><p data-es>Fije el dictado en un campo de texto: cada frase se añade allí, una tras otra, mientras consulta otro documento.</p><p data-de>Verankern Sie das Diktat in einem Textfeld: Jeder Satz wird dort angefügt, während Sie ein anderes Dokument ansehen.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="block" id="confidentialite">
-  <div class="wrap">
-    <div class="head">
-      <div>
-        <div class="num">02 / <span data-fr>Confidentialité</span><span data-en>Privacy</span><span data-es>Privacidad</span><span data-de>Datenschutz</span></div>
-        <h2><span data-fr>Vos dictées<span class="s">ne quittent jamais votre ordinateur.</span></span><span data-en>Your dictation<span class="s">never leaves your computer.</span></span><span data-es>Sus dictados<span class="s">nunca salen de su ordenador.</span></span><span data-de>Ihre Diktate<span class="s">verlassen nie Ihren Computer.</span></span></h2>
-      </div>
-      <p data-fr>NiderVoice effectue toute la reconnaissance vocale sur votre ordinateur : avec Vox Caladrii FR en français, avec Whisper dans les autres langues. Aucun enregistrement ni aucun texte n'est transmis à un serveur ; une fois installé, le logiciel fonctionne sans connexion à Internet.</p><p data-en>NiderVoice performs all speech recognition on your computer: with Vox Caladrii FR in French, with Whisper in other languages. No recording and no text is sent to a server; once installed, the software works without an Internet connection.</p><p data-es>NiderVoice realiza todo el reconocimiento de voz en su ordenador: con Vox Caladrii FR en francés y con Whisper en los demás idiomas. Ninguna grabación ni ningún texto se transmite a un servidor; una vez instalado, el programa funciona sin conexión a Internet.</p><p data-de>NiderVoice führt die gesamte Spracherkennung auf Ihrem Computer aus: mit Vox Caladrii FR auf Französisch, mit Whisper in den anderen Sprachen. Weder Aufnahmen noch Texte werden an einen Server übertragen; einmal installiert, funktioniert die Software ohne Internetverbindung.</p>
-    </div>
-    <div class="compare">
+    <div class="card reveal">
       <div class="route ok">
-        <span class="tag" data-fr>Avec NiderVoice</span><span class="tag" data-en>With NiderVoice</span><span class="tag" data-es>Con NiderVoice</span><span class="tag" data-de>Mit NiderVoice</span>
-        <h3 data-fr>Tout reste sur place</h3><h3 data-en>Everything stays on site</h3><h3 data-es>Todo se queda en su ordenador</h3><h3 data-de>Alles bleibt vor Ort</h3>
-        <div class="path"><div class="node"><svg width="26" height="32" viewBox="0 0 24 30" aria-hidden="true"><rect x="7" y="2" width="10" height="16" rx="5" fill="currentColor"/><path d="M3 14a9 9 0 0 0 18 0M12 23v5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg><span data-fr>Voix</span><span data-en>Voice</span><span data-es>Voz</span><span data-de>Stimme</span></div><div class="link"></div><div class="node"><svg width="38" height="32" viewBox="0 0 40 32" aria-hidden="true"><rect x="5" y="3" width="30" height="20" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M1 28h38" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><span data-fr>Votre ordinateur</span><span data-en>Your computer</span><span data-es>Su ordenador</span><span data-de>Ihr Computer</span></div></div>
+        <div class="label">NiderVoice</div>
+        <div class="path"><div class="node"><div class="c"><svg width="16" height="20" viewBox="0 0 24 30" aria-hidden="true"><rect x="7" y="2" width="10" height="16" rx="5" fill="currentColor"/><path d="M3 14a9 9 0 0 0 18 0M12 23v5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></div><span data-fr>Voix</span><span data-en>Voice</span><span data-es>Voz</span><span data-de>Stimme</span></div><div class="link"></div><div class="node"><div class="c"><svg width="24" height="20" viewBox="0 0 40 32" aria-hidden="true"><rect x="5" y="3" width="30" height="20" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M1 28h38" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg></div><span data-fr>Votre ordinateur</span><span data-en>Your computer</span><span data-es>Su ordenador</span><span data-de>Ihr Computer</span></div></div>
         <p data-fr>La voix est transformée en texte sur votre ordinateur. Aucun enregistrement ni aucun texte n'est transmis.</p><p data-en>The voice is turned into text on your computer. No recording and no text is transmitted.</p><p data-es>La voz se transforma en texto en su ordenador. No se transmite ninguna grabación ni ningún texto.</p><p data-de>Die Stimme wird auf Ihrem Computer in Text umgewandelt. Weder Aufnahmen noch Texte werden übertragen.</p>
       </div>
       <div class="route away">
-        <span class="tag" data-fr>Avec de nombreux services en ligne</span><span class="tag" data-en>With many online services</span><span class="tag" data-es>Con muchos servicios en línea</span><span class="tag" data-de>Bei vielen Online-Diensten</span>
-        <h3 data-fr>La voix part ailleurs</h3><h3 data-en>The voice goes elsewhere</h3><h3 data-es>La voz se va a otra parte</h3><h3 data-de>Die Stimme geht woandershin</h3>
-        <div class="path"><div class="node"><svg width="26" height="32" viewBox="0 0 24 30" aria-hidden="true"><rect x="7" y="2" width="10" height="16" rx="5" fill="currentColor"/><path d="M3 14a9 9 0 0 0 18 0M12 23v5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg><span data-fr>Voix</span><span data-en>Voice</span><span data-es>Voz</span><span data-de>Stimme</span></div><div class="link"></div><div class="node"><svg width="38" height="32" viewBox="0 0 40 32" aria-hidden="true"><rect x="5" y="3" width="30" height="20" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M1 28h38" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><span data-fr>Ordinateur</span><span data-en>Computer</span><span data-es>Ordenador</span><span data-de>Computer</span></div><div class="link"></div><div class="node"><svg width="40" height="32" viewBox="0 0 44 30" aria-hidden="true"><path d="M12 26h22a8 8 0 0 0 0-16 11 11 0 0 0-21-2A9 9 0 0 0 12 26z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg><span data-fr>Serveur distant</span><span data-en>Remote server</span><span data-es>Servidor remoto</span><span data-de>Entfernter Server</span></div></div>
-        <p data-fr>La voix est envoyée vers des serveurs distants, parfois hors de l'Union européenne — y compris avec certains services fondés sur Whisper. Pour des informations confidentielles, ce transfert relève du RGPD et engage la responsabilité de la personne qui dicte.</p><p data-en>The voice is sent to remote servers, sometimes outside the European Union — including with some Whisper-based services. For confidential information, this transfer falls under the GDPR and engages the responsibility of the person dictating.</p><p data-es>La voz se envía a servidores remotos, a veces fuera de la Unión Europea, incluso con algunos servicios basados en Whisper. Para información confidencial, esta transferencia está sujeta al RGPD y compromete la responsabilidad de quien dicta.</p><p data-de>Die Stimme wird an entfernte Server gesendet, teils außerhalb der Europäischen Union – auch bei manchen Diensten auf Whisper-Basis. Bei vertraulichen Informationen unterliegt diese Übermittlung der DSGVO, und die diktierende Person trägt die Verantwortung.</p>
+        <div class="label"><span data-fr>De nombreux services en ligne</span><span data-en>Many online services</span><span data-es>Muchos servicios en línea</span><span data-de>Viele Online-Dienste</span></div>
+        <div class="path"><div class="node"><div class="c"><svg width="16" height="20" viewBox="0 0 24 30" aria-hidden="true"><rect x="7" y="2" width="10" height="16" rx="5" fill="currentColor"/><path d="M3 14a9 9 0 0 0 18 0M12 23v5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></div><span data-fr>Voix</span><span data-en>Voice</span><span data-es>Voz</span><span data-de>Stimme</span></div><div class="link"></div><div class="node"><div class="c"><svg width="24" height="20" viewBox="0 0 40 32" aria-hidden="true"><rect x="5" y="3" width="30" height="20" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M1 28h38" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg></div><span data-fr>Ordinateur</span><span data-en>Computer</span><span data-es>Ordenador</span><span data-de>Computer</span></div><div class="link bad"></div><div class="node"><div class="c"><svg width="26" height="18" viewBox="0 0 44 30" aria-hidden="true"><path d="M12 26h22a8 8 0 0 0 0-16 11 11 0 0 0-21-2A9 9 0 0 0 12 26z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></div><span data-fr>Serveur distant</span><span data-en>Remote server</span><span data-es>Servidor remoto</span><span data-de>Entfernter Server</span></div></div>
+        <p data-fr>Y compris avec certains services fondés sur Whisper. Avant d'utiliser un outil de dictée, vérifiez où la voix est transformée en texte.</p><p data-en>Including some Whisper-based services. Before using a dictation tool, check where the voice is turned into text.</p><p data-es>Incluso con algunos servicios basados en Whisper. Antes de utilizar una herramienta de dictado, compruebe dónde se transforma la voz en texto.</p><p data-de>Auch bei manchen Diensten auf Whisper-Basis. Prüfen Sie vor der Nutzung eines Diktierwerkzeugs, wo die Stimme in Text umgewandelt wird.</p>
       </div>
-    </div>
-    <p class="advice" data-fr>Avant d'utiliser un outil de dictée, vérifiez où la voix est transformée en texte.</p><p class="advice" data-en>Before using a dictation tool, check where the voice is turned into text.</p><p class="advice" data-es>Antes de utilizar una herramienta de dictado, compruebe dónde se transforma la voz en texto.</p><p class="advice" data-de>Prüfen Sie vor der Nutzung eines Diktierwerkzeugs, wo die Stimme in Text umgewandelt wird.</p>
-  </div>
-</section>
-
-<section class="block" id="modeles">
-  <div class="wrap">
-    <div class="head">
-      <div>
-        <div class="num">03 / <span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></div>
-        <h2><span data-fr>Les modèles<span class="s">de reconnaissance vocale.</span></span><span data-en>The speech<span class="s">recognition models.</span></span><span data-es>Los modelos<span class="s">de reconocimiento de voz.</span></span><span data-de>Die Modelle<span class="s">der Spracherkennung.</span></span></h2>
-      </div>
-      <p data-fr>Le modèle est la partie qui transforme la voix en texte. NiderVoice l'exécute sur votre ordinateur, sans carte graphique obligatoire.</p><p data-en>The model is the part that turns the voice into text. NiderVoice runs it on your computer; a graphics card is not required.</p><p data-es>El modelo es la parte que transforma la voz en texto. NiderVoice lo ejecuta en su ordenador, sin necesidad de tarjeta gráfica.</p><p data-de>Das Modell ist der Teil, der die Stimme in Text umwandelt. NiderVoice führt es auf Ihrem Computer aus; eine Grafikkarte ist nicht erforderlich.</p>
-    </div>
-    <div class="grid3">
-      <div class="card"><div class="ico"><img src="assets/vox-caladrii-icon.svg" width="24" height="24" alt=""></div><h3 data-fr>Français</h3><h3 data-en>French</h3><h3 data-es>Francés</h3><h3 data-de>Französisch</h3><p data-fr>Vox Caladrii FR, entraîné pour la terminologie radiologique française. Livré avec NiderVoice, prêt à l'emploi.</p><p data-en>Vox Caladrii FR, trained for French radiology terminology. Supplied with NiderVoice, ready to use.</p><p data-es>Vox Caladrii FR, entrenado para la terminología radiológica francesa. Incluido con NiderVoice, listo para usar.</p><p data-de>Vox Caladrii FR, trainiert für die französische radiologische Terminologie. Wird mit NiderVoice geliefert und ist sofort einsatzbereit.</p></div>
-      <div class="card"><div class="ico">DE·EN</div><h3 data-fr>Allemand et anglais</h3><h3 data-en>German and English</h3><h3 data-es>Alemán e inglés</h3><h3 data-de>Deutsch und Englisch</h3><p data-fr>Les modèles Vox Caladrii DE et EN sont en cours de développement. En attendant, NiderVoice prend en charge Whisper (OpenAI), un modèle multilingue généraliste, téléchargeable une seule fois depuis le logiciel. Il n'est pas entraîné pour la terminologie radiologique et peut être plus lent.</p><p data-en>The Vox Caladrii DE and EN models are under development. Meanwhile, NiderVoice supports Whisper (OpenAI), a general-purpose multilingual model, downloaded once from within the software. It is not trained for radiology terminology and may be slower.</p><p data-es>Los modelos Vox Caladrii DE y EN están en desarrollo. Mientras tanto, NiderVoice admite Whisper (OpenAI), un modelo multilingüe generalista que se descarga una sola vez desde el programa. No está entrenado para la terminología radiológica y puede ser más lento.</p><p data-de>Die Modelle Vox Caladrii DE und EN befinden sich in Entwicklung. Bis dahin unterstützt NiderVoice Whisper (OpenAI), ein allgemeines mehrsprachiges Modell, das einmalig aus der Software heruntergeladen wird. Es ist nicht für die radiologische Terminologie trainiert und kann langsamer sein.</p></div>
-      <div class="card"><div class="ico">≈100</div><h3 data-fr>Autres langues</h3><h3 data-en>Other languages</h3><h3 data-es>Otros idiomas</h3><h3 data-de>Weitere Sprachen</h3><p data-fr>Près de cent autres langues sont prises en charge avec Whisper. La qualité de reconnaissance varie selon la langue.</p><p data-en>Nearly a hundred other languages are supported with Whisper. Recognition quality varies by language.</p><p data-es>Casi cien idiomas más son compatibles con Whisper. La calidad del reconocimiento varía según el idioma.</p><p data-de>Fast hundert weitere Sprachen werden mit Whisper unterstützt. Die Erkennungsqualität hängt von der Sprache ab.</p></div>
     </div>
   </div>
 </section>
 
-<section class="block" style="border-top:0;padding-top:24px">
-  <div class="wrap">
-    <div class="closing">
-      <div>
-        <div class="num">NiderVoice</div>
-        <h2><span data-fr>Dictez en toute confiance.<span class="s">Sur votre ordinateur, et nulle part ailleurs.</span></span><span data-en>Dictate with confidence.<span class="s">On your computer, and nowhere else.</span></span><span data-es>Dicte con total confianza.<span class="s">En su ordenador, y en ningún otro sitio.</span></span><span data-de>Diktieren Sie mit Vertrauen.<span class="s">Auf Ihrem Computer, und nirgendwo sonst.</span></span></h2>
+<section id="comment">
+  <div class="w">
+    <h2 class="serif steps-title reveal"><span data-fr>Comment NiderVoice <em>écrit pour vous.</em></span><span data-en>How NiderVoice <em>writes for you.</em></span><span data-es>Cómo NiderVoice <em>escribe por usted.</em></span><span data-de>Wie NiderVoice <em>für Sie schreibt.</em></span></h2>
+    <div class="steps">
+      <div class="list">
+        <div class="step on" data-s="0"><span class="label">01</span><h3 data-fr>Vous dictez.</h3><h3 data-en>You dictate.</h3><h3 data-es>Usted dicta.</h3><h3 data-de>Sie diktieren.</h3><p data-fr>Un raccourci, le bouton du micro ou le clic du milieu de la souris : vous parlez naturellement, au micro de votre choix.</p><p data-en>A shortcut, the microphone button or the middle mouse button: you speak naturally, into the microphone of your choice.</p><p data-es>Un atajo, el botón del micrófono o el botón central del ratón: habla con naturalidad, con el micrófono que prefiera.</p><p data-de>Ein Tastenkürzel, die Mikrofontaste oder die mittlere Maustaste: Sie sprechen ganz natürlich, über ein Mikrofon Ihrer Wahl.</p></div>
+        <div class="step" data-s="1"><span class="label">02</span><h3 data-fr>Tout se passe sur votre ordinateur.</h3><h3 data-en>Everything happens on your computer.</h3><h3 data-es>Todo ocurre en su ordenador.</h3><h3 data-de>Alles geschieht auf Ihrem Computer.</h3><p data-fr>Le modèle de reconnaissance tourne sur place, sans connexion et sans carte graphique obligatoire. Rien n'est envoyé.</p><p data-en>The recognition model runs locally, offline, with no graphics card required. Nothing is sent.</p><p data-es>El modelo de reconocimiento funciona en el propio ordenador, sin conexión y sin necesidad de tarjeta gráfica. No se envía nada.</p><p data-de>Das Erkennungsmodell läuft lokal, offline und ohne zwingende Grafikkarte. Nichts wird gesendet.</p></div>
+        <div class="step" data-s="2"><span class="label">03</span><h3 data-fr>Vous gardez la main sur la forme.</h3><h3 data-en>You stay in control of the layout.</h3><h3 data-es>Usted controla el formato.</h3><h3 data-de>Sie bestimmen die Form.</h3><p data-fr>La ponctuation et la mise en page suivent ce que vous dictez : « point », « virgule », « à la ligne ». Rien n'est ajouté à votre place.</p><p data-en>Punctuation and layout follow what you dictate: "full stop", "comma", "new line". Nothing is added in your place.</p><p data-es>La puntuación y el formato siguen lo que usted dicta: «punto», «coma», «punto y aparte». No se añade nada por usted.</p><p data-de>Zeichensetzung und Layout folgen Ihrem Diktat: „Punkt“, „Komma“, „neue Zeile“. Nichts wird an Ihrer Stelle hinzugefügt.</p></div>
+        <div class="step" data-s="3"><span class="label">04</span><h3 data-fr>Le texte arrive là où vous travaillez.</h3><h3 data-en>The text lands where you work.</h3><h3 data-es>El texto llega donde usted trabaja.</h3><h3 data-de>Der Text landet dort, wo Sie arbeiten.</h3><p data-fr>Traitement de texte, messagerie, logiciel métier : le texte s'écrit au curseur. Vous pouvez aussi fixer la dictée sur un champ et regarder ailleurs.</p><p data-en>Word processor, e-mail, business software: the text is written at the cursor. You can also anchor dictation on one field and look elsewhere.</p><p data-es>Procesador de textos, correo, programa profesional: el texto se escribe en el cursor. También puede fijar el dictado en un campo y mirar a otra parte.</p><p data-de>Textverarbeitung, E-Mail, Fachsoftware: Der Text erscheint am Cursor. Sie können das Diktat auch in einem Feld verankern und woanders hinschauen.</p></div>
       </div>
-      <div class="side">
-        <span class="soon"><i></i><span data-fr>Bientôt disponible</span><span data-en>Coming soon</span><span data-es>Próximamente</span><span data-de>Demnächst verfügbar</span></span>
-        <p data-fr>Pour être informé de la sortie ou poser une question :</p><p data-en>To be told when it is released or to ask a question:</p><p data-es>Para recibir aviso del lanzamiento o hacer una pregunta:</p><p data-de>Um über die Veröffentlichung informiert zu werden oder eine Frage zu stellen:</p>
-        <a class="btn primary" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span class="arr" aria-hidden="true">↗</span></a>
+      <div class="stage">
+        <div class="card screen">
+          <div class="scene on" data-s="0"><div class="big-wave" aria-hidden="true"></div><div class="chips"><span class="chip" data-fr>Raccourci clavier</span><span class="chip" data-en>Keyboard shortcut</span><span class="chip" data-es>Atajo de teclado</span><span class="chip" data-de>Tastenkürzel</span><span class="chip" data-fr>Clic du milieu</span><span class="chip" data-en>Middle click</span><span class="chip" data-es>Clic central</span><span class="chip" data-de>Mittlere Maustaste</span><span class="chip" data-fr>Micro au choix</span><span class="chip" data-en>Any microphone</span><span class="chip" data-es>Cualquier micrófono</span><span class="chip" data-de>Beliebiges Mikrofon</span></div></div>
+          <div class="scene" data-s="1"><div class="cpu"><img src="assets/favicon.svg" width="54" height="54" alt=""></div><div class="chips"><span class="chip">Vox Caladrii FR</span><span class="chip" data-fr>Hors ligne</span><span class="chip" data-en>Offline</span><span class="chip" data-es>Sin conexión</span><span class="chip" data-de>Offline</span><span class="chip" data-fr>Rien n'est envoyé</span><span class="chip" data-en>Nothing is sent</span><span class="chip" data-es>No se envía nada</span><span class="chip" data-de>Nichts wird gesendet</span></div></div>
+          <div class="scene" data-s="2">
+            <div class="rule"><span class="say" data-fr>« … normale point »</span><span class="say" data-en>"… normal full stop"</span><span class="say" data-es>«… normal punto»</span><span class="say" data-de>„… normal Punkt“</span><span class="ar">→</span><span class="out" data-fr>… normale.</span><span class="out" data-en>… normal.</span><span class="out" data-es>… normal.</span><span class="out" data-de>… normal.</span></div>
+            <div class="rule"><span class="say" data-fr>« virgule »</span><span class="say" data-en>"comma"</span><span class="say" data-es>«coma»</span><span class="say" data-de>„Komma“</span><span class="ar">→</span><span class="out">,</span></div>
+            <div class="rule"><span class="say" data-fr>« à la ligne »</span><span class="say" data-en>"new line"</span><span class="say" data-es>«punto y aparte»</span><span class="say" data-de>„neue Zeile“</span><span class="ar">→</span><span class="out">↵</span></div>
+            <div class="rule"><span class="say" data-fr>« douze millimètres »</span><span class="say" data-en>"twelve millimetres"</span><span class="say" data-es>«doce milímetros»</span><span class="say" data-de>„zwölf Millimeter“</span><span class="ar">→</span><span class="out">12 mm</span></div>
+          </div>
+          <div class="scene" data-s="3"><div class="fake"><div class="t"><i></i><i></i><i></i></div><div class="b"><span data-fr>Bonjour,<br><br>Je vous confirme notre réunion de jeudi à 14 heures. <mark>Je joindrai le document de présentation.</mark></span><span data-en>Hello,<br><br>I am confirming our meeting on Thursday at 2 pm. <mark>I will attach the presentation document.</mark></span><span data-es>Buenos días:<br><br>Le confirmo nuestra reunión del jueves a las 14:00. <mark>Adjuntaré el documento de presentación.</mark></span><span data-de>Guten Tag,<br><br>hiermit bestätige ich unser Treffen am Donnerstag um 14 Uhr. <mark>Ich füge das Präsentationsdokument bei.</mark></span></div></div></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<section>
+  <div class="w">
+    <div class="card priv reveal" style="padding:56px 44px">
+      <div class="ico"><svg width="16" height="18" viewBox="0 0 16 18" aria-hidden="true"><rect x="1.5" y="8" width="13" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 8V5.5a3.5 3.5 0 0 1 7 0V8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div>
+      <div class="label"><span data-fr>La confidentialité d'abord</span><span data-en>Privacy first</span><span data-es>La privacidad, primero</span><span data-de>Datenschutz zuerst</span></div>
+      <h2 class="serif" style="margin-top:14px"><span data-fr>Vos dictées restent <em>les vôtres.</em></span><span data-en>Your dictation stays <em>yours.</em></span><span data-es>Sus dictados siguen siendo <em>suyos.</em></span><span data-de>Ihre Diktate bleiben <em>Ihre.</em></span></h2>
+      <div class="four">
+        <div><span class="ic">↯</span><b data-fr>Rien n'est envoyé.</b><b data-en>Nothing is sent.</b><b data-es>No se envía nada.</b><b data-de>Nichts wird gesendet.</b><p data-fr>Ni la voix ni le texte ne quittent votre ordinateur.</p><p data-en>Neither the voice nor the text leaves your computer.</p><p data-es>Ni la voz ni el texto salen de su ordenador.</p><p data-de>Weder Stimme noch Text verlassen Ihren Computer.</p></div>
+        <div><span class="ic">∅</span><b data-fr>Rien n'est gardé.</b><b data-en>Nothing is kept.</b><b data-es>No se guarda nada.</b><b data-de>Nichts wird aufbewahrt.</b><p data-fr>Par défaut, aucun enregistrement ni aucun historique des dictées.</p><p data-en>By default, no recordings and no dictation history.</p><p data-es>Por defecto, ninguna grabación ni historial de dictados.</p><p data-de>Standardmäßig keine Aufnahmen und kein Diktatverlauf.</p></div>
+        <div><span class="ic">⏻</span><b data-fr>Fonctionne hors ligne.</b><b data-en>Works offline.</b><b data-es>Funciona sin conexión.</b><b data-de>Funktioniert offline.</b><p data-fr>Une fois installé, pas besoin d'Internet pour dicter.</p><p data-en>Once installed, no Internet is needed to dictate.</p><p data-es>Una vez instalado, no hace falta Internet para dictar.</p><p data-de>Einmal installiert, ist zum Diktieren kein Internet nötig.</p></div>
+        <div><span class="ic">✓</span><b data-fr>Modèles vérifiés.</b><b data-en>Verified models.</b><b data-es>Modelos verificados.</b><b data-de>Geprüfte Modelle.</b><p data-fr>Le logiciel refuse tout modèle de reconnaissance qu'il n'a pas pu vérifier.</p><p data-en>The software refuses any recognition model it could not verify.</p><p data-es>El programa rechaza cualquier modelo de reconocimiento que no haya podido verificar.</p><p data-de>Die Software lehnt jedes Erkennungsmodell ab, das sie nicht prüfen konnte.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="modeles">
+  <div class="w">
+    <h2 class="serif reveal" style="text-align:center"><span data-fr>Un modèle <em>pour chaque langue.</em></span><span data-en>A model <em>for each language.</em></span><span data-es>Un modelo <em>para cada idioma.</em></span><span data-de>Ein Modell <em>für jede Sprache.</em></span></h2>
+    <div class="models">
+      <div class="card reveal"><span class="label">FR</span><h3 data-fr>Français</h3><h3 data-en>French</h3><h3 data-es>Francés</h3><h3 data-de>Französisch</h3><p data-fr>Vox Caladrii FR, entraîné pour la terminologie radiologique française. Livré avec NiderVoice, prêt à l'emploi.</p><p data-en>Vox Caladrii FR, trained for French radiology terminology. Supplied with NiderVoice, ready to use.</p><p data-es>Vox Caladrii FR, entrenado para la terminología radiológica francesa. Incluido con NiderVoice, listo para usar.</p><p data-de>Vox Caladrii FR, trainiert für die französische radiologische Terminologie. Wird mit NiderVoice geliefert und ist sofort einsatzbereit.</p></div>
+      <div class="card reveal"><span class="label">DE · EN</span><h3 data-fr>Allemand et anglais</h3><h3 data-en>German and English</h3><h3 data-es>Alemán e inglés</h3><h3 data-de>Deutsch und Englisch</h3><p data-fr>Vox Caladrii DE et EN sont en cours de développement. En attendant, NiderVoice prend en charge Whisper (OpenAI), un modèle multilingue généraliste, non entraîné pour la terminologie radiologique.</p><p data-en>Vox Caladrii DE and EN are under development. Meanwhile, NiderVoice supports Whisper (OpenAI), a general-purpose multilingual model, not trained for radiology terminology.</p><p data-es>Vox Caladrii DE y EN están en desarrollo. Mientras tanto, NiderVoice admite Whisper (OpenAI), un modelo multilingüe generalista, no entrenado para la terminología radiológica.</p><p data-de>Vox Caladrii DE und EN befinden sich in Entwicklung. Bis dahin unterstützt NiderVoice Whisper (OpenAI), ein allgemeines mehrsprachiges Modell, das nicht für die radiologische Terminologie trainiert ist.</p></div>
+      <div class="card reveal"><span class="label">≈ 100</span><h3 data-fr>Autres langues</h3><h3 data-en>Other languages</h3><h3 data-es>Otros idiomas</h3><h3 data-de>Weitere Sprachen</h3><p data-fr>Près de cent autres langues sont prises en charge avec Whisper. La qualité de reconnaissance varie selon la langue.</p><p data-en>Nearly a hundred other languages are supported with Whisper. Recognition quality varies by language.</p><p data-es>Casi cien idiomas más son compatibles con Whisper. La calidad del reconocimiento varía según el idioma.</p><p data-de>Fast hundert weitere Sprachen werden mit Whisper unterstützt. Die Erkennungsqualität hängt von der Sprache ab.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="final">
+  <h2 class="serif reveal"><span data-fr>Qu'avez-vous à écrire ?<br><em>Dites-le.</em></span><span data-en>What do you need to write?<br><em>Just say it.</em></span><span data-es>¿Qué tiene que escribir?<br><em>Dígalo.</em></span><span data-de>Was möchten Sie schreiben?<br><em>Sagen Sie es.</em></span></h2>
+  <a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a>
+  <div class="soon"><i></i><span data-fr>Bientôt disponible</span><span data-en>Coming soon</span><span data-es>Próximamente</span><span data-de>Demnächst verfügbar</span></div>
+</div>
 </main>
 
 <footer>
-  <div class="wrap row">
-    <div>
-      <img src="assets/nidervoice-logo.svg?v=20261113" width="125" height="24" alt="NiderVoice">
-      <p><span data-fr>Outil de dictée. Ne constitue pas une aide au diagnostic.</span><span data-en>Dictation tool. It is not a diagnostic aid.</span><span data-es>Herramienta de dictado. No constituye una ayuda al diagnóstico.</span><span data-de>Diktierwerkzeug. Es stellt keine Diagnosehilfe dar.</span></p>
-    </div>
-    <div>
-      <p><span data-fr>Conception&nbsp;: NiderLabs · Distribution, licences et assistance&nbsp;: GOKYO S.à r.l.-S, Luxembourg</span><span data-en>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-es>Diseño: NiderLabs · Distribución, licencias y asistencia: GOKYO S.à r.l.-S, Luxemburgo</span><span data-de>Konzeption: NiderLabs · Vertrieb, Lizenzen und Support: GOKYO S.à r.l.-S, Luxemburg</span></p>
-      <p>© 2026 NiderLabs · <a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p>
-    </div>
+  <div class="w">
+    <div><p><span data-fr>Outil de dictée. Ne constitue pas une aide au diagnostic.</span><span data-en>Dictation tool. It is not a diagnostic aid.</span><span data-es>Herramienta de dictado. No constituye una ayuda al diagnóstico.</span><span data-de>Diktierwerkzeug. Es stellt keine Diagnosehilfe dar.</span></p><p>© 2026 NiderLabs</p></div>
+    <div style="text-align:right"><p><span data-fr>Conception&nbsp;: NiderLabs · Distribution, licences et assistance&nbsp;: GOKYO S.à r.l.-S, Luxembourg</span><span data-en>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-es>Diseño: NiderLabs · Distribución, licencias y asistencia: GOKYO S.à r.l.-S, Luxemburgo</span><span data-de>Konzeption: NiderLabs · Vertrieb, Lizenzen und Support: GOKYO S.à r.l.-S, Luxemburg</span></p><p><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p></div>
   </div>
 </footer>
 
 <script>
 (function(){
   var html=document.documentElement, LANGS=['fr','en','es','de'];
-  function setLang(l){
-    html.lang=l;
-    document.querySelectorAll('.lang button').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.lang===l)});
-  }
-  // Langue du navigateur par défaut (français, anglais, espagnol ou allemand), sinon anglais.
+  function setLang(l){html.lang=l;document.querySelectorAll('.lang button').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.lang===l)});}
   var nav=((navigator.languages&&navigator.languages[0])||navigator.language||'fr').slice(0,2).toLowerCase();
   setLang(LANGS.indexOf(nav)>=0?nav:'en');
-  document.querySelectorAll('.lang button').forEach(function(b){
-    b.addEventListener('click',function(){setLang(b.dataset.lang);restart();});
-  });
+  document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.lang);restart();});});
   var head=document.querySelector('header');
-  window.addEventListener('scroll',function(){head.classList.toggle('scrolled',window.scrollY>8)},{passive:true});
-
-  var texts={fr:"Bonjour, je vous confirme notre réunion de jeudi à 14 heures. Bien cordialement.",en:"Hello, I am confirming our meeting on Thursday at 2 pm. Kind regards.",es:"Buenos días, le confirmo nuestra reunión del jueves a las 14:00. Atentamente.",de:"Guten Tag, hiermit bestätige ich unser Treffen am Donnerstag um 14 Uhr. Mit freundlichen Grüßen."};
-  var demo=document.getElementById('demo'), wave=demo.querySelector('.wave'), out=document.getElementById('typed');
-  var heights=[10,22,34,18,40,26,14,30,44,20,12,28,36,16,24,38,18,10,26,32,14,22,36,18,28,12];
-  heights.forEach(function(h){var s=document.createElement('span');s.style.height=h+'px';wave.appendChild(s)});
+  window.addEventListener('scroll',function(){head.classList.toggle('scrolled',window.scrollY>10)},{passive:true});
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var timer=null, frame=null;
-  function animateWave(){
-    var t=0;
-    frame=setInterval(function(){
-      t++;
-      wave.querySelectorAll('span').forEach(function(s,i){
-        var base=heights[i]; s.style.height=Math.max(6,base*(0.55+0.45*Math.abs(Math.sin((t+i*2)/4))))+'px';
-      });
-    },80);
-  }
-  function run(){
-    var txt=texts[html.lang]||texts.fr;
-    if(reduce){demo.classList.add('typing');out.textContent=txt;return}
-    demo.classList.remove('typing'); out.textContent='';
-    animateWave();
-    // Le texte s'écrit pendant que l'onde bouge : comme la dictée en direct.
-    var i=0;
-    timer=setTimeout(function type(){
-      out.textContent=txt.slice(0,++i);
-      if(i<txt.length){timer=setTimeout(type,45)}
-      else{clearInterval(frame);demo.classList.add('typing');timer=setTimeout(run,4500)}
-    },900);
-  }
+
+  // Fenêtre de démonstration : le texte s'écrit pendant que l'onde bouge.
+  var texts={fr:"Bonjour à tous,\nJe vous confirme notre réunion de jeudi à 14 heures. Merci d'apporter les chiffres du trimestre.",en:"Hello everyone,\nI am confirming our meeting on Thursday at 2 pm. Please bring the figures for the quarter.",es:"Hola a todos:\nLes confirmo nuestra reunión del jueves a las 14:00. Por favor, traigan las cifras del trimestre.",de:"Hallo zusammen,\nich bestätige unser Treffen am Donnerstag um 14 Uhr. Bitte bringen Sie die Quartalszahlen mit."};
+  var demo=document.getElementById('demo'), wave=demo.querySelector('.wave'), out=document.getElementById('typed');
+  var hs=[];
+  for(var k=0;k<120;k++){var s=document.createElement('span');var h=6+Math.round(26*Math.abs(Math.sin(k*1.7)*Math.cos(k*.37)));hs.push(h);s.style.height=h+'px';wave.appendChild(s)}
+  var timer=null,frame=null;
+  function animateWave(){var t=0;frame=setInterval(function(){t++;wave.querySelectorAll('span').forEach(function(s,i){s.style.height=Math.max(4,hs[i]*(0.45+0.55*Math.abs(Math.sin((t+i*2)/4))))+'px'})},80)}
+  function show(txt){out.innerHTML='';txt.split('\n').forEach(function(l,i){if(i)out.appendChild(document.createElement('br'));out.appendChild(document.createTextNode(l))})}
+  function run(){var txt=texts[html.lang]||texts.fr;if(reduce){demo.classList.add('done');show(txt);return}
+    demo.classList.remove('done');show('');animateWave();var i=0;
+    timer=setTimeout(function type(){show(txt.slice(0,++i));if(i<txt.length){timer=setTimeout(type,38)}else{clearInterval(frame);demo.classList.add('done');timer=setTimeout(run,5000)}},800)}
   function stop(){clearTimeout(timer);clearInterval(frame)}
   function restart(){stop();run()}
   document.addEventListener('visibilitychange',function(){document.hidden?stop():restart()});
-  if(location.hash==='#final'){demo.classList.add('typing');out.textContent=texts.fr}else{run()}
+  run();
+
+  var bw=document.querySelector('.big-wave');
+  for(var j=0;j<28;j++){var b=document.createElement('span');b.style.height=(30+Math.round(100*Math.abs(Math.sin(j*.55))))+'px';b.style.animationDelay=(j*0.06)+'s';bw.appendChild(b)}
+
+  // Étapes : la scène de droite suit l'étape au centre de l'écran.
+  var steps=[].slice.call(document.querySelectorAll('.step')), scenes=[].slice.call(document.querySelectorAll('.scene'));
+  function activate(i){steps.forEach(function(s){s.classList.toggle('on',s.dataset.s==i)});scenes.forEach(function(s){s.classList.toggle('on',s.dataset.s==i)})}
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)activate(e.target.dataset.s)})},{rootMargin:'-45% 0px -45% 0px'});
+    steps.forEach(function(s){io.observe(s)});
+    var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}})},{threshold:.15});
+    document.querySelectorAll('.reveal').forEach(function(r){ro.observe(r)});
+  } else { document.querySelectorAll('.reveal').forEach(function(r){r.classList.add('in')}) }
 })();
 </script>
 </body>
