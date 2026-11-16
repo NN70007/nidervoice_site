@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr" data-langs="fr en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Modèles — NiderVoice</title>
+<meta name="description" content="Modèles de reconnaissance vocale pris en charge par NiderVoice, vérification de leur intégrité et validation par votre organisation.">
+<meta name="theme-color" content="#0A0E15">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Modèles — NiderVoice">
+<meta property="og:description" content="Modèles de reconnaissance vocale pris en charge par NiderVoice, vérification de leur intégrité et validation par votre organisation.">
+<meta property="og:url" content="https://nidervoice.com/modeles/">
+<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/nv.css?v=20261116b">
+</head>
+<body>
+<canvas id="dots" aria-hidden="true"></canvas>
+<header>
+  <div class="w bar">
+    <a class="logo" href="/" aria-label="NiderVoice"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="146" height="28" alt="NiderVoice"></a>
+    <nav class="main-nav" aria-label="Navigation"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Deployment</span><span data-de>Deployment</span></a><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Industries</span><span data-de>Industries</span></a><a href="/modeles/" aria-current=page><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Models</span><span data-de>Models</span></a></nav>
+    <div class="right">
+      <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button><button type="button" data-lang="de" aria-pressed="false">DE</button></div>
+      <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Request a demo</span><span data-de>Request a demo</span></a>
+      <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
+    </div>
+  </div>
+</header>
+<main>
+<div class="w page-head">
+  <div class="crumbs"><a href="/">NiderVoice</a> / <span data-fr>Modèles</span><span data-en>Models</span></div>
+  <h1 class="serif"><span data-fr>Des modèles ouverts, <em>sous votre contrôle.</em></span><span data-en>Open models, <em>under your control.</em></span></h1>
+  <p class="lead" data-fr>NiderVoice fait tourner des modèles de reconnaissance vocale reconnus, sur vos postes. Il ne se contente pas de les exécuter : il vérifie qu'il s'agit bien des fichiers attendus, et demain, de ceux que votre organisation a validés.</p>
+  <p class="lead" data-en>NiderVoice runs well-known speech-recognition models on your workstations. It does not just run them: it checks they are exactly the expected files and, soon, the ones your organisation has approved.</p>
+</div>
+
+<div class="layout">
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#catalogue"><span data-fr>Catalogue</span><span data-en>Catalogue</span></a>
+    <a href="#limites"><span data-fr>Bon à savoir</span><span data-en>Good to know</span></a>
+    <a href="#validation"><span data-fr>Validation par l'entreprise</span><span data-en>Approval by your organisation</span></a>
+  </nav>
+  <div class="prose">
+
+<section id="catalogue">
+<div data-fr>
+  <h2>Catalogue</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Modèle</th><th>Origine et licence</th><th>Langues</th><th>Contrôle</th></tr>
+    <tr><td>Whisper (plusieurs tailles)</td><td>OpenAI, licence MIT</td><td>Près de 100 langues, qualité variable selon la langue</td><td>Empreinte SHA-256, liste fermée</td></tr>
+    <tr><td>Vox Caladrii FR <span class="status"><i></i>Option</span></td><td>NiderLabs, issu de Parakeet (NVIDIA, licence CC BY 4.0)</td><td>Français, vocabulaire de la radiologie</td><td>Signature Ed25519 NiderLabs</td></tr>
+    <tr><td>Vox Caladrii DE, EN</td><td>NiderLabs</td><td>Allemand, anglais</td><td><span class="status dev"><i></i>En développement</span></td></tr>
+  </table></div>
+  <p>NiderVoice est compatible avec les modèles Whisper ; il n'est ni édité ni approuvé par OpenAI. Whisper est une marque d'OpenAI.</p>
+</div>
+<div data-en>
+  <h2>Catalogue</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Model</th><th>Origin and licence</th><th>Languages</th><th>Check</th></tr>
+    <tr><td>Whisper (several sizes)</td><td>OpenAI, MIT licence</td><td>Nearly 100 languages, quality varies by language</td><td>SHA-256 fingerprint, closed list</td></tr>
+    <tr><td>Vox Caladrii FR <span class="status"><i></i>Option</span></td><td>NiderLabs, derived from Parakeet (NVIDIA, CC BY 4.0 licence)</td><td>French, radiology vocabulary</td><td>NiderLabs Ed25519 signature</td></tr>
+    <tr><td>Vox Caladrii DE, EN</td><td>NiderLabs</td><td>German, English</td><td><span class="status dev"><i></i>In development</span></td></tr>
+  </table></div>
+  <p>NiderVoice is compatible with Whisper models; it is neither published nor endorsed by OpenAI. Whisper is a trademark of OpenAI.</p>
+</div>
+</section>
+
+<section id="limites">
+<div data-fr>
+  <h2>Bon à savoir</h2>
+  <ul>
+    <li><strong>Les silences.</strong> Les modèles de type Whisper peuvent produire du texte inventé à partir d'un silence ou d'un bruit. NiderVoice détecte la parole et ne transmet au modèle que les passages parlés, ce qui réduit fortement ce risque sans le supprimer.</li>
+    <li><strong>La ponctuation.</strong> En français, NiderVoice écrit la ponctuation que vous dictez : « point », « virgule », « à la ligne ».</li>
+    <li><strong>La relecture.</strong> Aucun modèle n'est parfait. Le texte doit toujours être relu avant usage.</li>
+    <li><strong>Le matériel.</strong> Une carte graphique accélère les grands modèles mais n'est pas indispensable.</li>
+  </ul>
+</div>
+<div data-en>
+  <h2>Good to know</h2>
+  <ul>
+    <li><strong>Silence.</strong> Whisper-type models can produce made-up text from silence or noise. NiderVoice detects speech and only passes spoken segments to the model, which greatly reduces this risk without removing it.</li>
+    <li><strong>Punctuation.</strong> In French, NiderVoice writes the punctuation you dictate: "point", "virgule", "à la ligne".</li>
+    <li><strong>Review.</strong> No model is perfect. The text must always be reviewed before use.</li>
+    <li><strong>Hardware.</strong> A graphics card speeds up large models but is not required.</li>
+  </ul>
+</div>
+</section>
+
+<section id="validation">
+<div data-fr>
+  <h2>Validation par votre organisation</h2>
+  <p>Dans une grande organisation, la question n'est pas seulement « ce modèle est-il authentique ? » mais aussi « l'avons-nous validé ? ». Voici le parcours que nous construisons.</p>
+  <ol>
+    <li><strong>NiderLabs signe</strong> chaque modèle distribué : le fichier est celui d'origine, non modifié. <span class="status"><i></i>Opérationnel</span></li>
+    <li><strong>Votre service informatique examine</strong> la fiche du modèle (origine, licence, empreinte, langues, résultats de test) et le teste. <span class="status dev"><i></i>En développement</span></li>
+    <li><strong>Il le contre-signe</strong> avec la clé de votre organisation, qui ne quitte jamais vos murs. <span class="status dev"><i></i>En développement</span></li>
+    <li><strong>Les postes n'acceptent</strong> que les modèles contre-signés, distribués par vos propres moyens. <span class="status dev"><i></i>En développement</span></li>
+    <li><strong>Chaque validation est tracée</strong> et exportable pour votre inventaire IA et vos auditeurs. <span class="status dev"><i></i>En développement</span></li>
+  </ol>
+  <p>Vous souhaitez participer à la conception de ce parcours ? <a href="mailto:contact@nidervoice.com">Écrivez-nous</a>.</p>
+</div>
+<div data-en>
+  <h2>Approval by your organisation</h2>
+  <p>In a large organisation, the question is not only "is this model authentic?" but also "have we approved it?". Here is the process we are building.</p>
+  <ol>
+    <li><strong>NiderLabs signs</strong> every distributed model: the file is the original, unmodified. <span class="status"><i></i>Operational</span></li>
+    <li><strong>Your IT department reviews</strong> the model sheet (origin, licence, fingerprint, languages, test results) and tests it. <span class="status dev"><i></i>In development</span></li>
+    <li><strong>It counter-signs</strong> it with your organisation's key, which never leaves your premises. <span class="status dev"><i></i>In development</span></li>
+    <li><strong>Workstations only accept</strong> counter-signed models, distributed by your own means. <span class="status dev"><i></i>In development</span></li>
+    <li><strong>Every approval is recorded</strong> and exportable for your AI inventory and your auditors. <span class="status dev"><i></i>In development</span></li>
+  </ol>
+  <p>Would you like to help shape this process? <a href="mailto:contact@nidervoice.com">Write to us</a>.</p>
+</div>
+</section>
+
+  </div>
+</div>
+
+<div class="cta-band"><div class="card"><div><div class="label"><span data-fr>Étape suivante</span><span data-en>Next step</span><span data-es>Next step</span><span data-de>Next step</span></div><h2 class="serif" style="margin-top:10px"><span data-fr>Parlons de votre déploiement.</span><span data-en>Let's talk about your deployment.</span><span data-es>Let's talk about your deployment.</span><span data-de>Let's talk about your deployment.</span></h2></div><a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a></div></div>
+</main>
+<footer>
+  <div class="w">
+    <div><p><span data-fr>Outil de saisie de texte par la voix. Ne fournit aucune information à visée diagnostique ou thérapeutique.</span><span data-en>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-es>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-de>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span></p><p>© 2026 NiderLabs</p>
+      <div class="links"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/securite/dpo/"><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>DPO kit</span><span data-de>DPO kit</span></a><a href="/securite/informatique/"><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>IT kit</span><span data-de>IT kit</span></a><a href="/securite/rssi/"><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>CISO kit</span><span data-de>CISO kit</span></a><a href="/.well-known/security.txt">security.txt</a></div></div>
+    <div style="text-align:right"><p><span data-fr>Conception&nbsp;: NiderLabs · Distribution, licences et assistance&nbsp;: GOKYO S.à r.l.-S, Luxembourg</span><span data-en>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-es>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-de>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span></p><p><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p></div>
+  </div>
+</footer>
+<script src="/assets/nv.js?v=20261116b"></script>
+</body>
+</html>

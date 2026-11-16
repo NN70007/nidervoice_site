@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr" data-langs="fr en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Déploiement — NiderVoice</title>
+<meta name="description" content="NiderVoice en trois formes : application MSI, version portable sur clé USB et version web où le modèle tourne dans le navigateur.">
+<meta name="theme-color" content="#0A0E15">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Déploiement — NiderVoice">
+<meta property="og:description" content="NiderVoice en trois formes : application MSI, version portable sur clé USB et version web où le modèle tourne dans le navigateur.">
+<meta property="og:url" content="https://nidervoice.com/deploiement/">
+<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/nv.css?v=20261116b">
+</head>
+<body>
+<canvas id="dots" aria-hidden="true"></canvas>
+<header>
+  <div class="w bar">
+    <a class="logo" href="/" aria-label="NiderVoice"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="146" height="28" alt="NiderVoice"></a>
+    <nav class="main-nav" aria-label="Navigation"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/deploiement/" aria-current=page><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Deployment</span><span data-de>Deployment</span></a><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Industries</span><span data-de>Industries</span></a><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Models</span><span data-de>Models</span></a></nav>
+    <div class="right">
+      <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button><button type="button" data-lang="de" aria-pressed="false">DE</button></div>
+      <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Request a demo</span><span data-de>Request a demo</span></a>
+      <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
+    </div>
+  </div>
+</header>
+<main>
+<div class="w page-head">
+  <div class="crumbs"><a href="/">NiderVoice</a> / <span data-fr>Déploiement</span><span data-en>Deployment</span></div>
+  <h1 class="serif"><span data-fr>Trois formes. <em>Un seul principe : rien ne sort.</em></span><span data-en>Three forms. <em>One principle: nothing leaves.</em></span></h1>
+  <p class="lead" data-fr>Une application à installer sur un parc géré, une version portable pour les situations sans installation possible, et une version web où le modèle tourne dans le navigateur. Choisissez selon vos postes et vos contraintes.</p>
+  <p class="lead" data-en>An application to install across a managed fleet, a portable version for situations where nothing can be installed, and a web version where the model runs in the browser. Choose according to your workstations and constraints.</p>
+</div>
+
+<div class="layout">
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#comparer"><span data-fr>Comparer</span><span data-en>Compare</span></a>
+    <a href="#msi">MSI</a>
+    <a href="#web">Web</a>
+    <a href="#usb">USB</a>
+    <a href="#pilote"><span data-fr>Un projet pilote</span><span data-en>A pilot project</span></a>
+  </nav>
+  <div class="prose">
+
+<section id="comparer">
+<div data-fr>
+  <h2>Comparer les trois formes</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th></th><th>MSI</th><th>Web</th><th>USB</th></tr>
+    <tr><td>Pour qui</td><td>Parc Windows géré</td><td>Postes sans droit d'installation, accès rapide</td><td>Usage nomade, environnements isolés</td></tr>
+    <tr><td>Où tourne le modèle</td><td>Sur le poste</td><td>Dans le navigateur, sur le poste</td><td>Sur le poste, depuis la clé</td></tr>
+    <tr><td>Écrit dans toutes les applications</td><td>Oui</td><td>Non : texte copié depuis la page</td><td>Oui</td></tr>
+    <tr><td>Fonctionne sans Internet</td><td>Oui</td><td>Après le premier chargement</td><td>Oui</td></tr>
+    <tr><td>Déploiement</td><td>Intune, Configuration Manager, GPO</td><td>Un lien, ou votre intranet</td><td>Copie sur une clé</td></tr>
+    <tr><td>État</td><td><span class="status"><i></i>Opérationnel</span></td><td><span class="status"><i></i>Sur invitation</span> · <span class="status dev"><i></i>Intranet : en préparation</span></td><td><span class="status"><i></i>Opérationnel</span></td></tr>
+  </table></div>
+</div>
+<div data-en>
+  <h2>Compare the three forms</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th></th><th>MSI</th><th>Web</th><th>USB</th></tr>
+    <tr><td>For whom</td><td>Managed Windows fleet</td><td>Devices without install rights, quick access</td><td>Mobile use, isolated environments</td></tr>
+    <tr><td>Where the model runs</td><td>On the device</td><td>In the browser, on the device</td><td>On the device, from the key</td></tr>
+    <tr><td>Writes into any application</td><td>Yes</td><td>No: text copied from the page</td><td>Yes</td></tr>
+    <tr><td>Works without Internet</td><td>Yes</td><td>After first load</td><td>Yes</td></tr>
+    <tr><td>Deployment</td><td>Intune, Configuration Manager, GPO</td><td>A link, or your intranet</td><td>Copy to a key</td></tr>
+    <tr><td>Status</td><td><span class="status"><i></i>Operational</span></td><td><span class="status"><i></i>By invitation</span> · <span class="status dev"><i></i>Intranet: in preparation</span></td><td><span class="status"><i></i>Operational</span></td></tr>
+  </table></div>
+</div>
+</section>
+
+<section id="msi">
+<div data-fr>
+  <h2>L'application MSI, pour les parcs gérés</h2>
+  <p>C'est la forme de référence pour une organisation. Le paquet s'installe pour tous les utilisateurs, dans un dossier qu'ils ne peuvent pas modifier, et se déploie avec vos outils habituels. L'<strong>édition sans réseau</strong> retire du programme toute fonction de connexion : pas de mise à jour automatique, pas de téléchargement, pas de télémétrie.</p>
+  <ul>
+    <li>Installation silencieuse, mise à niveau propre d'une version à l'autre.</li>
+    <li>Modèles livrés avec l'installation et vérifiés au chargement.</li>
+    <li>Écrit directement dans le logiciel métier, la messagerie ou le traitement de texte, au curseur.</li>
+    <li>Ancrage : la dictée peut être fixée sur un champ et continuer à s'y écrire pendant que l'utilisateur travaille ailleurs.</li>
+  </ul>
+  <p>Détails techniques : <a href="/securite/informatique/">kit informatique</a>.</p>
+</div>
+<div data-en>
+  <h2>The MSI application, for managed fleets</h2>
+  <p>This is the reference form for an organisation. The package installs for all users, in a folder they cannot modify, and deploys with your usual tools. The <strong>offline edition</strong> removes every connection feature from the program: no automatic updates, no downloads, no telemetry.</p>
+  <ul>
+    <li>Silent installation, clean upgrade from one version to the next.</li>
+    <li>Models shipped with the installation and verified at load time.</li>
+    <li>Writes straight into business software, e-mail or the word processor, at the cursor.</li>
+    <li>Anchoring: dictation can be pinned to a field and keep writing there while the user works elsewhere.</li>
+  </ul>
+  <p>Technical details: <a href="/securite/informatique/">IT kit</a>.</p>
+</div>
+</section>
+
+<section id="web">
+<div data-fr>
+  <h2>La version web, sans installation</h2>
+  <p>Contrairement à la plupart des services de dictée en ligne, la version web de NiderVoice <strong>n'envoie pas la voix à un serveur</strong>. La page télécharge le modèle une fois, puis la reconnaissance se fait dans le navigateur, sur le poste. Le texte s'affiche en direct dans la page, d'où l'utilisateur le copie.</p>
+  <ul>
+    <li>Navigateur récent (Chrome, Edge) ; pas de droits d'installation nécessaires.</li>
+    <li>La page interdit au navigateur d'envoyer des données ailleurs que vers son propre serveur, et n'envoie ni la voix ni le texte.</li>
+    <li><strong>Sur votre intranet</strong> <span class="status dev"><i></i>En préparation</span> : vous hébergez vous-même la page et le modèle. Vous maîtrisez alors le code servi à vos postes, ce qu'un service hébergé par un tiers ne permet pas.</li>
+  </ul>
+</div>
+<div data-en>
+  <h2>The web version, with no installation</h2>
+  <p>Unlike most online dictation services, the NiderVoice web version <strong>does not send the voice to a server</strong>. The page downloads the model once, then recognition runs in the browser, on the device. The text appears live in the page, from which the user copies it.</p>
+  <ul>
+    <li>Recent browser (Chrome, Edge); no installation rights needed.</li>
+    <li>The page forbids the browser from sending data anywhere other than its own server, and sends neither the voice nor the text.</li>
+    <li><strong>On your intranet</strong> <span class="status dev"><i></i>In preparation</span>: you host the page and the model yourself. You then control the code served to your devices, which a third-party hosted service cannot offer.</li>
+  </ul>
+</div>
+</section>
+
+<section id="usb">
+<div data-fr>
+  <h2>La version portable sur clé USB</h2>
+  <p>Pour les consultants, les missions, les laboratoires isolés ou les postes où rien ne peut être installé. Le programme et ses modèles tiennent sur une clé et fonctionnent sans connexion. Les modèles restent vérifiés à chaque chargement.</p>
+  <div class="note warn"><p>Beaucoup d'organisations bloquent les clés USB, à juste titre. Sur un parc géré, préférez le MSI. Si vous utilisez la clé, chiffrez-la : une clé se perd.</p></div>
+</div>
+<div data-en>
+  <h2>The portable version on a USB key</h2>
+  <p>For consultants, assignments, isolated labs or devices where nothing can be installed. The program and its models fit on a key and work offline. Models are still verified at every load.</p>
+  <div class="note warn"><p>Many organisations block USB keys, rightly so. On a managed fleet, prefer the MSI. If you use the key, encrypt it: keys get lost.</p></div>
+</div>
+</section>
+
+<section id="pilote">
+<div data-fr>
+  <h2>Commencer par un projet pilote</h2>
+  <p>Nous recommandons de démarrer petit :</p>
+  <ol>
+    <li>Votre DPO et votre service informatique examinent les <a href="/securite/">kits de sécurité</a>.</li>
+    <li>Le service informatique vérifie l'absence de connexion sur un poste de test.</li>
+    <li>Quelques utilisateurs dictent pendant plusieurs semaines dans leurs logiciels habituels.</li>
+    <li>Vous décidez du déploiement à partir de leurs retours.</li>
+  </ol>
+</div>
+<div data-en>
+  <h2>Start with a pilot</h2>
+  <p>We recommend starting small:</p>
+  <ol>
+    <li>Your DPO and IT department review the <a href="/securite/">security kits</a>.</li>
+    <li>IT verifies there are no connections on a test device.</li>
+    <li>A few users dictate for several weeks in their usual software.</li>
+    <li>You decide on the rollout based on their feedback.</li>
+  </ol>
+</div>
+</section>
+
+  </div>
+</div>
+
+<div class="cta-band"><div class="card"><div><div class="label"><span data-fr>Étape suivante</span><span data-en>Next step</span><span data-es>Next step</span><span data-de>Next step</span></div><h2 class="serif" style="margin-top:10px"><span data-fr>Parlons de votre déploiement.</span><span data-en>Let's talk about your deployment.</span><span data-es>Let's talk about your deployment.</span><span data-de>Let's talk about your deployment.</span></h2></div><a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a></div></div>
+</main>
+<footer>
+  <div class="w">
+    <div><p><span data-fr>Outil de saisie de texte par la voix. Ne fournit aucune information à visée diagnostique ou thérapeutique.</span><span data-en>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-es>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-de>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span></p><p>© 2026 NiderLabs</p>
+      <div class="links"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/securite/dpo/"><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>DPO kit</span><span data-de>DPO kit</span></a><a href="/securite/informatique/"><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>IT kit</span><span data-de>IT kit</span></a><a href="/securite/rssi/"><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>CISO kit</span><span data-de>CISO kit</span></a><a href="/.well-known/security.txt">security.txt</a></div></div>
+    <div style="text-align:right"><p><span data-fr>Conception&nbsp;: NiderLabs · Distribution, licences et assistance&nbsp;: GOKYO S.à r.l.-S, Luxembourg</span><span data-en>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-es>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-de>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span></p><p><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p></div>
+  </div>
+</footer>
+<script src="/assets/nv.js?v=20261116b"></script>
+</body>
+</html>

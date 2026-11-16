@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="fr" data-langs="fr en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kit informatique — NiderVoice</title>
+<meta name="description" content="Installation MSI, matrice réseau, vérification par vos soins, stratégies recommandées et empreintes : tout ce qu'un service informatique doit savoir sur NiderVoice.">
+<meta name="theme-color" content="#0A0E15">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kit informatique — NiderVoice">
+<meta property="og:description" content="Installation MSI, matrice réseau, vérification par vos soins, stratégies recommandées et empreintes : tout ce qu'un service informatique doit savoir sur NiderVoice.">
+<meta property="og:url" content="https://nidervoice.com/securite/informatique/">
+<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/nv.css?v=20261116b">
+</head>
+<body>
+<canvas id="dots" aria-hidden="true"></canvas>
+<header>
+  <div class="w bar">
+    <a class="logo" href="/" aria-label="NiderVoice"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="146" height="28" alt="NiderVoice"></a>
+    <nav class="main-nav" aria-label="Navigation"><a href="/securite/" aria-current=page><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Deployment</span><span data-de>Deployment</span></a><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Industries</span><span data-de>Industries</span></a><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Models</span><span data-de>Models</span></a></nav>
+    <div class="right">
+      <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button><button type="button" data-lang="de" aria-pressed="false">DE</button></div>
+      <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Request a demo</span><span data-de>Request a demo</span></a>
+      <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
+    </div>
+  </div>
+</header>
+<main>
+<div class="w page-head">
+  <div class="crumbs"><a href="/">NiderVoice</a> / <a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span></a> / <span data-fr>Informatique</span><span data-en>IT</span></div>
+  <h1 class="serif"><span data-fr>Kit informatique. <em>Installer, contrôler, vérifier.</em></span><span data-en>IT kit. <em>Install, control, verify.</em></span></h1>
+  <p class="lead" data-fr>Ce que votre service informatique doit savoir pour déployer NiderVoice sur un parc Windows : composants, installation, réseau, accès utilisés sur le poste, stratégies recommandées et vérification par vos propres moyens.</p>
+  <p class="lead" data-en>What your IT department needs to know to deploy NiderVoice across a Windows fleet: components, installation, network, access used on the workstation, recommended policies and verification with your own tools.</p>
+</div>
+
+<div class="layout">
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#composants"><span data-fr>Composants</span><span data-en>Components</span></a>
+    <a href="#installation"><span data-fr>Installation</span><span data-en>Installation</span></a>
+    <a href="#reseau"><span data-fr>Matrice réseau</span><span data-en>Network matrix</span></a>
+    <a href="#acces"><span data-fr>Accès sur le poste</span><span data-en>Access on the device</span></a>
+    <a href="#verifier"><span data-fr>Vérifier vous-même</span><span data-en>Verify it yourself</span></a>
+    <a href="#strategies"><span data-fr>Stratégies</span><span data-en>Policies</span></a>
+    <a href="#versions"><span data-fr>Versions et empreintes</span><span data-en>Versions and hashes</span></a>
+  </nav>
+  <div class="prose">
+
+<section id="composants">
+<div data-fr>
+  <h2>Composants</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Élément</th><th>Détail</th></tr>
+    <tr><td>Application</td><td>Programme Windows 64 bits écrit en Rust (cadre Tauri). Interface affichée par Microsoft Edge WebView2.</td></tr>
+    <tr><td>Moteur de reconnaissance</td><td>Bibliothèques locales (formats GGML/GGUF), exécutées sur le processeur ou la carte graphique. Pas de carte graphique obligatoire.</td></tr>
+    <tr><td>Modèles</td><td>Fichiers livrés dans le dossier <code>models</code> de l'installation, vérifiés au chargement.</td></tr>
+    <tr><td>Réglages</td><td>Quelques kilo-octets dans le profil de l'utilisateur (<code>%APPDATA%</code>).</td></tr>
+    <tr><td>Journaux techniques</td><td>Dans <code>%LOCALAPPDATA%</code>, sans aucun texte dicté.</td></tr>
+    <tr><td>Prérequis</td><td>Windows 10 ou 11, 64 bits ; WebView2 (présent sur Windows 11) ; un micro ; quelques Go d'espace disque selon les modèles choisis.</td></tr>
+  </table></div>
+</div>
+<div data-en>
+  <h2>Components</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Item</th><th>Detail</th></tr>
+    <tr><td>Application</td><td>64-bit Windows program written in Rust (Tauri framework). Interface rendered by Microsoft Edge WebView2.</td></tr>
+    <tr><td>Recognition engine</td><td>Local libraries (GGML/GGUF formats), run on the CPU or the graphics card. No graphics card required.</td></tr>
+    <tr><td>Models</td><td>Files shipped in the installation's <code>models</code> folder, verified at load time.</td></tr>
+    <tr><td>Settings</td><td>A few kilobytes in the user profile (<code>%APPDATA%</code>).</td></tr>
+    <tr><td>Technical logs</td><td>In <code>%LOCALAPPDATA%</code>, with no dictated text.</td></tr>
+    <tr><td>Requirements</td><td>Windows 10 or 11, 64-bit; WebView2 (included in Windows 11); a microphone; a few GB of disk space depending on the models chosen.</td></tr>
+  </table></div>
+</div>
+</section>
+
+<section id="installation">
+<div data-fr>
+  <h2>Installation</h2>
+  <p>Le paquet MSI installe NiderVoice pour tous les utilisateurs, dans <code>Program Files</code>. Les utilisateurs n'ont pas besoin de droits d'administrateur pour s'en servir.</p>
+  <ul>
+    <li>Installation silencieuse : <code>msiexec /i NiderVoice-&lt;version&gt;.msi /qn</code></li>
+    <li>Désinstallation : <code>msiexec /x NiderVoice-&lt;version&gt;.msi /qn</code> ou « Applications installées ».</li>
+    <li>Le code de mise à niveau du MSI est stable d'une version à l'autre : une nouvelle version remplace proprement l'ancienne.</li>
+    <li>Un MSI standard se déploie avec vos outils habituels : Intune, Configuration Manager, stratégie de groupe.</li>
+  </ul>
+  <div class="note warn"><p><strong>Signature du code</strong> <span class="status dev"><i></i>En cours</span><br>La signature Authenticode du programme est en cours d'obtention. D'ici là, Windows affiche « Éditeur inconnu ». Pour autoriser le logiciel avec précision (AppLocker, WDAC, antivirus), utilisez les empreintes SHA-256 fournies avec chaque version.</p></div>
+</div>
+<div data-en>
+  <h2>Installation</h2>
+  <p>The MSI package installs NiderVoice for all users, in <code>Program Files</code>. Users do not need administrator rights to use it.</p>
+  <ul>
+    <li>Silent install: <code>msiexec /i NiderVoice-&lt;version&gt;.msi /qn</code></li>
+    <li>Uninstall: <code>msiexec /x NiderVoice-&lt;version&gt;.msi /qn</code> or "Installed apps".</li>
+    <li>The MSI upgrade code is stable across versions: a new version cleanly replaces the old one.</li>
+    <li>A standard MSI deploys with your usual tools: Intune, Configuration Manager, Group Policy.</li>
+  </ul>
+  <div class="note warn"><p><strong>Code signing</strong> <span class="status dev"><i></i>In progress</span><br>Authenticode signing of the program is being obtained. Until then, Windows shows "Unknown publisher". To allow the software precisely (AppLocker, WDAC, antivirus), use the SHA-256 fingerprints supplied with each version.</p></div>
+</div>
+</section>
+
+<section id="reseau">
+<div data-fr>
+  <h2>Matrice réseau</h2>
+  <p>Pour un environnement sensible, nous recommandons l'<strong>édition sans réseau</strong>. Son comportement réseau tient en un tableau :</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Fonction</th><th>Édition sans réseau</th></tr>
+    <tr><td>Reconnaissance vocale</td><td>Locale</td></tr>
+    <tr><td>Recherche de mises à jour</td><td>Absente</td></tr>
+    <tr><td>Téléchargement de modèles</td><td>Absent : modèles livrés avec l'installation</td></tr>
+    <tr><td>Services d'IA en ligne</td><td>Absents</td></tr>
+    <tr><td>Télémétrie, licence en ligne</td><td>Absentes</td></tr>
+    <tr><td>Connexions mesurées (TCP, UDP, DNS)</td><td>Aucune</td></tr>
+  </table></div>
+  <p>Les autres éditions peuvent rechercher les mises à jour et télécharger les modèles de la liste fermée, vérifiés par empreinte ; ces fonctions se désactivent.</p>
+  <p>Dans l'édition sans réseau, les fonctions de connexion ne sont pas seulement désactivées : le code qui pourrait se connecter refuse de s'exécuter. Le composant WebView2 est lancé avec ses services d'arrière-plan coupés (SmartScreen, mises à jour de composants, préchargement DNS, rapports).</p>
+</div>
+<div data-en>
+  <h2>Network matrix</h2>
+  <p>For a sensitive environment we recommend the <strong>offline edition</strong>. Its network behaviour fits in one table:</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Function</th><th>Offline edition</th></tr>
+    <tr><td>Speech recognition</td><td>Local</td></tr>
+    <tr><td>Update check</td><td>Absent</td></tr>
+    <tr><td>Model download</td><td>Absent: models ship with the installation</td></tr>
+    <tr><td>Online AI services</td><td>Absent</td></tr>
+    <tr><td>Telemetry, online licensing</td><td>Absent</td></tr>
+    <tr><td>Measured connections (TCP, UDP, DNS)</td><td>None</td></tr>
+  </table></div>
+  <p>Other editions can check for updates and download closed-list models, verified by fingerprint; these features can be turned off.</p>
+  <p>In the offline edition, connection features are not just disabled: the code that could connect refuses to run. The WebView2 component is started with its background services turned off (SmartScreen, component updates, DNS prefetch, reporting).</p>
+</div>
+</section>
+
+<section id="acces">
+<div data-fr>
+  <h2>Accès utilisés sur le poste</h2>
+  <p>Un logiciel de dictée doit écouter un raccourci et écrire dans d'autres applications. Ces comportements peuvent alerter un antivirus comportemental ; ils sont communs à tous les logiciels de dictée. Voici la liste complète :</p>
+  <ul>
+    <li><strong>Micro</strong> : seulement pendant la dictée.</li>
+    <li><strong>Raccourci clavier global</strong> et clic du milieu de la souris : seules ces touches sont surveillées.</li>
+    <li><strong>Collage simulé</strong> (Ctrl+V) ou frappe directe dans la fenêtre active.</li>
+    <li><strong>Presse-papiers</strong> : texte marqué pour être exclu de l'historique, de la synchronisation cloud et des logiciels de surveillance, puis effacé une seconde après le collage.</li>
+    <li><strong>UI Automation</strong> de Windows : pour repérer le champ où écrire quand l'utilisateur ancre la dictée sur un champ. Rien n'est lu au-delà du champ visé, rien n'est transmis.</li>
+  </ul>
+</div>
+<div data-en>
+  <h2>Access used on the device</h2>
+  <p>Dictation software has to listen for a shortcut and write into other applications. These behaviours may alert a behavioural antivirus; they are common to all dictation software. Here is the complete list:</p>
+  <ul>
+    <li><strong>Microphone</strong>: only while dictating.</li>
+    <li><strong>Global keyboard shortcut</strong> and middle mouse button: only these keys are watched.</li>
+    <li><strong>Simulated paste</strong> (Ctrl+V) or direct typing into the active window.</li>
+    <li><strong>Clipboard</strong>: text flagged to be excluded from history, cloud sync and monitoring software, then cleared one second after pasting.</li>
+    <li>Windows <strong>UI Automation</strong>: to find the field to write into when the user anchors dictation to a field. Nothing beyond the target field is read, nothing is transmitted.</li>
+  </ul>
+</div>
+</section>
+
+<section id="verifier">
+<div data-fr>
+  <h2>Vérifier vous-même l'absence de connexion</h2>
+  <p>Lancez NiderVoice, dictez quelques phrases, puis exécutez ces commandes dans PowerShell. Elles listent toutes les connexions du programme et de ses sous-processus, y compris WebView2. Le résultat attendu est vide.</p>
+</div>
+<div data-en>
+  <h2>Verify there is no connection yourself</h2>
+  <p>Start NiderVoice, dictate a few sentences, then run these commands in PowerShell. They list every connection of the program and its child processes, WebView2 included. The expected result is empty.</p>
+</div>
+<pre class="card" style="overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.6;color:#C9D2DD;white-space:pre"><code>$all = Get-CimInstance Win32_Process
+$ids = @(($all | Where-Object Name -like 'nidervoice*.exe').ProcessId)
+do { $n = $ids.Count
+     $ids += @($all | Where-Object { $ids -contains $_.ParentProcessId -and $ids -notcontains $_.ProcessId }).ProcessId
+} while ($ids.Count -gt $n)
+Get-NetTCPConnection | Where-Object { $ids -contains $_.OwningProcess }
+Get-NetUDPEndpoint   | Where-Object { $ids -contains $_.OwningProcess }</code></pre>
+<div data-fr>
+  <p>Pour une défense en profondeur, vous pouvez aussi bloquer toute connexion sortante du programme dans le pare-feu Windows :</p>
+</div>
+<div data-en>
+  <p>For defence in depth, you can also block all outbound connections of the program in Windows Firewall:</p>
+</div>
+<pre class="card" style="overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.6;color:#C9D2DD;white-space:pre"><code>New-NetFirewallRule -DisplayName "NiderVoice - sortant bloque" -Direction Outbound `
+  -Program "C:\Program Files\NiderVoice\nidervoice.exe" -Action Block</code></pre>
+<div data-fr><p>Adaptez le chemin à votre dossier d'installation. Un script de mesure plus complet, qui compare aussi le cache DNS avant et après, est fourni sur demande.</p></div>
+<div data-en><p>Adjust the path to your installation folder. A fuller measurement script, which also compares the DNS cache before and after, is available on request.</p></div>
+</section>
+
+<section id="strategies">
+<div data-fr>
+  <h2>Stratégies recommandées</h2>
+  <ul>
+    <li><strong>Chiffrement du disque</strong> (BitLocker) et verrouillage de session : ils protègent les documents produits, que NiderVoice ne stocke pas lui-même.</li>
+    <li><strong>Synchronisation du presse-papiers entre appareils</strong> : NiderVoice exclut déjà son texte, mais vous pouvez la désactiver pour tout le poste par stratégie de groupe.</li>
+    <li><strong>Accès au micro</strong> : autorisez les applications de bureau à utiliser le micro, en limitant les autres applications selon votre politique.</li>
+    <li><strong>Règles d'exécution</strong> (AppLocker, WDAC) : autorisez NiderVoice par son empreinte, puis par son certificat une fois la signature disponible.</li>
+  </ul>
+  <p><strong>Modèles de stratégie NiderVoice (ADMX)</strong> <span class="status dev"><i></i>En développement</span> : pour imposer depuis votre console les modèles autorisés, les réglages et les fonctions disponibles.</p>
+</div>
+<div data-en>
+  <h2>Recommended policies</h2>
+  <ul>
+    <li><strong>Disk encryption</strong> (BitLocker) and session locking: they protect the documents produced, which NiderVoice does not store itself.</li>
+    <li><strong>Clipboard sync across devices</strong>: NiderVoice already excludes its text, but you can disable it for the whole workstation via Group Policy.</li>
+    <li><strong>Microphone access</strong>: allow desktop apps to use the microphone, restricting other apps according to your policy.</li>
+    <li><strong>Execution rules</strong> (AppLocker, WDAC): allow NiderVoice by fingerprint, then by certificate once signing is available.</li>
+  </ul>
+  <p><strong>NiderVoice policy templates (ADMX)</strong> <span class="status dev"><i></i>In development</span>: to enforce allowed models, settings and available features from your console.</p>
+</div>
+</section>
+
+<section id="versions">
+<div data-fr>
+  <h2>Versions et empreintes</h2>
+  <p>Chaque version est livrée avec :</p>
+  <ul>
+    <li>l'empreinte SHA-256 du programme d'installation ;</li>
+    <li>la liste des empreintes SHA-256 de tous les fichiers installés ;</li>
+    <li>une fiche de version pour le service informatique.</li>
+  </ul>
+  <p>L'édition sans réseau ne se met jamais à jour seule : c'est votre service informatique qui déploie chaque nouvelle version, après l'avoir contrôlée.</p>
+</div>
+<div data-en>
+  <h2>Versions and fingerprints</h2>
+  <p>Each version ships with:</p>
+  <ul>
+    <li>the SHA-256 fingerprint of the installer;</li>
+    <li>the list of SHA-256 fingerprints of all installed files;</li>
+    <li>a release sheet for the IT department.</li>
+  </ul>
+  <p>The offline edition never updates itself: your IT department deploys each new version after checking it.</p>
+</div>
+</section>
+
+  </div>
+</div>
+
+<div class="cta-band"><div class="card"><div><div class="label"><span data-fr>Étape suivante</span><span data-en>Next step</span><span data-es>Next step</span><span data-de>Next step</span></div><h2 class="serif" style="margin-top:10px"><span data-fr>Parlons de votre déploiement.</span><span data-en>Let's talk about your deployment.</span><span data-es>Let's talk about your deployment.</span><span data-de>Let's talk about your deployment.</span></h2></div><a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a></div></div>
+</main>
+<footer>
+  <div class="w">
+    <div><p><span data-fr>Outil de saisie de texte par la voix. Ne fournit aucune information à visée diagnostique ou thérapeutique.</span><span data-en>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-es>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-de>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span></p><p>© 2026 NiderLabs</p>
+      <div class="links"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/securite/dpo/"><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>DPO kit</span><span data-de>DPO kit</span></a><a href="/securite/informatique/"><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>IT kit</span><span data-de>IT kit</span></a><a href="/securite/rssi/"><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>CISO kit</span><span data-de>CISO kit</span></a><a href="/.well-known/security.txt">security.txt</a></div></div>
+    <div style="text-align:right"><p><span data-fr>Conception&nbsp;: NiderLabs · Distribution, licences et assistance&nbsp;: GOKYO S.à r.l.-S, Luxembourg</span><span data-en>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-es>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-de>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span></p><p><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p></div>
+  </div>
+</footer>
+<script src="/assets/nv.js?v=20261116b"></script>
+</body>
+</html>

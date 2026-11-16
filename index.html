@@ -3,19 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>NiderVoice — logiciel de dictée, 100 % local</title>
-<meta name="description" content="NiderVoice — logiciel de dictée professionnel, 100 % local. Vos dictées ne quittent jamais votre ordinateur. Bientôt disponible.">
+<title>NiderVoice — l'IA vocale, sous votre contrôle</title>
+<meta name="description" content="NiderVoice fait tourner des modèles de reconnaissance vocale comme Whisper directement sur vos postes : la voix ne sort pas, seuls les modèles vérifiés sont chargés, et tout se vérifie.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="theme-color" content="#0A0E15">
 <meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
-<meta property="og:title" content="NiderVoice — Vous parlez, le texte s'écrit">
-<meta property="og:description" content="NiderVoice — logiciel de dictée professionnel, 100 % local. Bientôt disponible.">
+<meta property="og:title" content="NiderVoice — l'IA vocale, sous votre contrôle">
+<meta property="og:description" content="Dictée vocale locale pour les organisations : rien ne sort, seuls les modèles vérifiés tournent, tout se prouve.">
 <meta property="og:url" content="https://nidervoice.com/">
 <meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/nv.css?v=20261116b">
 <link rel="preload" href="assets/fonts/source-serif-4-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -34,8 +36,7 @@
   html{scroll-behavior:smooth}
   body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden}
   body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
-    background:radial-gradient(900px 520px at 50% -120px,rgba(55,138,221,.22),transparent 70%),
-               linear-gradient(var(--line) 1px,transparent 1px) 0 0/100% 96px;
+    background:radial-gradient(900px 520px at 50% -120px,rgba(55,138,221,.22),transparent 70%);
     -webkit-mask-image:linear-gradient(#000 0,#000 55%,transparent 100%);mask-image:linear-gradient(#000 0,#000 55%,transparent 100%)}
   a{color:inherit}
   html:not([lang=fr]) [data-fr],html:not([lang=en]) [data-en],html:not([lang=es]) [data-es],html:not([lang=de]) [data-de]{display:none!important}
@@ -47,7 +48,24 @@
 
   header{position:fixed;inset:0 0 auto;z-index:30;transition:background .2s}
   header.scrolled{background:rgba(10,14,21,.72);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .bar{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .bar{display:flex;align-items:center;gap:22px;height:72px}
+  footer{margin-top:0}
+  section{scroll-margin-top:80px}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+  .pillars .tile h3{font-size:30px}
+  .forms{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+  .sectors{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:48px}
+  .sectors .tile{padding:22px}
+  .sectors .tile h3{font-size:21px}
+  .center{text-align:center}
+  .hero .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+  .hero .ctas .pill{margin-top:0}
+  .kits{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+  .kits .links{display:flex;flex-direction:column;gap:12px}
+  .kits .links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;border:1px solid var(--line2);border-radius:14px;padding:18px 20px;background:rgba(10,14,21,.5)}
+  .kits .links a:hover{border-color:rgba(140,192,242,.5)}
+  .kits .links small{color:var(--mut);font-size:13px;display:block;margin-top:2px}
+  @media (max-width:900px){.pillars,.forms{grid-template-columns:1fr}.sectors{grid-template-columns:1fr 1fr}.kits{grid-template-columns:1fr}}
   .bar .logo img{display:block;height:28px;width:auto}
   .lang{display:flex;padding:3px;border:1px solid var(--line2);border-radius:999px;background:rgba(10,14,21,.6)}
   .lang button{font-family:var(--mono);font-size:11px;letter-spacing:.1em;border:0;background:none;color:var(--dim);padding:6px 11px;border-radius:999px;cursor:pointer}
@@ -174,24 +192,29 @@
 </style>
 </head>
 <body>
+<canvas id="dots" aria-hidden="true"></canvas>
 <header>
   <div class="w bar">
     <a class="logo" href="#" aria-label="NiderVoice"><img src="assets/nidervoice-logo-sombre.svg?v=20261116" width="146" height="28" alt="NiderVoice"></a>
+    <nav class="main-nav" aria-label="Navigation"><a href="securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a><a href="deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Despliegue</span><span data-de>Bereitstellung</span></a><a href="secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Sectores</span><span data-de>Branchen</span></a><a href="modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></a></nav>
+    <div class="right">
     <div class="lang" role="group" aria-label="Langue / Language">
       <button type="button" data-lang="fr" aria-pressed="true">FR</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
       <button type="button" data-lang="es" aria-pressed="false">ES</button>
       <button type="button" data-lang="de" aria-pressed="false">DE</button>
     </div>
-    <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Nous écrire</span><span data-en>Contact us</span><span data-es>Escríbanos</span><span data-de>Kontakt</span></a>
+    <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Solicitar una demo</span><span data-de>Demo anfragen</span></a>
+    <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
+    </div>
   </div>
 </header>
 
 <main>
 <div class="hero">
-  <h1 class="serif"><span data-fr>Vous parlez, <em>le texte s'écrit.</em></span><span data-en>You speak, <em>the text writes itself.</em></span><span data-es>Usted habla, <em>el texto se escribe.</em></span><span data-de>Sie sprechen, <em>der Text schreibt sich.</em></span></h1>
-  <p class="lead" data-fr>NiderVoice écrit ce que vous dictez directement dans vos documents, votre messagerie et vos logiciels. Toute la reconnaissance vocale se fait sur votre ordinateur.</p><p class="lead" data-en>NiderVoice writes what you dictate straight into your documents, your e-mail and your software. All speech recognition happens on your computer.</p><p class="lead" data-es>NiderVoice escribe lo que usted dicta directamente en sus documentos, su correo y sus programas. Todo el reconocimiento de voz se hace en su ordenador.</p><p class="lead" data-de>NiderVoice schreibt, was Sie diktieren, direkt in Ihre Dokumente, E-Mails und Programme. Die gesamte Spracherkennung erfolgt auf Ihrem Computer.</p>
-  <a class="pill light" href="#comment"><span data-fr>Voir comment ça marche</span><span data-en>See how it works</span><span data-es>Ver cómo funciona</span><span data-de>So funktioniert es</span> <span aria-hidden="true">→</span></a>
+  <h1 class="serif"><span data-fr>L'IA vocale, <em>sous votre contrôle.</em></span><span data-en>Voice AI, <em>under your control.</em></span><span data-es>IA de voz, <em>bajo su control.</em></span><span data-de>Sprach-KI, <em>unter Ihrer Kontrolle.</em></span></h1>
+  <p class="lead" data-fr>NiderVoice fait tourner des modèles de reconnaissance vocale comme Whisper directement sur vos postes. La voix ne sort pas, seuls les modèles vérifiés sont chargés, et votre service informatique peut tout contrôler lui-même.</p><p class="lead" data-en>NiderVoice runs speech-recognition models such as Whisper directly on your workstations. The voice never leaves, only verified models are loaded, and your IT department can check everything for itself.</p><p class="lead" data-es>NiderVoice ejecuta modelos de reconocimiento de voz como Whisper directamente en sus equipos. La voz no sale, solo se cargan modelos verificados y su departamento informático puede comprobarlo todo por sí mismo.</p><p class="lead" data-de>NiderVoice führt Spracherkennungsmodelle wie Whisper direkt auf Ihren Arbeitsplätzen aus. Die Stimme verlässt das Gerät nicht, nur geprüfte Modelle werden geladen, und Ihre IT kann alles selbst kontrollieren.</p>
+  <div class="ctas"><a class="pill light" href="securite/"><span data-fr>Lire le dossier sécurité</span><span data-en>Read the security brief</span><span data-es>Leer el dossier de seguridad</span><span data-de>Sicherheitsdossier lesen</span> <span aria-hidden="true">→</span></a><a class="pill ghost" href="#comment"><span data-fr>Voir comment ça marche</span><span data-en>See how it works</span><span data-es>Ver cómo funciona</span><span data-de>So funktioniert es</span></a></div>
 
   <div class="app demo" id="demo" aria-live="off">
     <div class="side" aria-hidden="true">
@@ -201,7 +224,7 @@
       <span class="it" data-fr>Dictionnaire</span><span class="it" data-en>Dictionary</span><span class="it" data-es>Diccionario</span><span class="it" data-de>Wörterbuch</span>
       <span class="it" data-fr>Réglages</span><span class="it" data-en>Settings</span><span class="it" data-es>Ajustes</span><span class="it" data-de>Einstellungen</span>
       <span class="it" data-fr>Dépannage</span><span class="it" data-en>Troubleshooting</span><span class="it" data-es>Solución de problemas</span><span class="it" data-de>Fehlerbehebung</span>
-      <div class="bot">VOX CALADRII FR</div>
+      <div class="bot"><span data-fr>MODÈLE VÉRIFIÉ ✓</span><span data-en>VERIFIED MODEL ✓</span><span data-es>MODELO VERIFICADO ✓</span><span data-de>GEPRÜFTES MODELL ✓</span></div>
     </div>
     <div class="main">
       <div class="top"><span data-fr>Message — à : équipe</span><span data-en>Message — to: team</span><span data-es>Mensaje — para: equipo</span><span data-de>Nachricht — an: Team</span><span class="live"><i></i><span data-fr>Sur cet ordinateur</span><span data-en>On this computer</span><span data-es>En este ordenador</span><span data-de>Auf diesem Computer</span></span></div>
@@ -211,6 +234,18 @@
   </div>
   <p class="illus"><span data-fr>Exemple illustratif — texte fictif</span><span data-en>Illustrative example — fictitious text</span><span data-es>Ejemplo ilustrativo — texto ficticio</span><span data-de>Illustratives Beispiel — fiktiver Text</span></p>
 </div>
+
+
+<section id="piliers">
+  <div class="w">
+    <h2 class="serif center reveal"><span data-fr>Trois principes, <em>vérifiables.</em></span><span data-en>Three principles, <em>verifiable.</em></span><span data-es>Tres principios, <em>verificables.</em></span><span data-de>Drei Prinzipien, <em>überprüfbar.</em></span></h2>
+    <div class="pillars">
+      <a class="tile reveal" href="securite/#flux"><div class="label">01</div><h3 data-fr>Local</h3><h3 data-en>Local</h3><h3 data-es>Local</h3><h3 data-de>Lokal</h3><p data-fr>La voix est transformée en texte sur le poste. Dans l'édition sans réseau, le programme n'établit aucune connexion : 0 TCP, 0 UDP, 0 DNS mesurés.</p><p data-en>Voice is turned into text on the device. In the offline edition, the program makes no connections: 0 TCP, 0 UDP, 0 DNS measured.</p><p data-es>La voz se convierte en texto en el equipo. En la edición sin red, el programa no establece ninguna conexión: 0 TCP, 0 UDP, 0 DNS medidos.</p><p data-de>Die Stimme wird auf dem Gerät in Text umgewandelt. In der Offline-Edition baut das Programm keine Verbindung auf: 0 TCP, 0 UDP, 0 DNS gemessen.</p><span class="more"><span data-fr>En savoir plus →</span><span data-en>Learn more →</span><span data-es>Más información →</span><span data-de>Mehr erfahren →</span></span></a>
+      <a class="tile reveal" href="modeles/#validation"><div class="label">02</div><h3 data-fr>Gouverné</h3><h3 data-en>Governed</h3><h3 data-es>Gobernado</h3><h3 data-de>Kontrolliert</h3><p data-fr>Chaque modèle est vérifié par signature ou empreinte avant d'être chargé. Bientôt, vos postes n'accepteront que les modèles validés par votre organisation.</p><p data-en>Every model is verified by signature or fingerprint before loading. Soon, your devices will only accept models approved by your organisation.</p><p data-es>Cada modelo se verifica por firma o huella antes de cargarse. Pronto, sus equipos solo aceptarán los modelos validados por su organización.</p><p data-de>Jedes Modell wird vor dem Laden per Signatur oder Prüfsumme geprüft. Bald akzeptieren Ihre Geräte nur von Ihrer Organisation freigegebene Modelle.</p><span class="more"><span data-fr>En savoir plus →</span><span data-en>Learn more →</span><span data-es>Más información →</span><span data-de>Mehr erfahren →</span></span></a>
+      <a class="tile reveal" href="securite/#kits"><div class="label">03</div><h3 data-fr>Prouvable</h3><h3 data-en>Provable</h3><h3 data-es>Demostrable</h3><h3 data-de>Nachweisbar</h3><p data-fr>Fiche de registre, éléments d'analyse d'impact, matrice réseau, empreintes de chaque fichier, commande de vérification : les preuves sont fournies.</p><p data-en>Record of processing, impact-assessment inputs, network matrix, fingerprints of every file, a verification command: the evidence is supplied.</p><p data-es>Registro de actividades, elementos de evaluación de impacto, matriz de red, huellas de cada archivo, comando de verificación: las pruebas se entregan.</p><p data-de>Verarbeitungsverzeichnis, Bausteine für die Folgenabschätzung, Netzwerkmatrix, Prüfsummen aller Dateien, Prüfbefehl: Die Nachweise werden mitgeliefert.</p><span class="more"><span data-fr>En savoir plus →</span><span data-en>Learn more →</span><span data-es>Más información →</span><span data-de>Mehr erfahren →</span></span></a>
+    </div>
+  </div>
+</section>
 
 <section id="confidentialite">
   <div class="w split">
@@ -247,7 +282,7 @@
       <div class="stage">
         <div class="card screen">
           <div class="scene on" data-s="0"><div class="big-wave" aria-hidden="true"></div><div class="chips"><span class="chip" data-fr>Raccourci clavier</span><span class="chip" data-en>Keyboard shortcut</span><span class="chip" data-es>Atajo de teclado</span><span class="chip" data-de>Tastenkürzel</span><span class="chip" data-fr>Clic du milieu</span><span class="chip" data-en>Middle click</span><span class="chip" data-es>Clic central</span><span class="chip" data-de>Mittlere Maustaste</span><span class="chip" data-fr>Micro au choix</span><span class="chip" data-en>Any microphone</span><span class="chip" data-es>Cualquier micrófono</span><span class="chip" data-de>Beliebiges Mikrofon</span></div></div>
-          <div class="scene" data-s="1"><div class="cpu"><img src="assets/favicon.svg" width="54" height="54" alt=""></div><div class="chips"><span class="chip">Vox Caladrii FR</span><span class="chip" data-fr>Hors ligne</span><span class="chip" data-en>Offline</span><span class="chip" data-es>Sin conexión</span><span class="chip" data-de>Offline</span><span class="chip" data-fr>Rien n'est envoyé</span><span class="chip" data-en>Nothing is sent</span><span class="chip" data-es>No se envía nada</span><span class="chip" data-de>Nichts wird gesendet</span></div></div>
+          <div class="scene" data-s="1"><div class="cpu"><img src="assets/favicon.svg" width="54" height="54" alt=""></div><div class="chips"><span class="chip" data-fr>Modèle vérifié</span><span class="chip" data-en>Verified model</span><span class="chip" data-es>Modelo verificado</span><span class="chip" data-de>Geprüftes Modell</span><span class="chip" data-fr>Hors ligne</span><span class="chip" data-en>Offline</span><span class="chip" data-es>Sin conexión</span><span class="chip" data-de>Offline</span><span class="chip" data-fr>Rien n'est envoyé</span><span class="chip" data-en>Nothing is sent</span><span class="chip" data-es>No se envía nada</span><span class="chip" data-de>Nichts wird gesendet</span></div></div>
           <div class="scene" data-s="2">
             <div class="rule"><span class="say" data-fr>« … normale point »</span><span class="say" data-en>"… normal full stop"</span><span class="say" data-es>«… normal punto»</span><span class="say" data-de>„… normal Punkt“</span><span class="ar">→</span><span class="out" data-fr>… normale.</span><span class="out" data-en>… normal.</span><span class="out" data-es>… normal.</span><span class="out" data-de>… normal.</span></div>
             <div class="rule"><span class="say" data-fr>« virgule »</span><span class="say" data-en>"comma"</span><span class="say" data-es>«coma»</span><span class="say" data-de>„Komma“</span><span class="ar">→</span><span class="out">,</span></div>
@@ -257,6 +292,31 @@
           <div class="scene" data-s="3"><div class="fake"><div class="t"><i></i><i></i><i></i></div><div class="b"><span data-fr>Bonjour,<br><br>Je vous confirme notre réunion de jeudi à 14 heures. <mark>Je joindrai le document de présentation.</mark></span><span data-en>Hello,<br><br>I am confirming our meeting on Thursday at 2 pm. <mark>I will attach the presentation document.</mark></span><span data-es>Buenos días:<br><br>Le confirmo nuestra reunión del jueves a las 14:00. <mark>Adjuntaré el documento de presentación.</mark></span><span data-de>Guten Tag,<br><br>hiermit bestätige ich unser Treffen am Donnerstag um 14 Uhr. <mark>Ich füge das Präsentationsdokument bei.</mark></span></div></div></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="formes">
+  <div class="w">
+    <h2 class="serif center reveal"><span data-fr>Trois formes, <em>un seul principe.</em></span><span data-en>Three forms, <em>one principle.</em></span><span data-es>Tres formas, <em>un solo principio.</em></span><span data-de>Drei Formen, <em>ein Prinzip.</em></span></h2>
+    <div class="forms">
+      <a class="tile reveal" href="deploiement/#msi"><div class="label">MSI</div><h3 data-fr>Pour les parcs gérés</h3><h3 data-en>For managed fleets</h3><h3 data-es>Para parques gestionados</h3><h3 data-de>Für verwaltete Geräte</h3><p data-fr>Installation silencieuse par Intune, Configuration Manager ou stratégie de groupe. Édition sans réseau disponible.</p><p data-en>Silent installation via Intune, Configuration Manager or Group Policy. Offline edition available.</p><p data-es>Instalación silenciosa mediante Intune, Configuration Manager o directiva de grupo. Edición sin red disponible.</p><p data-de>Stille Installation über Intune, Configuration Manager oder Gruppenrichtlinie. Offline-Edition verfügbar.</p><span class="more"><span data-fr>En savoir plus →</span><span data-en>Learn more →</span><span data-es>Más información →</span><span data-de>Mehr erfahren →</span></span></a>
+      <a class="tile reveal" href="deploiement/#web"><div class="label">WEB</div><h3 data-fr>Sans installation</h3><h3 data-en>No installation</h3><h3 data-es>Sin instalación</h3><h3 data-de>Ohne Installation</h3><p data-fr>Le modèle tourne dans le navigateur, sur le poste : la voix n'est pas envoyée au serveur. Hébergeable sur votre intranet.</p><p data-en>The model runs in the browser, on the device: the voice is not sent to the server. Can be hosted on your intranet.</p><p data-es>El modelo funciona en el navegador, en el equipo: la voz no se envía al servidor. Se puede alojar en su intranet.</p><p data-de>Das Modell läuft im Browser auf dem Gerät: Die Stimme wird nicht an den Server gesendet. Im eigenen Intranet hostbar.</p><span class="more"><span data-fr>En savoir plus →</span><span data-en>Learn more →</span><span data-es>Más información →</span><span data-de>Mehr erfahren →</span></span></a>
+      <a class="tile reveal" href="deploiement/#usb"><div class="label">USB</div><h3 data-fr>Nomade et isolé</h3><h3 data-en>Mobile and isolated</h3><h3 data-es>Móvil y aislado</h3><h3 data-de>Mobil und isoliert</h3><p data-fr>Le programme et ses modèles sur une clé, sans connexion. Pour les missions et les postes où rien ne s'installe.</p><p data-en>The program and its models on a key, offline. For assignments and devices where nothing can be installed.</p><p data-es>El programa y sus modelos en una memoria USB, sin conexión. Para misiones y equipos donde no se puede instalar nada.</p><p data-de>Programm und Modelle auf einem USB-Stick, offline. Für Einsätze und Geräte, auf denen nichts installiert werden kann.</p><span class="more"><span data-fr>En savoir plus →</span><span data-en>Learn more →</span><span data-es>Más información →</span><span data-de>Mehr erfahren →</span></span></a>
+    </div>
+  </div>
+</section>
+
+<section id="secteurs">
+  <div class="w">
+    <h2 class="serif center reveal"><span data-fr>Pour les métiers <em>tenus au secret.</em></span><span data-en>For professions <em>bound by secrecy.</em></span><span data-es>Para las profesiones <em>sujetas al secreto.</em></span><span data-de>Für Berufe <em>mit Schweigepflicht.</em></span></h2>
+    <div class="sectors">
+      <a class="tile reveal" href="secteurs/#sante"><div class="label">01</div><h3 data-fr>Santé</h3><h3 data-en>Healthcare</h3><h3 data-es>Salud</h3><h3 data-de>Gesundheit</h3><p data-fr>Secret médical, données de santé.</p><p data-en>Medical confidentiality, health data.</p><p data-es>Secreto médico, datos de salud.</p><p data-de>Ärztliche Schweigepflicht, Gesundheitsdaten.</p></a>
+      <a class="tile reveal" href="secteurs/#juridique"><div class="label">02</div><h3 data-fr>Juridique</h3><h3 data-en>Legal</h3><h3 data-es>Jurídico</h3><h3 data-de>Recht</h3><p data-fr>Secret professionnel, dossiers clients.</p><p data-en>Professional secrecy, client files.</p><p data-es>Secreto profesional, expedientes.</p><p data-de>Berufsgeheimnis, Mandantenakten.</p></a>
+      <a class="tile reveal" href="secteurs/#finance"><div class="label">03</div><h3 data-fr>Finance</h3><h3 data-en>Finance</h3><h3 data-es>Finanzas</h3><h3 data-de>Finanzen</h3><p data-fr>Secret bancaire, DORA.</p><p data-en>Banking secrecy, DORA.</p><p data-es>Secreto bancario, DORA.</p><p data-de>Bankgeheimnis, DORA.</p></a>
+      <a class="tile reveal" href="secteurs/#public"><div class="label">04</div><h3 data-fr>Secteur public</h3><h3 data-en>Public sector</h3><h3 data-es>Sector público</h3><h3 data-de>Öffentlicher Sektor</h3><p data-fr>Souveraineté, données des citoyens.</p><p data-en>Sovereignty, citizens' data.</p><p data-es>Soberanía, datos ciudadanos.</p><p data-de>Souveränität, Bürgerdaten.</p></a>
+      <a class="tile reveal" href="secteurs/#industrie"><div class="label">05</div><h3 data-fr>Industrie</h3><h3 data-en>Industry</h3><h3 data-es>Industria</h3><h3 data-de>Industrie</h3><p data-fr>Secrets d'affaires, réseaux isolés.</p><p data-en>Trade secrets, isolated networks.</p><p data-es>Secretos comerciales, redes aisladas.</p><p data-de>Geschäftsgeheimnisse, isolierte Netze.</p></a>
     </div>
   </div>
 </section>
@@ -277,13 +337,29 @@
   </div>
 </section>
 
+
+<section id="kits">
+  <div class="w kits">
+    <div class="reveal">
+      <div class="label"><span data-fr>DPO · Informatique · Sécurité</span><span data-en>DPO · IT · Security</span><span data-es>DPD · Informática · Seguridad</span><span data-de>DSB · IT · Sicherheit</span></div>
+      <h2 class="serif" style="margin-top:16px"><span data-fr>Les réponses <em>avant les questions.</em></span><span data-en>Answers <em>before the questions.</em></span><span data-es>Las respuestas <em>antes de las preguntas.</em></span><span data-de>Die Antworten <em>vor den Fragen.</em></span></h2>
+      <p class="sub" data-fr>Un DPO, un service informatique et un responsable de la sécurité ne doivent pas avoir à nous croire sur parole. Chacun trouve ici les documents qu'il produirait lui-même, prêts à l'emploi.</p><p class="sub" data-en>A DPO, an IT department and a security lead should not have to take our word for it. Each finds here the documents they would produce themselves, ready to use.</p><p class="sub" data-es>Un DPD, un departamento informático y un responsable de seguridad no deberían tener que creernos sin más. Cada uno encuentra aquí los documentos que elaboraría por sí mismo, listos para usar.</p><p class="sub" data-de>DSB, IT-Abteilung und Sicherheitsverantwortliche sollen uns nicht einfach glauben müssen. Jeder findet hier die Unterlagen, die er selbst erstellen würde, gebrauchsfertig.</p>
+    </div>
+    <div class="links reveal">
+      <a href="securite/dpo/"><span><b><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>Kit DPD</span><span data-de>DSB-Kit</span></b><small><span data-fr>Fiche de registre, analyse d'impact, questions fréquentes</span><span data-en>Record of processing, impact assessment, FAQ</span><span data-es>Registro de actividades, evaluación de impacto, preguntas frecuentes</span><span data-de>Verarbeitungsverzeichnis, Folgenabschätzung, FAQ</span></small></span><span aria-hidden="true">→</span></a>
+      <a href="securite/informatique/"><span><b><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>Kit informático</span><span data-de>IT-Kit</span></b><small><span data-fr>Installation, matrice réseau, commande de vérification</span><span data-en>Installation, network matrix, verification command</span><span data-es>Instalación, matriz de red, comando de verificación</span><span data-de>Installation, Netzwerkmatrix, Prüfbefehl</span></small></span><span aria-hidden="true">→</span></a>
+      <a href="securite/rssi/"><span><b><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>Kit CISO</span><span data-de>CISO-Kit</span></b><small><span data-fr>Modèle de menace, limites reconnues, signalement</span><span data-en>Threat model, known limits, reporting</span><span data-es>Modelo de amenazas, límites reconocidos, notificación</span><span data-de>Bedrohungsmodell, bekannte Grenzen, Meldung</span></small></span><span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
 <section id="modeles">
   <div class="w">
-    <h2 class="serif reveal" style="text-align:center"><span data-fr>Un modèle <em>pour chaque langue.</em></span><span data-en>A model <em>for each language.</em></span><span data-es>Un modelo <em>para cada idioma.</em></span><span data-de>Ein Modell <em>für jede Sprache.</em></span></h2>
+    <h2 class="serif reveal" style="text-align:center"><span data-fr>Des modèles ouverts, <em>vérifiés.</em></span><span data-en>Open models, <em>verified.</em></span><span data-es>Modelos abiertos, <em>verificados.</em></span><span data-de>Offene Modelle, <em>geprüft.</em></span></h2>
     <div class="models">
-      <div class="card reveal"><span class="label">FR</span><h3 data-fr>Français</h3><h3 data-en>French</h3><h3 data-es>Francés</h3><h3 data-de>Französisch</h3><p data-fr>Vox Caladrii FR, entraîné pour la terminologie radiologique française. Livré avec NiderVoice, prêt à l'emploi.</p><p data-en>Vox Caladrii FR, trained for French radiology terminology. Supplied with NiderVoice, ready to use.</p><p data-es>Vox Caladrii FR, entrenado para la terminología radiológica francesa. Incluido con NiderVoice, listo para usar.</p><p data-de>Vox Caladrii FR, trainiert für die französische radiologische Terminologie. Wird mit NiderVoice geliefert und ist sofort einsatzbereit.</p></div>
-      <div class="card reveal"><span class="label">DE · EN</span><h3 data-fr>Allemand et anglais</h3><h3 data-en>German and English</h3><h3 data-es>Alemán e inglés</h3><h3 data-de>Deutsch und Englisch</h3><p data-fr>Vox Caladrii DE et EN sont en cours de développement. En attendant, NiderVoice prend en charge Whisper (OpenAI), un modèle multilingue généraliste, non entraîné pour la terminologie radiologique.</p><p data-en>Vox Caladrii DE and EN are under development. Meanwhile, NiderVoice supports Whisper (OpenAI), a general-purpose multilingual model, not trained for radiology terminology.</p><p data-es>Vox Caladrii DE y EN están en desarrollo. Mientras tanto, NiderVoice admite Whisper (OpenAI), un modelo multilingüe generalista, no entrenado para la terminología radiológica.</p><p data-de>Vox Caladrii DE und EN befinden sich in Entwicklung. Bis dahin unterstützt NiderVoice Whisper (OpenAI), ein allgemeines mehrsprachiges Modell, das nicht für die radiologische Terminologie trainiert ist.</p></div>
-      <div class="card reveal"><span class="label">≈ 100</span><h3 data-fr>Autres langues</h3><h3 data-en>Other languages</h3><h3 data-es>Otros idiomas</h3><h3 data-de>Weitere Sprachen</h3><p data-fr>Près de cent autres langues sont prises en charge avec Whisper. La qualité de reconnaissance varie selon la langue.</p><p data-en>Nearly a hundred other languages are supported with Whisper. Recognition quality varies by language.</p><p data-es>Casi cien idiomas más son compatibles con Whisper. La calidad del reconocimiento varía según el idioma.</p><p data-de>Fast hundert weitere Sprachen werden mit Whisper unterstützt. Die Erkennungsqualität hängt von der Sprache ab.</p></div>
+      <div class="card reveal"><span class="label">≈ 100</span><h3 data-fr>Whisper</h3><h3 data-en>Whisper</h3><h3 data-es>Whisper</h3><h3 data-de>Whisper</h3><p data-fr>Le modèle multilingue d'OpenAI, dans plusieurs tailles. Près de cent langues, qualité variable selon la langue. Chaque fichier est contrôlé par son empreinte.</p><p data-en>OpenAI's multilingual model, in several sizes. Nearly a hundred languages, quality varying by language. Each file is checked against its fingerprint.</p><p data-es>El modelo multilingüe de OpenAI, en varios tamaños. Casi cien idiomas, con calidad variable según el idioma. Cada archivo se controla por su huella.</p><p data-de>Das mehrsprachige Modell von OpenAI in mehreren Größen. Fast hundert Sprachen, Qualität je nach Sprache unterschiedlich. Jede Datei wird per Prüfsumme kontrolliert.</p></div>
+      <div class="card reveal"><span class="label"><span data-fr>Bientôt</span><span data-en>Soon</span><span data-es>Pronto</span><span data-de>Bald</span></span><h3 data-fr>Vos modèles validés</h3><h3 data-en>Your approved models</h3><h3 data-es>Sus modelos validados</h3><h3 data-de>Ihre freigegebenen Modelle</h3><p data-fr>Votre service informatique valide un modèle et le contre-signe avec la clé de l'organisation. Les postes n'acceptent plus que ceux-là.</p><p data-en>Your IT department approves a model and counter-signs it with the organisation's key. Workstations then accept only those.</p><p data-es>Su departamento informático valida un modelo y lo contrafirma con la clave de la organización. Los equipos solo aceptan esos.</p><p data-de>Ihre IT gibt ein Modell frei und gegenzeichnet es mit dem Schlüssel der Organisation. Die Geräte akzeptieren nur noch diese.</p></div>
+      <div class="card reveal"><span class="label"><span data-fr>Option</span><span data-en>Option</span><span data-es>Opción</span><span data-de>Option</span></span><h3 data-fr>Vox Caladrii</h3><h3 data-en>Vox Caladrii</h3><h3 data-es>Vox Caladrii</h3><h3 data-de>Vox Caladrii</h3><p data-fr>Un modèle NiderLabs spécialisé dans le vocabulaire de la radiologie en français, signé numériquement. Allemand et anglais en développement.</p><p data-en>A NiderLabs model specialised in French radiology vocabulary, digitally signed. German and English in development.</p><p data-es>Un modelo de NiderLabs especializado en el vocabulario de la radiología en francés, firmado digitalmente. Alemán e inglés en desarrollo.</p><p data-de>Ein NiderLabs-Modell für das französische Radiologie-Vokabular, digital signiert. Deutsch und Englisch in Entwicklung.</p></div>
     </div>
   </div>
 </section>
@@ -291,57 +367,18 @@
 <div class="final">
   <h2 class="serif reveal"><span data-fr>Qu'avez-vous à écrire ?<br><em>Dites-le.</em></span><span data-en>What do you need to write?<br><em>Just say it.</em></span><span data-es>¿Qué tiene que escribir?<br><em>Dígalo.</em></span><span data-de>Was möchten Sie schreiben?<br><em>Sagen Sie es.</em></span></h2>
   <a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a>
-  <div class="soon"><i></i><span data-fr>Bientôt disponible</span><span data-en>Coming soon</span><span data-es>Próximamente</span><span data-de>Demnächst verfügbar</span></div>
+  <div class="soon"><i></i><span data-fr>Démonstrations et projets pilotes sur demande</span><span data-en>Demos and pilot projects on request</span><span data-es>Demostraciones y proyectos piloto bajo petición</span><span data-de>Demos und Pilotprojekte auf Anfrage</span></div>
 </div>
 </main>
 
 <footer>
   <div class="w">
-    <div><p><span data-fr>Outil de dictée. Ne constitue pas une aide au diagnostic.</span><span data-en>Dictation tool. It is not a diagnostic aid.</span><span data-es>Herramienta de dictado. No constituye una ayuda al diagnóstico.</span><span data-de>Diktierwerkzeug. Es stellt keine Diagnosehilfe dar.</span></p><p>© 2026 NiderLabs</p></div>
+    <div><p><span data-fr>Outil de saisie de texte par la voix. Ne fournit aucune information à visée diagnostique ou thérapeutique.</span><span data-en>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-es>Herramienta de introducción de texto por voz. No proporciona información con fines diagnósticos o terapéuticos.</span><span data-de>Werkzeug zur Texteingabe per Sprache. Es liefert keine Informationen zu diagnostischen oder therapeutischen Zwecken.</span></p><p>© 2026 NiderLabs</p><p class="flinks" style="margin-top:10px;display:flex;gap:16px;flex-wrap:wrap"><a href="securite/" style="text-decoration:none"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a><a href="securite/dpo/" style="text-decoration:none"><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>Kit DPD</span><span data-de>DSB-Kit</span></a><a href="securite/informatique/" style="text-decoration:none"><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>Kit informático</span><span data-de>IT-Kit</span></a><a href="securite/rssi/" style="text-decoration:none"><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>Kit CISO</span><span data-de>CISO-Kit</span></a><a href="/.well-known/security.txt" style="text-decoration:none">security.txt</a></p></div>
     <div style="text-align:right"><p><span data-fr>Conception&nbsp;: NiderLabs · Distribution, licences et assistance&nbsp;: GOKYO S.à r.l.-S, Luxembourg</span><span data-en>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-es>Diseño: NiderLabs · Distribución, licencias y asistencia: GOKYO S.à r.l.-S, Luxemburgo</span><span data-de>Konzeption: NiderLabs · Vertrieb, Lizenzen und Support: GOKYO S.à r.l.-S, Luxemburg</span></p><p><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p></div>
   </div>
 </footer>
 
-<script>
-(function(){
-  var html=document.documentElement, LANGS=['fr','en','es','de'];
-  function setLang(l){html.lang=l;document.querySelectorAll('.lang button').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.lang===l)});}
-  var nav=((navigator.languages&&navigator.languages[0])||navigator.language||'fr').slice(0,2).toLowerCase();
-  setLang(LANGS.indexOf(nav)>=0?nav:'en');
-  document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.lang);restart();});});
-  var head=document.querySelector('header');
-  window.addEventListener('scroll',function(){head.classList.toggle('scrolled',window.scrollY>10)},{passive:true});
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Fenêtre de démonstration : le texte s'écrit pendant que l'onde bouge.
-  var texts={fr:"Bonjour à tous,\nJe vous confirme notre réunion de jeudi à 14 heures. Merci d'apporter les chiffres du trimestre.",en:"Hello everyone,\nI am confirming our meeting on Thursday at 2 pm. Please bring the figures for the quarter.",es:"Hola a todos:\nLes confirmo nuestra reunión del jueves a las 14:00. Por favor, traigan las cifras del trimestre.",de:"Hallo zusammen,\nich bestätige unser Treffen am Donnerstag um 14 Uhr. Bitte bringen Sie die Quartalszahlen mit."};
-  var demo=document.getElementById('demo'), wave=demo.querySelector('.wave'), out=document.getElementById('typed');
-  var hs=[];
-  for(var k=0;k<120;k++){var s=document.createElement('span');var h=6+Math.round(26*Math.abs(Math.sin(k*1.7)*Math.cos(k*.37)));hs.push(h);s.style.height=h+'px';wave.appendChild(s)}
-  var timer=null,frame=null;
-  function animateWave(){var t=0;frame=setInterval(function(){t++;wave.querySelectorAll('span').forEach(function(s,i){s.style.height=Math.max(4,hs[i]*(0.45+0.55*Math.abs(Math.sin((t+i*2)/4))))+'px'})},80)}
-  function show(txt){out.innerHTML='';txt.split('\n').forEach(function(l,i){if(i)out.appendChild(document.createElement('br'));out.appendChild(document.createTextNode(l))})}
-  function run(){var txt=texts[html.lang]||texts.fr;if(reduce){demo.classList.add('done');show(txt);return}
-    demo.classList.remove('done');show('');animateWave();var i=0;
-    timer=setTimeout(function type(){show(txt.slice(0,++i));if(i<txt.length){timer=setTimeout(type,38)}else{clearInterval(frame);demo.classList.add('done');timer=setTimeout(run,5000)}},800)}
-  function stop(){clearTimeout(timer);clearInterval(frame)}
-  function restart(){stop();run()}
-  document.addEventListener('visibilitychange',function(){document.hidden?stop():restart()});
-  run();
-
-  var bw=document.querySelector('.big-wave');
-  for(var j=0;j<28;j++){var b=document.createElement('span');b.style.height=(30+Math.round(100*Math.abs(Math.sin(j*.55))))+'px';b.style.animationDelay=(j*0.06)+'s';bw.appendChild(b)}
-
-  // Étapes : la scène de droite suit l'étape au centre de l'écran.
-  var steps=[].slice.call(document.querySelectorAll('.step')), scenes=[].slice.call(document.querySelectorAll('.scene'));
-  function activate(i){steps.forEach(function(s){s.classList.toggle('on',s.dataset.s==i)});scenes.forEach(function(s){s.classList.toggle('on',s.dataset.s==i)})}
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)activate(e.target.dataset.s)})},{rootMargin:'-45% 0px -45% 0px'});
-    steps.forEach(function(s){io.observe(s)});
-    var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}})},{threshold:.15});
-    document.querySelectorAll('.reveal').forEach(function(r){ro.observe(r)});
-  } else { document.querySelectorAll('.reveal').forEach(function(r){r.classList.add('in')}) }
-})();
-</script>
+<script src="assets/nv.js?v=20261116b"></script>
+<script src="assets/home.js?v=20261116b"></script>
 </body>
 </html>

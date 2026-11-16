@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="fr" data-langs="fr en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kit RSSI — NiderVoice</title>
+<meta name="description" content="Modèle de menace, surface d'attaque, chaîne de confiance des modèles et signalement des vulnérabilités de NiderVoice.">
+<meta name="theme-color" content="#0A0E15">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kit RSSI — NiderVoice">
+<meta property="og:description" content="Modèle de menace, surface d'attaque, chaîne de confiance des modèles et signalement des vulnérabilités de NiderVoice.">
+<meta property="og:url" content="https://nidervoice.com/securite/rssi/">
+<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/nv.css?v=20261116b">
+</head>
+<body>
+<canvas id="dots" aria-hidden="true"></canvas>
+<header>
+  <div class="w bar">
+    <a class="logo" href="/" aria-label="NiderVoice"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="146" height="28" alt="NiderVoice"></a>
+    <nav class="main-nav" aria-label="Navigation"><a href="/securite/" aria-current=page><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Deployment</span><span data-de>Deployment</span></a><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Industries</span><span data-de>Industries</span></a><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Models</span><span data-de>Models</span></a></nav>
+    <div class="right">
+      <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button><button type="button" data-lang="de" aria-pressed="false">DE</button></div>
+      <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Request a demo</span><span data-de>Request a demo</span></a>
+      <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
+    </div>
+  </div>
+</header>
+<main>
+<div class="w page-head">
+  <div class="crumbs"><a href="/">NiderVoice</a> / <a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span></a> / <span data-fr>RSSI</span><span data-en>CISO</span></div>
+  <h1 class="serif"><span data-fr>Kit RSSI. <em>Ce qu'on protège, et contre quoi.</em></span><span data-en>CISO kit. <em>What we protect, and against what.</em></span></h1>
+  <p class="lead" data-fr>Le modèle de menace de NiderVoice, sa surface d'attaque, les limites que nous reconnaissons et la façon de nous signaler une vulnérabilité.</p>
+  <p class="lead" data-en>NiderVoice's threat model, its attack surface, the limits we acknowledge and how to report a vulnerability to us.</p>
+</div>
+
+<div class="layout">
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#actifs"><span data-fr>Ce qu'on protège</span><span data-en>Assets</span></a>
+    <a href="#menaces"><span data-fr>Menaces et mesures</span><span data-en>Threats and controls</span></a>
+    <a href="#limites"><span data-fr>Limites reconnues</span><span data-en>Known limits</span></a>
+    <a href="#formes"><span data-fr>Selon la forme</span><span data-en>By form factor</span></a>
+    <a href="#chaine"><span data-fr>Chaîne logicielle</span><span data-en>Software supply chain</span></a>
+    <a href="#signaler"><span data-fr>Signaler une faille</span><span data-en>Report a flaw</span></a>
+  </nav>
+  <div class="prose">
+
+<section id="actifs">
+<div data-fr>
+  <h2>Ce qu'on protège</h2>
+  <ul>
+    <li><strong>Le contenu dicté</strong> : la voix, présente en mémoire le temps de la reconnaissance, puis le texte, présent un court instant dans le presse-papiers.</li>
+    <li><strong>L'intégrité des modèles</strong> : un modèle remplacé pourrait produire un texte faux ou servir de vecteur d'attaque.</li>
+    <li><strong>L'intégrité du programme</strong> sur le poste.</li>
+  </ul>
+</div>
+<div data-en>
+  <h2>Assets</h2>
+  <ul>
+    <li><strong>Dictated content</strong>: the voice, held in memory during recognition, then the text, held briefly in the clipboard.</li>
+    <li><strong>Model integrity</strong>: a swapped model could produce wrong text or serve as an attack vector.</li>
+    <li><strong>Program integrity</strong> on the workstation.</li>
+  </ul>
+</div>
+</section>
+
+<section id="menaces">
+<div data-fr>
+  <h2>Menaces et mesures</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Menace</th><th>Mesure</th></tr>
+    <tr><td>Exfiltration de la voix ou du texte par le réseau</td><td>Aucune fonction réseau dans l'édition sans réseau ; code de connexion bloqué ; WebView2 lancé sans services d'arrière-plan ; mesure vérifiable par vos soins.</td></tr>
+    <tr><td>Modèle altéré ou remplacé</td><td>Signature Ed25519 des modèles NiderLabs ; empreinte SHA-256 des modèles publics ; refus de tout fichier non conforme.</td></tr>
+    <tr><td>Remplacement d'une bibliothèque du programme</td><td>Installation MSI dans <code>Program Files</code>, non modifiable par les utilisateurs ; empreintes de tous les fichiers fournies.</td></tr>
+    <tr><td>Lecture du texte par un outil de surveillance du presse-papiers</td><td>Marqueurs Windows d'exclusion (historique, cloud, surveillance) ; effacement après une seconde ; mode frappe directe possible.</td></tr>
+    <tr><td>Écriture dans la mauvaise fenêtre</td><td>Contrôle de la fenêtre et du champ visés avant chaque insertion lorsque la dictée est ancrée.</td></tr>
+    <tr><td>Fuite par les journaux</td><td>Le texte dicté n'est jamais écrit dans les journaux, même en version de développement.</td></tr>
+  </table></div>
+</div>
+<div data-en>
+  <h2>Threats and controls</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Threat</th><th>Control</th></tr>
+    <tr><td>Exfiltration of voice or text over the network</td><td>No network features in the offline edition; connection code blocked; WebView2 started without background services; measurement you can repeat.</td></tr>
+    <tr><td>Altered or swapped model</td><td>Ed25519 signature on NiderLabs models; SHA-256 fingerprint on public models; any non-matching file refused.</td></tr>
+    <tr><td>Replacement of a program library</td><td>MSI installation in <code>Program Files</code>, not writable by users; fingerprints of every file supplied.</td></tr>
+    <tr><td>Text read by a clipboard-monitoring tool</td><td>Windows exclusion markers (history, cloud, monitoring); cleared after one second; direct typing mode available.</td></tr>
+    <tr><td>Writing into the wrong window</td><td>Check of the target window and field before each insertion when dictation is anchored.</td></tr>
+    <tr><td>Leak through logs</td><td>Dictated text is never written to logs, not even in development builds.</td></tr>
+  </table></div>
+</div>
+</section>
+
+<section id="limites">
+<div data-fr>
+  <h2>Limites reconnues</h2>
+  <p>Un modèle de menace honnête dit aussi ce qu'il ne couvre pas.</p>
+  <ul>
+    <li>Un programme malveillant qui tourne déjà sur le poste avec les droits de l'utilisateur peut lire l'écran, le clavier ou le presse-papiers. NiderVoice ne peut pas protéger contre un poste déjà compromis ; c'est le rôle de vos protections de poste.</li>
+    <li>Les marqueurs d'exclusion du presse-papiers sont respectés par Windows et par les logiciels bien conçus, pas par un logiciel malveillant.</li>
+    <li>La qualité du texte dépend du modèle, du micro et de l'élocution : le texte doit toujours être relu.</li>
+    <li>Aucun test d'intrusion indépendant n'a encore été réalisé. Il est prévu, et ses conclusions seront résumées ici.</li>
+  </ul>
+</div>
+<div data-en>
+  <h2>Known limits</h2>
+  <p>An honest threat model also says what it does not cover.</p>
+  <ul>
+    <li>Malware already running on the workstation with the user's rights can read the screen, the keyboard or the clipboard. NiderVoice cannot protect against an already compromised device; that is the job of your endpoint protection.</li>
+    <li>Clipboard exclusion markers are honoured by Windows and by well-behaved software, not by malware.</li>
+    <li>Text quality depends on the model, the microphone and the speaker: the text must always be reviewed.</li>
+    <li>No independent penetration test has been carried out yet. One is planned, and its conclusions will be summarised here.</li>
+  </ul>
+</div>
+</section>
+
+<section id="formes">
+<div data-fr>
+  <h2>Selon la forme de déploiement</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Forme</th><th>Point d'attention</th><th>Recommandation</th></tr>
+    <tr><td>MSI</td><td>Fichiers protégés en écriture dans <code>Program Files</code>.</td><td>Forme recommandée pour un parc géré.</td></tr>
+    <tr><td>Clé USB</td><td>Les fichiers du programme sont modifiables sur la clé ; une clé peut être perdue.</td><td>Les modèles restent vérifiés au chargement. Réservez cette forme aux usages hors parc géré et chiffrez la clé.</td></tr>
+    <tr><td>Web</td><td>Le code de la page est fourni par le serveur à chaque visite.</td><td>Pour un usage sensible, hébergez la version web sur votre propre serveur afin de maîtriser le code servi.</td></tr>
+  </table></div>
+</div>
+<div data-en>
+  <h2>By form factor</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Form</th><th>Point of attention</th><th>Recommendation</th></tr>
+    <tr><td>MSI</td><td>Files write-protected in <code>Program Files</code>.</td><td>Recommended form for a managed fleet.</td></tr>
+    <tr><td>USB key</td><td>Program files can be modified on the key; a key can be lost.</td><td>Models are still verified at load time. Keep this form for use outside the managed fleet and encrypt the key.</td></tr>
+    <tr><td>Web</td><td>The page code is served by the server on each visit.</td><td>For sensitive use, host the web version on your own server so that you control the code served.</td></tr>
+  </table></div>
+</div>
+</section>
+
+<section id="chaine">
+<div data-fr>
+  <h2>Chaîne logicielle</h2>
+  <ul>
+    <li>Le programme est compilé par une chaîne d'intégration continue à partir du code source, avec des dépendances verrouillées par version.</li>
+    <li>Il s'appuie sur des composants open source reconnus (Tauri, bibliothèques de reconnaissance GGML), dont les licences sont listées dans le logiciel.</li>
+    <li><strong>Liste des composants (SBOM au format CycloneDX)</strong> <span class="status dev"><i></i>En préparation</span>.</li>
+    <li><strong>Signature Authenticode</strong> <span class="status dev"><i></i>En cours</span>.</li>
+  </ul>
+</div>
+<div data-en>
+  <h2>Software supply chain</h2>
+  <ul>
+    <li>The program is built by a continuous-integration pipeline from source, with version-locked dependencies.</li>
+    <li>It relies on established open-source components (Tauri, GGML recognition libraries), whose licences are listed in the software.</li>
+    <li><strong>Software bill of materials (CycloneDX SBOM)</strong> <span class="status dev"><i></i>In preparation</span>.</li>
+    <li><strong>Authenticode signing</strong> <span class="status dev"><i></i>In progress</span>.</li>
+  </ul>
+</div>
+</section>
+
+<section id="signaler">
+<div data-fr>
+  <h2>Signaler une vulnérabilité</h2>
+  <p>Si vous pensez avoir trouvé une faille, écrivez à <a href="mailto:contact@nidervoice.com?subject=S%C3%A9curit%C3%A9">contact@nidervoice.com</a> avec l'objet « Sécurité ». Décrivez la version concernée et les étapes pour reproduire le problème. Nous accusons réception, vous tenons informé de la correction et vous créditons si vous le souhaitez.</p>
+  <p>Nos coordonnées de sécurité sont aussi publiées au format standard dans <a href="/.well-known/security.txt">/.well-known/security.txt</a>.</p>
+</div>
+<div data-en>
+  <h2>Report a vulnerability</h2>
+  <p>If you think you have found a flaw, write to <a href="mailto:contact@nidervoice.com?subject=Security">contact@nidervoice.com</a> with the subject "Security". Describe the affected version and the steps to reproduce. We acknowledge receipt, keep you informed of the fix and credit you if you wish.</p>
+  <p>Our security contact is also published in the standard format at <a href="/.well-known/security.txt">/.well-known/security.txt</a>.</p>
+</div>
+</section>
+
+  </div>
+</div>
+
+<div class="cta-band"><div class="card"><div><div class="label"><span data-fr>Étape suivante</span><span data-en>Next step</span><span data-es>Next step</span><span data-de>Next step</span></div><h2 class="serif" style="margin-top:10px"><span data-fr>Parlons de votre déploiement.</span><span data-en>Let's talk about your deployment.</span><span data-es>Let's talk about your deployment.</span><span data-de>Let's talk about your deployment.</span></h2></div><a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a></div></div>
+</main>
+<footer>
+  <div class="w">
+    <div><p><span data-fr>Outil de saisie de texte par la voix. Ne fournit aucune information à visée diagnostique ou thérapeutique.</span><span data-en>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-es>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-de>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span></p><p>© 2026 NiderLabs</p>
+      <div class="links"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/securite/dpo/"><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>DPO kit</span><span data-de>DPO kit</span></a><a href="/securite/informatique/"><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>IT kit</span><span data-de>IT kit</span></a><a href="/securite/rssi/"><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>CISO kit</span><span data-de>CISO kit</span></a><a href="/.well-known/security.txt">security.txt</a></div></div>
+    <div style="text-align:right"><p><span data-fr>Conception&nbsp;: NiderLabs · Distribution, licences et assistance&nbsp;: GOKYO S.à r.l.-S, Luxembourg</span><span data-en>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-es>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-de>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span></p><p><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p></div>
+  </div>
+</footer>
+<script src="/assets/nv.js?v=20261116b"></script>
+</body>
+</html>
