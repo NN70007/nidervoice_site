@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" data-langs="fr en">
+<html lang="fr" data-langs="fr en es de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -12,44 +12,45 @@
 <meta property="og:title" content="Secteurs — NiderVoice">
 <meta property="og:description" content="Santé, juridique, finance, secteur public, industrie : comment la dictée locale répond aux exigences de confidentialité de chaque métier.">
 <meta property="og:url" content="https://nidervoice.com/secteurs/">
-<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg">
+<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg?v=20261116c">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/nv.css?v=20261116b">
+<link rel="stylesheet" href="/assets/nv.css?v=20261116c">
 </head>
 <body>
 <canvas id="dots" aria-hidden="true"></canvas>
 <header>
   <div class="w bar">
     <a class="logo" href="/" aria-label="NiderVoice"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="146" height="28" alt="NiderVoice"></a>
-    <nav class="main-nav" aria-label="Navigation"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Deployment</span><span data-de>Deployment</span></a><a href="/secteurs/" aria-current=page><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Industries</span><span data-de>Industries</span></a><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Models</span><span data-de>Models</span></a></nav>
+    <nav class="main-nav" aria-label="Navigation"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Despliegue</span><span data-de>Bereitstellung</span></a><a href="/secteurs/" aria-current=page><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Sectores</span><span data-de>Branchen</span></a><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></a></nav>
     <div class="right">
       <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button><button type="button" data-lang="de" aria-pressed="false">DE</button></div>
-      <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Request a demo</span><span data-de>Request a demo</span></a>
+      <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Solicitar una demo</span><span data-de>Demo anfragen</span></a>
       <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
     </div>
   </div>
 </header>
 <main>
 <div class="w page-head">
-  <div class="crumbs"><a href="/">NiderVoice</a> / <span data-fr>Secteurs</span><span data-en>Industries</span></div>
-  <h1 class="serif"><span data-fr>Là où les mots dictés <em>ne doivent pas sortir.</em></span><span data-en>Where dictated words <em>must not leave.</em></span></h1>
+  <div class="crumbs"><a href="/">NiderVoice</a> / <span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Sectores</span><span data-de>Branchen</span></div>
+  <h1 class="serif"><span data-fr>Là où les mots dictés <em>ne doivent pas sortir.</em></span><span data-en>Where dictated words <em>must not leave.</em></span><span data-es>Donde las palabras dictadas <em>no deben salir.</em></span><span data-de>Wo diktierte Worte <em>nicht hinausdürfen.</em></span></h1>
   <p class="lead" data-fr>Chaque métier a son secret : médical, professionnel, bancaire, industriel. La dictée vocale est un gain de temps considérable, mais envoyer ces mots à un service en ligne pose des questions que beaucoup d'organisations préfèrent ne pas avoir à trancher.</p>
-  <p class="lead" data-en>Every profession has its secret: medical, legal, banking, industrial. Voice dictation saves a great deal of time, but sending those words to an online service raises questions many organisations would rather not have to settle.</p>
+  <p class="lead" data-en>Every profession has its secret: medical, legal, banking, industrial. Voice dictation saves a great deal of time, but sending those words to an online service raises questions many organisations would rather not have to settle.</p><p class="lead" data-es>Toda profesión tiene su secreto: médico, jurídico, bancario, industrial. El dictado de voz ahorra un tiempo considerable, pero enviar esas palabras a un servicio en línea plantea preguntas que muchas organizaciones preferirían no tener que resolver.</p><p class="lead" data-de>Jeder Beruf hat sein Geheimnis: medizinisch, juristisch, bankfachlich, industriell. Sprachdiktat spart eine Menge Zeit, aber das Senden dieser Wörter an einen Online-Dienst wirft Fragen auf, die viele Organisationen lieber nicht klären möchten.</p>
 </div>
 
 <div class="layout">
   <nav class="toc" aria-label="Sommaire">
-    <a href="#sante"><span data-fr>Santé</span><span data-en>Healthcare</span></a>
-    <a href="#juridique"><span data-fr>Juridique</span><span data-en>Legal</span></a>
-    <a href="#finance"><span data-fr>Finance et assurance</span><span data-en>Finance and insurance</span></a>
-    <a href="#public"><span data-fr>Secteur public</span><span data-en>Public sector</span></a>
-    <a href="#industrie"><span data-fr>Industrie</span><span data-en>Industry</span></a>
+    <a href="#sante"><span data-fr>Santé</span><span data-en>Healthcare</span><span data-es>Salud</span><span data-de>Gesundheitswesen</span></a>
+    <a href="#juridique"><span data-fr>Juridique</span><span data-en>Legal</span><span data-es>Jurídico</span><span data-de>Recht</span></a>
+    <a href="#finance"><span data-fr>Finance et assurance</span><span data-en>Finance and insurance</span><span data-es>Finanzas y seguros</span><span data-de>Finanzen und Versicherungen</span></a>
+    <a href="#public"><span data-fr>Secteur public</span><span data-en>Public sector</span><span data-es>Sector público</span><span data-de>Öffentlicher Sektor</span></a>
+    <a href="#industrie"><span data-fr>Industrie</span><span data-en>Industry</span><span data-es>Industria</span><span data-de>Industrie</span></a>
   </nav>
   <div class="prose">
 
-<section id="sante">
+<section class="reveal" id="sante">
 <div data-fr>
   <h2>Santé</h2>
+  <div class="scenario"><div><span class="label">Qui</span><p>Un radiologue</p></div><div><span class="label">Quel document</span><p>Le compte rendu d'examen, dicté dans le logiciel du service</p></div><div><span class="label">Risque évité</span><p>Envoyer la voix et le contenu médical à un service de dictée en ligne</p></div></div>
   <p><strong>La contrainte.</strong> Ce que dicte un médecin relève du secret médical. Les données de santé sont une catégorie particulière au sens du RGPD ; aux États-Unis, elles relèvent de HIPAA ; dans plusieurs pays, leur hébergement par un tiers exige une certification spécifique. Les services de dictée en ligne imposent donc contrats, analyses et parfois certifications.</p>
   <p><strong>Les usages.</strong> Comptes rendus, courriers aux confrères, notes de consultation, documents administratifs : partout où le médecin ou le secrétariat écrit, dans le logiciel déjà en place.</p>
   <p><strong>Ce que change NiderVoice.</strong> La reconnaissance se fait sur le poste : pas d'hébergeur de données de santé à qualifier pour la dictée, pas de transfert à documenter. Un modèle spécialisé en vocabulaire de radiologie française, Vox Caladrii, est disponible en option.</p>
@@ -57,85 +58,141 @@
 </div>
 <div data-en>
   <h2>Healthcare</h2>
+  <div class="scenario"><div><span class="label">Who</span><p>A radiologist</p></div><div><span class="label">Which document</span><p>The examination report, dictated into the department software</p></div><div><span class="label">Risk avoided</span><p>Sending voice and medical content to an online dictation service</p></div></div>
   <p><strong>The constraint.</strong> What a doctor dictates is covered by medical confidentiality. Health data is a special category under the GDPR; in the United States it falls under HIPAA; in several countries, hosting it on behalf of others requires specific certification. Online dictation services therefore bring contracts, assessments and sometimes certifications.</p>
   <p><strong>The uses.</strong> Reports, letters to colleagues, consultation notes, administrative documents: wherever the doctor or the secretariat writes, in the software already in place.</p>
   <p><strong>What NiderVoice changes.</strong> Recognition runs on the device: no health-data host to qualify for dictation, no transfer to document. A model specialised in French radiology vocabulary, Vox Caladrii, is available as an option.</p>
   <div class="note"><p>NiderVoice is a voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes; the text produced is reviewed and approved by the professional.</p></div>
-</div>
+</div><div data-es><h2>Salud</h2>
+  <div class="scenario"><div><span class="label">Quién</span><p>Un radiólogo</p></div><div><span class="label">Qué documento</span><p>El informe de la exploración, dictado en el software del departamento</p></div><div><span class="label">Riesgo evitado</span><p>Enviar voz y contenido médico a un servicio de dictado en línea</p></div></div>
+  <p><strong>La restricción.</strong> Lo que un médico dicta está cubierto por el secreto médico. Los datos de salud son una categoría especial bajo el RGPD; en los Estados Unidos están regulados por HIPAA; en varios países, su alojamiento por cuenta de terceros requiere certificaciones específicas. Los servicios de dictado en línea conllevan, por tanto, contratos, evaluaciones e, a veces, certificaciones.</p>
+  <p><strong>Los usos.</strong> Informes, cartas a colegas, notas de consulta, documentos administrativos: donde el médico o la secretaría escriba, en el software ya en uso.</p>
+  <p><strong>Qué cambia NiderVoice.</strong> El reconocimiento se ejecuta en el equipo: ningún host de datos de salud que calificar para el dictado, ninguna transferencia al documento. Un modelo especializado en el vocabulario de radiología en francés, Vox Caladrii, está disponible como opción.</p>
+  <div class="note"><p>NiderVoice es una herramienta de entrada de voz a texto. No proporciona información con fines diagnósticos o terapéuticos; el texto producido es revisado y aprobado por el profesional.</p></div></div><div data-de><h2>Gesundheitswesen</h2>
+  <div class="scenario"><div><span class="label">Wer</span><p>Ein Radiologe</p></div><div><span class="label">Welches Dokument</span><p>Der Untersuchungsbericht, der in die Abteilungssoftware diktiert wird</p></div><div><span class="label">Vermiedenes Risiko</span><p>Senden von Sprach- und medizinischen Inhalten an einen Online-Diktatdienst</p></div></div>
+  <p><strong>Die Anforderung.</strong> Was ein Arzt diktiert, unterliegt der ärztlichen Schweigepflicht. Gesundheitsdaten sind eine besondere Kategorie nach der DSGVO; in den Vereinigten Staaten fallen sie unter HIPAA; in mehreren Ländern erfordert die Hosting-Dienstleistung für Dritte spezifische Zertifizierungen. Online-Diktatdienste erfordern daher Verträge, Bewertungen und manchmal Zertifizierungen.</p>
+  <p><strong>Die Einsatzbereiche.</strong> Berichte, Briefe an Kollegen, Konsultationsnotizen, administrative Dokumente: überall dort, wo der Arzt oder das Sekretariat schreibt, in der bereits vorhandenen Software.</p>
+  <p><strong>Was NiderVoice verändert.</strong> Die Erkennung läuft auf dem Gerät: kein Hoster für Gesundheitsdaten zu qualifizieren, keine Übermittlung zu dokumentieren. Ein auf den französischen Radiologie-Wortschatz spezialisiertes Modell, Vox Caladrii, ist optional verfügbar.</p>
+  <div class="note"><p>NiderVoice ist ein Sprach-zu-Text-Eingabewerkzeug. Es liefert keine Informationen für diagnostische oder therapeutische Zwecke; der erzeugte Text wird vom Fachpersonal überprüft und freigegeben.</p></div></div>
 </section>
 
-<section id="juridique">
+<section class="reveal" id="juridique">
 <div data-fr>
   <h2>Juridique</h2>
+  <div class="scenario"><div><span class="label">Qui</span><p>Une avocate associée</p></div><div><span class="label">Quel document</span><p>Un projet de conclusions</p></div><div><span class="label">Risque évité</span><p>Confier le contenu d'un dossier à un prestataire étranger</p></div></div>
   <p><strong>La contrainte.</strong> Avocats, notaires et juristes d'entreprise sont tenus au secret professionnel. Confier le contenu d'un dossier à un service tiers, a fortiori situé dans un autre pays, oblige à vérifier ce que ce service peut voir, conserver ou être contraint de communiquer.</p>
   <p><strong>Les usages.</strong> Conclusions, actes, courriers, notes de dossier, comptes rendus de rendez-vous rédigés après coup.</p>
   <p><strong>Ce que change NiderVoice.</strong> Le contenu du dossier reste dans le cabinet. Aucun tiers ne reçoit les mots dictés, ni pour la reconnaissance ni pour l'« amélioration du service ».</p>
 </div>
 <div data-en>
   <h2>Legal</h2>
+  <div class="scenario"><div><span class="label">Who</span><p>A partner at a law firm</p></div><div><span class="label">Which document</span><p>Draft submissions</p></div><div><span class="label">Risk avoided</span><p>Handing case content to a foreign provider</p></div></div>
   <p><strong>The constraint.</strong> Lawyers, notaries and in-house counsel are bound by professional secrecy. Entrusting case content to a third-party service, especially one based in another country, means checking what that service can see, keep or be compelled to disclose.</p>
   <p><strong>The uses.</strong> Pleadings, deeds, letters, file notes, meeting summaries written up afterwards.</p>
   <p><strong>What NiderVoice changes.</strong> Case content stays in the firm. No third party receives the dictated words, neither for recognition nor to "improve the service".</p>
-</div>
+</div><div data-es><h2>Legal</h2>
+  <div class="scenario"><div><span class="label">Who</span><p>Un socio de un despacho de abogados</p></div><div><span class="label">Which document</span><p>Borradores de presentaciones</p></div><div><span class="label">Risk avoided</span><p>Entregar el contenido del caso a un proveedor extranjero</p></div></div>
+  <p><strong>The constraint.</strong> Los abogados, notarios y asesores jurídicos internos están sujetos al secreto profesional. Confiar el contenido de un caso a un servicio de terceros, especialmente si está establecido en otro país, implica verificar qué puede ver, conservar o estar obligado a divulgar dicho servicio.</p>
+  <p><strong>The uses.</strong> Alegatos, escrituras, cartas, notas de expediente, resúmenes de reuniones redactados a posteriori.</p>
+  <p><strong>What NiderVoice changes.</strong> El contenido del caso se mantiene en el despacho. No se transmite a ningún tercero las palabras dictadas, ni para su reconocimiento ni para "mejorar el servicio".</p></div><div data-de><h2>Rechtliches</h2>
+  <div class="scenario"><div><span class="label">Wer</span><p>Ein Partner in einer Anwaltskanzlei</p></div><div><span class="label">Welches Dokument</span><p>Schriftsatzentwürfe</p></div><div><span class="label">Vermiedenes Risiko</span><p>Übergabe von Fallinhalten an einen ausländischen Anbieter</p></div></div>
+  <p><strong>Die Anforderung.</strong> Anwälte, Notare und interne Rechtsberater unterliegen der beruflichen Verschwiegenheit. Die Überlassung von Fallinhalten an einen Drittanbieter, insbesondere einen in einem anderen Land ansässigen, erfordert die Prüfung, was dieser Dienst sehen, speichern oder preisgeben kann.</p>
+  <p><strong>Die Einsatzbereiche.</strong> Klageschriften, Urkunden, Briefe, Aktenvermerke, nachträglich erstellte Zusammenfassungen von Besprechungen.</p>
+  <p><strong>Was NiderVoice ändert.</strong> Fallinhalte bleiben in der Kanzlei. Kein Dritter erhält die diktierten Wörter, weder zur Erkennung noch zur „Verbesserung des Dienstes“.</p></div>
 </section>
 
-<section id="finance">
+<section class="reveal" id="finance">
 <div data-fr>
   <h2>Finance et assurance</h2>
+  <div class="scenario"><div><span class="label">Qui</span><p>Un conseiller en gestion de patrimoine</p></div><div><span class="label">Quel document</span><p>La note d'entretien avec un client</p></div><div><span class="label">Risque évité</span><p>Ajouter un prestataire de plus à déclarer et à surveiller</p></div></div>
   <p><strong>La contrainte.</strong> Secret bancaire, informations privilégiées, données clients : le secteur financier encadre strictement ses flux d'information. En Europe, le règlement DORA impose en outre de recenser et de maîtriser les prestataires de services informatiques.</p>
   <p><strong>Les usages.</strong> Notes d'entretien client rédigées par le conseiller, rapports d'analyse, comptes rendus de comité, instructions de dossiers de sinistre.</p>
   <p><strong>Ce que change NiderVoice.</strong> Un logiciel installé chez vous, sans service distant, ajoute peu à votre cartographie des prestataires et rien à vos flux sortants.</p>
 </div>
 <div data-en>
   <h2>Finance and insurance</h2>
+  <div class="scenario"><div><span class="label">Who</span><p>A wealth-management adviser</p></div><div><span class="label">Which document</span><p>The client meeting note</p></div><div><span class="label">Risk avoided</span><p>Adding one more provider to declare and monitor</p></div></div>
   <p><strong>The constraint.</strong> Banking secrecy, inside information, client data: the financial sector tightly controls its information flows. In Europe, the DORA regulation also requires firms to register and manage their ICT service providers.</p>
   <p><strong>The uses.</strong> Client meeting notes written by the adviser, analysis reports, committee minutes, claims file handling.</p>
   <p><strong>What NiderVoice changes.</strong> Software installed on your premises, with no remote service, adds little to your provider map and nothing to your outbound flows.</p>
-</div>
+</div><div data-es><h2>Finanzas y seguros</h2>
+  <div class="scenario"><div><span class="label">¿Quién?</span><p>Un asesor de gestión de patrimonios</p></div><div><span class="label">¿Qué documento?</span><p>La nota de la reunión con el cliente</p></div><div><span class="label">Riesgo evitado</span><p>Añadir un proveedor más que declarar y monitorizar</p></div></div>
+  <p><strong>La restricción.</strong> El secreto bancario, la información privilegiada, los datos del cliente: el sector financiero controla estrictamente sus flujos de información. En Europa, el reglamento DORA también exige a las empresas registrar y gestionar sus proveedores de servicios de tecnologías de la información y la comunicación.</p>
+  <p><strong>Los usos.</strong> Notas de reuniones con clientes redactadas por el asesor, informes de análisis, actas de comités, gestión de expedientes de reclamaciones.</p>
+  <p><strong>Qué cambia NiderVoice.</strong> Software instalado en sus instalaciones, sin servicio remoto, añade poco a su mapa de proveedores y nada a sus flujos salientes.</p></div><div data-de><h2>Finanzwesen und Versicherungen</h2>
+  <div class="scenario"><div><span class="label">Wer</span><p>Ein Vermögensverwaltungsberater</p></div><div><span class="label">Welches Dokument</span><p>Das Protokoll des Kundenmeetings</p></div><div><span class="label">Vermiedenes Risiko</span><p>Ein weiterer Anbieter, der deklariert und überwacht werden muss</p></div></div>
+  <p><strong>Die Anforderung.</strong> Bankgeheimnis, Insiderinformationen, Kundendaten: Der Finanzsektor kontrolliert seine Informationsflüsse streng. In Europa verlangt die DORA-Verordnung zudem, dass Unternehmen ihre ICT-Dienstleister registrieren und verwalten.</p>
+  <p><strong>Die Einsatzbereiche.</strong> Vom Berater verfasste Protokolle der Kundenmeetings, Analysenberichte, Protokolle von Ausschusssitzungen, Bearbeitung von Schadensakten.</p>
+  <p><strong>Was NiderVoice ändert.</strong> Eine auf Ihren Räumlichkeiten installierte Software ohne entfernten Dienst fügt Ihrer Anbieterkarte wenig hinzu und nichts zu Ihren ausgehenden Datenströmen.</p></div>
 </section>
 
-<section id="public">
+<section class="reveal" id="public">
 <div data-fr>
   <h2>Secteur public</h2>
+  <div class="scenario"><div><span class="label">Qui</span><p>Un inspecteur</p></div><div><span class="label">Quel document</span><p>Le rapport d'inspection</p></div><div><span class="label">Risque évité</span><p>Traiter des données de citoyens hors de votre juridiction</p></div></div>
   <p><strong>La contrainte.</strong> Administrations et collectivités traitent des données de citoyens et des informations sensibles, et sont de plus en plus attentives à la souveraineté : où sont traitées les données, et sous quelle juridiction.</p>
   <p><strong>Les usages.</strong> Courriers, rapports d'inspection ou d'enquête, comptes rendus de réunion, notes internes.</p>
   <p><strong>Ce que change NiderVoice.</strong> Le traitement a lieu sur vos postes, dans vos locaux. La question de la juridiction d'un prestataire de reconnaissance vocale ne se pose pas.</p>
 </div>
 <div data-en>
   <h2>Public sector</h2>
+  <div class="scenario"><div><span class="label">Who</span><p>An inspector</p></div><div><span class="label">Which document</span><p>The inspection report</p></div><div><span class="label">Risk avoided</span><p>Processing citizens' data outside your jurisdiction</p></div></div>
   <p><strong>The constraint.</strong> Government bodies handle citizens' data and sensitive information, and pay increasing attention to sovereignty: where data is processed, and under which jurisdiction.</p>
   <p><strong>The uses.</strong> Letters, inspection or investigation reports, meeting minutes, internal notes.</p>
   <p><strong>What NiderVoice changes.</strong> Processing happens on your devices, on your premises. The jurisdiction of a speech-recognition provider is simply not a question.</p>
-</div>
+</div><div data-es><h2>Sector público</h2>
+  <div class="scenario"><div><span class="label">¿Quién?</span><p>Un inspector</p></div><div><span class="label">¿Qué documento?</span><p>El informe de inspección</p></div><div><span class="label">Riesgo evitado</span><p>Tratamiento de datos de ciudadanos fuera de su jurisdicción</p></div></div>
+  <p><strong>La restricción.</strong> Los organismos gubernamentales gestionan datos de ciudadanos e información sensible, y prestan cada vez más atención a la soberanía: dónde se procesan los datos y bajo qué jurisdicción.</p>
+  <p><strong>Los usos.</strong> Cartas, informes de inspección o investigación, actas de reuniones, notas internas.</p>
+  <p><strong>Qué cambia NiderVoice.</strong> El tratamiento se realiza en sus equipos, en sus instalaciones. La jurisdicción de un proveedor de reconocimiento de voz simplemente no es una cuestión.</p></div><div data-de><h2>Öffentlicher Sektor</h2>
+  <div class="scenario"><div><span class="label">Wer</span><p>Ein Inspektor</p></div><div><span class="label">Welches Dokument</span><p>Der Inspektionsbericht</p></div><div><span class="label">Vermiedenes Risiko</span><p>Verarbeitung von Daten von Bürgern außerhalb Ihrer Zuständigkeit</p></div></div>
+  <p><strong>Die Anforderung.</strong> Behörden verarbeiten Daten von Bürgern und sensible Informationen und legen zunehmend Wert auf Souveränität: wo Daten verarbeitet werden und unter welcher Zuständigkeit.</p>
+  <p><strong>Die Einsatzbereiche.</strong> Briefe, Inspektions- oder Ermittlungsberichte, Protokolle von Sitzungen, interne Notizen.</p>
+  <p><strong>Was NiderVoice verändert.</strong> Die Verarbeitung erfolgt auf Ihren Geräten, auf Ihren Räumlichkeiten. Die Zuständigkeit eines Spracherkennungsanbieters stellt sich einfach nicht.</p></div>
 </section>
 
-<section id="industrie">
+<section class="reveal" id="industrie">
 <div data-fr>
   <h2>Industrie</h2>
+  <div class="scenario"><div><span class="label">Qui</span><p>Une technicienne de maintenance sur un site isolé</p></div><div><span class="label">Quel document</span><p>Le rapport d'intervention</p></div><div><span class="label">Risque évité</span><p>Décrire un procédé confidentiel à un service en ligne</p></div></div>
   <p><strong>La contrainte.</strong> Procédés, plans, résultats d'essais : les secrets d'affaires ne sont protégés que si l'entreprise prend des mesures raisonnables pour les garder confidentiels. Certains sites travaillent sur des réseaux isolés d'Internet.</p>
   <p><strong>Les usages.</strong> Rapports d'intervention et de maintenance, notes de laboratoire, comptes rendus d'audit qualité.</p>
   <p><strong>Ce que change NiderVoice.</strong> L'édition sans réseau fonctionne sur des postes totalement déconnectés. Les mots dictés ne franchissent pas les murs de l'usine.</p>
 </div>
 <div data-en>
   <h2>Industry</h2>
+  <div class="scenario"><div><span class="label">Who</span><p>A maintenance technician on an isolated site</p></div><div><span class="label">Which document</span><p>The service report</p></div><div><span class="label">Risk avoided</span><p>Describing a confidential process to an online service</p></div></div>
   <p><strong>The constraint.</strong> Processes, drawings, test results: trade secrets are only protected if the company takes reasonable steps to keep them confidential. Some sites run on networks isolated from the Internet.</p>
   <p><strong>The uses.</strong> Service and maintenance reports, lab notes, quality-audit reports.</p>
   <p><strong>What NiderVoice changes.</strong> The offline edition runs on fully disconnected workstations. Dictated words do not leave the plant.</p>
-</div>
+</div><div data-es><h2>Industria</h2>
+  <div class="scenario"><div><span class="label">¿Quién?</span><p>Un técnico de mantenimiento en un sitio aislado</p></div><div><span class="label">¿Qué documento?</span><p>El informe de servicio</p></div><div><span class="label">Riesgo evitado</span><p>Describir un proceso confidencial a un servicio en línea</p></div></div>
+  <p><strong>La restricción.</strong> Procesos, planos, resultados de pruebas: los secretos comerciales solo están protegidos si la empresa toma medidas razonables para mantenerlos confidenciales. Algunos sitios funcionan en redes aisladas de Internet.</p>
+  <p><strong>Los usos.</strong> Informes de servicio y mantenimiento, notas de laboratorio, informes de auditoría de calidad.</p>
+  <p><strong>Qué cambia NiderVoice.</strong> La edición sin red se ejecuta en equipos completamente desconectados. Las palabras dictadas no salen de la planta.</p></div><div data-de><h2>Industrie</h2>
+  <div class="scenario"><div><span class="label">Wer</span><p>Ein Wartungstechniker auf einer isolierten Anlage</p></div><div><span class="label">Welches Dokument</span><p>Der Servicebericht</p></div><div><span class="label">Vermiedenes Risiko</span><p>Beschreibung eines vertraulichen Prozesses an einen Online-Dienst</p></div></div>
+  <p><strong>Die Anforderung.</strong> Prozesse, Zeichnungen, Testergebnisse: Betriebsgeheimnisse sind nur geschützt, wenn das Unternehmen angemessene Maßnahmen zum Schutz ihrer Vertraulichkeit ergreift. Einige Anlagen laufen auf Netzwerken, die vom Internet isoliert sind.</p>
+  <p><strong>Die Einsatzbereiche.</strong> Service- und Wartungsberichte, Labornotizen, Qualitätsauditberichte.</p>
+  <p><strong>Was NiderVoice verändert.</strong> Die Offline-Edition läuft auf vollständig getrennten Arbeitsplätzen. Diktierte Wörter verlassen das Werk nicht.</p></div>
 </section>
 
   </div>
 </div>
 
-<div class="cta-band"><div class="card"><div><div class="label"><span data-fr>Étape suivante</span><span data-en>Next step</span><span data-es>Next step</span><span data-de>Next step</span></div><h2 class="serif" style="margin-top:10px"><span data-fr>Parlons de votre déploiement.</span><span data-en>Let's talk about your deployment.</span><span data-es>Let's talk about your deployment.</span><span data-de>Let's talk about your deployment.</span></h2></div><a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a></div></div>
+<div class="cta-band"><div class="card"><div><div class="label"><span data-fr>Étape suivante</span><span data-en>Next step</span><span data-es>Siguiente paso</span><span data-de>Nächster Schritt</span></div><h2 class="serif" style="margin-top:10px"><span data-fr>Parlons de votre déploiement.</span><span data-en>Let's talk about your deployment.</span><span data-es>Hablemos de su despliegue.</span><span data-de>Sprechen wir über Ihre Einführung.</span></h2></div><a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a></div></div>
 </main>
-<footer>
+<footer class="big">
   <div class="w">
-    <div><p><span data-fr>Outil de saisie de texte par la voix. Ne fournit aucune information à visée diagnostique ou thérapeutique.</span><span data-en>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-es>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-de>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span></p><p>© 2026 NiderLabs</p>
-      <div class="links"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/securite/dpo/"><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>DPO kit</span><span data-de>DPO kit</span></a><a href="/securite/informatique/"><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>IT kit</span><span data-de>IT kit</span></a><a href="/securite/rssi/"><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>CISO kit</span><span data-de>CISO kit</span></a><a href="/.well-known/security.txt">security.txt</a></div></div>
-    <div style="text-align:right"><p><span data-fr>Conception&nbsp;: NiderLabs · Distribution, licences et assistance&nbsp;: GOKYO S.à r.l.-S, Luxembourg</span><span data-en>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-es>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-de>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span></p><p><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p></div>
+    <div class="cols">
+      <div class="brand"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="136" height="26" alt="NiderVoice"><p><span data-fr>L'IA vocale, sous votre contrôle. Conçu par NiderLabs, distribué par GOKYO S.à r.l.-S, Luxembourg.</span><span data-en>Voice AI, under your control. Designed by NiderLabs, distributed by GOKYO S.à r.l.-S, Luxembourg.</span><span data-es>IA de voz, bajo su control. Diseñado por NiderLabs, distribuido por GOKYO S.à r.l.-S, Luxemburgo.</span><span data-de>Sprach-KI unter Ihrer Kontrolle. Entwickelt von NiderLabs, vertrieben von GOKYO S.à r.l.-S, Luxemburg.</span></p></div>
+      <div><h4><span data-fr>Produit</span><span data-en>Product</span><span data-es>Producto</span><span data-de>Produkt</span></h4><ul><li><a href="/#comment"><span data-fr>Comment ça marche</span><span data-en>How it works</span><span data-es>Cómo funciona</span><span data-de>So funktioniert es</span></a></li><li><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Despliegue</span><span data-de>Bereitstellung</span></a></li><li><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></a></li><li><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Sectores</span><span data-de>Branchen</span></a></li></ul></div>
+      <div><h4><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></h4><ul><li><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a></li><li><a href="/securite/dpo/"><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>Kit DPD</span><span data-de>DSB-Kit</span></a></li><li><a href="/securite/informatique/"><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>Kit informático</span><span data-de>IT-Kit</span></a></li><li><a href="/securite/rssi/"><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>Kit CISO</span><span data-de>CISO-Kit</span></a></li><li><a href="/.well-known/security.txt">security.txt</a></li></ul></div>
+      <div><h4><span data-fr>Entreprise</span><span data-en>Company</span><span data-es>Empresa</span><span data-de>Unternehmen</span></h4><ul><li><a href="/entreprise/"><span data-fr>Entreprise</span><span data-en>Company</span><span data-es>Empresa</span><span data-de>Unternehmen</span></a></li><li><a href="/contact/"><span data-fr>Contact</span><span data-en>Contact</span><span data-es>Contacto</span><span data-de>Kontakt</span></a></li></ul></div>
+      <div><h4><span data-fr>Légal</span><span data-en>Legal</span><span data-es>Legal</span><span data-de>Rechtliches</span></h4><ul><li><a href="/confidentialite/"><span data-fr>Confidentialité du site</span><span data-en>Site privacy</span><span data-es>Privacidad del sitio</span><span data-de>Datenschutz der Website</span></a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 NiderLabs · GOKYO S.à r.l.-S</span><span><span data-fr>Outil de saisie de texte par la voix. Ne fournit aucune information à visée diagnostique ou thérapeutique.</span><span data-en>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-es>Herramienta de introducción de texto por voz. No proporciona información con fines diagnósticos o terapéuticos.</span><span data-de>Werkzeug zur Texteingabe per Sprache. Es liefert keine Informationen zu diagnostischen oder therapeutischen Zwecken.</span></span><span><span data-fr>Aucun cookie, aucun traceur.</span><span data-en>No cookies, no trackers.</span><span data-es>Ningún cookie, ningún rastreador.</span><span data-de>Keine Cookies, keine Tracker.</span></span></div>
   </div>
 </footer>
-<script src="/assets/nv.js?v=20261116b"></script>
+<script src="/assets/nv.js?v=20261116c"></script>
 </body>
 </html>

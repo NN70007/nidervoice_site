@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" data-langs="fr en">
+<html lang="fr" data-langs="fr en es de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -12,42 +12,42 @@
 <meta property="og:title" content="Déploiement — NiderVoice">
 <meta property="og:description" content="NiderVoice en trois formes : application MSI, version portable sur clé USB et version web où le modèle tourne dans le navigateur.">
 <meta property="og:url" content="https://nidervoice.com/deploiement/">
-<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg">
+<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg?v=20261116c">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/nv.css?v=20261116b">
+<link rel="stylesheet" href="/assets/nv.css?v=20261116c">
 </head>
 <body>
 <canvas id="dots" aria-hidden="true"></canvas>
 <header>
   <div class="w bar">
     <a class="logo" href="/" aria-label="NiderVoice"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="146" height="28" alt="NiderVoice"></a>
-    <nav class="main-nav" aria-label="Navigation"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/deploiement/" aria-current=page><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Deployment</span><span data-de>Deployment</span></a><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Industries</span><span data-de>Industries</span></a><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Models</span><span data-de>Models</span></a></nav>
+    <nav class="main-nav" aria-label="Navigation"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a><a href="/deploiement/" aria-current=page><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Despliegue</span><span data-de>Bereitstellung</span></a><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Sectores</span><span data-de>Branchen</span></a><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></a></nav>
     <div class="right">
       <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button><button type="button" data-lang="de" aria-pressed="false">DE</button></div>
-      <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Request a demo</span><span data-de>Request a demo</span></a>
+      <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Solicitar una demo</span><span data-de>Demo anfragen</span></a>
       <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
     </div>
   </div>
 </header>
 <main>
 <div class="w page-head">
-  <div class="crumbs"><a href="/">NiderVoice</a> / <span data-fr>Déploiement</span><span data-en>Deployment</span></div>
-  <h1 class="serif"><span data-fr>Trois formes. <em>Un seul principe : rien ne sort.</em></span><span data-en>Three forms. <em>One principle: nothing leaves.</em></span></h1>
+  <div class="crumbs"><a href="/">NiderVoice</a> / <span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Despliegue</span><span data-de>Bereitstellung</span></div>
+  <h1 class="serif"><span data-fr>Trois formes. <em>Un seul principe : rien ne sort.</em></span><span data-en>Three forms. <em>One principle: nothing leaves.</em></span><span data-es>Tres formas. <em>Un principio: nada sale.</em></span><span data-de>Drei Formen. <em>Ein Prinzip: Nichts verlässt das Gerät.</em></span></h1>
   <p class="lead" data-fr>Une application à installer sur un parc géré, une version portable pour les situations sans installation possible, et une version web où le modèle tourne dans le navigateur. Choisissez selon vos postes et vos contraintes.</p>
-  <p class="lead" data-en>An application to install across a managed fleet, a portable version for situations where nothing can be installed, and a web version where the model runs in the browser. Choose according to your workstations and constraints.</p>
+  <p class="lead" data-en>An application to install across a managed fleet, a portable version for situations where nothing can be installed, and a web version where the model runs in the browser. Choose according to your workstations and constraints.</p><p class="lead" data-es>Una aplicación para instalar en una flota gestionada, una versión portátil para situaciones en las que no se puede instalar nada, y una versión web donde el modelo se ejecuta en el navegador. Elija según sus equipos y restricciones.</p><p class="lead" data-de>Eine Anwendung zum Installieren auf einer verwalteten Geräteflotte, eine tragbare Version für Situationen, in denen nichts installiert werden kann, und eine Webversion, in der das Modell im Browser läuft. Wählen Sie je nach Arbeitsplätzen und Rahmenbedingungen.</p>
 </div>
 
 <div class="layout">
   <nav class="toc" aria-label="Sommaire">
-    <a href="#comparer"><span data-fr>Comparer</span><span data-en>Compare</span></a>
+    <a href="#comparer"><span data-fr>Comparer</span><span data-en>Compare</span><span data-es>Comparar</span><span data-de>Vergleichen</span></a>
     <a href="#msi">MSI</a>
     <a href="#web">Web</a>
     <a href="#usb">USB</a>
-    <a href="#pilote"><span data-fr>Un projet pilote</span><span data-en>A pilot project</span></a>
+    <a href="#pilote"><span data-fr>Un projet pilote</span><span data-en>A pilot project</span><span data-es>Un proyecto piloto</span><span data-de>Ein Pilotprojekt</span></a>
   </nav>
   <div class="prose">
 
-<section id="comparer">
+<section class="reveal" id="comparer">
 <div data-fr>
   <h2>Comparer les trois formes</h2>
   <div class="tbl-wrap"><table class="tbl">
@@ -71,10 +71,28 @@
     <tr><td>Deployment</td><td>Intune, Configuration Manager, GPO</td><td>A link, or your intranet</td><td>Copy to a key</td></tr>
     <tr><td>Status</td><td><span class="status"><i></i>Operational</span></td><td><span class="status"><i></i>By invitation</span> · <span class="status dev"><i></i>Intranet: in preparation</span></td><td><span class="status"><i></i>Operational</span></td></tr>
   </table></div>
-</div>
+</div><div data-es><h2>Comparación de las tres formas</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th></th><th>MSI</th><th>Web</th><th>USB</th></tr>
+    <tr><td>Para quién</td><td>Flota gestionada de Windows</td><td>Dispositivos sin derechos de instalación, acceso rápido</td><td>Uso móvil, entornos aislados</td></tr>
+    <tr><td>Dónde se ejecuta el modelo</td><td>En el dispositivo</td><td>En el navegador, en el dispositivo</td><td>En el equipo, desde la memoria USB</td></tr>
+    <tr><td>Escribe en cualquier aplicación</td><td>Sí</td><td>No: texto copiado de la página</td><td>Sí</td></tr>
+    <tr><td>Funciona sin Internet</td><td>Sí</td><td>Después de la primera carga</td><td>Sí</td></tr>
+    <tr><td>Despliegue</td><td>Intune, Configuration Manager, GPO</td><td>Un enlace, o su intranet</td><td>Copia en una memoria USB</td></tr>
+    <tr><td>Estado</td><td><span class="status"><i></i>Operativo</span></td><td><span class="status"><i></i>Por invitación</span> · <span class="status dev"><i></i>Intranet: en preparación</span></td><td><span class="status"><i></i>Operativo</span></td></tr>
+  </table></div></div><div data-de><h2>Die drei Formen im Vergleich</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th></th><th>MSI</th><th>Web</th><th>USB</th></tr>
+    <tr><td>Für wen</td><td>Verwaltete Windows-Geräteflotte</td><td>Geräte ohne Installationsrechte, schneller Zugriff</td><td>Mobiles Arbeiten, isolierte Umgebungen</td></tr>
+    <tr><td>Wo das Modell läuft</td><td>Auf dem Gerät</td><td>Im Browser, auf dem Gerät</td><td>Auf dem Gerät, vom USB-Stick aus</td></tr>
+    <tr><td>Schreibt in jede Anwendung</td><td>Ja</td><td>Nein: Text wird von der Seite kopiert</td><td>Ja</td></tr>
+    <tr><td>Funktioniert ohne Internet</td><td>Ja</td><td>Nach dem ersten Laden</td><td>Ja</td></tr>
+    <tr><td>Bereitstellung</td><td>Intune, Configuration Manager, GPO</td><td>Ein Link oder Ihr Intranet</td><td>Kopie auf einen USB-Stick</td></tr>
+    <tr><td>Status</td><td><span class="status"><i></i>Betriebsbereit</span></td><td><span class="status"><i></i>Auf Einladung</span> · <span class="status dev"><i></i>Intranet: in Vorbereitung</span></td><td><span class="status"><i></i>Betriebsbereit</span></td></tr>
+  </table></div></div>
 </section>
 
-<section id="msi">
+<section class="reveal" id="msi">
 <div data-fr>
   <h2>L'application MSI, pour les parcs gérés</h2>
   <p>C'est la forme de référence pour une organisation. Le paquet s'installe pour tous les utilisateurs, dans un dossier qu'ils ne peuvent pas modifier, et se déploie avec vos outils habituels. L'<strong>édition sans réseau</strong> retire du programme toute fonction de connexion : pas de mise à jour automatique, pas de téléchargement, pas de télémétrie.</p>
@@ -96,10 +114,26 @@
     <li>Anchoring: dictation can be pinned to a field and keep writing there while the user works elsewhere.</li>
   </ul>
   <p>Technical details: <a href="/securite/informatique/">IT kit</a>.</p>
-</div>
+</div><div data-es><h2>La aplicación MSI, para flotas gestionadas</h2>
+<p>Esta es la forma de referencia para una organización. El paquete se instala para todos los usuarios, en una carpeta que no pueden modificar, y se despliega con sus herramientas habituales. La <strong>edición sin red</strong> elimina todas las funciones de conexión del programa: sin actualizaciones automáticas, sin descargas, sin telemetría.</p>
+<ul>
+  <li>Instalación silenciosa, actualización limpia de una versión a la siguiente.</li>
+  <li>Modelos enviados con la instalación y verificados en el momento de la carga.</li>
+  <li>Escribe directamente en el software empresarial, el correo electrónico o el procesador de textos, en el cursor.</li>
+  <li>Anclaje: el dictado puede fijarse a un campo y seguir escribiendo allí mientras el usuario trabaja en otro lugar.</li>
+</ul>
+<p>Detalles técnicos: <a href="/securite/informatique/">kit de informática</a>.</p></div><div data-de><h2>Die MSI-Anwendung für verwaltete Geräteflotten</h2>
+<p>Dies ist die bevorzugte Form für Organisationen. Das Paket wird für alle Benutzer installiert, in einem Ordner, den sie nicht ändern können, und wird mit Ihren üblichen Tools bereitgestellt. Die <strong>Offline-Edition</strong> entfernt alle Verbindungsfunktionen aus dem Programm: keine automatischen Updates, keine Downloads, keine Telemetrie.</p>
+<ul>
+  <li>Unbeaufsichtigte Installation, sauberes Upgrade von einer Version zur nächsten.</li>
+  <li>Modelle, die mit der Installation geliefert und beim Laden überprüft werden.</li>
+  <li>Direktes Schreiben in Geschäftssoftware, E-Mail oder Textverarbeitung, am Cursor.</li>
+  <li>Verankerung: Diktat kann an einem Feld angeheftet werden und dort weiter schreiben, während der Benutzer anderswo arbeitet.</li>
+</ul>
+<p>Technische Details: <a href="/securite/informatique/">IT-Kit</a>.</p></div>
 </section>
 
-<section id="web">
+<section class="reveal" id="web">
 <div data-fr>
   <h2>La version web, sans installation</h2>
   <p>Contrairement à la plupart des services de dictée en ligne, la version web de NiderVoice <strong>n'envoie pas la voix à un serveur</strong>. La page télécharge le modèle une fois, puis la reconnaissance se fait dans le navigateur, sur le poste. Le texte s'affiche en direct dans la page, d'où l'utilisateur le copie.</p>
@@ -117,10 +151,22 @@
     <li>The page forbids the browser from sending data anywhere other than its own server, and sends neither the voice nor the text.</li>
     <li><strong>On your intranet</strong> <span class="status dev"><i></i>In preparation</span>: you host the page and the model yourself. You then control the code served to your devices, which a third-party hosted service cannot offer.</li>
   </ul>
-</div>
+</div><div data-es><h2>La versión web, sin instalación</h2>
+<p>A diferencia de la mayoría de los servicios de dictado en línea, la versión web de NiderVoice <strong>no envía la voz a un servidor</strong>. La página descarga el modelo una vez, luego el reconocimiento se ejecuta en el navegador, en el dispositivo. El texto aparece en vivo en la página, desde la cual el usuario lo copia.</p>
+<ul>
+    <li>Navegador reciente (Chrome, Edge); no se necesitan derechos de instalación.</li>
+    <li>La página impide que el navegador envíe datos a cualquier lugar distinto de su propio servidor, y no envía ni la voz ni el texto.</li>
+    <li><strong>En su intranet</strong> <span class="status dev"><i></i>En preparación</span>: usted aloja la página y el modelo usted mismo. Usted controla entonces el código servido a sus dispositivos, algo que un servicio alojado por un tercero no puede ofrecer.</li>
+</ul></div><div data-de><h2>Die Webversion, ohne Installation</h2>
+<p>Im Gegensatz zu den meisten Online-Diktierdiensten <strong>sendet die NiderVoice-Webversion die Stimme nicht an einen Server</strong>. Die Seite lädt das Modell einmal herunter, dann läuft die Erkennung im Browser auf dem Gerät. Der Text erscheint live auf der Seite, von der der Nutzer ihn kopiert.</p>
+<ul>
+  <li>Aktueller Browser (Chrome, Edge); keine Installationsrechte erforderlich.</li>
+  <li>Die Seite verbietet dem Browser, Daten an einen anderen Ort als ihren eigenen Server zu senden, und sendet weder die Stimme noch den Text.</li>
+  <li><strong>In Ihrem Intranet</strong> <span class="status dev"><i></i>In Vorbereitung</span>: Sie hosten die Seite und das Modell selbst. Sie kontrollieren dann den Code, der Ihren Geräten bereitgestellt wird, was ein von einem Dritten gehosteter Dienst nicht bieten kann.</li>
+</ul></div>
 </section>
 
-<section id="usb">
+<section class="reveal" id="usb">
 <div data-fr>
   <h2>La version portable sur clé USB</h2>
   <p>Pour les consultants, les missions, les laboratoires isolés ou les postes où rien ne peut être installé. Le programme et ses modèles tiennent sur une clé et fonctionnent sans connexion. Les modèles restent vérifiés à chaque chargement.</p>
@@ -130,10 +176,14 @@
   <h2>The portable version on a USB key</h2>
   <p>For consultants, assignments, isolated labs or devices where nothing can be installed. The program and its models fit on a key and work offline. Models are still verified at every load.</p>
   <div class="note warn"><p>Many organisations block USB keys, rightly so. On a managed fleet, prefer the MSI. If you use the key, encrypt it: keys get lost.</p></div>
-</div>
+</div><div data-es><h2>La versión portátil en una memoria USB</h2>
+  <p>Para consultores, asignaciones, laboratorios aislados o dispositivos donde no se puede instalar nada. El programa y sus modelos caben en una memoria USB y funcionan sin conexión. Los modelos siguen verificándose en cada carga.</p>
+  <div class="note warn"><p>Muchas organizaciones bloquean las memorias USB, y con razón. En una flota gestionada, prefiera el MSI. Si usa la memoria USB, cífrela: estos soportes se pierden.</p></div></div><div data-de><h2>Die tragbare Version auf einem USB-Stick</h2>
+  <p>Für Berater, Aufträge, isolierte Labore oder Geräte, auf denen nichts installiert werden kann. Das Programm und seine Modelle passen auf einen Stick und funktionieren offline. Die Modelle werden dennoch bei jedem Laden überprüft.</p>
+  <div class="note warn"><p>Viele Organisationen blockieren USB-Sticks, und das zu Recht. Bei einer verwalteten Geräteflotte ist das MSI bevorzugt. Wenn Sie den Stick verwenden, verschlüsseln Sie ihn: Sticks gehen verloren.</p></div></div>
 </section>
 
-<section id="pilote">
+<section class="reveal" id="pilote">
 <div data-fr>
   <h2>Commencer par un projet pilote</h2>
   <p>Nous recommandons de démarrer petit :</p>
@@ -153,21 +203,40 @@
     <li>A few users dictate for several weeks in their usual software.</li>
     <li>You decide on the rollout based on their feedback.</li>
   </ol>
-</div>
+</div><div data-es><h2>Comience con un piloto</h2>
+  <p>Recomendamos empezar con algo pequeño:</p>
+  <ol>
+    <li>Su DPD y el departamento de informática revisan los <a href="/securite/">kits de seguridad</a>.</li>
+    <li>El departamento de informática verifica que no hay conexiones en un dispositivo de prueba.</li>
+    <li>Unos pocos usuarios dictan durante varias semanas en su software habitual.</li>
+    <li>Usted decide el despliegue en función de su feedback.</li>
+  </ol></div><div data-de><h2>Beginnen Sie mit einem Pilotprojekt</h2>
+<p>Wir empfehlen, klein anzufangen:</p>
+<ol>
+  <li>Ihr Datenschutzbeauftragter (DSB) und Ihre IT-Abteilung überprüfen die <a href="/securite/">Sicherheits-Kits</a>.</li>
+  <li>Die IT prüft, ob auf einem Testgerät keine Verbindungen bestehen.</li>
+  <li>Einige Nutzer diktieren mehrere Wochen lang in ihrer üblichen Software.</li>
+  <li>Sie entscheiden auf Grundlage ihres Feedbacks über die Ausrollung.</li>
+</ol></div>
 </section>
 
   </div>
 </div>
 
-<div class="cta-band"><div class="card"><div><div class="label"><span data-fr>Étape suivante</span><span data-en>Next step</span><span data-es>Next step</span><span data-de>Next step</span></div><h2 class="serif" style="margin-top:10px"><span data-fr>Parlons de votre déploiement.</span><span data-en>Let's talk about your deployment.</span><span data-es>Let's talk about your deployment.</span><span data-de>Let's talk about your deployment.</span></h2></div><a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a></div></div>
+<div class="cta-band"><div class="card"><div><div class="label"><span data-fr>Étape suivante</span><span data-en>Next step</span><span data-es>Siguiente paso</span><span data-de>Nächster Schritt</span></div><h2 class="serif" style="margin-top:10px"><span data-fr>Parlons de votre déploiement.</span><span data-en>Let's talk about your deployment.</span><span data-es>Hablemos de su despliegue.</span><span data-de>Sprechen wir über Ihre Einführung.</span></h2></div><a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a></div></div>
 </main>
-<footer>
+<footer class="big">
   <div class="w">
-    <div><p><span data-fr>Outil de saisie de texte par la voix. Ne fournit aucune information à visée diagnostique ou thérapeutique.</span><span data-en>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-es>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-de>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span></p><p>© 2026 NiderLabs</p>
-      <div class="links"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/securite/dpo/"><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>DPO kit</span><span data-de>DPO kit</span></a><a href="/securite/informatique/"><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>IT kit</span><span data-de>IT kit</span></a><a href="/securite/rssi/"><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>CISO kit</span><span data-de>CISO kit</span></a><a href="/.well-known/security.txt">security.txt</a></div></div>
-    <div style="text-align:right"><p><span data-fr>Conception&nbsp;: NiderLabs · Distribution, licences et assistance&nbsp;: GOKYO S.à r.l.-S, Luxembourg</span><span data-en>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-es>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-de>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span></p><p><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p></div>
+    <div class="cols">
+      <div class="brand"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="136" height="26" alt="NiderVoice"><p><span data-fr>L'IA vocale, sous votre contrôle. Conçu par NiderLabs, distribué par GOKYO S.à r.l.-S, Luxembourg.</span><span data-en>Voice AI, under your control. Designed by NiderLabs, distributed by GOKYO S.à r.l.-S, Luxembourg.</span><span data-es>IA de voz, bajo su control. Diseñado por NiderLabs, distribuido por GOKYO S.à r.l.-S, Luxemburgo.</span><span data-de>Sprach-KI unter Ihrer Kontrolle. Entwickelt von NiderLabs, vertrieben von GOKYO S.à r.l.-S, Luxemburg.</span></p></div>
+      <div><h4><span data-fr>Produit</span><span data-en>Product</span><span data-es>Producto</span><span data-de>Produkt</span></h4><ul><li><a href="/#comment"><span data-fr>Comment ça marche</span><span data-en>How it works</span><span data-es>Cómo funciona</span><span data-de>So funktioniert es</span></a></li><li><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Despliegue</span><span data-de>Bereitstellung</span></a></li><li><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></a></li><li><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Sectores</span><span data-de>Branchen</span></a></li></ul></div>
+      <div><h4><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></h4><ul><li><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a></li><li><a href="/securite/dpo/"><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>Kit DPD</span><span data-de>DSB-Kit</span></a></li><li><a href="/securite/informatique/"><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>Kit informático</span><span data-de>IT-Kit</span></a></li><li><a href="/securite/rssi/"><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>Kit CISO</span><span data-de>CISO-Kit</span></a></li><li><a href="/.well-known/security.txt">security.txt</a></li></ul></div>
+      <div><h4><span data-fr>Entreprise</span><span data-en>Company</span><span data-es>Empresa</span><span data-de>Unternehmen</span></h4><ul><li><a href="/entreprise/"><span data-fr>Entreprise</span><span data-en>Company</span><span data-es>Empresa</span><span data-de>Unternehmen</span></a></li><li><a href="/contact/"><span data-fr>Contact</span><span data-en>Contact</span><span data-es>Contacto</span><span data-de>Kontakt</span></a></li></ul></div>
+      <div><h4><span data-fr>Légal</span><span data-en>Legal</span><span data-es>Legal</span><span data-de>Rechtliches</span></h4><ul><li><a href="/confidentialite/"><span data-fr>Confidentialité du site</span><span data-en>Site privacy</span><span data-es>Privacidad del sitio</span><span data-de>Datenschutz der Website</span></a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 NiderLabs · GOKYO S.à r.l.-S</span><span><span data-fr>Outil de saisie de texte par la voix. Ne fournit aucune information à visée diagnostique ou thérapeutique.</span><span data-en>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-es>Herramienta de introducción de texto por voz. No proporciona información con fines diagnósticos o terapéuticos.</span><span data-de>Werkzeug zur Texteingabe per Sprache. Es liefert keine Informationen zu diagnostischen oder therapeutischen Zwecken.</span></span><span><span data-fr>Aucun cookie, aucun traceur.</span><span data-en>No cookies, no trackers.</span><span data-es>Ningún cookie, ningún rastreador.</span><span data-de>Keine Cookies, keine Tracker.</span></span></div>
   </div>
 </footer>
-<script src="/assets/nv.js?v=20261116b"></script>
+<script src="/assets/nv.js?v=20261116c"></script>
 </body>
 </html>

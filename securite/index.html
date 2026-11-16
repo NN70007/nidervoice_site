@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" data-langs="fr en">
+<html lang="fr" data-langs="fr en es de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -12,44 +12,62 @@
 <meta property="og:title" content="Sécurité et conformité — NiderVoice">
 <meta property="og:description" content="Comment NiderVoice garde la voix et le texte sur le poste : flux de données, chaîne de confiance des modèles, cadres juridiques, kits pour le DPO, l'informatique et la sécurité.">
 <meta property="og:url" content="https://nidervoice.com/securite/">
-<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg">
+<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg?v=20261116c">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/nv.css?v=20261116b">
+<link rel="stylesheet" href="/assets/nv.css?v=20261116c">
 </head>
 <body>
 <canvas id="dots" aria-hidden="true"></canvas>
 <header>
   <div class="w bar">
     <a class="logo" href="/" aria-label="NiderVoice"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="146" height="28" alt="NiderVoice"></a>
-    <nav class="main-nav" aria-label="Navigation"><a href="/securite/" aria-current=page><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Deployment</span><span data-de>Deployment</span></a><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Industries</span><span data-de>Industries</span></a><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Models</span><span data-de>Models</span></a></nav>
+    <nav class="main-nav" aria-label="Navigation"><a href="/securite/" aria-current=page><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Despliegue</span><span data-de>Bereitstellung</span></a><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Sectores</span><span data-de>Branchen</span></a><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></a></nav>
     <div class="right">
       <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button><button type="button" data-lang="de" aria-pressed="false">DE</button></div>
-      <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Request a demo</span><span data-de>Request a demo</span></a>
+      <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Solicitar una demo</span><span data-de>Demo anfragen</span></a>
       <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
     </div>
   </div>
 </header>
 <main>
 <div class="w page-head">
-  <div class="crumbs"><a href="/">NiderVoice</a> / <span data-fr>Sécurité</span><span data-en>Security</span></div>
-  <h1 class="serif"><span data-fr>La voix reste sur le poste. <em>Et vous pouvez le vérifier.</em></span><span data-en>The voice stays on the device. <em>And you can check it.</em></span></h1>
+<div class="head-grid"><div>
+  <div class="crumbs"><a href="/">NiderVoice</a> / <span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></div>
+  <h1 class="serif"><span data-fr>La voix reste sur le poste. <em>Et vous pouvez le vérifier.</em></span><span data-en>The voice stays on the device. <em>And you can check it.</em></span><span data-es>La voz se queda en el dispositivo. <em>Y usted puede comprobarlo.</em></span><span data-de>Die Stimme bleibt auf dem Gerät. <em>Und Sie können dies überprüfen.</em></span></h1>
   <p class="lead" data-fr>Cette page s'adresse au délégué à la protection des données, au service informatique et au responsable de la sécurité. Elle décrit ce que fait NiderVoice, ce qu'il ne fait pas, et comment le contrôler vous-même plutôt que de nous croire sur parole.</p>
-  <p class="lead" data-en>This page is for the data protection officer, the IT department and the security lead. It describes what NiderVoice does, what it does not do, and how to check it yourself rather than take our word for it.</p>
+  <p class="lead" data-en>This page is for the data protection officer, the IT department and the security lead. It describes what NiderVoice does, what it does not do, and how to check it yourself rather than take our word for it.</p><p class="lead" data-es>Esta página está destinada al delegado de protección de datos, al departamento de informática y al responsable de seguridad. En ella se describe qué hace NiderVoice, qué no hace y cómo puede comprobarlo usted mismo en lugar de confiar en nuestra palabra.</p><p class="lead" data-de>Diese Seite richtet sich an den Datenschutzbeauftragten, die IT-Abteilung und den Sicherheitsverantwortlichen. Sie beschreibt, was NiderVoice tut, was es nicht tut und wie Sie dies selbst überprüfen können, anstatt unserem Wort zu vertrauen.</p>
+</div>
+<div class="head-visual reveal" aria-hidden="true"><svg viewBox="0 0 420 250">
+<rect x="10" y="22" width="300" height="200" rx="16" fill="rgba(55,138,221,.05)" stroke="rgba(140,192,242,.45)" stroke-dasharray="5 6"/>
+<text x="26" y="44" font-family="Mono,monospace" font-size="9.5" letter-spacing="1.2" fill="#8CC0F2" data-fr>POSTE DE TRAVAIL</text><text x="26" y="44" font-family="Mono,monospace" font-size="9.5" letter-spacing="1.2" fill="#8CC0F2" data-en>WORKSTATION</text><text x="26" y="44" font-family="Mono,monospace" font-size="9.5" letter-spacing="1.2" fill="#8CC0F2" data-es>EQUIPO</text><text x="26" y="44" font-family="Mono,monospace" font-size="9.5" letter-spacing="1.2" fill="#8CC0F2" data-de>ARBEITSPLATZ</text>
+<g fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.18)"><rect x="30" y="98" width="64" height="52" rx="12"/><rect x="128" y="98" width="64" height="52" rx="12"/><rect x="226" y="98" width="64" height="52" rx="12"/></g>
+<rect x="57" y="108" width="10" height="17" rx="5" fill="#F2F5F9"/><path d="M53 120a9 9 0 0 0 18 0M62 129v6" stroke="#F2F5F9" stroke-width="2" fill="none"/>
+<circle cx="160" cy="124" r="12" fill="none" stroke="#8CC0F2" stroke-width="2"/><path d="M154 124l4 4 8-8" stroke="#5CC08E" stroke-width="2.2" fill="none"/>
+<g stroke="#F2F5F9" stroke-width="2"><line x1="244" y1="116" x2="272" y2="116"/><line x1="244" y1="124" x2="272" y2="124"/><line x1="244" y1="132" x2="262" y2="132"/></g>
+<line class="flowline" x1="96" y1="124" x2="126" y2="124" stroke="#8CC0F2" stroke-width="2"/><line class="flowline" x1="194" y1="124" x2="224" y2="124" stroke="#8CC0F2" stroke-width="2"/>
+<text x="62" y="170" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-fr>Voix</text><text x="62" y="170" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-en>Voice</text><text x="62" y="170" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-es>Voz</text><text x="62" y="170" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-de>Stimme</text><text x="160" y="170" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-fr>Modèle vérifié</text><text x="160" y="170" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-en>Verified model</text><text x="160" y="170" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-es>Modelo verificado</text><text x="160" y="170" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-de>Verifiziertes Modell</text><text x="258" y="170" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-fr>Texte</text><text x="258" y="170" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-en>Text</text><text x="258" y="170" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-es>Texto</text><text x="258" y="170" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-de>Text</text>
+<path d="M352 110h40a14 14 0 0 0 0-28 19 19 0 0 0-37-4 16 16 0 0 0-3 32z" fill="none" stroke="#6B7787" stroke-width="2"/>
+<line x1="292" y1="196" x2="372" y2="124" stroke="#E06A62" stroke-width="1.6" stroke-dasharray="4 5" opacity=".6"/>
+<g transform="translate(318,170)"><circle r="11" fill="#0A0E15" stroke="#E06A62" stroke-width="1.6"/><path d="M-4-4l8 8M4-4l-8 8" stroke="#E06A62" stroke-width="1.8"/></g>
+<text x="372" y="140" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-fr>Cloud</text><text x="372" y="140" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-en>Cloud</text><text x="372" y="140" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-es>Nube</text><text x="372" y="140" font-family="Inter,sans-serif" font-size="11" fill="#9AA6B6" text-anchor="middle" data-de>Cloud</text>
+<text x="160" y="206" font-family="Mono,monospace" font-size="10.5" fill="#5CC08E" text-anchor="middle" class="pulse" data-fr>0 TCP · 0 UDP · 0 DNS</text><text x="160" y="206" font-family="Mono,monospace" font-size="10.5" fill="#5CC08E" text-anchor="middle" class="pulse" data-en>0 TCP · 0 UDP · 0 DNS</text><text x="160" y="206" font-family="Mono,monospace" font-size="10.5" fill="#5CC08E" text-anchor="middle" class="pulse" data-es>0 TCP · 0 UDP · 0 DNS</text><text x="160" y="206" font-family="Mono,monospace" font-size="10.5" fill="#5CC08E" text-anchor="middle" class="pulse" data-de>0 TCP · 0 UDP · 0 DNS</text>
+</svg></div>
+</div>
 </div>
 
 <div class="layout">
   <nav class="toc" aria-label="Sommaire">
-    <a href="#principes"><span data-fr>Principes</span><span data-en>Principles</span></a>
-    <a href="#flux"><span data-fr>Flux de données</span><span data-en>Data flow</span></a>
-    <a href="#modeles"><span data-fr>Confiance dans les modèles</span><span data-en>Trust in models</span></a>
-    <a href="#ne-fait-pas"><span data-fr>Ce qu'il ne fait pas</span><span data-en>What it does not do</span></a>
-    <a href="#lois"><span data-fr>Cadres juridiques</span><span data-en>Legal frameworks</span></a>
-    <a href="#ia"><span data-fr>Gouvernance de l'IA</span><span data-en>AI governance</span></a>
-    <a href="#kits"><span data-fr>Les trois kits</span><span data-en>The three kits</span></a>
+    <a href="#principes"><span data-fr>Principes</span><span data-en>Principles</span><span data-es>Principios</span><span data-de>Grundsätze</span></a>
+    <a href="#flux"><span data-fr>Flux de données</span><span data-en>Data flow</span><span data-es>Flujo de datos</span><span data-de>Datenfluss</span></a>
+    <a href="#modeles"><span data-fr>Confiance dans les modèles</span><span data-en>Trust in models</span><span data-es>Confianza en los modelos</span><span data-de>Vertrauen in Modelle</span></a>
+    <a href="#ne-fait-pas"><span data-fr>Ce qu'il ne fait pas</span><span data-en>What it does not do</span><span data-es>Qué no hace</span><span data-de>Was es nicht tut</span></a>
+    <a href="#lois"><span data-fr>Cadres juridiques</span><span data-en>Legal frameworks</span><span data-es>Marco legal</span><span data-de>Rechtliche Rahmenbedingungen</span></a>
+    <a href="#ia"><span data-fr>Gouvernance de l'IA</span><span data-en>AI governance</span><span data-es>Gobernanza de la IA</span><span data-de>KI-Governance</span></a>
+    <a href="#kits"><span data-fr>Les trois kits</span><span data-en>The three kits</span><span data-es>Los tres kits</span><span data-de>Die drei Kits</span></a>
   </nav>
   <div class="prose">
 
-<section id="principes">
+<section class="reveal" id="principes">
 <div data-fr>
   <h2>Cinq principes, appliqués dans le code</h2>
   <p>Une promesse de confidentialité ne vaut que si elle est inscrite dans le logiciel. Voici les cinq règles de NiderVoice et la façon dont chacune est tenue.</p>
@@ -73,10 +91,28 @@
     <tr><td>Only verified models are loaded</td><td>Each model is checked before loading, by signature or by fingerprint. A file altered by a single byte is refused.</td></tr>
     <tr><td>Content is not interpreted</td><td>NiderVoice writes what is dictated. It does not summarise, classify, suggest or decide anything.</td></tr>
   </table></div>
-</div>
+</div><div data-es><h2>Cinco principios, aplicados en el código</h2>
+<p>Una promesa de privacidad solo vale algo si está escrita en el software. Aquí están las cinco reglas de NiderVoice y cómo se mantiene cada una.</p>
+<div class="tbl-wrap"><table class="tbl">
+  <tr><th>Principio</th><th>Cómo se aplica</th></tr>
+  <tr><td>El reconocimiento se ejecuta en el equipo</td><td>El modelo es un archivo instalado en el ordenador y ejecutado por el procesador local o la tarjeta gráfica. Ningún servicio remoto participa en la conversión de la voz en texto.</td></tr>
+  <tr><td>Sin conexión en la edición sin red</td><td>Las funciones que podrían conectarse (descargas de modelos, comprobaciones de actualizaciones, servicios de IA en línea) están bloqueadas en el código, no solo ocultas en la interfaz. El componente de visualización de Windows (WebView2) se inicia con sus características de red de fondo desactivadas.</td></tr>
+  <tr><td>Nada se guarda por defecto</td><td>El audio se procesa en memoria. El historial de dictado está desactivado y bloqueado en la edición sin red. El registro técnico local nunca contiene el texto dictado: solo las duraciones, el nombre del modelo y el recuento de caracteres.</td></tr>
+  <tr><td>Solo se cargan modelos verificados</td><td>Cada modelo se comprueba antes de cargarse, por firma o por huella. Un archivo alterado por un solo byte es rechazado.</td></tr>
+  <tr><td>El contenido no se interpreta</td><td>NiderVoice escribe lo que se dicta. No resume, clasifica, sugiere ni decide nada.</td></tr>
+</table></div></div><div data-de><h2>Fünf Prinzipien, die im Code durchgesetzt werden</h2>
+<p>Ein Datenschutzversprechen ist nur etwas wert, wenn es in die Software geschrieben wird. Hier sind die fünf Regeln von NiderVoice und wie jede einzelne davon eingehalten wird.</p>
+<div class="tbl-wrap"><table class="tbl">
+  <tr><th>Prinzip</th><th>Wie es durchgesetzt wird</th></tr>
+  <tr><td>Die Erkennung läuft auf dem Gerät</td><td>Das Modell ist eine Datei, die auf dem Computer installiert und vom lokalen Prozessor oder der Grafikkarte ausgeführt wird. Kein Remote-Service ist an der Umwandlung der Stimme in Text beteiligt.</td></tr>
+  <tr><td>Keine Verbindung in der Offline-Edition</td><td>Funktionen, die eine Verbindung herstellen könnten (Modellherunterladungen, Update-Überprüfungen, Online-KI-Dienste), sind im Code blockiert, nicht nur in der Oberfläche versteckt. Die Windows-Anzeigekomponente (WebView2) wird mit deaktivierten Hintergrundnetzwerkfunktionen gestartet.</td></tr>
+  <tr><td>Nichts wird standardmäßig gespeichert</td><td>Audio wird im Arbeitsspeicher verarbeitet. Die Diktathistorie ist deaktiviert und gesperrt in der Offline-Edition. Das lokale technische Protokoll enthält niemals den diktierten Text: nur Dauer, den Modellnamen und die Zeichenanzahl.</td></tr>
+  <tr><td>Nur verifizierte Modelle werden geladen</td><td>Jedes Modell wird vor dem Laden überprüft, durch Signatur oder Prüfsumme. Eine durch ein einzelnes Byte veränderte Datei wird abgelehnt.</td></tr>
+  <tr><td>Inhalte werden nicht interpretiert</td><td>NiderVoice schreibt, was diktiert wird. Es fasst nicht zusammen, klassifiziert, schlägt oder entscheidet etwas.</td></tr>
+</table></div></div>
 </section>
 
-<section id="flux">
+<section class="reveal" id="flux">
 <div data-fr>
   <h2>Le flux de données, de bout en bout</h2>
   <p>Tout le traitement se déroule à l'intérieur du poste de travail. Le schéma ci-dessous est complet : il n'existe pas d'autre chemin.</p>
@@ -114,10 +150,42 @@
   <h3>Measurement</h3>
   <p>In November 2026 we started the offline edition on Windows 11 with a fresh profile and recorded every connection of the program and its child processes, along with new DNS lookups, during a first launch and then during transcriptions. Result: <strong>0 TCP connections, 0 UDP endpoints, 0 DNS requests</strong>.</p>
   <div class="note"><p>Don't take our word for it: the <a href="/securite/informatique/#verifier">IT kit</a> gives the command to repeat this measurement on your own machines.</p></div>
+</div><div data-es><h2>El flujo de datos, de principio a fin</h2>
+<p>Todo el tratamiento se realiza dentro del equipo. El diagrama siguiente es completo: no existe otro camino.</p>
+<div class="boundary">
+  <div class="label">Equipo</div>
+  <div class="flow"><span class="n">Micrófono</span><span class="a">→</span><span class="n">Audio en RAM</span><span class="a">→</span><span class="n">Modelo local</span><span class="a">→</span><span class="n">Texto</span><span class="a">→</span><span class="n">Aplicación bajo el cursor</span></div>
 </div>
+<div class="flow"><span class="n">Servidor de NiderLabs</span><span class="x">✕</span><span class="n">Nube</span><span class="x">✕</span><span class="n">Terceros</span><span class="x">✕</span></div>
+<h3>Pasando por el portapapeles</h3>
+<p>Para insertar texto en cualquier aplicación, NiderVoice lo pega. Este detalle es relevante para un DPD, por lo que lo documentamos con precisión:</p>
+<ul>
+  <li>el texto se escribe en el portapapeles de Windows con los marcadores que <strong>lo excluyen del historial del portapapeles (Win+V), la sincronización del portapapeles en la nube y el software de monitorización del portapapeles</strong>;</li>
+  <li>se <strong>borra un segundo después</strong> del último pegado;</li>
+  <li>también está disponible un modo de escritura directa, sin usar el portapapeles.</li>
+</ul>
+<h3>Medición</h3>
+<p>En noviembre de 2026 comenzamos la edición sin red en Windows 11 con un perfil nuevo y registramos cada conexión del programa y sus procesos hijos, junto con nuevas consultas DNS, durante un primer lanzamiento y luego durante transcripciones. Resultado: <strong>0 conexiones TCP, 0 puntos finales UDP, 0 solicitudes DNS</strong>.</p>
+<div class="note"><p>No nos tome la palabra: el <a href="/securite/informatique/#verifier">kit de informática</a> proporciona el comando para repetir esta medición en sus propias máquinas.</p></div></div><div data-de><h2>Der Datenfluss, von Anfang bis Ende</h2>
+<p>Alle Verarbeitungen finden innerhalb des Arbeitsplatzes statt. Das folgende Diagramm ist vollständig: Es gibt keinen anderen Weg.</p>
+<div class="boundary">
+  <div class="label">Arbeitsplatz</div>
+  <div class="flow"><span class="n">Mikrofon</span><span class="a">→</span><span class="n">Audio im RAM</span><span class="a">→</span><span class="n">Lokales Modell</span><span class="a">→</span><span class="n">Text</span><span class="a">→</span><span class="n">Anwendung unter dem Cursor</span></div>
+</div>
+<div class="flow"><span class="n">NiderLabs-Server</span><span class="x">✕</span><span class="n">Cloud</span><span class="x">✕</span><span class="n">Dritte</span><span class="x">✕</span></div>
+<h3>Über die Zwischenablage</h3>
+<p>Um Text in jede Anwendung einzufügen, fügt NiderVoice ihn ein. Dieses Detail ist für einen Datenschutzbeauftragten von Bedeutung, daher dokumentieren wir es präzise:</p>
+<ul>
+  <li>der Text wird in die Windows-Zwischenablage mit den Markierungen geschrieben, die <strong>ihn von der Zwischenablage-Historie (Win+V), der Cloud-Zwischenablage-Synchronisation und der Zwischenablage-Überwachungssoftware ausschließen</strong>;</li>
+  <li>er wird <strong>eine Sekunde nach</strong> dem letzten Einfügen gelöscht;</li>
+  <li>ein direkter Eingabemodus ohne Zwischenablage ist ebenfalls verfügbar.</li>
+</ul>
+<h3>Messung</h3>
+<p>Im November 2026 haben wir die Offline-Edition unter Windows 11 mit einem neuen Profil gestartet und jede Verbindung des Programms und seiner Unterprozesse sowie neue DNS-Abfragen während des ersten Starts und anschließend während der Transkriptionen aufgezeichnet. Ergebnis: <strong>0 TCP-Verbindungen, 0 UDP-Endpunkte, 0 DNS-Anfragen</strong>.</p>
+<div class="note"><p>Nehmen Sie uns nicht beim Wort: Das <a href="/securite/informatique/#verifier">IT-Kit</a> gibt den Befehl, diese Messung auf Ihren eigenen Geräten zu wiederholen.</p></div></div>
 </section>
 
-<section id="modeles">
+<section class="reveal" id="modeles">
 <div data-fr>
   <h2>La confiance dans les modèles</h2>
   <p>Un modèle d'IA est un fichier. Comme un logiciel, il peut être altéré, remplacé ou téléchargé depuis une source douteuse. NiderVoice traite donc les modèles comme du code : rien n'est chargé sans vérification.</p>
@@ -151,10 +219,38 @@
     <li><strong>Exportable traceability</strong>: which model was approved, by whom, when, in which version.</li>
     <li>Alignment with the OpenSSF open model-signing standard, published in 2025 by teams from Google, NVIDIA and HiddenLayer.</li>
   </ul>
-</div>
+</div><div data-es><h2>Confianza en los modelos</h2>
+<p>Un modelo de IA es un archivo. Al igual que el software, puede ser modificado, intercambiado o descargado de una fuente dudosa. NiderVoice trata por tanto los modelos como código: nada se carga sin verificación.</p>
+<h3>Hoy <span class="status"><i></i>Operativo</span></h3>
+<ul>
+  <li><strong>Modelos de NiderLabs</strong>: cada archivo viene con una firma Ed25519 (formato minisign). El software verifica la firma antes de cargar el modelo.</li>
+  <li><strong>Modelos públicos</strong> (como Whisper, por ejemplo): el software solo ofrece una lista cerrada de archivos, cada uno verificado contra su huella SHA-256.</li>
+  <li>En las ediciones distribuidas, un modelo que falle la verificación no se lista y no puede cargarse.</li>
+</ul>
+<h3>Próximamente <span class="status dev"><i></i>En desarrollo</span></h3>
+<ul>
+  <li><strong>Contrafirma por su organización</strong>: su departamento de informática aprueba un modelo y lo firma con su propia clave. Los equipos solo aceptan entonces modelos aprobados internamente.</li>
+  <li><strong>Herramienta de aprobación</strong> para el departamento de informática, con una ficha para cada modelo (origen, licencia, huella, idiomas).</li>
+  <li><strong>Trazabilidad exportable</strong>: qué modelo fue aprobado, por quién, cuándo y en qué versión.</li>
+  <li>Alineación con el estándar abierto de firma de modelos OpenSSF, publicado en 2025 por equipos de Google, NVIDIA y HiddenLayer.</li>
+</ul></div><div data-de><h2>Vertrauen in Modelle</h2>
+<p>Ein KI-Modell ist eine Datei. Wie Software kann es verändert, ausgetauscht oder von einer zweifelhaften Quelle heruntergeladen werden. NiderVoice behandelt Modelle daher wie Code: Nichts wird ohne Überprüfung geladen.</p>
+<h3>Heute <span class="status"><i></i>Betriebsbereit</span></h3>
+<ul>
+    <li><strong>NiderLabs-Modelle</strong>: jede Datei verfügt über eine Ed25519-Signatur (minisign-Format). Die Software überprüft die Signatur vor dem Laden des Modells.</li>
+    <li><strong>Öffentliche Modelle</strong> (Whisper zum Beispiel): die Software bietet nur eine geschlossene Liste von Dateien an, die jeweils anhand ihrer SHA-256-Prüfsumme überprüft werden.</li>
+    <li>In verteilten Editionen wird ein Modell, das die Überprüfung nicht besteht, nicht aufgelistet und kann nicht geladen werden.</li>
+</ul>
+<h3>Künftige Entwicklungen <span class="status dev"><i></i>In Entwicklung</span></h3>
+<ul>
+    <li><strong>Gegenzeichnung durch Ihre Organisation</strong>: Ihre IT-Abteilung genehmigt ein Modell und signiert es mit ihrem eigenen Schlüssel. Arbeitsplätze akzeptieren dann nur Modelle, die inhouse genehmigt wurden.</li>
+    <li><strong>Genehmigungstool</strong> für die IT, mit einem Steckbrief für jedes Modell (Herkunft, Lizenz, Prüfsumme, Sprachen).</li>
+    <li><strong>Exportierbare Nachverfolgbarkeit</strong>: welches Modell wurde genehmigt, von wem, wann, in welcher Version.</li>
+    <li>Ausrichtung am offenen Modell-Signaturstandard der OpenSSF, 2025 von Teams von Google, NVIDIA und HiddenLayer veröffentlicht.</li>
+</ul></div>
 </section>
 
-<section id="ne-fait-pas">
+<section class="reveal" id="ne-fait-pas">
 <div data-fr>
   <h2>Ce que NiderVoice ne fait pas</h2>
   <p>Pour un DPO, la liste de ce qu'un outil ne fait pas compte autant que ses fonctions.</p>
@@ -178,10 +274,28 @@
     <li>No text or audio sent to NiderLabs, to GOKYO or to any third party.</li>
     <li>No audio recording kept on disk by default.</li>
   </ul>
-</div>
+</div><div data-es><h2>Qué no hace NiderVoice</h2>
+<p>Para un DPD, la lista de lo que una herramienta no hace importa tanto como sus características.</p>
+<ul>
+  <li>No hay cuenta de usuario, no hay inicio de sesión, no hay registro.</li>
+  <li>No hay telemetría ni estadísticas de uso en la edición sin red.</li>
+  <li>No hay huella de voz: NiderVoice no identifica al hablante y no construye ningún perfil biométrico.</li>
+  <li>No hay análisis de contenido, no hay resúmenes, no hay sugerencias, no hay decisiones automatizadas.</li>
+  <li>No se envía texto ni audio a NiderLabs, a GOKYO ni a ningún tercero.</li>
+  <li>No se guarda grabación de audio en el disco por defecto.</li>
+</ul></div><div data-de><h2>Was NiderVoice nicht tut</h2>
+  <p>Für einen DSB ist die Liste dessen, was ein Tool nicht tut, genauso wichtig wie dessen Funktionen.</p>
+  <ul>
+    <li>Kein Benutzerkonto, kein Login, keine Registrierung.</li>
+    <li>Keine Telemetrie oder Nutzungsstatistiken in der Offline-Edition.</li>
+    <li>Keine Sprachbiometrie: NiderVoice identifiziert den Sprecher nicht und erstellt kein biometrisches Profil.</li>
+    <li>Keine Inhaltsanalyse, keine Zusammenfassungen, keine Vorschläge, keine automatisierten Entscheidungen.</li>
+    <li>Kein Text oder Audio wird an NiderLabs, an GOKYO oder an Dritte gesendet.</li>
+    <li>Keine Audiodatei wird standardmäßig auf der Festplatte gespeichert.</li>
+  </ul></div>
 </section>
 
-<section id="lois">
+<section class="reveal" id="lois">
 <div data-fr>
   <h2>Cadres juridiques : ce que le traitement local simplifie</h2>
   <p>Partout dans le monde, les lois sur la protection des données encadrent la collecte, la conservation et surtout le transfert d'informations personnelles vers des prestataires et vers d'autres pays. Quand la voix et le texte ne quittent pas le poste, une grande partie de ces questions ne se pose plus : il n'y a ni sous-traitant à encadrer pour la reconnaissance vocale, ni transfert international à justifier.</p>
@@ -217,10 +331,40 @@
   <div class="note warn"><p><strong>What we do not claim.</strong> No software makes an organisation "compliant" on its own: compliance depends on all your processing, your workstations and your procedures. NiderVoice <strong>makes compliance easier</strong> by removing outbound flows. This table is general guidance, not legal advice.</p></div>
   <h3>Is voice biometric data?</h3>
   <p>The European Data Protection Board (Guidelines 02/2021 on virtual voice assistants) points out that voice can be biometric data when it is used to identify a person. NiderVoice identifies no one. What is dictated, however, is often sensitive: health data, professional secrecy, financial information. It is the sensitivity of the content that justifies keeping processing on the device.</p>
-</div>
+</div><div data-es><h2>Marcos legales: qué simplifica el procesamiento local</h2>
+<p>En todo el mundo, las leyes de protección de datos regulan la recogida, retención y, sobre todo, la transferencia de información personal a proveedores de servicios y a otros países. Cuando la voz y el texto nunca salen del dispositivo, muchas de esas preguntas desaparecen: no hay un procesador de reconocimiento de voz con el que contratar ni transferencia internacional que justificar.</p>
+<div class="tbl-wrap"><table class="tbl">
+  <tr><th>Región</th><th>Textos principales</th><th>Qué evita el procesamiento local</th></tr>
+  <tr><td>Unión Europea</td><td>RGPD; Ley de IA</td><td>Acuerdo de encargado de tratamiento para el reconocimiento de voz; transferencias fuera de la UE</td></tr>
+  <tr><td>Reino Unido</td><td>RGPD del Reino Unido, Ley de Protección de Datos de 2018</td><td>Transferencias internacionales y encargados de tratamiento</td></tr>
+  <tr><td>Suiza</td><td>Ley Federal Revisada de Protección de Datos (en vigor desde 2023)</td><td>Divulgación de datos en el extranjero</td></tr>
+  <tr><td>Estados Unidos</td><td>HIPAA para la salud; leyes estatales de privacidad</td><td>Acuerdo de asociado comercial (BAA) con un proveedor de reconocimiento de voz</td></tr>
+  <tr><td>Canadá</td><td>PIPEDA y leyes provinciales</td><td>Divulgación a proveedores y alojamiento en el extranjero</td></tr>
+  <tr><td>Australia</td><td>Ley de Privacidad de 1988</td><td>Divulgación transfronteriza de información</td></tr>
+  <tr><td>Brasil</td><td>LGPD</td><td>Transferencias internacionales</td></tr>
+  <tr><td>Japón, Singapur</td><td>APPI; PDPA</td><td>Provisión de datos a terceros y en el extranjero</td></tr>
+</table></div>
+<div class="note warn"><p><strong>Qué no afirmamos.</strong> Ningún software hace que una organización sea "conforme" por sí solo: la conformidad depende de todo su tratamiento, sus equipos y sus procedimientos. NiderVoice <strong>facilita la conformidad</strong> al eliminar flujos salientes. Esta tabla es una guía general, no un asesoramiento legal.</p></div>
+<h3>¿Son los datos de voz biométricos?</h3>
+<p>El Comité Europeo de Protección de Datos (Directrices 02/2021 sobre asistentes de voz virtuales) señala que la voz puede ser datos biométricos cuando se utiliza para identificar a una persona. NiderVoice no identifica a nadie. Lo que se dicta, sin embargo, suele ser sensible: datos de salud, secreto profesional, información financiera. Es la sensibilidad del contenido lo que justifica mantener el procesamiento en el dispositivo.</p></div><div data-de><h2>Rechtliche Rahmenbedingungen: Was lokale Verarbeitung vereinfacht</h2>
+  <p>Auf der ganzen Welt regeln Datenschutzgesetze die Erhebung, Speicherung und vor allem die Übermittlung personenbezogener Daten an Dienstleister und in andere Länder. Wenn Sprache und Text das Gerät nie verlassen, fallen viele dieser Fragen weg: Es gibt keinen Vertrag mit einem Auftragsverarbeiter für die Spracherkennung und keine internationale Übermittlung, die gerechtfertigt werden muss.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Region</th><th>Haupttexte</th><th>Was lokale Verarbeitung vermeidet</th></tr>
+    <tr><td>Europäische Union</td><td>DSGVO; KI-Gesetz</td><td>Auftragsverarbeitungsvertrag für Spracherkennung; Übermittlungen außerhalb der EU</td></tr>
+    <tr><td>Vereinigtes Königreich</td><td>UK-DSGVO, Data Protection Act 2018</td><td>Internationale Übermittlungen und Auftragsverarbeiter</td></tr>
+    <tr><td>Schweiz</td><td>Revidiertes Bundesgesetz über den Datenschutz (seit 2023 in Kraft)</td><td>Offenlegung von Daten im Ausland</td></tr>
+    <tr><td>Vereinigte Staaten</td><td>HIPAA für Gesundheitsdaten; Datenschutzgesetze der Bundesstaaten</td><td>Business-Associate-Agreement (BAA) mit einem Spracherkennungsanbieter</td></tr>
+    <tr><td>Kanada</td><td>PIPEDA und Gesetze der Provinzen</td><td>Offenlegung gegenüber Anbietern und Hosting im Ausland</td></tr>
+    <tr><td>Australien</td><td>Privacy Act 1988</td><td>Grenzüberschreitende Offenlegung von Informationen</td></tr>
+    <tr><td>Brasilien</td><td>LGPD</td><td>Internationale Übermittlungen</td></tr>
+    <tr><td>Japan, Singapur</td><td>APPI; PDPA</td><td>Bereitstellung von Daten an Dritte und im Ausland</td></tr>
+  </table></div>
+  <div class="note warn"><p><strong>Was wir nicht behaupten.</strong> Keine Software macht eine Organisation "konform" von allein: Die Konformität hängt von Ihrer gesamten Verarbeitung, Ihren Arbeitsplätzen und Ihren Verfahren ab. NiderVoice <strong>erleichtert die Konformität</strong>, indem es abgehende Datenströme entfernt. Diese Tabelle dient der allgemeinen Orientierung und stellt keine Rechtsberatung dar.</p></div>
+  <h3>Ist die Stimme ein biometrisches Datum?</h3>
+  <p>Der Europäische Datenschutzausschuss (Leitlinien 02/2021 zu virtuellen Sprachassistenten) weist darauf hin, dass Sprache biometrische Daten sein kann, wenn sie zur Identifizierung einer Person verwendet wird. NiderVoice identifiziert niemanden. Was jedoch diktiert wird, ist oft sensibel: Gesundheitsdaten, berufliche Verschwiegenheit, Finanzinformationen. Es ist die Sensibilität des Inhalts, die die Verarbeitung auf dem Gerät rechtfertigt.</p></div>
 </section>
 
-<section id="ia">
+<section class="reveal" id="ia">
 <div data-fr>
   <h2>Gouvernance de l'IA</h2>
   <p>De plus en plus d'organisations tiennent un inventaire des systèmes d'IA qu'elles utilisent, que ce soit pour répondre au règlement européen sur l'IA ou pour suivre une norme de gestion comme ISO/IEC 42001. NiderVoice est conçu pour entrer facilement dans cet inventaire :</p>
@@ -238,30 +382,47 @@
     <li>models identified by name, version and fingerprint;</li>
     <li>no automated decisions about people.</li>
   </ul>
-</div>
+</div><div data-es><h2>Gobernanza de la IA</h2>
+<p>Cada vez más organizaciones mantienen un inventario de los sistemas de IA que utilizan, ya sea para cumplir con el Reglamento de la UE sobre Inteligencia Artificial o para seguir un estándar de gestión como la ISO/IEC 42001. NiderVoice está diseñado para integrarse fácilmente en ese inventario:</p>
+<ul>
+    <li>una única función documentada: convertir voz en texto, revisada por el usuario;</li>
+    <li>modelos identificados por nombre, versión y huella;</li>
+    <li>no se toman decisiones automatizadas sobre personas.</li>
+</ul></div><div data-de><h2>KI-Governance</h2>
+<p>Immer mehr Organisationen führen ein Verzeichnis der von ihnen genutzten KI-Systeme, sei es zur Einhaltung des EU-KI-Gesetzes oder zur Anwendung eines Managementstandards wie ISO/IEC 42001. NiderVoice ist so konzipiert, dass es sich leicht in dieses Verzeichnis einfügt:</p>
+<ul>
+    <li>eine einzelne, dokumentierte Funktion: Umwandlung von Sprache in Text, überprüft durch den Nutzer;</li>
+    <li>Modelle, die durch Namen, Version und Prüfsumme identifiziert werden;</li>
+    <li>keine automatisierten Entscheidungen über Personen.</li>
+</ul></div>
 </section>
 
-<section id="kits">
-  <h2><span data-fr>Les trois kits</span><span data-en>The three kits</span></h2>
+<section class="reveal" id="kits">
+  <h2><span data-fr>Les trois kits</span><span data-en>The three kits</span><span data-es>Los tres kits</span><span data-de>Die drei Kits</span></h2>
   <div class="grid g3">
-    <a class="tile" href="/securite/dpo/"><div class="label">DPO</div><h3 data-fr>Kit DPO</h3><h3 data-en>DPO kit</h3><p data-fr>Fiche de registre pré-remplie, éléments pour l'analyse d'impact, questions fréquentes.</p><p data-en>Pre-filled record of processing, impact-assessment inputs, frequent questions.</p><span class="more" data-fr>Ouvrir →</span><span class="more" data-en>Open →</span></a>
-    <a class="tile" href="/securite/informatique/"><div class="label">IT</div><h3 data-fr>Kit informatique</h3><h3 data-en>IT kit</h3><p data-fr>Installation, matrice réseau, vérification, stratégies recommandées, empreintes.</p><p data-en>Installation, network matrix, verification, recommended policies, fingerprints.</p><span class="more" data-fr>Ouvrir →</span><span class="more" data-en>Open →</span></a>
-    <a class="tile" href="/securite/rssi/"><div class="label">RSSI · CISO</div><h3 data-fr>Kit RSSI</h3><h3 data-en>CISO kit</h3><p data-fr>Modèle de menace, surface d'attaque, signalement des vulnérabilités.</p><p data-en>Threat model, attack surface, vulnerability reporting.</p><span class="more" data-fr>Ouvrir →</span><span class="more" data-en>Open →</span></a>
+    <a class="tile" href="/securite/dpo/"><div class="label">DPO</div><h3 data-fr>Kit DPO</h3><h3 data-en>DPO kit</h3><h3 data-es>Kit DPD</h3><h3 data-de>DSB-Kit</h3><p data-fr>Fiche de registre pré-remplie, éléments pour l'analyse d'impact, questions fréquentes.</p><p data-en>Pre-filled record of processing, impact-assessment inputs, frequent questions.</p><p data-es>Registro de actividades prerrellenado, elementos para la evaluación de impacto, preguntas frecuentes.</p><p data-de>Vorgefülltes Verzeichnis von Verarbeitungstätigkeiten, Eingaben für Datenschutz-Folgenabschätzung, häufige Fragen.</p><span class="more" data-fr>Ouvrir →</span><span class="more" data-en>Open →</span><span class="more" data-es>Abrir →</span><span class="more" data-de>Öffnen →</span></a>
+    <a class="tile" href="/securite/informatique/"><div class="label">IT</div><h3 data-fr>Kit informatique</h3><h3 data-en>IT kit</h3><h3 data-es>Kit informático</h3><h3 data-de>IT-Kit</h3><p data-fr>Installation, matrice réseau, vérification, stratégies recommandées, empreintes.</p><p data-en>Installation, network matrix, verification, recommended policies, fingerprints.</p><p data-es>Instalación, matriz de red, verificación, políticas recomendadas, huellas.</p><p data-de>Installation, Netzwerkmatrix, Überprüfung, empfohlene Richtlinien, Prüfsummen.</p><span class="more" data-fr>Ouvrir →</span><span class="more" data-en>Open →</span><span class="more" data-es>Abrir →</span><span class="more" data-de>Öffnen →</span></a>
+    <a class="tile" href="/securite/rssi/"><div class="label">RSSI · CISO</div><h3 data-fr>Kit RSSI</h3><h3 data-en>CISO kit</h3><h3 data-es>Kit CISO</h3><h3 data-de>CISO-Kit</h3><p data-fr>Modèle de menace, surface d'attaque, signalement des vulnérabilités.</p><p data-en>Threat model, attack surface, vulnerability reporting.</p><p data-es>Modelo de amenaza, superficie de ataque, informe de vulnerabilidades.</p><p data-de>Bedrohungsmodell, Angriffsfläche, Schwachstellenberichterstattung.</p><span class="more" data-fr>Ouvrir →</span><span class="more" data-en>Open →</span><span class="more" data-es>Abrir →</span><span class="more" data-de>Öffnen →</span></a>
   </div>
 </section>
 
   </div>
 </div>
 
-<div class="cta-band"><div class="card"><div><div class="label"><span data-fr>Étape suivante</span><span data-en>Next step</span><span data-es>Next step</span><span data-de>Next step</span></div><h2 class="serif" style="margin-top:10px"><span data-fr>Parlons de votre déploiement.</span><span data-en>Let's talk about your deployment.</span><span data-es>Let's talk about your deployment.</span><span data-de>Let's talk about your deployment.</span></h2></div><a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a></div></div>
+<div class="cta-band"><div class="card"><div><div class="label"><span data-fr>Étape suivante</span><span data-en>Next step</span><span data-es>Siguiente paso</span><span data-de>Nächster Schritt</span></div><h2 class="serif" style="margin-top:10px"><span data-fr>Parlons de votre déploiement.</span><span data-en>Let's talk about your deployment.</span><span data-es>Hablemos de su despliegue.</span><span data-de>Sprechen wir über Ihre Einführung.</span></h2></div><a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a></div></div>
 </main>
-<footer>
+<footer class="big">
   <div class="w">
-    <div><p><span data-fr>Outil de saisie de texte par la voix. Ne fournit aucune information à visée diagnostique ou thérapeutique.</span><span data-en>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-es>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-de>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span></p><p>© 2026 NiderLabs</p>
-      <div class="links"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Security</span><span data-de>Security</span></a><a href="/securite/dpo/"><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>DPO kit</span><span data-de>DPO kit</span></a><a href="/securite/informatique/"><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>IT kit</span><span data-de>IT kit</span></a><a href="/securite/rssi/"><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>CISO kit</span><span data-de>CISO kit</span></a><a href="/.well-known/security.txt">security.txt</a></div></div>
-    <div style="text-align:right"><p><span data-fr>Conception&nbsp;: NiderLabs · Distribution, licences et assistance&nbsp;: GOKYO S.à r.l.-S, Luxembourg</span><span data-en>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-es>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span><span data-de>Design: NiderLabs · Distribution, licences and support: GOKYO S.à r.l.-S, Luxembourg</span></p><p><a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a></p></div>
+    <div class="cols">
+      <div class="brand"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="136" height="26" alt="NiderVoice"><p><span data-fr>L'IA vocale, sous votre contrôle. Conçu par NiderLabs, distribué par GOKYO S.à r.l.-S, Luxembourg.</span><span data-en>Voice AI, under your control. Designed by NiderLabs, distributed by GOKYO S.à r.l.-S, Luxembourg.</span><span data-es>IA de voz, bajo su control. Diseñado por NiderLabs, distribuido por GOKYO S.à r.l.-S, Luxemburgo.</span><span data-de>Sprach-KI unter Ihrer Kontrolle. Entwickelt von NiderLabs, vertrieben von GOKYO S.à r.l.-S, Luxemburg.</span></p></div>
+      <div><h4><span data-fr>Produit</span><span data-en>Product</span><span data-es>Producto</span><span data-de>Produkt</span></h4><ul><li><a href="/#comment"><span data-fr>Comment ça marche</span><span data-en>How it works</span><span data-es>Cómo funciona</span><span data-de>So funktioniert es</span></a></li><li><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Despliegue</span><span data-de>Bereitstellung</span></a></li><li><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></a></li><li><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Sectores</span><span data-de>Branchen</span></a></li></ul></div>
+      <div><h4><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></h4><ul><li><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a></li><li><a href="/securite/dpo/"><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>Kit DPD</span><span data-de>DSB-Kit</span></a></li><li><a href="/securite/informatique/"><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>Kit informático</span><span data-de>IT-Kit</span></a></li><li><a href="/securite/rssi/"><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>Kit CISO</span><span data-de>CISO-Kit</span></a></li><li><a href="/.well-known/security.txt">security.txt</a></li></ul></div>
+      <div><h4><span data-fr>Entreprise</span><span data-en>Company</span><span data-es>Empresa</span><span data-de>Unternehmen</span></h4><ul><li><a href="/entreprise/"><span data-fr>Entreprise</span><span data-en>Company</span><span data-es>Empresa</span><span data-de>Unternehmen</span></a></li><li><a href="/contact/"><span data-fr>Contact</span><span data-en>Contact</span><span data-es>Contacto</span><span data-de>Kontakt</span></a></li></ul></div>
+      <div><h4><span data-fr>Légal</span><span data-en>Legal</span><span data-es>Legal</span><span data-de>Rechtliches</span></h4><ul><li><a href="/confidentialite/"><span data-fr>Confidentialité du site</span><span data-en>Site privacy</span><span data-es>Privacidad del sitio</span><span data-de>Datenschutz der Website</span></a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 NiderLabs · GOKYO S.à r.l.-S</span><span><span data-fr>Outil de saisie de texte par la voix. Ne fournit aucune information à visée diagnostique ou thérapeutique.</span><span data-en>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-es>Herramienta de introducción de texto por voz. No proporciona información con fines diagnósticos o terapéuticos.</span><span data-de>Werkzeug zur Texteingabe per Sprache. Es liefert keine Informationen zu diagnostischen oder therapeutischen Zwecken.</span></span><span><span data-fr>Aucun cookie, aucun traceur.</span><span data-en>No cookies, no trackers.</span><span data-es>Ningún cookie, ningún rastreador.</span><span data-de>Keine Cookies, keine Tracker.</span></span></div>
   </div>
 </footer>
-<script src="/assets/nv.js?v=20261116b"></script>
+<script src="/assets/nv.js?v=20261116c"></script>
 </body>
 </html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="fr" data-langs="fr en es de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Confidentialité du site — NiderVoice</title>
+<meta name="description" content="Ce site n'utilise ni cookie ni traceur. Voici exactement quelles données il traite, et pourquoi.">
+<meta name="theme-color" content="#0A0E15">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Confidentialité du site — NiderVoice">
+<meta property="og:description" content="Ce site n'utilise ni cookie ni traceur. Voici exactement quelles données il traite, et pourquoi.">
+<meta property="og:url" content="https://nidervoice.com/confidentialite/">
+<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg?v=20261116c">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/nv.css?v=20261116c">
+</head>
+<body>
+<canvas id="dots" aria-hidden="true"></canvas>
+<header>
+  <div class="w bar">
+    <a class="logo" href="/" aria-label="NiderVoice"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="146" height="28" alt="NiderVoice"></a>
+    <nav class="main-nav" aria-label="Navigation"><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Despliegue</span><span data-de>Bereitstellung</span></a><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Sectores</span><span data-de>Branchen</span></a><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></a></nav>
+    <div class="right">
+      <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button><button type="button" data-lang="de" aria-pressed="false">DE</button></div>
+      <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Solicitar una demo</span><span data-de>Demo anfragen</span></a>
+      <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
+    </div>
+  </div>
+</header>
+<main>
+<div class="w page-head">
+  <div class="crumbs"><a href="/">NiderVoice</a> / <span data-fr>Confidentialité du site</span><span data-en>Site privacy</span><span data-es>Privacidad del sitio</span><span data-de>Datenschutz der Website</span></div>
+  <h1 class="serif"><span data-fr>Ce site ne vous suit pas. <em>Voici exactement ce qu'il traite.</em></span><span data-en>This site does not track you. <em>Here is exactly what it processes.</em></span><span data-es>Este sitio no le rastrea. <em>Aquí tiene exactamente lo que procesa.</em></span><span data-de>Diese Website verfolgt Sie nicht. <em>Hier sehen Sie genau, was sie verarbeitet.</em></span></h1>
+  <p class="lead" data-fr>Cette page concerne le site nidervoice.com. Le logiciel NiderVoice, lui, ne transmet aucune donnée : voir la page <a href="/securite/">Sécurité</a>.</p>
+  <p class="lead" data-en>This page covers the nidervoice.com website. The NiderVoice software itself transmits no data: see the <a href="/securite/">Security</a> page.</p><p class="lead" data-es>Esta página cubre el sitio web nidervoice.com. El software NiderVoice no transmite ningún dato: consulte la página de <a href="/securite/">Seguridad</a>.</p><p class="lead" data-de>Diese Seite betrifft die Website nidervoice.com. Die NiderVoice-Software selbst überträgt keine Daten: siehe die <a href="/securite/">Sicherheitsseite</a>.</p>
+  <div class="docmeta"><span data-fr>Version 1.0 · 16 novembre 2026</span><span data-en>Version 1.0 · 16 November 2026</span><span data-es>Versión 1.0 · 16 de noviembre de 2026</span><span data-de>Version 1.0 · 16. November 2026</span></div>
+</div>
+
+<div class="layout">
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#resume"><span data-fr>En bref</span><span data-en>In short</span><span data-es>En resumen</span><span data-de>Kurz gesagt</span></a>
+    <a href="#donnees"><span data-fr>Données traitées</span><span data-en>Data processed</span><span data-es>Datos procesados</span><span data-de>Verarbeitete Daten</span></a>
+    <a href="#prive"><span data-fr>Espaces privés</span><span data-en>Private areas</span><span data-es>Áreas privadas</span><span data-de>Private Bereiche</span></a>
+    <a href="#droits"><span data-fr>Vos droits</span><span data-en>Your rights</span><span data-es>Sus derechos</span><span data-de>Ihre Rechte</span></a>
+  </nav>
+  <div class="prose">
+
+<section class="reveal" id="resume">
+<div data-fr>
+  <h2>En bref</h2>
+  <ul>
+    <li><strong>Aucun cookie</strong> sur les pages publiques.</li>
+    <li><strong>Aucun outil de mesure d'audience</strong>, aucun traceur, aucune publicité.</li>
+    <li><strong>Aucune ressource tierce</strong> : polices, scripts et images sont servis par ce site. La politique de sécurité des pages interdit au navigateur de charger quoi que ce soit ailleurs.</li>
+    <li>Votre choix de langue est mémorisé <strong>dans votre navigateur</strong> uniquement ; il n'est jamais envoyé.</li>
+  </ul>
+</div>
+<div data-en>
+  <h2>In short</h2>
+  <ul>
+    <li><strong>No cookies</strong> on public pages.</li>
+    <li><strong>No audience-measurement tools</strong>, no trackers, no advertising.</li>
+    <li><strong>No third-party resources</strong>: fonts, scripts and images are served by this site. The pages' security policy forbids the browser from loading anything elsewhere.</li>
+    <li>Your language choice is stored <strong>in your browser</strong> only; it is never sent.</li>
+  </ul>
+</div><div data-es><h2>En resumen</h2>
+  <ul>
+    <li><strong>Ninguna cookie</strong> en las páginas públicas.</li>
+    <li><strong>Ninguna herramienta de medición de audiencia</strong>, ni rastreadores, ni publicidad.</li>
+    <li><strong>Ningún recurso de terceros</strong>: las fuentes, los scripts y las imágenes se sirven desde este sitio. La política de seguridad de las páginas impide que el navegador cargue nada de otro lugar.</li>
+    <li>Su elección de idioma se almacena <strong>en su navegador</strong> únicamente; nunca se envía.</li>
+  </ul></div><div data-de><h2>Kurz gesagt</h2>
+  <ul>
+    <li><strong>Keine Cookies</strong> auf öffentlichen Seiten.</li>
+    <li><strong>Keine Tools zur Besuchermessung</strong>, keine Tracker, keine Werbung.</li>
+    <li><strong>Keine Drittanbieter-Ressourcen</strong>: Schriftarten, Skripte und Bilder werden von dieser Seite bereitgestellt. Die Sicherheitsrichtlinie der Seiten verbietet dem Browser, etwas anderes zu laden.</li>
+    <li>Ihre Sprachwahl wird <strong>nur in Ihrem Browser</strong> gespeichert; sie wird niemals gesendet.</li>
+  </ul></div>
+</section>
+
+<section class="reveal" id="donnees">
+<div data-fr>
+  <h2>Données traitées</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Donnée</th><th>Pourquoi</th><th>Durée</th></tr>
+    <tr><td>Journaux techniques du serveur (adresse IP, date, page demandée, navigateur)</td><td>Fonctionnement et sécurité de l'hébergement</td><td>Selon la politique de l'hébergeur</td></tr>
+    <tr><td>Messages envoyés à contact@nidervoice.com</td><td>Vous répondre et assurer le suivi de votre demande</td><td>Le temps de la relation, puis archivage limité</td></tr>
+    <tr><td>Langue choisie (stockage local du navigateur)</td><td>Afficher le site dans votre langue</td><td>Jusqu'à ce que vous effaciez les données du navigateur</td></tr>
+  </table></div>
+  <p>Responsable du traitement : GOKYO S.à r.l.-S, Luxembourg. Hébergeur : Hostinger International Ltd.</p>
+</div>
+<div data-en>
+  <h2>Data processed</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Data</th><th>Why</th><th>Retention</th></tr>
+    <tr><td>Server technical logs (IP address, date, page requested, browser)</td><td>Operation and security of the hosting</td><td>According to the host's policy</td></tr>
+    <tr><td>Messages sent to contact@nidervoice.com</td><td>Answering you and following up on your request</td><td>For the duration of the relationship, then limited archiving</td></tr>
+    <tr><td>Chosen language (browser local storage)</td><td>Showing the site in your language</td><td>Until you clear your browser data</td></tr>
+  </table></div>
+  <p>Controller: GOKYO S.à r.l.-S, Luxembourg. Host: Hostinger International Ltd.</p>
+</div><div data-es><h2>Datos procesados</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Datos</th><th>Motivo</th><th>Conservación</th></tr>
+    <tr><td>Registros técnicos del servidor (dirección IP, fecha, página solicitada, navegador)</td><td>Operación y seguridad del alojamiento</td><td>Según la política del proveedor de alojamiento</td></tr>
+    <tr><td>Mensajes enviados a contact@nidervoice.com</td><td>Responderle y seguir su solicitud</td><td>Durante la duración de la relación, luego archivo limitado</td></tr>
+    <tr><td>Idioma elegido (almacenamiento local del navegador)</td><td>Mostrar el sitio en su idioma</td><td>Hasta que borre los datos de su navegador</td></tr>
+  </table></div>
+  <p>Responsable: GOKYO S.à r.l.-S, Luxemburgo. Proveedor de alojamiento: Hostinger International Ltd.</p></div><div data-de><h2>Verarbeitete Daten</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Daten</th><th>Zweck</th><th>Aufbewahrung</th></tr>
+    <tr><td>Servertechnische Protokolle (IP-Adresse, Datum, angeforderte Seite, Browser)</td><td>Betrieb und Sicherheit des Hostings</td><td>Gemäß der Richtlinie des Hosters</td></tr>
+    <tr><td>Nachrichten an contact@nidervoice.com gesendet</td><td>Beantwortung Ihrer Anfrage und Nachverfolgung</td><td>Während der Dauer der Beziehung, anschließend begrenzte Archivierung</td></tr>
+    <tr><td>Gewählte Sprache (Browser-Lokal-Speicher)</td><td>Anzeige der Website in Ihrer Sprache</td><td>Bis Sie Ihre Browserdaten löschen</td></tr>
+  </table></div>
+  <p>Verantwortlicher: GOKYO S.à r.l.-S, Luxemburg. Hoster: Hostinger International Ltd.</p></div>
+</section>
+
+<section class="reveal" id="prive">
+<div data-fr>
+  <h2>Espaces privés</h2>
+  <p>Le site comporte des espaces réservés aux personnes autorisées (dictée en ligne, administration). Leur accès repose sur un code à usage unique envoyé par courriel et sur un <strong>cookie de session strictement nécessaire</strong>, déposé seulement après connexion. Dans la dictée en ligne, la voix est traitée dans le navigateur et n'est pas envoyée au serveur.</p>
+</div>
+<div data-en>
+  <h2>Private areas</h2>
+  <p>The site includes areas reserved for authorised people (online dictation, administration). Access relies on a one-time code sent by e-mail and on a <strong>strictly necessary session cookie</strong>, set only after signing in. In online dictation, the voice is processed in the browser and is not sent to the server.</p>
+</div><div data-es><h2>Áreas privadas</h2>
+  <p>El sitio incluye áreas reservadas para personas autorizadas (dictado en línea, administración). El acceso se basa en un código de un solo uso enviado por correo electrónico y en una <strong>cookie de sesión estrictamente necesaria</strong>, que solo se establece después de iniciar sesión. En el dictado en línea, la voz se procesa en el navegador y no se envía al servidor.</p></div><div data-de><h2>Private Bereiche</h2>
+  <p>Die Website enthält Bereiche, die für autorisierte Personen reserviert sind (Online-Diktat, Verwaltung). Der Zugriff erfolgt über einen einmaligen Code, der per E-Mail gesendet wird, und über ein <strong>strikt notwendiges Sitzungs-Cookie</strong>, das erst nach dem Einloggen gesetzt wird. Beim Online-Diktat wird die Stimme im Browser verarbeitet und nicht an den Server gesendet.</p></div>
+</section>
+
+<section class="reveal" id="droits">
+<div data-fr>
+  <h2>Vos droits</h2>
+  <p>Vous pouvez demander l'accès à vos données, leur rectification ou leur effacement, et vous opposer à leur traitement, en écrivant à <a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a>. Vous pouvez aussi saisir l'autorité de contrôle : au Luxembourg, la Commission nationale pour la protection des données (CNPD).</p>
+  <p>Seule la version française de cette page fait foi.</p>
+</div>
+<div data-en>
+  <h2>Your rights</h2>
+  <p>You can request access to your data, its rectification or erasure, and object to its processing, by writing to <a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a>. You can also contact the supervisory authority: in Luxembourg, the Commission nationale pour la protection des données (CNPD).</p>
+  <p>Only the French version of this page is authoritative.</p>
+</div><div data-es><h2>Sus derechos</h2>
+  <p>Puede solicitar el acceso a sus datos, su rectificación o supresión, y oponerse a su tratamiento, escribiendo a <a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a>. También puede contactar con la autoridad de control: en Luxemburgo, la Commission nationale pour la protection des données (CNPD).</p>
+  <p>Solo la versión francesa de esta página tiene carácter oficial.</p></div><div data-de><h2>Ihre Rechte</h2>
+<p>Sie können den Zugriff auf Ihre Daten, deren Berichtigung oder Löschung anfordern und Widerspruch gegen deren Verarbeitung einlegen, indem Sie eine E-Mail an <a href="mailto:contact@nidervoice.com">contact@nidervoice.com</a> senden. Sie können sich auch an die Aufsichtsbehörde wenden: in Luxemburg an die Commission nationale pour la protection des données (CNPD).</p>
+<p>Nur die französische Version dieser Seite ist verbindlich.</p></div>
+</section>
+
+  </div>
+</div>
+
+<div class="cta-band"><div class="card"><div><div class="label"><span data-fr>Étape suivante</span><span data-en>Next step</span><span data-es>Siguiente paso</span><span data-de>Nächster Schritt</span></div><h2 class="serif" style="margin-top:10px"><span data-fr>Parlons de votre déploiement.</span><span data-en>Let's talk about your deployment.</span><span data-es>Hablemos de su despliegue.</span><span data-de>Sprechen wir über Ihre Einführung.</span></h2></div><a class="pill light" href="mailto:contact@nidervoice.com">contact@nidervoice.com <span aria-hidden="true">↗</span></a></div></div>
+</main>
+<footer class="big">
+  <div class="w">
+    <div class="cols">
+      <div class="brand"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="136" height="26" alt="NiderVoice"><p><span data-fr>L'IA vocale, sous votre contrôle. Conçu par NiderLabs, distribué par GOKYO S.à r.l.-S, Luxembourg.</span><span data-en>Voice AI, under your control. Designed by NiderLabs, distributed by GOKYO S.à r.l.-S, Luxembourg.</span><span data-es>IA de voz, bajo su control. Diseñado por NiderLabs, distribuido por GOKYO S.à r.l.-S, Luxemburgo.</span><span data-de>Sprach-KI unter Ihrer Kontrolle. Entwickelt von NiderLabs, vertrieben von GOKYO S.à r.l.-S, Luxemburg.</span></p></div>
+      <div><h4><span data-fr>Produit</span><span data-en>Product</span><span data-es>Producto</span><span data-de>Produkt</span></h4><ul><li><a href="/#comment"><span data-fr>Comment ça marche</span><span data-en>How it works</span><span data-es>Cómo funciona</span><span data-de>So funktioniert es</span></a></li><li><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Despliegue</span><span data-de>Bereitstellung</span></a></li><li><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></a></li><li><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Sectores</span><span data-de>Branchen</span></a></li></ul></div>
+      <div><h4><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></h4><ul><li><a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a></li><li><a href="/securite/dpo/"><span data-fr>Kit DPO</span><span data-en>DPO kit</span><span data-es>Kit DPD</span><span data-de>DSB-Kit</span></a></li><li><a href="/securite/informatique/"><span data-fr>Kit informatique</span><span data-en>IT kit</span><span data-es>Kit informático</span><span data-de>IT-Kit</span></a></li><li><a href="/securite/rssi/"><span data-fr>Kit RSSI</span><span data-en>CISO kit</span><span data-es>Kit CISO</span><span data-de>CISO-Kit</span></a></li><li><a href="/.well-known/security.txt">security.txt</a></li></ul></div>
+      <div><h4><span data-fr>Entreprise</span><span data-en>Company</span><span data-es>Empresa</span><span data-de>Unternehmen</span></h4><ul><li><a href="/entreprise/"><span data-fr>Entreprise</span><span data-en>Company</span><span data-es>Empresa</span><span data-de>Unternehmen</span></a></li><li><a href="/contact/"><span data-fr>Contact</span><span data-en>Contact</span><span data-es>Contacto</span><span data-de>Kontakt</span></a></li></ul></div>
+      <div><h4><span data-fr>Légal</span><span data-en>Legal</span><span data-es>Legal</span><span data-de>Rechtliches</span></h4><ul><li><a href="/confidentialite/"><span data-fr>Confidentialité du site</span><span data-en>Site privacy</span><span data-es>Privacidad del sitio</span><span data-de>Datenschutz der Website</span></a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 NiderLabs · GOKYO S.à r.l.-S</span><span><span data-fr>Outil de saisie de texte par la voix. Ne fournit aucune information à visée diagnostique ou thérapeutique.</span><span data-en>Voice-to-text input tool. It provides no information for diagnostic or therapeutic purposes.</span><span data-es>Herramienta de introducción de texto por voz. No proporciona información con fines diagnósticos o terapéuticos.</span><span data-de>Werkzeug zur Texteingabe per Sprache. Es liefert keine Informationen zu diagnostischen oder therapeutischen Zwecken.</span></span><span><span data-fr>Aucun cookie, aucun traceur.</span><span data-en>No cookies, no trackers.</span><span data-es>Ningún cookie, ningún rastreador.</span><span data-de>Keine Cookies, keine Tracker.</span></span></div>
+  </div>
+</footer>
+<script src="/assets/nv.js?v=20261116c"></script>
+</body>
+</html>

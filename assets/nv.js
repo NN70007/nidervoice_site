@@ -31,6 +31,15 @@
     toc.forEach(function(a){var s=document.querySelector(a.getAttribute('href'));if(s)io.observe(s)});
   }
 
+  // Apparition progressive des blocs marqués .reveal
+  var rv=[].slice.call(document.querySelectorAll('.reveal'));
+  if(rv.length){
+    if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}})},{threshold:.12});
+      rv.forEach(function(r){ro.observe(r)});
+    }else rv.forEach(function(r){r.classList.add('in')});
+  }
+
   // Fond de points : les points proches du pointeur s'éclairent et s'écartent légèrement.
   var cv=document.getElementById('dots');
   if(!cv||!cv.getContext)return;
