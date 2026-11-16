@@ -7,6 +7,9 @@ Options -Indexes
 # Forcer HTTPS
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # Adresse unique : www -> domaine principal
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 </IfModule>
