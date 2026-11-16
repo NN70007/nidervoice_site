@@ -138,7 +138,7 @@ details summary{cursor:pointer;color:var(--acc-soft)}
       <button id="rec" type="button">Dicter</button>
       <span id="state">Prêt</span>
     </div>
-    <p class="muted">Raccourci : touche F2 pour démarrer ou arrêter. Dites « à la ligne » ou « nouveau paragraphe » pour passer à la ligne.</p>
+    <p class="muted">Raccourci : touche F2 pour démarrer ou arrêter. Commandes : « point », « virgule », « deux points », « à la ligne », « point à la ligne », « nouveau paragraphe », « ouvrez / fermez la parenthèse », « effacer ça ».</p>
     <textarea id="text" spellcheck="false" aria-label="Texte dicté"></textarea>
     <div class="row">
       <button id="copy" type="button">Copier le texte</button>
