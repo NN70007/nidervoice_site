@@ -1,18 +1,18 @@
 <!doctype html>
-<html lang="fr" data-langs="fr en es de">
+<html lang="en" data-langs="en fr es de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Kit DPO — NiderVoice</title>
-<meta name="description" content="Fiche de registre pré-remplie, éléments pour l'analyse d'impact et réponses aux questions d'un délégué à la protection des données sur NiderVoice.">
+<title>DPO kit — NiderVoice</title>
+<meta name="description" content="Pre-filled record of processing, impact-assessment inputs and answers to a data protection officer's questions about NiderVoice.">
 <meta name="theme-color" content="#0A0E15">
 <meta name="color-scheme" content="dark">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Kit DPO — NiderVoice">
-<meta property="og:description" content="Fiche de registre pré-remplie, éléments pour l'analyse d'impact et réponses aux questions d'un délégué à la protection des données sur NiderVoice.">
+<meta property="og:title" content="DPO kit — NiderVoice">
+<meta property="og:description" content="Pre-filled record of processing, impact-assessment inputs and answers to a data protection officer's questions about NiderVoice.">
 <meta property="og:url" content="https://nidervoice.com/securite/dpo/">
-<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg?v=20261116c">
+<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg?v=20261116d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="stylesheet" href="/assets/nv.css?v=20261116c">
 </head>
@@ -23,7 +23,7 @@
     <a class="logo" href="/" aria-label="NiderVoice"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="146" height="28" alt="NiderVoice"></a>
     <nav class="main-nav" aria-label="Navigation"><a href="/securite/" aria-current=page><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Despliegue</span><span data-de>Bereitstellung</span></a><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Sectores</span><span data-de>Branchen</span></a><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></a></nav>
     <div class="right">
-      <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button><button type="button" data-lang="de" aria-pressed="false">DE</button></div>
+      <div class="lang" role="group" aria-label="Language / Langue"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="fr" aria-pressed="false">FR</button><button type="button" data-lang="es" aria-pressed="false">ES</button><button type="button" data-lang="de" aria-pressed="false">DE</button></div>
       <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Solicitar una demo</span><span data-de>Demo anfragen</span></a>
       <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
     </div>
@@ -196,6 +196,10 @@
 <section class="reveal" id="faq">
 <div data-fr>
   <h2>Questions fréquentes</h2>
+  <h3>Le logiciel crée-t-il un profil vocal ?</h3>
+  <p>Non. Les modèles reconnaissent n'importe quelle voix sans enregistrement préalable. Aucune empreinte vocale n'est créée ni stockée : il n'y a pas de donnée biométrique à déclarer.</p>
+  <h3>Où sont stockés les réglages et le dictionnaire personnel ?</h3>
+  <p>Dans le profil Windows de chaque utilisateur (<code>%APPDATA%</code>), sur le poste. Le dictionnaire personnel peut contenir des noms de personnes ; il suit les règles de votre organisation pour les profils utilisateurs. Un dictionnaire commun à l'organisation, déployé par votre service informatique, est en développement.</p>
   <h3>Faut-il le consentement des utilisateurs ?</h3>
   <p>La dictée ne sert pas à identifier les personnes et ne crée pas d'empreinte vocale. Le consentement n'est donc pas, en principe, la base légale adaptée : c'est celle du traitement principal qui s'applique. Votre DPO reste seul juge selon votre contexte.</p>
   <h3>Les éditeurs peuvent-ils accéder aux dictées à distance ?</h3>
@@ -209,6 +213,10 @@
 </div>
 <div data-en>
   <h2>Frequent questions</h2>
+  <h3>Does the software create a voice profile?</h3>
+  <p>No. The models recognise any voice without prior enrolment. No voiceprint is created or stored: there is no biometric data to declare.</p>
+  <h3>Where are the settings and the personal dictionary stored?</h3>
+  <p>In each user's Windows profile (<code>%APPDATA%</code>), on the device. The personal dictionary may contain people's names; it follows your organisation's rules for user profiles. An organisation-wide dictionary, deployed by your IT department, is in development.</p>
   <h3>Is user consent required?</h3>
   <p>Dictation is not used to identify people and creates no voiceprint. Consent is therefore not normally the right legal basis: that of the main processing applies. Your DPO remains the judge in your context.</p>
   <h3>Can the publishers access dictations remotely?</h3>
@@ -220,6 +228,10 @@
   <h3>How do we document the installed version?</h3>
   <p>Each version ships with the list of SHA-256 fingerprints of the installer and of the installed files. Keep it in your file.</p>
 </div><div data-es><h2>Preguntas frecuentes</h2>
+  <h3>¿Crea el software un perfil de voz?</h3>
+  <p>No. Los modelos reconocen cualquier voz sin grabación previa. No se crea ni se almacena ninguna huella vocal: no hay datos biométricos que declarar.</p>
+  <h3>¿Dónde se guardan los ajustes y el diccionario personal?</h3>
+  <p>En el perfil de Windows de cada usuario (<code>%APPDATA%</code>), en el equipo. El diccionario personal puede contener nombres de personas; sigue las normas de su organización para los perfiles de usuario. Un diccionario común para toda la organización, desplegado por su departamento de informática, está en desarrollo.</p>
 <h3>¿Es necesario el consentimiento del usuario?</h3>
 <p>El dictado no se utiliza para identificar personas y no crea ninguna huella. Por lo tanto, el consentimiento no suele ser la base legal adecuada: se aplica la del tratamiento principal. Su DPD sigue siendo el juez en su contexto.</p>
 <h3>¿Pueden los editores acceder a las dictados de forma remota?</h3>
@@ -230,6 +242,10 @@
 <p>No. No genera estadísticas de uso, informes ni, por defecto, historial.</p>
 <h3>¿Cómo documentamos la versión instalada?</h3>
 <p>Cada versión incluye la lista de huellas SHA-256 del instalador y de los archivos instalados. Guárdela en su archivo.</p></div><div data-de><h2>Häufige Fragen</h2>
+  <h3>Erstellt die Software ein Stimmprofil?</h3>
+  <p>Nein. Die Modelle erkennen jede Stimme ohne vorherige Aufnahme. Es wird kein Stimmabdruck erstellt oder gespeichert: Es gibt keine biometrischen Daten zu melden.</p>
+  <h3>Wo werden Einstellungen und persönliches Wörterbuch gespeichert?</h3>
+  <p>Im Windows-Profil jedes Benutzers (<code>%APPDATA%</code>) auf dem Gerät. Das persönliche Wörterbuch kann Namen von Personen enthalten; es folgt den Regeln Ihrer Organisation für Benutzerprofile. Ein gemeinsames Wörterbuch für die ganze Organisation, bereitgestellt von Ihrer IT-Abteilung, ist in Entwicklung.</p>
   <h3>Ist die Einwilligung der Nutzer erforderlich?</h3>
   <p>Die Diktierfunktion wird nicht verwendet, um Personen zu identifizieren, und erstellt kein Sprachprofil. Die Einwilligung ist daher normalerweise nicht die richtige Rechtsgrundlage: Es gilt diejenige der Hauptverarbeitung. Die Entscheidung liegt in Ihrem Kontext bei Ihrem DSB.</p>
   <h3>Können die Hersteller aus der Ferne auf Diktate zugreifen?</h3>

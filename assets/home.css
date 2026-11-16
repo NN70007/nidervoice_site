@@ -156,3 +156,28 @@
   .app{min-height:300px;padding:18px}
 }
 @media (prefers-reduced-motion:reduce){.caret,.big-wave span,.monitor .mh b i{animation:none}.scene{transition:none}}
+
+/* Questions fréquentes */
+.faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:72px;align-items:start}
+.faq h2{position:sticky;top:120px}
+.qa{border-top:1px solid var(--line)}
+.qa:last-child{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;padding:22px 40px 22px 0;position:relative;font-family:var(--disp);font-weight:300;font-size:23px;letter-spacing:-.01em;color:var(--tx)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";position:absolute;right:6px;top:20px;font-family:var(--mono);font-size:20px;color:var(--sky);transition:transform .25s}
+.qa[open] summary::after{transform:rotate(45deg)}
+.qa p{color:var(--mut);font-size:15.5px;padding:0 40px 24px 0;max-width:40em}
+.qa p .status{margin-right:8px}
+@media (max-width:980px){.faq{grid-template-columns:1fr;gap:28px}.faq h2{position:static}}
+
+/* Verre dépoli sur les surfaces de l'accueil */
+.panel,.home .card{background:var(--glass);-webkit-backdrop-filter:blur(5px) saturate(1.1);backdrop-filter:blur(5px) saturate(1.1)}
+.proofs,.forms,.sectors,.models,.principles .reveal:not(h2),.faq>div,.kits .links a{background:rgba(12,17,26,.78);-webkit-backdrop-filter:blur(5px) saturate(1.1);backdrop-filter:blur(5px) saturate(1.1)}
+.proofs,.forms,.sectors,.models{border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.sectors a:first-child,.pr:first-child{border-top:0}
+.sectors a:last-child{border-bottom:0}
+.principles .reveal:not(h2),.faq>div{border:1px solid var(--line);border-radius:18px;padding:0 28px}
+.pr:last-child,.qa:last-child{border-bottom:0}
+.qa:first-child{border-top:0}
+.sectors a{padding-left:22px;padding-right:22px}
+.sectors a:hover{padding-left:30px}

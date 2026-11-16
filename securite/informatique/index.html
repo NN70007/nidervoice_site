@@ -1,18 +1,18 @@
 <!doctype html>
-<html lang="fr" data-langs="fr en es de">
+<html lang="en" data-langs="en fr es de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Kit informatique — NiderVoice</title>
-<meta name="description" content="Installation MSI, matrice réseau, vérification par vos soins, stratégies recommandées et empreintes : tout ce qu'un service informatique doit savoir sur NiderVoice.">
+<title>IT kit — NiderVoice</title>
+<meta name="description" content="MSI installation, network matrix, self-verification, recommended policies and fingerprints: what an IT department needs to know about NiderVoice.">
 <meta name="theme-color" content="#0A0E15">
 <meta name="color-scheme" content="dark">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Kit informatique — NiderVoice">
-<meta property="og:description" content="Installation MSI, matrice réseau, vérification par vos soins, stratégies recommandées et empreintes : tout ce qu'un service informatique doit savoir sur NiderVoice.">
+<meta property="og:title" content="IT kit — NiderVoice">
+<meta property="og:description" content="MSI installation, network matrix, self-verification, recommended policies and fingerprints: what an IT department needs to know about NiderVoice.">
 <meta property="og:url" content="https://nidervoice.com/securite/informatique/">
-<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg?v=20261116c">
+<meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg?v=20261116d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="stylesheet" href="/assets/nv.css?v=20261116c">
 </head>
@@ -23,7 +23,7 @@
     <a class="logo" href="/" aria-label="NiderVoice"><img src="/assets/nidervoice-logo-sombre.svg?v=20261116" width="146" height="28" alt="NiderVoice"></a>
     <nav class="main-nav" aria-label="Navigation"><a href="/securite/" aria-current=page><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a><a href="/deploiement/"><span data-fr>Déploiement</span><span data-en>Deployment</span><span data-es>Despliegue</span><span data-de>Bereitstellung</span></a><a href="/secteurs/"><span data-fr>Secteurs</span><span data-en>Industries</span><span data-es>Sectores</span><span data-de>Branchen</span></a><a href="/modeles/"><span data-fr>Modèles</span><span data-en>Models</span><span data-es>Modelos</span><span data-de>Modelle</span></a></nav>
     <div class="right">
-      <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button><button type="button" data-lang="de" aria-pressed="false">DE</button></div>
+      <div class="lang" role="group" aria-label="Language / Langue"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="fr" aria-pressed="false">FR</button><button type="button" data-lang="es" aria-pressed="false">ES</button><button type="button" data-lang="de" aria-pressed="false">DE</button></div>
       <a class="pill light" href="mailto:contact@nidervoice.com"><span data-fr>Demander une démo</span><span data-en>Request a demo</span><span data-es>Solicitar una demo</span><span data-de>Demo anfragen</span></a>
       <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
     </div>
@@ -59,7 +59,7 @@
     <tr><td>Application</td><td>Programme Windows 64 bits écrit en Rust (cadre Tauri). Interface affichée par Microsoft Edge WebView2.</td></tr>
     <tr><td>Moteur de reconnaissance</td><td>Bibliothèques locales (formats GGML/GGUF), exécutées sur le processeur ou la carte graphique. Pas de carte graphique obligatoire.</td></tr>
     <tr><td>Modèles</td><td>Fichiers livrés dans le dossier <code>models</code> de l'installation, vérifiés au chargement.</td></tr>
-    <tr><td>Réglages</td><td>Quelques kilo-octets dans le profil de l'utilisateur (<code>%APPDATA%</code>).</td></tr>
+    <tr><td>Réglages</td><td>Quelques kilo-octets dans le profil de l'utilisateur (<code>%APPDATA%</code>), dictionnaire personnel compris : ils suivent les profils itinérants.</td></tr>
     <tr><td>Journaux techniques</td><td>Dans <code>%LOCALAPPDATA%</code>, sans aucun texte dicté.</td></tr>
     <tr><td>Prérequis</td><td>Windows 10 ou 11, 64 bits ; WebView2 (présent sur Windows 11) ; un micro ; quelques Go d'espace disque selon les modèles choisis.</td></tr>
   </table></div>
@@ -71,7 +71,7 @@
     <tr><td>Application</td><td>64-bit Windows program written in Rust (Tauri framework). Interface rendered by Microsoft Edge WebView2.</td></tr>
     <tr><td>Recognition engine</td><td>Local libraries (GGML/GGUF formats), run on the CPU or the graphics card. No graphics card required.</td></tr>
     <tr><td>Models</td><td>Files shipped in the installation's <code>models</code> folder, verified at load time.</td></tr>
-    <tr><td>Settings</td><td>A few kilobytes in the user profile (<code>%APPDATA%</code>).</td></tr>
+    <tr><td>Settings</td><td>A few kilobytes in the user profile (<code>%APPDATA%</code>), personal dictionary included: they follow roaming profiles.</td></tr>
     <tr><td>Technical logs</td><td>In <code>%LOCALAPPDATA%</code>, with no dictated text.</td></tr>
     <tr><td>Requirements</td><td>Windows 10 or 11, 64-bit; WebView2 (included in Windows 11); a microphone; a few GB of disk space depending on the models chosen.</td></tr>
   </table></div>
@@ -81,7 +81,7 @@
     <tr><td>Aplicación</td><td>Programa de 64 bits para Windows escrito en Rust (framework Tauri). Interfaz renderizada por Microsoft Edge WebView2.</td></tr>
     <tr><td>Motor de reconocimiento</td><td>Librerías locales (formatos GGML/GGUF), ejecutadas en la CPU o en la tarjeta gráfica. No se requiere tarjeta gráfica.</td></tr>
     <tr><td>Modelos</td><td>Archivos incluidos en la carpeta <code>models</code> de la instalación, verificados en el momento de la carga.</td></tr>
-    <tr><td>Configuración</td><td>Unos pocos kilobytes en el perfil del usuario (<code>%APPDATA%</code>).</td></tr>
+    <tr><td>Configuración</td><td>Unos pocos kilobytes en el perfil del usuario (<code>%APPDATA%</code>), incluido el diccionario personal: siguen los perfiles móviles.</td></tr>
     <tr><td>Registros técnicos</td><td>En <code>%LOCALAPPDATA%</code>, sin texto dictado.</td></tr>
     <tr><td>Requisitos</td><td>Windows 10 o 11, 64 bits; WebView2 (incluido en Windows 11); un micrófono; unos pocos GB de espacio en disco según los modelos elegidos.</td></tr>
   </table></div></div><div data-de><h2>Komponenten</h2>
@@ -90,7 +90,7 @@
     <tr><td>Anwendung</td><td>64-Bit Windows-Programm, geschrieben in Rust (Tauri-Framework). Oberfläche wird von Microsoft Edge WebView2 gerendert.</td></tr>
     <tr><td>Erkennungs-Engine</td><td>Lokale Bibliotheken (GGML/GGUF-Formate), die auf der CPU oder der Grafikkarte ausgeführt werden. Keine Grafikkarte erforderlich.</td></tr>
     <tr><td>Modelle</td><td>Dateien, die im <code>models</code>-Ordner der Installation enthalten sind und beim Laden überprüft werden.</td></tr>
-    <tr><td>Einstellungen</td><td>Einige Kilobyte im Benutzerprofil (<code>%APPDATA%</code>).</td></tr>
+    <tr><td>Einstellungen</td><td>Einige Kilobyte im Benutzerprofil (<code>%APPDATA%</code>), einschließlich des persönlichen Wörterbuchs: Sie folgen servergespeicherten Profilen.</td></tr>
     <tr><td>Technische Protokolle</td><td>In <code>%LOCALAPPDATA%</code>, ohne Diktattexte.</td></tr>
     <tr><td>Anforderungen</td><td>Windows 10 oder 11, 64-Bit; WebView2 (in Windows 11 enthalten); ein Mikrofon; einige GB Festplattenspeicher, abhängig von den gewählten Modellen.</td></tr>
   </table></div></div>

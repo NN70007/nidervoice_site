@@ -204,3 +204,10 @@ footer.big .legal{display:flex;justify-content:space-between;gap:20px;flex-wrap:
 .head-grid h1{font-size:clamp(40px,5.2vw,70px)}
 .scenario{margin-bottom:24px}
 @media print{html,body{background:#fff!important}.w,.layout{padding-left:0!important;padding-right:0!important;max-width:none}.docmeta .sep{display:none}}
+
+/* Surfaces en verre dépoli : le fond de points reste perceptible, mais atténué */
+:root{--glass:linear-gradient(180deg,rgba(18,26,39,.82),rgba(13,19,29,.88))}
+.card,.tile,.tbl-wrap,.head-visual,.scenario,.note,.toc{-webkit-backdrop-filter:blur(5px) saturate(1.1);backdrop-filter:blur(5px) saturate(1.1)}
+.card,.tile,.head-visual{background:var(--glass)}
+.tbl-wrap,.scenario{background:rgba(10,14,21,.8)}
+@media print{.card,.tile,.tbl-wrap,.head-visual,.scenario,.note{backdrop-filter:none;-webkit-backdrop-filter:none}}
