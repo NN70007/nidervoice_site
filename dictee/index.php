@@ -66,7 +66,9 @@ $v = @filemtime(__DIR__ . '/app/app.js') ?: 0;
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dictée NiderVoice</title>
 <style nonce="<?= h($nonce) ?>">
-:root{--ink:#1b2430;--muted:#5d6b7a;--line:#d5dde5;--bg:#f3f6f8;--card:#fff;--acc:#0f5e7a;--acc2:#0b4a60;--rec:#b3261e;--ok:#1f7a4d}
+:root{--ink:#1b2430;--muted:#5d6b7a;--line:#d5dde5;--bg:#f3f6f8;--card:#fff;--acc:#0f5e7a;--acc2:#0b4a60;--acc-soft:#0f5e7a;--rec:#b3261e;--ok:#1f7a4d;--flash:#eef6f9;--errbg:#fbeeee;color-scheme:light}
+:root[data-theme=dark]{--ink:#e3e8ed;--muted:#9ba8b5;--line:#2f3b47;--bg:#10151b;--card:#19212a;--acc:#1f6f8c;--acc2:#185a72;--acc-soft:#7cc3dc;--rec:#c4413a;--ok:#4caf7d;--flash:#15303b;--errbg:#3a1c1c;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#e3e8ed;--muted:#9ba8b5;--line:#2f3b47;--bg:#10151b;--card:#19212a;--acc:#1f6f8c;--acc2:#185a72;--acc-soft:#7cc3dc;--rec:#c4413a;--ok:#4caf7d;--flash:#15303b;--errbg:#3a1c1c;color-scheme:dark}}
 *{box-sizing:border-box}
 body{margin:0;font:16px/1.5 "Segoe UI",system-ui,sans-serif;color:var(--ink);background:var(--bg)}
 header{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.2rem;background:var(--card);border-bottom:1px solid var(--line)}
@@ -75,29 +77,30 @@ header small{color:var(--muted)}
 main{max-width:58rem;margin:1.2rem auto;padding:0 1rem}
 .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1.2rem 1.4rem;margin-bottom:1rem}
 label{display:block;font-weight:600;margin:.4rem 0 .3rem}
-input[type=email],input[type=text],input[type=password]{width:100%;max-width:26rem;padding:.55rem .7rem;font:inherit;border:1px solid var(--line);border-radius:6px}
+input[type=email],input[type=text],input[type=password]{width:100%;max-width:26rem;padding:.55rem .7rem;font:inherit;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)}
 button{font:inherit;padding:.55rem 1rem;border-radius:6px;border:1px solid var(--acc);background:var(--acc);color:#fff;cursor:pointer}
-button.sec{background:#fff;color:var(--acc)}
+button.sec{background:var(--card);color:var(--acc-soft);border-color:var(--acc-soft)}
+#theme{padding:.3rem .7rem;font-size:.9rem}
 button:disabled{opacity:.45;cursor:default}
 button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #8cc3d6;outline-offset:1px}
 #rec{font-size:1.15rem;padding:.8rem 1.6rem;min-width:12rem}
 #rec.on{background:var(--rec);border-color:var(--rec)}
-textarea{width:100%;min-height:22rem;padding:.8rem;font:17px/1.55 "Segoe UI",system-ui,sans-serif;border:1px solid var(--line);border-radius:6px;resize:vertical}
+textarea{width:100%;min-height:22rem;padding:.8rem;font:17px/1.55 "Segoe UI",system-ui,sans-serif;border:1px solid var(--line);border-radius:6px;resize:vertical;background:var(--card);color:var(--ink)}
 .row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.7rem 0}
 .muted{color:var(--muted);font-size:.92rem}
-.flash{background:#eef6f9;border-left:4px solid var(--acc);padding:.6rem .9rem;margin-bottom:1rem}
-.err{background:#fbeeee;border-left-color:var(--rec)}
+.flash{background:var(--flash);border-left:4px solid var(--acc);padding:.6rem .9rem;margin-bottom:1rem}
+.err{background:var(--errbg);border-left-color:var(--rec)}
 progress{width:100%;height:.8rem}
 #state{font-weight:600}
 .hidden{display:none}
-details summary{cursor:pointer;color:var(--acc)}
+details summary{cursor:pointer;color:var(--acc-soft)}
 </style>
 <?php if ($s): ?>
 <script type="module" src="app/app.js?v=<?= (int) $v ?>"></script>
 <?php endif; ?>
 </head>
 <body>
-<header><b>Dictée NiderVoice</b><small>Reconnaissance dans ce navigateur — rien n'est envoyé</small></header>
+<header><b>Dictée NiderVoice</b><small>Reconnaissance dans ce navigateur — rien n'est envoyé<?php if ($s): ?> <button type="button" id="theme" class="sec" aria-pressed="false">Mode nuit</button><?php endif; ?></small></header>
 <main>
 <?php if ($flash !== ''): ?><div class="flash"><?= h($flash) ?></div><?php endif; ?>
 <?php if (!$s && $step === 'email'): ?>
