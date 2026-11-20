@@ -7,7 +7,8 @@
  *
  * Actions (POST, jeton CSRF dans l'en-tête X-CSRF) :
  *   start              → {id}
- *   chunk&id&i         → corps = morceau chiffré n° i (dans l'ordre, ≤ NV_DEPOT_CHUNK + 16 octets)
+ *   chunk&id&i         → corps = morceau chiffré n° i (dans n'importe quel ordre, en parallèle,
+ *                        ≤ NV_DEPOT_CHUNK + 16 octets), écrit à sa place ; <id>.ok note les morceaux reçus
  *   finish&id          → corps JSON {k: clé enveloppée b64, m: manifeste chiffré b64, n: nombre de morceaux}
  */
 declare(strict_types=1);
@@ -62,6 +63,7 @@ try {
         foreach (glob("$d/*.part") ?: [] as $old) {
             if (filemtime($old) < time() - NV_DEPOT_PART_HOURS * 3600) {
                 @unlink($old);
+                @unlink(substr($old, 0, -5) . '.ok');
             }
         }
         if (depot_used($d) > NV_DEPOT_MAX_BYTES) {
@@ -73,9 +75,9 @@ try {
         echo json_encode(['id' => $id]);
     } elseif ($action === 'chunk') {
         $i = (int) ($_GET['i'] ?? -1);
-        clearstatcache();
-        if (!is_file($part) || filesize($part) !== $i * (NV_DEPOT_CHUNK + 16)) {
-            fail(409, 'Morceau hors séquence.');
+        $offset = $i * (NV_DEPOT_CHUNK + 16);
+        if (!is_file($part) || $i < 0 || $offset + NV_DEPOT_CHUNK + 16 > NV_DEPOT_MAX_BYTES) {
+            fail(400, 'Morceau invalide.');
         }
         $body = file_get_contents('php://input', false, null, 0, NV_DEPOT_CHUNK + 17);
         if ($body === false || strlen($body) < 16 || strlen($body) > NV_DEPOT_CHUNK + 16) {
@@ -84,7 +86,20 @@ try {
         if (depot_used($d) + strlen($body) > NV_DEPOT_MAX_BYTES) {
             fail(507, 'Espace d\'attente plein.');
         }
-        file_put_contents($part, $body, FILE_APPEND | LOCK_EX);
+        $f = fopen($part, 'c');
+        flock($f, LOCK_EX);
+        fseek($f, $offset);
+        fwrite($f, $body);
+        fflush($f);
+        flock($f, LOCK_UN);
+        fclose($f);
+        $ok = fopen("$d/$id.ok", 'c');   // un octet « 1 » par morceau reçu
+        flock($ok, LOCK_EX);
+        fseek($ok, $i);
+        fwrite($ok, '1');
+        flock($ok, LOCK_UN);
+        fclose($ok);
+        @chmod("$d/$id.ok", 0600);
         echo json_encode(['ok' => true]);
     } elseif ($action === 'finish') {
         $j = json_decode((string) file_get_contents('php://input', false, null, 0, 65536), true);
@@ -94,10 +109,12 @@ try {
         clearstatcache();
         $size = is_file($part) ? filesize($part) : -1;
         $okSize = $n >= 1 && $size > ($n - 1) * (NV_DEPOT_CHUNK + 16) && $size <= $n * (NV_DEPOT_CHUNK + 16);
-        if (!$okSize || !preg_match('#^[A-Za-z0-9+/=]{684}$#', $k) || !preg_match('#^[A-Za-z0-9+/=]{20,40000}$#', $m)) {
+        $allChunks = @file_get_contents("$d/$id.ok") === str_repeat('1', max(1, $n));
+        if (!$okSize || !$allChunks || !preg_match('#^[A-Za-z0-9+/=]{684}$#', $k) || !preg_match('#^[A-Za-z0-9+/=]{20,40000}$#', $m)) {
             fail(400, 'Fin d\'envoi invalide.');
         }
         rename($part, "$d/$id.bin");
+        @unlink("$d/$id.ok");
         $tmp = "$d/$id.tmp";
         file_put_contents($tmp, json_encode(['v' => 1, 'k' => $k, 'm' => $m, 'n' => $n, 'c' => NV_DEPOT_CHUNK]));
         @chmod($tmp, 0600);

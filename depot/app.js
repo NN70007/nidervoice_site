@@ -13,6 +13,8 @@
  * Format lu par C:\DicteeLab\depot\recuperer_depot.py : toute modification doit être faite des deux côtés.
  */
 const CHUNK = 4 * 1024 * 1024;
+const PARALLEL = 6; // envois simultanés au plus (morceaux et fichiers confondus)
+const FILES_AT_ONCE = 3;
 const app = document.getElementById('app');
 const csrf = app.dataset.csrf;
 const enc = new TextEncoder();
@@ -57,9 +59,23 @@ async function api(action, params, body) {
       if (r.ok) return j;
       if (r.status < 500 || attempt >= 3) throw new Error(j.erreur || 'Erreur ' + r.status);
     } catch (e) {
-      if (attempt >= 3 || e.message.startsWith('Session') || e.message.includes('séquence')) throw e;
+      if (attempt >= 3 || e.message.startsWith('Session')) throw e;
     }
     await new Promise((res) => setTimeout(res, 1500 * attempt));
+  }
+}
+
+/** Limite le nombre d'envois simultanés : chaque morceau n'est lu et chiffré qu'au moment de partir. */
+let active = 0;
+const waiting = [];
+async function slot(fn) {
+  while (active >= PARALLEL) await new Promise((res) => waiting.push(res));
+  active++;
+  try {
+    return await fn();
+  } finally {
+    active--;
+    if (waiting.length) waiting.shift()();
   }
 }
 
@@ -67,18 +83,21 @@ async function sendFile(file, path, onBytes) {
   const key = await crypto.subtle.generateKey({ name: 'AES-GCM', length: 256 }, true, ['encrypt']);
   const prefix = crypto.getRandomValues(new Uint8Array(8));
   const n = Math.max(1, Math.ceil(file.size / CHUNK));
-  const { id } = await api('start', {});
-  for (let i = 0; i < n; i++) {
-    const plain = await file.slice(i * CHUNK, (i + 1) * CHUNK).arrayBuffer();
-    const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv(prefix, i), additionalData: aad(i, i === n - 1) }, key, plain);
-    await api('chunk', { id, i }, ct);
-    onBytes(plain.byteLength);
-  }
+  const { id } = await slot(() => api('start', {}));
+  const chunks = Array.from({ length: n }, (_, i) =>
+    slot(async () => {
+      const plain = await file.slice(i * CHUNK, (i + 1) * CHUNK).arrayBuffer();
+      const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv(prefix, i), additionalData: aad(i, i === n - 1) }, key, plain);
+      await api('chunk', { id, i }, ct);
+      onBytes(plain.byteLength);
+    }),
+  );
+  await Promise.all(chunks);
   const manifest = enc.encode(JSON.stringify({ p: path, s: file.size, t: file.lastModified }));
   const m = await crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv(prefix, 0xffffffff), additionalData: enc.encode('NVD1M') }, key, manifest);
   const raw = await crypto.subtle.exportKey('raw', key);
   const k = await crypto.subtle.encrypt({ name: 'RSA-OAEP' }, await pubKey, raw);
-  await api('finish', { id }, JSON.stringify({ k: b64(k), m: b64(new Uint8Array([...prefix, ...new Uint8Array(m)])), n }));
+  await slot(() => api('finish', { id }, JSON.stringify({ k: b64(k), m: b64(new Uint8Array([...prefix, ...new Uint8Array(m)])), n })));
 }
 
 /** Parcourt un dossier glissé (API d'entrées du navigateur) et renvoie [{file, path}]. */
@@ -104,26 +123,33 @@ async function sendAll(items) {
   let done = 0;
   let ok = 0;
   $('progressBox').classList.remove('hidden');
-  for (const it of items) {
-    const li = document.createElement('li');
-    li.append(Object.assign(document.createElement('span'), { textContent: it.path }));
-    const st = Object.assign(document.createElement('span'), { textContent: 'chiffrement…' });
-    li.append(st);
-    $('list').prepend(li);
-    $('status').textContent = it.path;
-    try {
-      await sendFile(it.file, it.path, (b) => {
-        done += b;
-        $('bar').value = (100 * done) / total;
-      });
-      st.textContent = 'envoyé';
-      li.className = 'ok';
-      ok++;
-    } catch (e) {
-      st.textContent = e.message || 'échec';
-      li.className = 'bad';
+  $('status').textContent = `Envoi de ${items.length} fichier(s)…`;
+  const queue = [...items];
+  const worker = async () => {
+    for (let it = queue.shift(); it; it = queue.shift()) {
+      const li = document.createElement('li');
+      li.append(Object.assign(document.createElement('span'), { textContent: it.path }));
+      const st = Object.assign(document.createElement('span'), { textContent: 'en attente…' });
+      li.append(st);
+      $('list').prepend(li);
+      let sent = 0;
+      try {
+        await sendFile(it.file, it.path, (b) => {
+          sent += b;
+          done += b;
+          st.textContent = `envoi ${Math.floor((100 * sent) / (it.file.size || 1))} %`;
+          $('bar').value = (100 * done) / total;
+        });
+        st.textContent = 'envoyé';
+        li.className = 'ok';
+        ok++;
+      } catch (e) {
+        st.textContent = e.message || 'échec';
+        li.className = 'bad';
+      }
     }
-  }
+  };
+  await Promise.all(Array.from({ length: Math.min(FILES_AT_ONCE, items.length) }, worker));
   $('status').textContent = `${ok} fichier(s) sur ${items.length} envoyé(s), chiffrés. Arrivée sur CHX dans 5 minutes environ.`;
   $('bar').value = 100;
   busy = false;
