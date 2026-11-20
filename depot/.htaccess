@@ -1,0 +1,13 @@
+# ====== Dépôt chiffré NiderVoice (usage personnel) ======
+Options -Indexes
+<FilesMatch "\.(sqlite|json|txt|md|bin|map)$">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^cle\.php$">
+  Require all denied
+</FilesMatch>
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>

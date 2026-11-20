@@ -1,6 +1,7 @@
 <?php
 /** Dictée NiderVoice en ligne — connexion par code e-mail, puis page de dictée (tout se fait dans le navigateur). */
 declare(strict_types=1);
+const NV_APP = 'dictee';
 require_once __DIR__ . '/lib/base.php';
 
 if (!nv_https() && !nv_dev()) {
@@ -15,39 +16,7 @@ $step = 'email';
 $pending = '';
 $s = null;
 try {
-    $s = nv_session();
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $action = (string) ($_POST['action'] ?? '');
-        $email = strtolower(trim((string) ($_POST['email'] ?? '')));
-        if ($s && $action === 'logout' && hash_equals($s['csrf'], (string) ($_POST['csrf'] ?? ''))) {
-            nv_db()->prepare('DELETE FROM sessions WHERE token_hash = ?')->execute([hash('sha256', (string) $_COOKIE[NV_COOKIE])]);
-            nv_set_cookie('', time() - 3600);
-            header('Location: ./', true, 303);
-            exit;
-        } elseif (!$s && $action === 'send' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            if (in_array($email, NV_DICTEE_EMAILS, true)) {
-                nv_send_code($email);
-            }
-            $flash = "Si cette adresse est autorisée, un code vient d'y être envoyé. Pensez à regarder dans les indésirables.";
-            $step = 'code';
-            $pending = $email;
-        } elseif (!$s && $action === 'verify') {
-            $code = preg_replace('/\D/', '', (string) ($_POST['code'] ?? ''));
-            if (in_array($email, NV_DICTEE_EMAILS, true) && strlen($code) === 6 && nv_check_code($email, $code)) {
-                $tok = bin2hex(random_bytes(32));
-                $exp = time() + NV_SESSION_HOURS * 3600;
-                nv_db()->prepare('INSERT INTO sessions (token_hash, email, csrf, expires_at) VALUES (?, ?, ?, ?)')
-                    ->execute([hash('sha256', $tok), $email, bin2hex(random_bytes(16)), $exp]);
-                nv_set_cookie($tok, $exp);
-                nv_log($email, 'connexion');
-                header('Location: ./', true, 303);
-                exit;
-            }
-            $flash = 'Code incorrect ou expiré.';
-            $step = 'code';
-            $pending = $email;
-        }
-    }
+    [$s, $flash, $step, $pending] = nv_login_flow();
 } catch (Throwable $e) {
     error_log('Dictée NiderVoice : ' . $e->getMessage());
     $flash = 'Erreur du serveur. Réessayez dans un instant.';

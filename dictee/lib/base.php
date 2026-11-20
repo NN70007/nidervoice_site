@@ -1,15 +1,18 @@
 <?php
 /**
- * Dictée NiderVoice en ligne (usage personnel de l'auteur).
+ * Espace personnel NiderVoice (usage personnel de l'auteur) : dictée en ligne et dépôt chiffré.
  * Connexion par code à usage unique envoyé par e-mail (adresses de NV_DICTEE_EMAILS seulement).
- * Le modèle est stocké CHIFFRÉ hors du dossier public et n'est envoyé qu'après connexion.
- * La reconnaissance se fait dans le navigateur : ni le son ni le texte ne sont envoyés au serveur.
+ * Chaque page définit NV_APP ('dictee' ou 'depot') avant d'inclure ce fichier : cookie distinct par page.
+ * Les données (modèle chiffré, dépôts chiffrés, base des sessions) sont hors du dossier public.
  */
 declare(strict_types=1);
 
 const NV_DICTEE_EMAILS = ['jb.niedercorn@gmail.com', 'jb@niedercorn.com'];
 const NV_MAIL_FROM = 'NiderVoice <licences@nidervoice.com>';
-const NV_COOKIE = 'nvdictee';
+if (!defined('NV_APP')) {
+    define('NV_APP', 'dictee');
+}
+define('NV_COOKIE', 'nv' . NV_APP);
 const NV_SESSION_HOURS = 12;
 const NV_CODE_MINUTES = 10;
 
@@ -67,7 +70,7 @@ function nv_log(string $email, string $action): void
 function nv_set_cookie(string $value, int $expires): void
 {
     setcookie(NV_COOKIE, $value, [
-        'expires' => $expires, 'path' => '/dictee/', 'secure' => nv_https(),
+        'expires' => $expires, 'path' => '/' . NV_APP . '/', 'secure' => nv_https(),
         'httponly' => true, 'samesite' => 'Strict',
     ]);
 }
@@ -110,11 +113,11 @@ function nv_send_code(string $email): void
         file_put_contents(nv_data_dir() . '/dernier_code.txt', "$email $code\n");
         return;
     }
-    $body = "Bonjour,\n\nVotre code d'accès à la dictée NiderVoice : $code\n\n"
+    $body = "Bonjour,\n\nVotre code d'accès à l'espace NiderVoice (dictée, dépôt) : $code\n\n"
         . 'Il est valable ' . NV_CODE_MINUTES . " minutes et ne peut servir qu'une fois.\n"
         . "Si vous n'avez pas demandé ce code, ignorez ce message.\n\nNiderVoice\n";
     $headers = 'From: ' . NV_MAIL_FROM . "\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit";
-    @mail($email, mb_encode_mimeheader("Code d'accès — dictée NiderVoice", 'UTF-8'), $body, $headers);
+    @mail($email, mb_encode_mimeheader("Code d'accès — NiderVoice", 'UTF-8'), $body, $headers);
 }
 
 function nv_check_code(string $email, string $code): bool
@@ -132,6 +135,52 @@ function nv_check_code(string $email, string $code): bool
     }
     $db->prepare('DELETE FROM codes WHERE email = ?')->execute([$email]);
     return true;
+}
+
+/**
+ * Traite le formulaire de connexion (envoi du code, vérification, déconnexion).
+ * Renvoie [session ou null, message, étape 'email'|'code', adresse en attente].
+ */
+function nv_login_flow(): array
+{
+    $flash = '';
+    $step = 'email';
+    $pending = '';
+    $s = nv_session();
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        return [$s, $flash, $step, $pending];
+    }
+    $action = (string) ($_POST['action'] ?? '');
+    $email = strtolower(trim((string) ($_POST['email'] ?? '')));
+    if ($s && $action === 'logout' && hash_equals($s['csrf'], (string) ($_POST['csrf'] ?? ''))) {
+        nv_db()->prepare('DELETE FROM sessions WHERE token_hash = ?')->execute([hash('sha256', (string) $_COOKIE[NV_COOKIE])]);
+        nv_set_cookie('', time() - 3600);
+        header('Location: ./', true, 303);
+        exit;
+    } elseif (!$s && $action === 'send' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (in_array($email, NV_DICTEE_EMAILS, true)) {
+            nv_send_code($email);
+        }
+        $flash = "Si cette adresse est autorisée, un code vient d'y être envoyé. Pensez à regarder dans les indésirables.";
+        $step = 'code';
+        $pending = $email;
+    } elseif (!$s && $action === 'verify') {
+        $code = preg_replace('/\D/', '', (string) ($_POST['code'] ?? ''));
+        if (in_array($email, NV_DICTEE_EMAILS, true) && strlen($code) === 6 && nv_check_code($email, $code)) {
+            $tok = bin2hex(random_bytes(32));
+            $exp = time() + NV_SESSION_HOURS * 3600;
+            nv_db()->prepare('INSERT INTO sessions (token_hash, email, csrf, expires_at) VALUES (?, ?, ?, ?)')
+                ->execute([hash('sha256', $tok), $email, bin2hex(random_bytes(16)), $exp]);
+            nv_set_cookie($tok, $exp);
+            nv_log($email, 'connexion ' . NV_APP);
+            header('Location: ./', true, 303);
+            exit;
+        }
+        $flash = 'Code incorrect ou expiré.';
+        $step = 'code';
+        $pending = $email;
+    }
+    return [$s, $flash, $step, $pending];
 }
 
 /** En-têtes communs : isolation (calcul multi-cœurs dans le navigateur) et aucune connexion vers un autre site. */
