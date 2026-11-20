@@ -99,7 +99,7 @@ code{font-size:.8rem;word-break:break-all}
     <div id="progressBox" class="hidden"><p id="status"></p><progress id="bar" max="100" value="0"></progress></div>
     <ul id="list"></ul>
   </div>
-  <p class="muted">Les fichiers arrivent dans <b>SynologyDriveCHX\Dropbox</b> en 5 minutes environ, avec leur arborescence. Le serveur ne garde qu'une copie chiffrée, effacée dès que CHX l'a récupérée et vérifiée. Les dossiers vides ne sont pas transmis.</p>
+  <p class="muted">Les fichiers arrivent dans <b>SynologyDriveCHX\Dropbox</b> en 5 minutes environ, avec leur arborescence. Le serveur ne garde qu'une copie chiffrée, effacée dès que CHX l'a récupérée et vérifiée. Sur CHX, chaque fichier passe par l'antivirus avant d'être rangé ; un fichier suspect reste en quarantaine, chiffré. Les dossiers vides ne sont pas transmis.</p>
   <p class="muted">Empreinte de la clé de CHX : <code><?= h(NV_DEPOT_PK_SHA256) ?></code></p>
 </div>
 <form method="post" class="row">
