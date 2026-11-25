@@ -1,14 +1,16 @@
-/* Formulaire de contact : prépare un e-mail dans la messagerie du visiteur.
-   Aucun envoi par le site, aucun appel réseau, rien de conservé. */
+/* Formulaire de contact : envoie le message au serveur du site (une ligne dans une feuille privée
+   et un e-mail au destinataire). Si l'envoi échoue, propose de préparer un e-mail à la place.
+   Aucun cookie, aucun traceur, aucune ressource tierce chargée. */
 (function () {
   "use strict";
   var LANGS = ["fr", "en", "es", "de"];
   var M = {
     req: { fr: "Champs à compléter : ", en: "Fields to complete: ", es: "Campos por completar: ", de: "Auszufüllende Felder: " },
     mail: { fr: "L'adresse e-mail semble incorrecte.", en: "The e-mail address looks incorrect.", es: "La dirección de correo parece incorrecta.", de: "Die E-Mail-Adresse scheint nicht korrekt zu sein." },
-    ok: { fr: "Le message est prêt dans la messagerie de l'appareil. Il reste à l'envoyer.", en: "The message is ready in the device's mail application. It only remains to send it.", es: "El mensaje está listo en la aplicación de correo del dispositivo. Solo queda enviarlo.", de: "Die Nachricht steht im E-Mail-Programm des Geräts bereit. Sie muss nur noch gesendet werden." },
-    copie: { fr: "Message copié. Il peut être collé dans un e-mail adressé à ", en: "Message copied. It can be pasted into an e-mail addressed to ", es: "Mensaje copiado. Puede pegarse en un correo dirigido a ", de: "Nachricht kopiert. Sie kann in eine E-Mail an folgende Adresse eingefügt werden: " },
-    nocopie: { fr: "Copie impossible sur cet appareil. Adresse : ", en: "Copying is not possible on this device. Address: ", es: "No es posible copiar en este dispositivo. Dirección: ", de: "Kopieren ist auf diesem Gerät nicht möglich. Adresse: " }
+    envoi: { fr: "Envoi en cours…", en: "Sending…", es: "Enviando…", de: "Wird gesendet…" },
+    ok: { fr: "Message envoyé. La réponse sera adressée à ", en: "Message sent. The reply will be addressed to ", es: "Mensaje enviado. La respuesta se enviará a ", de: "Nachricht gesendet. Die Antwort geht an " },
+    echec: { fr: "L'envoi n'a pas abouti. Le message peut être envoyé par e-mail à ", en: "Sending did not succeed. The message can be sent by e-mail to ", es: "El envío no se ha completado. El mensaje puede enviarse por correo a ", de: "Das Senden ist nicht gelungen. Die Nachricht kann per E-Mail gesendet werden an " },
+    limite: { fr: "Trop de messages reçus en peu de temps. Écrire directement à ", en: "Too many messages received in a short time. Please write directly to ", es: "Demasiados mensajes recibidos en poco tiempo. Escriba directamente a ", de: "Zu viele Nachrichten in kurzer Zeit. Bitte direkt schreiben an " }
   };
   function langue() { var l = document.documentElement.lang || "en"; return LANGS.indexOf(l) < 0 ? "en" : l; }
   function propre(s) { return String(s == null ? "" : s).replace(/\s+/g, " ").trim(); }
@@ -40,35 +42,41 @@
     if (manque.length) return { erreur: M.req[langue()] + manque.join(", ") + "." };
     if (v.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email)) return { erreur: M.mail[langue()] };
     var sujet = (form.getAttribute("data-sujet") || location.hostname) + (v.objet ? " – " + v.objet : "") + (v.nom ? " – " + v.nom : "");
-    return { a: form.getAttribute("data-to"), sujet: sujet, corps: lignes.join("\n") + "\n\n" + (v.message || "") + "\n" };
+    return { a: form.getAttribute("data-to"), valeurs: v, sujet: sujet, corps: lignes.join("\n") + "\n\n" + (v.message || "") + "\n" };
   }
   function dire(form, texte, erreur) {
     var s = form.querySelector(".cf-status"); if (!s) return;
     s.textContent = texte; s.className = "cf-status" + (erreur ? " cf-erreur" : "");
   }
-  function copier(texte) {
-    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(texte);
-    return new Promise(function (ok, non) {
-      try {
-        var t = document.createElement("textarea"); t.value = texte; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
-        document.body.appendChild(t); t.select(); var fait = document.execCommand("copy"); document.body.removeChild(t); fait ? ok() : non();
-      } catch (e) { non(e); }
-    });
+  function repli(form, montrer) { var b = form.querySelector("[data-cf-mailto]"); if (b) b.hidden = !montrer; }
+  function envoyer(form, m) {
+    var api = form.getAttribute("data-api"), piege = form.querySelector("[data-cf-piege]");
+    var charge = { action: "contact", page: location.pathname, langue: langue(), site: piege ? piege.value : "" }, k;
+    for (k in m.valeurs) if (Object.prototype.hasOwnProperty.call(m.valeurs, k)) charge[k] = m.valeurs[k];
+    var ctl = window.AbortController ? new AbortController() : null, fin = ctl ? setTimeout(function () { ctl.abort(); }, 25000) : 0;
+    return fetch(api, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(charge), redirect: "follow", credentials: "omit", referrerPolicy: "no-referrer", signal: ctl ? ctl.signal : undefined })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { clearTimeout(fin); return j; }, function (e) { clearTimeout(fin); throw e; });
   }
   function brancher(form) {
     traduire(form);
+    var bouton = form.querySelector('button[type="submit"]'), occupe = false;
     form.addEventListener("submit", function (e) {
-      e.preventDefault();
+      e.preventDefault(); if (occupe) return;
+      var m = composer(form); if (m.erreur) { dire(form, m.erreur, true); return; }
+      occupe = true; if (bouton) bouton.disabled = true; repli(form, false); dire(form, M.envoi[langue()], false);
+      envoyer(form, m).then(function (j) {
+        if (j && j.ok) { var adr = m.valeurs.email; form.reset(); traduire(form); dire(form, M.ok[langue()] + adr + ".", false); }
+        else if (j && j.code === "limite") { dire(form, M.limite[langue()] + m.a + ".", true); repli(form, true); }
+        else { dire(form, M.echec[langue()] + m.a + ".", true); repli(form, true); }
+      }, function () { dire(form, M.echec[langue()] + m.a + ".", true); repli(form, true); })
+        .then(function () { occupe = false; if (bouton) bouton.disabled = false; });
+    });
+    var b = form.querySelector("[data-cf-mailto]");
+    if (b) b.addEventListener("click", function () {
       var m = composer(form); if (m.erreur) { dire(form, m.erreur, true); return; }
       var corps = m.corps; if (corps.length > 1500) corps = corps.slice(0, 1500) + "…";   // limite prudente des adresses mailto
       window.location.href = "mailto:" + m.a + "?subject=" + encodeURIComponent(m.sujet) + "&body=" + encodeURIComponent(corps);
-      dire(form, M.ok[langue()], false);
-    });
-    var b = form.querySelector("[data-cf-copier]");
-    if (b) b.addEventListener("click", function () {
-      var m = composer(form); if (m.erreur) { dire(form, m.erreur, true); return; }
-      copier(m.sujet + "\n\n" + m.corps).then(function () { dire(form, M.copie[langue()] + m.a + ".", false); },
-        function () { dire(form, M.nocopie[langue()] + m.a + ".", true); });
     });
   }
   function demarrer() {

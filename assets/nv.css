@@ -223,7 +223,7 @@ footer.big .legal{display:flex;justify-content:space-between;gap:20px;flex-wrap:
 .qa:last-child{border-bottom:0}
 .qa:first-child{border-top:0}
 
-/* Formulaire de contact (prépare un e-mail, n'envoie rien) */
+/* Formulaire de contact */
 .cf{display:grid;gap:14px;color:var(--cf-tx)}
 .cf-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
 .cf-row.cf-un{grid-template-columns:minmax(0,1fr)}
@@ -240,6 +240,10 @@ footer.big .legal{display:flex;justify-content:space-between;gap:20px;flex-wrap:
 .cf-note{font-size:13px;line-height:1.5;color:var(--cf-note);margin:0}
 .cf-status{font-size:14px;line-height:1.5;min-height:1.5em;margin:0;color:var(--cf-tx)}
 .cf-status.cf-erreur{color:var(--cf-err)}
+.cf-piege{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+.cf [hidden]{display:none!important}
+.cf button:disabled{opacity:.55;cursor:default}
+.cf-note a{color:inherit}
 @media(max-width:720px){.cf-row{grid-template-columns:minmax(0,1fr)}}
 @media print{.cf{display:none}}
 .cf-card{border:1px solid var(--line2);border-radius:18px;background:linear-gradient(180deg,var(--panel),#0D131D);padding:32px;max-width:860px;margin-bottom:36px}

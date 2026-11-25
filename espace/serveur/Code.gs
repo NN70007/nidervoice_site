@@ -24,7 +24,7 @@
 
 /* ======================= Réglages ======================= */
 var CONFIG = {
-  VERSION: '2026-11-04b',
+  VERSION: '2026-11-25a',
   // Adresses qui reçoivent tous les droits au premier lancement de « installer ».
   ADMINS_INITIAUX: ['jb@niedercorn.com'],
   NOM_ADMIN_INITIAL: 'Jean-Baptiste Niedercorn',
@@ -39,12 +39,17 @@ var CONFIG = {
   SAUV_JOURS: 30,
   // Publication
   ARTICLES_MAX: 1000,
-  IMAGE_MAX_OCTETS: 6 * 1024 * 1024
+  IMAGE_MAX_OCTETS: 6 * 1024 * 1024,
+  // Formulaire de contact public
+  CONTACT_DEST: 'contact@nidervoice.com',
+  CONTACT_PAR_HEURE: 20,
+  CONTACT_CHAMPS: { Organisation: 'organisation', Fonction: 'fonction', Objet: 'objet' }
 };
 
 var ONGLETS = {
   Acces: ['Email', 'Nom', 'Admin', 'Actualites', 'Actif', 'Note'],
-  Journal: ['Date', 'Qui', 'Action', 'Detail']
+  Journal: ['Date', 'Qui', 'Action', 'Detail'],
+  Messages: ['Date', 'Nom', 'Email', 'Organisation', 'Fonction', 'Objet', 'Message', 'Page', 'Langue']
 };
 
 /* ======================= Points d'entrée ======================= */
@@ -72,6 +77,7 @@ function route_(req) {
   if (a === 'auth.google') return authGoogle_(req.idToken);
   if (a === 'auth.demanderCode') return demanderCode_(req.email);
   if (a === 'auth.verifierCode') return verifierCode_(req.email, req.code);
+  if (a === 'contact') return contact_(req);
 
   // Actions avec session : l'utilisateur est relu dans l'onglet Acces à CHAQUE demande
   var user = userFromToken_(req.token);
@@ -85,6 +91,36 @@ function route_(req) {
     case 'pub.github': return pubGithub_(user, req.methode, req.chemin, req.corps);
     default: throw refus_('Action inconnue.', 'inconnu');
   }
+}
+
+/* ======================= Formulaire de contact public ======================= */
+/** Reçoit un message du formulaire du site : une ligne dans l'onglet Messages et un e-mail au destinataire.
+ *  Sans session. Garde-fous : champ piège, longueurs bornées, plafond horaire, cellules neutralisées par ajouter_. */
+function contact_(req) {
+  if (texte_(req.site, 200)) return { ok: true };            // champ piège rempli : robot, rien n'est gardé
+  var nom = texte_(req.nom, 120), email = norm_(texte_(req.email, 160));
+  var message = String(req.message == null ? '' : req.message).replace(/\r/g, '').replace(/[\u0000-\u0009\u000b-\u001f]/g, ' ').trim().slice(0, 4000);
+  if (!nom || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || message.length < 3) throw refus_('Le nom, une adresse e-mail valide et le message sont nécessaires.', 'champs');
+  var cache = CacheService.getScriptCache(), cle = 'contact:' + Math.floor(Date.now() / 3600000), nb = Number(cache.get(cle) || 0);
+  if (nb >= CONFIG.CONTACT_PAR_HEURE) throw refus_('Trop de messages reçus en peu de temps. Écrire directement à ' + CONFIG.CONTACT_DEST + '.', 'limite');
+  cache.put(cle, String(nb + 1), 3600);
+  var ligne = { Date: Utilities.formatDate(new Date(), CONFIG.FUSEAU, 'yyyy-MM-dd HH:mm'), Nom: nom, Email: email, Message: message, Page: texte_(req.page, 120), Langue: texte_(req.langue, 5) };
+  var details = [];
+  Object.keys(CONFIG.CONTACT_CHAMPS).forEach(function (col) {
+    ligne[col] = texte_(req[CONFIG.CONTACT_CHAMPS[col]], 160);
+    if (ligne[col]) details.push(col + ' : ' + ligne[col]);
+  });
+  verrou_(function () {
+    var ss = classeur_(false);
+    if (!ss.getSheetByName('Messages')) ss.insertSheet('Messages').getRange(1, 1, 1, ONGLETS.Messages.length).setValues([ONGLETS.Messages]);
+    ajouter_('Messages', ligne);
+  });
+  try {
+    MailApp.sendEmail({ to: CONFIG.CONTACT_DEST, replyTo: email, name: nomSite_(),
+      subject: nomSite_() + ' – ' + (ligne.Objet || 'message du site') + ' – ' + nom,
+      body: ['Nom : ' + nom, 'E-mail : ' + email].concat(details).join('\n') + '\n\n' + message + '\n\n(page ' + ligne.Page + ', langue ' + ligne.Langue + ')' });
+  } catch (e) { console.error(e && e.stack || e); }
+  return { ok: true };
 }
 
 /* ======================= Installation et entretien ======================= */

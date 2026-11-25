@@ -202,4 +202,23 @@ console.log('Script autonome (hors feuille)');
   ok(auto.sheets.Acces.data.length === 2, 'onglets créés dans la feuille mémorisée');
 }
 
+
+console.log('Formulaire de contact');
+{
+  const avant = srv.mails.length;
+  const base = { action: 'contact', nom: 'Jeanne Test', email: adr('jeanne'), message: 'Bonjour, ceci est un essai.', page: '/contact/', langue: 'fr' };
+  ok(srv.post(Object.assign({}, base, { objet: '=CMD()' })).ok === true, 'message accepté sans session');
+  const L = srv.sheets.Messages.data;
+  ok(L.length === 2 && L[1][1] === 'Jeanne Test' && L[1][2] === adr('jeanne'), 'ligne ajoutée dans l\'onglet Messages (créé à la demande)');
+  ok(L[1][L[0].indexOf('Message')] === 'Bonjour, ceci est un essai.' && L[1][L[0].indexOf('Page')] === '/contact/', 'message et page rangés dans leurs colonnes');
+  ok(srv.mails.length === avant + 1 && srv.mails[avant].replyTo === adr('jeanne') && srv.mails[avant].to === srv.ctx.CONFIG.CONTACT_DEST, 'e-mail de notification avec réponse vers l\'expéditeur');
+  ok(srv.post(Object.assign({}, base, { email: 'pas-un-mail' })).ok === false, 'adresse invalide refusée');
+  ok(srv.post(Object.assign({}, base, { message: 'x' })).ok === false, 'message trop court refusé');
+  ok(srv.post(Object.assign({}, base, { nom: '' })).ok === false, 'nom manquant refusé');
+  const n1 = srv.sheets.Messages.data.length, m1 = srv.mails.length;
+  ok(srv.post(Object.assign({}, base, { site: 'http://spam' })).ok === true && srv.sheets.Messages.data.length === n1 && srv.mails.length === m1, 'champ piège rempli : accepté en apparence, rien de gardé');
+  let dernier; for (let i = 0; i < 25; i++) dernier = srv.post(base);
+  ok(dernier.ok === false && dernier.code === 'limite', 'plafond horaire appliqué');
+}
+
 console.log('\n' + n + ' vérifications réussies.');
