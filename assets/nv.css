@@ -251,3 +251,17 @@ footer.big .legal{display:flex;justify-content:space-between;gap:20px;flex-wrap:
 @media(max-width:720px){.cf-card{padding:22px}}
 .cf-ou{margin:18px 0 0;font-size:14.5px;color:var(--mut)}
 .cf-ou a{color:var(--sky)}
+
+/* Pied de page commun aux sites NiderLabs (même distribution que Crosswind METAR) */
+footer.pc{--pc-fort:var(--tx);--pc-doux:var(--mut);--pc-trait:var(--line);--pc-accent:var(--sky);border-top:1px solid var(--pc-trait);padding:0;margin-top:0}
+.pc-haut{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:40px;padding:58px 0 46px}
+.pc-marque p{margin:16px 0 0;font-size:15px;line-height:1.75;color:var(--pc-doux);max-width:44ch}
+.pc-col h4{margin:4px 0 20px;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--pc-doux)}
+.pc-col a{display:block;margin:0 0 15px;font-size:16px;line-height:1.35;color:var(--pc-fort);text-decoration:none}
+.pc-col a:hover,.pc-legal a:hover{text-decoration:underline}
+.pc-bas{display:flex;justify-content:space-between;align-items:baseline;gap:14px 32px;flex-wrap:wrap;border-top:1px solid var(--pc-trait);padding:22px 0 30px;font-size:14px;line-height:1.6;color:var(--pc-doux)}
+.pc-bas p{margin:0}
+.pc-bas b{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--pc-accent)}
+.pc-legal a{color:var(--pc-fort);text-decoration:none}
+@media(max-width:900px){.pc-haut{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:34px 24px;padding:44px 0 34px}.pc-marque{grid-column:1/-1}}
+@media print{footer.pc{display:none}}
