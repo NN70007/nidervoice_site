@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://nidervoice.com/securite/">
 <meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg?v=20261116d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/nv.css?v=20261117a">
+<link rel="stylesheet" href="/assets/nv.css?v=20261125">
 </head>
 <body>
 <canvas id="dots" aria-hidden="true"></canvas>
@@ -35,8 +35,8 @@
 <div class="head-grid"><div>
   <div class="crumbs"><a href="/">NiderVoice</a> / <span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></div>
   <h1 class="serif"><span data-fr>La voix reste sur le poste. <em>Et vous pouvez le vérifier.</em></span><span data-en>The voice stays on the device. <em>And you can check it.</em></span><span data-es>La voz se queda en el dispositivo. <em>Y usted puede comprobarlo.</em></span><span data-de>Die Stimme bleibt auf dem Gerät. <em>Und Sie können dies überprüfen.</em></span></h1>
-  <p class="lead" data-fr>Cette page s'adresse au délégué à la protection des données, au service informatique et au responsable de la sécurité. Elle décrit ce que fait NiderVoice, ce qu'il ne fait pas, et comment le contrôler vous-même plutôt que de nous croire sur parole.</p>
-  <p class="lead" data-en>This page is for the data protection officer, the IT department and the security lead. It describes what NiderVoice does, what it does not do, and how to check it yourself rather than take our word for it.</p><p class="lead" data-es>Esta página está destinada al delegado de protección de datos, al departamento de informática y al responsable de seguridad. En ella se describe qué hace NiderVoice, qué no hace y cómo puede comprobarlo usted mismo en lugar de confiar en nuestra palabra.</p><p class="lead" data-de>Diese Seite richtet sich an den Datenschutzbeauftragten, die IT-Abteilung und den Sicherheitsverantwortlichen. Sie beschreibt, was NiderVoice tut, was es nicht tut und wie Sie dies selbst überprüfen können, anstatt unserem Wort zu vertrauen.</p>
+  <p class="lead" data-fr>Cette page s'adresse au délégué à la protection des données, au service informatique et au responsable de la sécurité. Elle décrit ce que fait NiderVoice, ce qu'il ne fait pas, et les moyens dont dispose l'organisation pour le contrôler par elle-même.</p>
+  <p class="lead" data-en>This page is intended for the data protection officer, the IT department and the security officer. It describes what NiderVoice does, what it does not do, and the means available to the organisation to verify this independently.</p><p class="lead" data-es>Esta página se dirige al delegado de protección de datos, al departamento de informática y al responsable de seguridad. Describe lo que hace NiderVoice, lo que no hace y los medios de que dispone la organización para comprobarlo por sí misma.</p><p class="lead" data-de>Diese Seite richtet sich an den Datenschutzbeauftragten, die IT-Abteilung und den Sicherheitsverantwortlichen. Sie beschreibt, was NiderVoice tut, was es nicht tut, und die Mittel, mit denen die Organisation dies eigenständig überprüfen kann.</p>
 </div>
 <div class="head-visual reveal" aria-hidden="true"><svg viewBox="0 0 420 250">
 <rect x="10" y="22" width="300" height="200" rx="16" fill="rgba(55,138,221,.05)" stroke="rgba(140,192,242,.45)" stroke-dasharray="5 6"/>
@@ -123,15 +123,15 @@
   </div>
   <div class="flow"><span class="n">Serveur NiderLabs</span><span class="x">✕</span><span class="n">Cloud</span><span class="x">✕</span><span class="n">Tiers</span><span class="x">✕</span></div>
   <h3>Le passage par le presse-papiers</h3>
-  <p>Pour insérer le texte dans n'importe quelle application, NiderVoice le colle. Ce détail compte pour un DPO, nous le documentons donc précisément :</p>
+  <p>Pour insérer le texte dans n'importe quelle application, NiderVoice procède par collage. Ce point intéresse directement le DPO ; il est donc documenté avec précision :</p>
   <ul>
     <li>le texte est écrit dans le presse-papiers de Windows avec les marqueurs qui l'<strong>excluent de l'historique (Win+V), de la synchronisation cloud du presse-papiers et des logiciels qui surveillent le presse-papiers</strong> ;</li>
     <li>il est <strong>effacé une seconde après</strong> le dernier collage ;</li>
     <li>un mode de saisie par frappe directe, sans presse-papiers, est aussi disponible.</li>
   </ul>
   <h3>Mesure réalisée</h3>
-  <p>En novembre 2026, nous avons lancé l'édition sans réseau sur Windows 11 avec un profil neuf et relevé toutes les connexions du programme et de ses sous-processus, ainsi que les nouvelles résolutions DNS, pendant un premier lancement puis pendant des transcriptions. Résultat : <strong>0 connexion TCP, 0 point UDP, 0 requête DNS</strong>.</p>
-  <div class="note"><p>Ne nous croyez pas sur parole : le <a href="/securite/informatique/#verifier">kit informatique</a> donne la commande pour refaire cette mesure sur vos postes.</p></div>
+  <p>En novembre 2026, l'édition sans réseau a été lancée sur Windows 11 avec un profil neuf. Toutes les connexions du programme et de ses sous-processus, ainsi que les nouvelles résolutions DNS, ont été relevées pendant un premier lancement puis pendant des transcriptions. Résultat : <strong>0 connexion TCP, 0 point UDP, 0 requête DNS</strong>.</p>
+  <div class="note"><p>Cette mesure est reproductible : le <a href="/securite/informatique/#verifier">kit informatique</a> fournit la commande permettant de la refaire sur les postes de l'organisation.</p></div>
 </div>
 <div data-en>
   <h2>The data flow, end to end</h2>
@@ -142,15 +142,15 @@
   </div>
   <div class="flow"><span class="n">NiderLabs server</span><span class="x">✕</span><span class="n">Cloud</span><span class="x">✕</span><span class="n">Third parties</span><span class="x">✕</span></div>
   <h3>Going through the clipboard</h3>
-  <p>To insert text into any application, NiderVoice pastes it. This detail matters to a DPO, so we document it precisely:</p>
+  <p>To insert text into any application, NiderVoice proceeds by pasting. This point is of direct concern to the DPO and is therefore documented precisely:</p>
   <ul>
     <li>the text is written to the Windows clipboard with the markers that <strong>exclude it from clipboard history (Win+V), cloud clipboard sync and clipboard-monitoring software</strong>;</li>
     <li>it is <strong>cleared one second after</strong> the last paste;</li>
     <li>a direct typing mode, without the clipboard, is also available.</li>
   </ul>
   <h3>Measurement</h3>
-  <p>In November 2026 we started the offline edition on Windows 11 with a fresh profile and recorded every connection of the program and its child processes, along with new DNS lookups, during a first launch and then during transcriptions. Result: <strong>0 TCP connections, 0 UDP endpoints, 0 DNS requests</strong>.</p>
-  <div class="note"><p>Don't take our word for it: the <a href="/securite/informatique/#verifier">IT kit</a> gives the command to repeat this measurement on your own machines.</p></div>
+  <p>In November 2026, the offline edition was launched on Windows 11 with a fresh profile. All connections made by the program and its sub-processes, together with any new DNS resolutions, were recorded during a first launch and then during transcriptions. Result: <strong>0 TCP connections, 0 UDP endpoints, 0 DNS queries</strong>.</p>
+  <div class="note"><p>This measurement is reproducible: the <a href="/securite/informatique/#verifier">IT kit</a> provides the command for repeating it on the organisation's workstations.</p></div>
 </div><div data-es><h2>El flujo de datos, de principio a fin</h2>
 <p>Todo el tratamiento se realiza dentro del equipo. El diagrama siguiente es completo: no existe otro camino.</p>
 <div class="boundary">
@@ -159,15 +159,15 @@
 </div>
 <div class="flow"><span class="n">Servidor de NiderLabs</span><span class="x">✕</span><span class="n">Nube</span><span class="x">✕</span><span class="n">Terceros</span><span class="x">✕</span></div>
 <h3>Pasando por el portapapeles</h3>
-<p>Para insertar texto en cualquier aplicación, NiderVoice lo pega. Este detalle es relevante para un DPD, por lo que lo documentamos con precisión:</p>
+<p>Para insertar el texto en cualquier aplicación, NiderVoice procede mediante pegado. Este punto concierne directamente al DPO, por lo que se documenta con precisión:</p>
 <ul>
   <li>el texto se escribe en el portapapeles de Windows con los marcadores que <strong>lo excluyen del historial del portapapeles (Win+V), la sincronización del portapapeles en la nube y el software de monitorización del portapapeles</strong>;</li>
   <li>se <strong>borra un segundo después</strong> del último pegado;</li>
   <li>también está disponible un modo de escritura directa, sin usar el portapapeles.</li>
 </ul>
 <h3>Medición</h3>
-<p>En noviembre de 2026 comenzamos la edición sin red en Windows 11 con un perfil nuevo y registramos cada conexión del programa y sus procesos hijos, junto con nuevas consultas DNS, durante un primer lanzamiento y luego durante transcripciones. Resultado: <strong>0 conexiones TCP, 0 puntos finales UDP, 0 solicitudes DNS</strong>.</p>
-<div class="note"><p>No nos tome la palabra: el <a href="/securite/informatique/#verifier">kit de informática</a> proporciona el comando para repetir esta medición en sus propias máquinas.</p></div></div><div data-de><h2>Der Datenfluss, von Anfang bis Ende</h2>
+<p>En noviembre de 2026, la edición sin red se ejecutó en Windows 11 con un perfil nuevo. Se registraron todas las conexiones del programa y de sus subprocesos, así como las nuevas resoluciones DNS, durante un primer inicio y después durante transcripciones. Resultado: <strong>0 conexiones TCP, 0 puntos UDP, 0 consultas DNS</strong>.</p>
+<div class="note"><p>Esta medición es reproducible: el <a href="/securite/informatique/#verifier">kit de informática</a> proporciona el comando que permite repetirla en los puestos de la organización.</p></div></div><div data-de><h2>Der Datenfluss, von Anfang bis Ende</h2>
 <p>Alle Verarbeitungen finden innerhalb des Arbeitsplatzes statt. Das folgende Diagramm ist vollständig: Es gibt keinen anderen Weg.</p>
 <div class="boundary">
   <div class="label">Arbeitsplatz</div>
@@ -175,15 +175,15 @@
 </div>
 <div class="flow"><span class="n">NiderLabs-Server</span><span class="x">✕</span><span class="n">Cloud</span><span class="x">✕</span><span class="n">Dritte</span><span class="x">✕</span></div>
 <h3>Über die Zwischenablage</h3>
-<p>Um Text in jede Anwendung einzufügen, fügt NiderVoice ihn ein. Dieses Detail ist für einen Datenschutzbeauftragten von Bedeutung, daher dokumentieren wir es präzise:</p>
+<p>Um Text in eine beliebige Anwendung einzufügen, verwendet NiderVoice das Einfügen aus der Zwischenablage. Dieser Punkt betrifft den Datenschutzbeauftragten unmittelbar und wird daher genau dokumentiert:</p>
 <ul>
   <li>der Text wird in die Windows-Zwischenablage mit den Markierungen geschrieben, die <strong>ihn von der Zwischenablage-Historie (Win+V), der Cloud-Zwischenablage-Synchronisation und der Zwischenablage-Überwachungssoftware ausschließen</strong>;</li>
   <li>er wird <strong>eine Sekunde nach</strong> dem letzten Einfügen gelöscht;</li>
   <li>ein direkter Eingabemodus ohne Zwischenablage ist ebenfalls verfügbar.</li>
 </ul>
 <h3>Messung</h3>
-<p>Im November 2026 haben wir die Offline-Edition unter Windows 11 mit einem neuen Profil gestartet und jede Verbindung des Programms und seiner Unterprozesse sowie neue DNS-Abfragen während des ersten Starts und anschließend während der Transkriptionen aufgezeichnet. Ergebnis: <strong>0 TCP-Verbindungen, 0 UDP-Endpunkte, 0 DNS-Anfragen</strong>.</p>
-<div class="note"><p>Nehmen Sie uns nicht beim Wort: Das <a href="/securite/informatique/#verifier">IT-Kit</a> gibt den Befehl, diese Messung auf Ihren eigenen Geräten zu wiederholen.</p></div></div>
+<p>Im November 2026 wurde die netzwerklose Edition unter Windows 11 mit einem neuen Profil gestartet. Sämtliche Verbindungen des Programms und seiner Unterprozesse sowie neue DNS-Auflösungen wurden während eines ersten Starts und anschließend während Transkriptionen erfasst. Ergebnis: <strong>0 TCP-Verbindungen, 0 UDP-Endpunkte, 0 DNS-Anfragen</strong>.</p>
+<div class="note"><p>Diese Messung ist reproduzierbar: Das <a href="/securite/informatique/#verifier">IT-Kit</a> enthält den Befehl, mit dem sie auf den Arbeitsplätzen der Organisation wiederholt werden kann.</p></div></div>
 </section>
 
 <section class="reveal" id="modeles">
@@ -198,7 +198,7 @@
   </ul>
   <h3>Prochainement <span class="status dev"><i></i>En développement</span></h3>
   <ul>
-    <li><strong>Contre-signature par votre organisation</strong> : votre service informatique valide un modèle et le signe avec sa propre clé. Les postes n'acceptent alors que les modèles validés chez vous.</li>
+    <li><strong>Contre-signature par l'organisation</strong> : le service informatique valide un modèle et le signe avec la clé de l'organisation. Les postes n'acceptent alors que les modèles ainsi validés.</li>
     <li><strong>Outil de validation</strong> pour le service informatique, avec la fiche de chaque modèle (origine, licence, empreinte, langues).</li>
     <li><strong>Traçabilité exportable</strong> : quel modèle a été validé, par qui, quand, dans quelle version.</li>
     <li>Alignement sur le standard ouvert de signature de modèles de l'OpenSSF, publié en 2025 par des équipes de Google, NVIDIA et HiddenLayer.</li>
@@ -215,7 +215,7 @@
   </ul>
   <h3>Coming next <span class="status dev"><i></i>In development</span></h3>
   <ul>
-    <li><strong>Counter-signature by your organisation</strong>: your IT department approves a model and signs it with its own key. Workstations then only accept models approved in-house.</li>
+    <li><strong>Counter-signature by the organisation</strong>: the IT department validates a model and signs it with the organisation's key. Workstations then accept only models validated in this way.</li>
     <li><strong>Approval tool</strong> for IT, with a sheet for each model (origin, licence, fingerprint, languages).</li>
     <li><strong>Exportable traceability</strong>: which model was approved, by whom, when, in which version.</li>
     <li>Alignment with the OpenSSF open model-signing standard, published in 2025 by teams from Google, NVIDIA and HiddenLayer.</li>
@@ -230,7 +230,7 @@
 </ul>
 <h3>Próximamente <span class="status dev"><i></i>En desarrollo</span></h3>
 <ul>
-  <li><strong>Contrafirma por su organización</strong>: su departamento de informática aprueba un modelo y lo firma con su propia clave. Los equipos solo aceptan entonces modelos aprobados internamente.</li>
+  <li><strong>Contrafirma por parte de la organización</strong>: el departamento de informática valida un modelo y lo firma con la clave de la organización. Los puestos solo aceptan entonces los modelos así validados.</li>
   <li><strong>Herramienta de aprobación</strong> para el departamento de informática, con una ficha para cada modelo (origen, licencia, huella, idiomas).</li>
   <li><strong>Trazabilidad exportable</strong>: qué modelo fue aprobado, por quién, cuándo y en qué versión.</li>
   <li>Alineación con el estándar abierto de firma de modelos OpenSSF, publicado en 2025 por equipos de Google, NVIDIA y HiddenLayer.</li>
@@ -244,7 +244,7 @@
 </ul>
 <h3>Künftige Entwicklungen <span class="status dev"><i></i>In Entwicklung</span></h3>
 <ul>
-    <li><strong>Gegenzeichnung durch Ihre Organisation</strong>: Ihre IT-Abteilung genehmigt ein Modell und signiert es mit ihrem eigenen Schlüssel. Arbeitsplätze akzeptieren dann nur Modelle, die inhouse genehmigt wurden.</li>
+    <li><strong>Gegensignatur durch die Organisation</strong>: Die IT-Abteilung gibt ein Modell frei und signiert es mit dem Schlüssel der Organisation. Die Arbeitsplätze akzeptieren dann ausschließlich so freigegebene Modelle.</li>
     <li><strong>Genehmigungstool</strong> für die IT, mit einem Steckbrief für jedes Modell (Herkunft, Lizenz, Prüfsumme, Sprachen).</li>
     <li><strong>Exportierbare Nachverfolgbarkeit</strong>: welches Modell wurde genehmigt, von wem, wann, in welcher Version.</li>
     <li>Ausrichtung am offenen Modell-Signaturstandard der OpenSSF, 2025 von Teams von Google, NVIDIA und HiddenLayer veröffentlicht.</li>
@@ -311,7 +311,7 @@
     <tr><td>Brésil</td><td>LGPD</td><td>Transferts internationaux</td></tr>
     <tr><td>Japon, Singapour</td><td>APPI ; PDPA</td><td>Fourniture de données à des tiers et à l'étranger</td></tr>
   </table></div>
-  <div class="note warn"><p><strong>Ce que nous ne disons pas.</strong> Aucun logiciel ne rend une organisation « conforme » à lui seul : la conformité dépend de l'ensemble de vos traitements, de vos postes et de vos procédures. NiderVoice <strong>facilite</strong> la conformité en supprimant les flux vers l'extérieur. Ce tableau est une orientation générale, pas un avis juridique.</p></div>
+  <div class="note warn"><p><strong>Limites de cet engagement.</strong> Aucun logiciel ne rend à lui seul une organisation « conforme » : la conformité dépend de l'ensemble des traitements, des postes et des procédures de l'organisation. NiderVoice <strong>facilite</strong> la conformité en supprimant les flux vers l'extérieur. Ce tableau constitue une orientation générale, et non un avis juridique.</p></div>
   <h3>La voix est-elle une donnée biométrique ?</h3>
   <p>Le Comité européen de la protection des données (lignes directrices 02/2021 sur les assistants vocaux) rappelle que la voix peut constituer une donnée biométrique lorsqu'elle sert à identifier une personne. NiderVoice n'identifie personne. En revanche, ce qui est dicté est souvent sensible : données de santé, secret professionnel, informations financières. C'est cette sensibilité du contenu qui justifie de garder le traitement sur le poste.</p>
 </div>
@@ -329,7 +329,7 @@
     <tr><td>Brazil</td><td>LGPD</td><td>International transfers</td></tr>
     <tr><td>Japan, Singapore</td><td>APPI; PDPA</td><td>Provision of data to third parties and abroad</td></tr>
   </table></div>
-  <div class="note warn"><p><strong>What we do not claim.</strong> No software makes an organisation "compliant" on its own: compliance depends on all your processing, your workstations and your procedures. NiderVoice <strong>makes compliance easier</strong> by removing outbound flows. This table is general guidance, not legal advice.</p></div>
+  <div class="note warn"><p><strong>Limits of this commitment.</strong> No software makes an organisation “compliant” on its own: compliance depends on the organisation's processing operations, workstations and procedures as a whole. NiderVoice <strong>facilitates</strong> compliance by eliminating outbound flows. This table is general guidance, not legal advice.</p></div>
   <h3>Is voice biometric data?</h3>
   <p>The European Data Protection Board (Guidelines 02/2021 on virtual voice assistants) points out that voice can be biometric data when it is used to identify a person. NiderVoice identifies no one. What is dictated, however, is often sensitive: health data, professional secrecy, financial information. It is the sensitivity of the content that justifies keeping processing on the device.</p>
 </div><div data-es><h2>Marcos legales: qué simplifica el procesamiento local</h2>
@@ -345,7 +345,7 @@
   <tr><td>Brasil</td><td>LGPD</td><td>Transferencias internacionales</td></tr>
   <tr><td>Japón, Singapur</td><td>APPI; PDPA</td><td>Provisión de datos a terceros y en el extranjero</td></tr>
 </table></div>
-<div class="note warn"><p><strong>Qué no afirmamos.</strong> Ningún software hace que una organización sea "conforme" por sí solo: la conformidad depende de todo su tratamiento, sus equipos y sus procedimientos. NiderVoice <strong>facilita la conformidad</strong> al eliminar flujos salientes. Esta tabla es una guía general, no un asesoramiento legal.</p></div>
+<div class="note warn"><p><strong>Límites de este compromiso.</strong> Ningún software hace por sí solo «conforme» a una organización: la conformidad depende del conjunto de los tratamientos, los puestos y los procedimientos de la organización. NiderVoice <strong>facilita</strong> la conformidad al suprimir los flujos hacia el exterior. Esta tabla constituye una orientación general, y no un dictamen jurídico.</p></div>
 <h3>¿Son los datos de voz biométricos?</h3>
 <p>El Comité Europeo de Protección de Datos (Directrices 02/2021 sobre asistentes de voz virtuales) señala que la voz puede ser datos biométricos cuando se utiliza para identificar a una persona. NiderVoice no identifica a nadie. Lo que se dicta, sin embargo, suele ser sensible: datos de salud, secreto profesional, información financiera. Es la sensibilidad del contenido lo que justifica mantener el procesamiento en el dispositivo.</p></div><div data-de><h2>Rechtliche Rahmenbedingungen: Was lokale Verarbeitung vereinfacht</h2>
   <p>Auf der ganzen Welt regeln Datenschutzgesetze die Erhebung, Speicherung und vor allem die Übermittlung personenbezogener Daten an Dienstleister und in andere Länder. Wenn Sprache und Text das Gerät nie verlassen, fallen viele dieser Fragen weg: Es gibt keinen Vertrag mit einem Auftragsverarbeiter für die Spracherkennung und keine internationale Übermittlung, die gerechtfertigt werden muss.</p>
@@ -360,7 +360,7 @@
     <tr><td>Brasilien</td><td>LGPD</td><td>Internationale Übermittlungen</td></tr>
     <tr><td>Japan, Singapur</td><td>APPI; PDPA</td><td>Bereitstellung von Daten an Dritte und im Ausland</td></tr>
   </table></div>
-  <div class="note warn"><p><strong>Was wir nicht behaupten.</strong> Keine Software macht eine Organisation "konform" von allein: Die Konformität hängt von Ihrer gesamten Verarbeitung, Ihren Arbeitsplätzen und Ihren Verfahren ab. NiderVoice <strong>erleichtert die Konformität</strong>, indem es abgehende Datenströme entfernt. Diese Tabelle dient der allgemeinen Orientierung und stellt keine Rechtsberatung dar.</p></div>
+  <div class="note warn"><p><strong>Grenzen dieser Zusage.</strong> Keine Software macht eine Organisation für sich allein „konform“: Die Konformität hängt von der Gesamtheit der Verarbeitungen, Arbeitsplätze und Verfahren der Organisation ab. NiderVoice <strong>erleichtert</strong> die Konformität, indem es Datenflüsse nach außen beseitigt. Diese Tabelle ist eine allgemeine Orientierung und keine Rechtsberatung.</p></div>
   <h3>Ist die Stimme ein biometrisches Datum?</h3>
   <p>Der Europäische Datenschutzausschuss (Leitlinien 02/2021 zu virtuellen Sprachassistenten) weist darauf hin, dass Sprache biometrische Daten sein kann, wenn sie zur Identifizierung einer Person verwendet wird. NiderVoice identifiziert niemanden. Was jedoch diktiert wird, ist oft sensibel: Gesundheitsdaten, berufliche Verschwiegenheit, Finanzinformationen. Es ist die Sensibilität des Inhalts, die die Verarbeitung auf dem Gerät rechtfertigt.</p></div>
 </section>

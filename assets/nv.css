@@ -113,7 +113,7 @@ footer .links a{color:var(--mut);text-decoration:none}
   header.open nav.main-nav{display:flex}
   .menu-btn{display:inline-block}
   .bar .pill{display:none}
-  .layout{grid-template-columns:1fr;gap:10px}
+  .layout{grid-template-columns:minmax(0,1fr);gap:10px}
   .toc{display:none}
   .g3{grid-template-columns:1fr 1fr}
 }

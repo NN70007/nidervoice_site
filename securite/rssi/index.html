@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://nidervoice.com/securite/rssi/">
 <meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg?v=20261116d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/nv.css?v=20261117a">
+<link rel="stylesheet" href="/assets/nv.css?v=20261125">
 </head>
 <body>
 <canvas id="dots" aria-hidden="true"></canvas>
@@ -34,8 +34,8 @@
 <div class="w page-head">
   <div class="crumbs"><a href="/">NiderVoice</a> / <a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a> / <span data-fr>RSSI</span><span data-en>CISO</span><span data-es>CISO</span><span data-de>CISO</span></div>
   <h1 class="serif"><span data-fr>Kit RSSI. <em>Ce qu'on protège, et contre quoi.</em></span><span data-en>CISO kit. <em>What we protect, and against what.</em></span><span data-es>Kit CISO. <em>Qué protegemos y contra qué.</em></span><span data-de>CISO-Kit. <em>Was wir schützen und wogegen.</em></span></h1>
-  <p class="lead" data-fr>Le modèle de menace de NiderVoice, sa surface d'attaque, les limites que nous reconnaissons et la façon de nous signaler une vulnérabilité.</p>
-  <p class="lead" data-en>NiderVoice's threat model, its attack surface, the limits we acknowledge and how to report a vulnerability to us.</p><p class="lead" data-es>El modelo de amenaza de NiderVoice, su superficie de ataque, los límites que reconocemos y cómo notificarnos una vulnerabilidad.</p><p class="lead" data-de>Das Bedrohungsmodell von NiderVoice, seine Angriffsfläche, die Grenzen, die wir anerkennen, und wie Sie uns eine Schwachstelle melden.</p>
+  <p class="lead" data-fr>Le modèle de menace de NiderVoice, sa surface d'attaque, les limites reconnues et la procédure de signalement d'une vulnérabilité.</p>
+  <p class="lead" data-en>The NiderVoice threat model, its attack surface, the acknowledged limits and the procedure for reporting a vulnerability.</p><p class="lead" data-es>El modelo de amenazas de NiderVoice, su superficie de ataque, los límites reconocidos y el procedimiento de notificación de una vulnerabilidad.</p><p class="lead" data-de>Das Bedrohungsmodell von NiderVoice, seine Angriffsfläche, die anerkannten Grenzen und das Verfahren zur Meldung einer Schwachstelle.</p>
 
   <div class="docmeta"><span data-fr>Version 1.0 · 16 novembre 2026</span><span data-en>Version 1.0 · 16 November 2026</span><span data-es>Versión 1.0 · 16 de noviembre de 2026</span><span data-de>Version 1.0 · 16. November 2026</span><span class="sep"></span><a class="pill ghost small" href="/securite/docs/nidervoice-kit-rssi-fr.pdf" data-fr>Télécharger en PDF</a><a class="pill ghost small" href="/securite/docs/nidervoice-kit-rssi-en.pdf" data-en>Download as PDF</a><a class="pill ghost small" href="/securite/docs/nidervoice-kit-rssi-es.pdf" data-es>Descargar como PDF</a><a class="pill ghost small" href="/securite/docs/nidervoice-kit-rssi-de.pdf" data-de>Als PDF herunterladen</a></div>
 </div>
@@ -85,7 +85,7 @@
   <h2>Menaces et mesures</h2>
   <div class="tbl-wrap"><table class="tbl">
     <tr><th>Menace</th><th>Mesure</th></tr>
-    <tr><td>Exfiltration de la voix ou du texte par le réseau</td><td>Aucune fonction réseau dans l'édition sans réseau ; code de connexion bloqué ; WebView2 lancé sans services d'arrière-plan ; mesure vérifiable par vos soins.</td></tr>
+    <tr><td>Exfiltration de la voix ou du texte par le réseau</td><td>Aucune fonction réseau dans l'édition sans réseau ; code de connexion bloqué ; WebView2 lancé sans services d'arrière-plan ; mesure vérifiable par l'organisation.</td></tr>
     <tr><td>Modèle altéré ou remplacé</td><td>Signature Ed25519 des modèles NiderLabs ; empreinte SHA-256 des modèles publics ; refus de tout fichier non conforme.</td></tr>
     <tr><td>Remplacement d'une bibliothèque du programme</td><td>Installation MSI dans <code>Program Files</code>, non modifiable par les utilisateurs ; empreintes de tous les fichiers fournies.</td></tr>
     <tr><td>Lecture du texte par un outil de surveillance du presse-papiers</td><td>Marqueurs Windows d'exclusion (historique, cloud, surveillance) ; effacement après une seconde ; mode frappe directe possible.</td></tr>
@@ -97,7 +97,7 @@
   <h2>Threats and controls</h2>
   <div class="tbl-wrap"><table class="tbl">
     <tr><th>Threat</th><th>Control</th></tr>
-    <tr><td>Exfiltration of voice or text over the network</td><td>No network features in the offline edition; connection code blocked; WebView2 started without background services; measurement you can repeat.</td></tr>
+    <tr><td>Exfiltration of voice or text over the network</td><td>No network function in the offline edition; connection code blocked; WebView2 launched without background services; measurement verifiable by the organisation.</td></tr>
     <tr><td>Altered or swapped model</td><td>Ed25519 signature on NiderLabs models; SHA-256 fingerprint on public models; any non-matching file refused.</td></tr>
     <tr><td>Replacement of a program library</td><td>MSI installation in <code>Program Files</code>, not writable by users; fingerprints of every file supplied.</td></tr>
     <tr><td>Text read by a clipboard-monitoring tool</td><td>Windows exclusion markers (history, cloud, monitoring); cleared after one second; direct typing mode available.</td></tr>
@@ -107,7 +107,7 @@
 </div><div data-es><h2>Amenazas y controles</h2>
   <div class="tbl-wrap"><table class="tbl">
     <tr><th>Amenaza</th><th>Control</th></tr>
-    <tr><td>Exfiltración de voz o texto a través de la red</td><td>Sin funciones de red en la edición sin red; código de conexión bloqueado; WebView2 iniciado sin servicios de fondo; medición que puede repetirse.</td></tr>
+    <tr><td>Exfiltración de voz o texto a través de la red</td><td>Ninguna función de red en la edición sin red; código de conexión bloqueado; WebView2 iniciado sin servicios en segundo plano; medición verificable por la organización.</td></tr>
     <tr><td>Modelo alterado o intercambiado</td><td>Firma Ed25519 en los modelos de NiderLabs; huella SHA-256 en los modelos públicos; cualquier archivo no coincidente se rechaza.</td></tr>
     <tr><td>Sustitución de una biblioteca de programas</td><td>Instalación MSI en <code>Program Files</code>, no escribible por los usuarios; huellas de cada archivo suministrado.</td></tr>
     <tr><td>Texto leído por una herramienta de monitorización del portapapeles</td><td>Marcadores de exclusión de Windows (historial, nube, monitorización); borrado después de un segundo; modo de escritura directa disponible.</td></tr>
@@ -116,7 +116,7 @@
   </table></div></div><div data-de><h2>Bedrohungen und Kontrollen</h2>
   <div class="tbl-wrap"><table class="tbl">
     <tr><th>Bedrohung</th><th>Kontrolle</th></tr>
-    <tr><td>Exfiltration von Sprach- oder Textdaten über das Netzwerk</td><td>Keine Netzwerkfunktionen in der Offline-Edition; Verbindungscode gesperrt; WebView2 ohne Hintergrunddienste gestartet; Messung, die Sie wiederholen können.</td></tr>
+    <tr><td>Exfiltration von Sprach- oder Textdaten über das Netzwerk</td><td>Keine Netzwerkfunktion in der netzwerklosen Edition; Verbindungscode gesperrt; WebView2 ohne Hintergrunddienste gestartet; Messung durch die Organisation überprüfbar.</td></tr>
     <tr><td>Verändertes oder vertauschtes Modell</td><td>Ed25519-Signatur auf NiderLabs-Modellen; SHA-256-Prüfsumme auf öffentlichen Modellen; jede nicht übereinstimmende Datei wird abgelehnt.</td></tr>
     <tr><td>Ersetzung einer Programmbibliothek</td><td>MSI-Installation in <code>Program Files</code>, nicht beschreibbar durch Benutzer; Prüfsummen aller bereitgestellten Dateien.</td></tr>
     <tr><td>Text wird von einem Zwischenablage-Überwachungstool gelesen</td><td>Windows-Ausschlussmarkierungen (Verlauf, Cloud, Überwachung); nach einer Sekunde gelöscht; direkter Eingabemodus verfügbar.</td></tr>
@@ -130,7 +130,7 @@
   <h2>Limites reconnues</h2>
   <p>Un modèle de menace honnête dit aussi ce qu'il ne couvre pas.</p>
   <ul>
-    <li>Un programme malveillant qui tourne déjà sur le poste avec les droits de l'utilisateur peut lire l'écran, le clavier ou le presse-papiers. NiderVoice ne peut pas protéger contre un poste déjà compromis ; c'est le rôle de vos protections de poste.</li>
+    <li>Un programme malveillant déjà actif sur le poste avec les droits de l'utilisateur peut lire l'écran, le clavier ou le presse-papiers. NiderVoice ne peut protéger un poste déjà compromis ; cette protection relève des dispositifs de sécurité du poste mis en œuvre par l'organisation.</li>
     <li>Les marqueurs d'exclusion du presse-papiers sont respectés par Windows et par les logiciels bien conçus, pas par un logiciel malveillant.</li>
     <li>La qualité du texte dépend du modèle, du micro et de l'élocution : le texte doit toujours être relu.</li>
     <li>Aucun test d'intrusion indépendant n'a encore été réalisé. Il est prévu, et ses conclusions seront résumées ici.</li>
@@ -140,7 +140,7 @@
   <h2>Known limits</h2>
   <p>An honest threat model also says what it does not cover.</p>
   <ul>
-    <li>Malware already running on the workstation with the user's rights can read the screen, the keyboard or the clipboard. NiderVoice cannot protect against an already compromised device; that is the job of your endpoint protection.</li>
+    <li>Malicious software already running on the workstation with the user's rights can read the screen, the keyboard or the clipboard. NiderVoice cannot protect a workstation that is already compromised; that protection falls to the endpoint security measures implemented by the organisation.</li>
     <li>Clipboard exclusion markers are honoured by Windows and by well-behaved software, not by malware.</li>
     <li>Text quality depends on the model, the microphone and the speaker: the text must always be reviewed.</li>
     <li>No independent penetration test has been carried out yet. One is planned, and its conclusions will be summarised here.</li>
@@ -148,14 +148,14 @@
 </div><div data-es><h2>Límites conocidos</h2>
 <p>Un modelo de amenazas honesto también indica qué no cubre.</p>
 <ul>
-  <li>El malware ya en ejecución en el equipo con los derechos del usuario puede leer la pantalla, el teclado o el portapapeles. NiderVoice no puede proteger contra un dispositivo ya comprometido; esa es la labor de su protección de puntos finales.</li>
+  <li>Un programa malicioso ya activo en el puesto con los derechos del usuario puede leer la pantalla, el teclado o el portapapeles. NiderVoice no puede proteger un puesto ya comprometido; dicha protección corresponde a los dispositivos de seguridad del puesto implantados por la organización.</li>
   <li>Los marcadores de exclusión del portapapeles son respetados por Windows y por el software bien comportado, no por el malware.</li>
   <li>La calidad del texto depende del modelo, del micrófono y de la persona que habla: el texto debe revisarse siempre.</li>
   <li>Aún no se ha realizado ninguna prueba de penetración independiente. Se planea una, y sus conclusiones se resumirán aquí.</li>
 </ul></div><div data-de><h2>Bekannte Grenzen</h2>
   <p>Ein ehrliches Bedrohungsmodell gibt auch an, was es nicht abdeckt.</p>
   <ul>
-    <li>Schadsoftware, die bereits mit den Benutzerrechten auf dem Arbeitsplatz läuft, kann den Bildschirm, die Tastatur oder die Zwischenablage lesen. NiderVoice kann ein bereits kompromittiertes Gerät nicht schützen; das ist die Aufgabe Ihrer Endpunkt-Schutzsoftware.</li>
+    <li>Ein Schadprogramm, das bereits mit den Rechten des Nutzers auf dem Arbeitsplatz läuft, kann Bildschirm, Tastatur oder Zwischenablage auslesen. NiderVoice kann einen bereits kompromittierten Arbeitsplatz nicht schützen; dieser Schutz obliegt den von der Organisation eingesetzten Endgeräteschutzmaßnahmen.</li>
     <li>Ausschlussmarkierungen der Zwischenablage werden von Windows und von gut funktionierender Software beachtet, nicht jedoch von Malware.</li>
     <li>Die Textqualität hängt vom Modell, dem Mikrofon und dem Sprecher ab: der Text muss immer überprüft werden.</li>
     <li>Bisher wurde noch kein unabhängiger Penetrationstest durchgeführt. Einer ist geplant, und seine Schlussfolgerungen werden hier zusammengefasst werden.</li>
@@ -169,7 +169,7 @@
     <tr><th>Forme</th><th>Point d'attention</th><th>Recommandation</th></tr>
     <tr><td>MSI</td><td>Fichiers protégés en écriture dans <code>Program Files</code>.</td><td>Forme recommandée pour un parc géré.</td></tr>
     <tr><td>Clé USB</td><td>Les fichiers du programme sont modifiables sur la clé ; une clé peut être perdue.</td><td>Les modèles restent vérifiés au chargement. Réservez cette forme aux usages hors parc géré et chiffrez la clé.</td></tr>
-    <tr><td>Web</td><td>Le code de la page est fourni par le serveur à chaque visite.</td><td>Pour un usage sensible, hébergez la version web sur votre propre serveur afin de maîtriser le code servi.</td></tr>
+    <tr><td>Web</td><td>Le code de la page est fourni par le serveur à chaque visite.</td><td>Pour un usage sensible, l'hébergement de la version web sur un serveur de l'organisation permet de maîtriser le code servi.</td></tr>
   </table></div>
 </div>
 <div data-en>
@@ -178,20 +178,20 @@
     <tr><th>Form</th><th>Point of attention</th><th>Recommendation</th></tr>
     <tr><td>MSI</td><td>Files write-protected in <code>Program Files</code>.</td><td>Recommended form for a managed fleet.</td></tr>
     <tr><td>USB key</td><td>Program files can be modified on the key; a key can be lost.</td><td>Models are still verified at load time. Keep this form for use outside the managed fleet and encrypt the key.</td></tr>
-    <tr><td>Web</td><td>The page code is served by the server on each visit.</td><td>For sensitive use, host the web version on your own server so that you control the code served.</td></tr>
+    <tr><td>Web</td><td>The page code is served by the server on each visit.</td><td>For sensitive use, hosting the web version on a server belonging to the organisation makes it possible to control the code served.</td></tr>
   </table></div>
 </div><div data-es><h2>Por factor de forma</h2>
   <div class="tbl-wrap"><table class="tbl">
     <tr><th>Forma</th><th>Punto de atención</th><th>Recomendación</th></tr>
     <tr><td>MSI</td><td>Archivos protegidos contra escritura en <code>Program Files</code>.</td><td>Forma recomendada para una flota gestionada.</td></tr>
     <tr><td>Memoria USB</td><td>Los archivos del programa pueden modificarse en la memoria USB; una memoria USB puede perderse.</td><td>Los modelos siguen verificándose en el momento de la carga. Mantenga esta forma para su uso fuera de la flota gestionada y cifre la memoria USB.</td></tr>
-    <tr><td>Web</td><td>El código de la página se sirve por el servidor en cada visita.</td><td>Para un uso sensible, aloje la versión web en su propio servidor para que usted controle el código servido.</td></tr>
+    <tr><td>Web</td><td>El código de la página se sirve por el servidor en cada visita.</td><td>Para un uso sensible, el alojamiento de la versión web en un servidor de la organización permite controlar el código servido.</td></tr>
   </table></div></div><div data-de><h2>Nach Formfaktor</h2>
   <div class="tbl-wrap"><table class="tbl">
     <tr><th>Form</th><th>Zu beachten</th><th>Empfehlung</th></tr>
     <tr><td>MSI</td><td>Dateien sind schreibgeschützt in <code>Program Files</code>.</td><td>Empfohlene Form für eine verwaltete Geräteflotte.</td></tr>
     <tr><td>USB-Stick</td><td>Programmdateien können auf dem Stick geändert werden; ein Stick kann verloren gehen.</td><td>Die Modelle werden weiterhin beim Laden überprüft. Behalten Sie diese Form für die Nutzung außerhalb der verwalteten Geräteflotte bei und verschlüsseln Sie den Stick.</td></tr>
-    <tr><td>Web</td><td>Der Seiten-Code wird vom Server bei jedem Besuch bereitgestellt.</td><td>Für sensible Nutzung hosten Sie die Web-Version auf Ihrem eigenen Server, damit Sie den bereitgestellten Code kontrollieren.</td></tr>
+    <tr><td>Web</td><td>Der Seiten-Code wird vom Server bei jedem Besuch bereitgestellt.</td><td>Für sensible Einsatzzwecke ermöglicht das Hosting der Webversion auf einem Server der Organisation die Kontrolle über den ausgelieferten Code.</td></tr>
   </table></div></div>
 </section>
 
@@ -231,18 +231,18 @@
 <section class="reveal" id="signaler">
 <div data-fr>
   <h2>Signaler une vulnérabilité</h2>
-  <p>Si vous pensez avoir trouvé une faille, écrivez à <a href="mailto:contact@nidervoice.com?subject=S%C3%A9curit%C3%A9">contact@nidervoice.com</a> avec l'objet « Sécurité ». Décrivez la version concernée et les étapes pour reproduire le problème. Nous accusons réception, vous tenons informé de la correction et vous créditons si vous le souhaitez.</p>
-  <p>Nos coordonnées de sécurité sont aussi publiées au format standard dans <a href="/.well-known/security.txt">/.well-known/security.txt</a>.</p>
+  <p>Toute faille présumée est à signaler à <a href="mailto:contact@nidervoice.com?subject=S%C3%A9curit%C3%A9">contact@nidervoice.com</a>, avec l'objet « Sécurité », en précisant la version concernée et les étapes de reproduction. Il en est accusé réception ; l'auteur du signalement est tenu informé de la correction et, s'il le souhaite, crédité.</p>
+  <p>Les coordonnées de sécurité sont également publiées au format standard dans <a href="/.well-known/security.txt">/.well-known/security.txt</a>.</p>
 </div>
 <div data-en>
   <h2>Report a vulnerability</h2>
-  <p>If you think you have found a flaw, write to <a href="mailto:contact@nidervoice.com?subject=Security">contact@nidervoice.com</a> with the subject "Security". Describe the affected version and the steps to reproduce. We acknowledge receipt, keep you informed of the fix and credit you if you wish.</p>
-  <p>Our security contact is also published in the standard format at <a href="/.well-known/security.txt">/.well-known/security.txt</a>.</p>
+  <p>Any suspected flaw should be reported to <a href="mailto:contact@nidervoice.com?subject=Security">contact@nidervoice.com</a>, with the subject “Security”, stating the version concerned and the steps to reproduce it. Receipt is acknowledged; the reporter is kept informed of the fix and, if they so wish, credited.</p>
+  <p>Security contact details are also published in the standard format in <a href="/.well-known/security.txt">/.well-known/security.txt</a>.</p>
 </div><div data-es><h2>Notificar una vulnerabilidad</h2>
-  <p>Si cree haber encontrado un fallo, escriba a <a href="mailto:contact@nidervoice.com?subject=Security">contact@nidervoice.com</a> con el asunto "Security". Describa la versión afectada y los pasos para reproducirlo. Acusamos recibo, le mantenemos informado sobre la corrección y le reconocemos si lo desea.</p>
-  <p>Nuestro contacto de seguridad también se publica en el formato estándar en <a href="/.well-known/security.txt">/.well-known/security.txt</a>.</p></div><div data-de><h2>Eine Schwachstelle melden</h2>
-<p>Wenn Sie denken, dass Sie eine Schwachstelle gefunden haben, schreiben Sie an <a href="mailto:contact@nidervoice.com?subject=Security">contact@nidervoice.com</a> mit dem Betreff "Security". Beschreiben Sie die betroffene Version und die Schritte zur Reproduktion. Wir bestätigen den Erhalt, halten Sie über die Behebung auf dem Laufenden und nennen Sie auf Wunsch als Entdecker.</p>
-<p>Unser Sicherheitskontakt ist auch im Standardformat unter <a href="/.well-known/security.txt">/.well-known/security.txt</a> veröffentlicht.</p></div>
+  <p>Toda presunta vulnerabilidad debe notificarse a <a href="mailto:contact@nidervoice.com?subject=Security">contact@nidervoice.com</a>, con el asunto «Seguridad», indicando la versión afectada y los pasos para reproducirla. Se acusa recibo; el autor de la notificación es informado de la corrección y, si lo desea, mencionado.</p>
+  <p>Los datos de contacto de seguridad se publican también en el formato estándar en <a href="/.well-known/security.txt">/.well-known/security.txt</a>.</p></div><div data-de><h2>Eine Schwachstelle melden</h2>
+<p>Jede mutmaßliche Schwachstelle ist an <a href="mailto:contact@nidervoice.com?subject=Security">contact@nidervoice.com</a> mit dem Betreff „Sicherheit“ zu melden, unter Angabe der betroffenen Version und der Schritte zur Reproduktion. Der Eingang wird bestätigt; die meldende Person wird über die Behebung informiert und auf Wunsch namentlich genannt.</p>
+<p>Die Sicherheitskontaktdaten sind zudem im Standardformat unter <a href="/.well-known/security.txt">/.well-known/security.txt</a> veröffentlicht.</p></div>
 </section>
 
   </div>

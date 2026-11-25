@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://nidervoice.com/securite/informatique/">
 <meta property="og:image" content="https://nidervoice.com/assets/og-image.jpg?v=20261116d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/nv.css?v=20261117a">
+<link rel="stylesheet" href="/assets/nv.css?v=20261125">
 </head>
 <body>
 <canvas id="dots" aria-hidden="true"></canvas>
@@ -34,8 +34,8 @@
 <div class="w page-head">
   <div class="crumbs"><a href="/">NiderVoice</a> / <a href="/securite/"><span data-fr>Sécurité</span><span data-en>Security</span><span data-es>Seguridad</span><span data-de>Sicherheit</span></a> / <span data-fr>Informatique</span><span data-en>IT</span><span data-es>Informática</span><span data-de>IT</span></div>
   <h1 class="serif"><span data-fr>Kit informatique. <em>Installer, contrôler, vérifier.</em></span><span data-en>IT kit. <em>Install, control, verify.</em></span><span data-es>Kit informático. <em>Instalar, controlar, verificar.</em></span><span data-de>IT-Kit. <em>Installieren, kontrollieren, überprüfen.</em></span></h1>
-  <p class="lead" data-fr>Ce que votre service informatique doit savoir pour déployer NiderVoice sur un parc Windows : composants, installation, réseau, accès utilisés sur le poste, stratégies recommandées et vérification par vos propres moyens.</p>
-  <p class="lead" data-en>What your IT department needs to know to deploy NiderVoice across a Windows fleet: components, installation, network, access used on the workstation, recommended policies and verification with your own tools.</p><p class="lead" data-es>Lo que su departamento de informática debe saber para desplegar NiderVoice en un parque de equipos Windows: componentes, instalación, red, acceso utilizado en el equipo, políticas recomendadas y verificación con sus propias herramientas.</p><p class="lead" data-de>Was Ihre IT-Abteilung wissen muss, um NiderVoice auf einer Windows-Geräteflotte einzusetzen: Komponenten, Installation, Netzwerk, Zugriff auf dem Arbeitsplatz, empfohlene Richtlinien und Überprüfung mit Ihren eigenen Tools.</p>
+  <p class="lead" data-fr>Les éléments nécessaires au service informatique pour déployer NiderVoice sur un parc Windows : composants, installation, réseau, accès utilisés sur le poste, stratégies recommandées et vérification par les moyens propres de l'organisation.</p>
+  <p class="lead" data-en>The information the IT department needs to deploy NiderVoice across a Windows fleet: components, installation, network, access used on the workstation, recommended policies and verification by the organisation's own means.</p><p class="lead" data-es>Los elementos que necesita el departamento de informática para desplegar NiderVoice en un parque Windows: componentes, instalación, red, accesos utilizados en el puesto, directivas recomendadas y verificación con los medios propios de la organización.</p><p class="lead" data-de>Die Angaben, die die IT-Abteilung für die Bereitstellung von NiderVoice auf einer Windows-Flotte benötigt: Komponenten, Installation, Netzwerk, auf dem Arbeitsplatz genutzte Zugriffe, empfohlene Richtlinien und Überprüfung mit eigenen Mitteln der Organisation.</p>
 
   <div class="docmeta"><span data-fr>Version 1.0 · 16 novembre 2026</span><span data-en>Version 1.0 · 16 November 2026</span><span data-es>Versión 1.0 · 16 de noviembre de 2026</span><span data-de>Version 1.0 · 16. November 2026</span><span class="sep"></span><a class="pill ghost small" href="/securite/docs/nidervoice-kit-informatique-fr.pdf" data-fr>Télécharger en PDF</a><a class="pill ghost small" href="/securite/docs/nidervoice-kit-informatique-en.pdf" data-en>Download as PDF</a><a class="pill ghost small" href="/securite/docs/nidervoice-kit-informatique-es.pdf" data-es>Descargar como PDF</a><a class="pill ghost small" href="/securite/docs/nidervoice-kit-informatique-de.pdf" data-de>Als PDF herunterladen</a></div>
 </div>
@@ -46,7 +46,7 @@
     <a href="#installation"><span data-fr>Installation</span><span data-en>Installation</span><span data-es>Instalación</span><span data-de>Installation</span></a>
     <a href="#reseau"><span data-fr>Matrice réseau</span><span data-en>Network matrix</span><span data-es>Matriz de red</span><span data-de>Netzwerkmatrix</span></a>
     <a href="#acces"><span data-fr>Accès sur le poste</span><span data-en>Access on the device</span><span data-es>Acceso en el dispositivo</span><span data-de>Zugriff auf dem Gerät</span></a>
-    <a href="#verifier"><span data-fr>Vérifier vous-même</span><span data-en>Verify it yourself</span><span data-es>Verifíquelo usted mismo</span><span data-de>Überprüfen Sie es selbst</span></a>
+    <a href="#verifier"><span data-fr>Vérification indépendante</span><span data-en>Independent verification</span><span data-es>Verificación independiente</span><span data-de>Unabhängige Überprüfung</span></a>
     <a href="#strategies"><span data-fr>Stratégies</span><span data-en>Policies</span><span data-es>Políticas</span><span data-de>Richtlinien</span></a>
     <a href="#versions"><span data-fr>Versions et empreintes</span><span data-en>Versions and hashes</span><span data-es>Versiones y huellas</span><span data-de>Versionen und Prüfsummen</span></a>
     <a href="#questions"><span data-fr>Questions</span><span data-en>Questions</span><span data-es>Preguntas</span><span data-de>Fragen</span></a>
@@ -106,7 +106,7 @@
     <li>Installation silencieuse : <code>msiexec /i NiderVoice-&lt;version&gt;.msi /qn</code></li>
     <li>Désinstallation : <code>msiexec /x NiderVoice-&lt;version&gt;.msi /qn</code> ou « Applications installées ».</li>
     <li>Le code de mise à niveau du MSI est stable d'une version à l'autre : une nouvelle version remplace proprement l'ancienne.</li>
-    <li>Un MSI standard se déploie avec vos outils habituels : Intune, Configuration Manager, stratégie de groupe.</li>
+    <li>Un MSI standard se déploie avec les outils en place : Intune, Configuration Manager, stratégie de groupe.</li>
   </ul>
   <div class="note warn"><p><strong>Signature du code</strong> <span class="status dev"><i></i>En cours</span><br>La signature Authenticode du programme est en cours d'obtention. D'ici là, Windows affiche « Éditeur inconnu ». Pour autoriser le logiciel avec précision (AppLocker, WDAC, antivirus), utilisez les empreintes SHA-256 fournies avec chaque version.</p></div>
 </div>
@@ -117,7 +117,7 @@
     <li>Silent install: <code>msiexec /i NiderVoice-&lt;version&gt;.msi /qn</code></li>
     <li>Uninstall: <code>msiexec /x NiderVoice-&lt;version&gt;.msi /qn</code> or "Installed apps".</li>
     <li>The MSI upgrade code is stable across versions: a new version cleanly replaces the old one.</li>
-    <li>A standard MSI deploys with your usual tools: Intune, Configuration Manager, Group Policy.</li>
+    <li>A standard MSI is deployed with the tools already in place: Intune, Configuration Manager, group policy.</li>
   </ul>
   <div class="note warn"><p><strong>Code signing</strong> <span class="status dev"><i></i>In progress</span><br>Authenticode signing of the program is being obtained. Until then, Windows shows "Unknown publisher". To allow the software precisely (AppLocker, WDAC, antivirus), use the SHA-256 fingerprints supplied with each version.</p></div>
 </div><div data-es><h2>Instalación</h2>
@@ -126,7 +126,7 @@
     <li>Instalación silenciosa: <code>msiexec /i NiderVoice-&lt;version&gt;.msi /qn</code></li>
     <li>Desinstalación: <code>msiexec /x NiderVoice-&lt;version&gt;.msi /qn</code> o "Aplicaciones instaladas".</li>
     <li>El código de actualización del MSI es estable entre versiones: una nueva versión reemplaza limpiamente a la anterior.</li>
-    <li>Un MSI estándar se despliega con sus herramientas habituales: Intune, Configuration Manager, Group Policy.</li>
+    <li>Un MSI estándar se despliega con las herramientas existentes: Intune, Configuration Manager, directiva de grupo.</li>
 </ul>
 <div class="note warn"><p><strong>Firma de código</strong> <span class="status dev"><i></i>En progreso</span><br>Se está obteniendo la firma Authenticode del programa. Hasta entonces, Windows muestra "Editor desconocido". Para permitir el software con precisión (AppLocker, WDAC, antivirus), utilice las huellas SHA-256 suministradas con cada versión.</p></div></div><div data-de><h2>Installation</h2>
 <p>Das MSI-Paket installiert NiderVoice für alle Benutzer im Ordner <code>Program Files</code>. Administratorrechte sind für die Nutzung nicht erforderlich.</p>
@@ -134,7 +134,7 @@
   <li>Unbeaufsichtigte Installation: <code>msiexec /i NiderVoice-&lt;version&gt;.msi /qn</code></li>
   <li>Deinstallation: <code>msiexec /x NiderVoice-&lt;version&gt;.msi /qn</code> oder "Installierte Apps".</li>
   <li>Der MSI-Upgrade-Code ist stabil über die Versionen hinweg: eine neue Version ersetzt die alte sauber.</li>
-  <li>Eine Standard-MSI wird mit Ihren üblichen Tools bereitgestellt: Intune, Configuration Manager, Gruppenrichtlinie.</li>
+  <li>Ein Standard-MSI wird mit den vorhandenen Werkzeugen bereitgestellt: Intune, Configuration Manager, Gruppenrichtlinie.</li>
 </ul>
 <div class="note warn"><p><strong>Code-Signierung</strong> <span class="status dev"><i></i>In Bearbeitung</span><br>Die Authenticode-Signierung des Programms wird beantragt. Bis dahin zeigt Windows "Unbekannter Herausgeber". Um die Software präzise zuzulassen (AppLocker, WDAC, Antivirenprogramm), verwenden Sie die mit jeder Version gelieferten SHA-256-Prüfsummen.</p></div></div>
 </section>
@@ -142,7 +142,7 @@
 <section class="reveal" id="reseau">
 <div data-fr>
   <h2>Matrice réseau</h2>
-  <p>Pour un environnement sensible, nous recommandons l'<strong>édition sans réseau</strong>. Son comportement réseau tient en un tableau :</p>
+  <p>Pour un environnement sensible, l'<strong>édition sans réseau</strong> est recommandée. Son comportement réseau tient en un tableau :</p>
   <div class="tbl-wrap"><table class="tbl">
     <tr><th>Fonction</th><th>Édition sans réseau</th></tr>
     <tr><td>Reconnaissance vocale</td><td>Locale</td></tr>
@@ -157,7 +157,7 @@
 </div>
 <div data-en>
   <h2>Network matrix</h2>
-  <p>For a sensitive environment we recommend the <strong>offline edition</strong>. Its network behaviour fits in one table:</p>
+  <p>For a sensitive environment, the <strong>offline edition</strong> is recommended. Its network behaviour fits in a single table:</p>
   <div class="tbl-wrap"><table class="tbl">
     <tr><th>Function</th><th>Offline edition</th></tr>
     <tr><td>Speech recognition</td><td>Local</td></tr>
@@ -170,7 +170,7 @@
   <p>Other editions can check for updates and download closed-list models, verified by fingerprint; these features can be turned off.</p>
   <p>In the offline edition, connection features are not just disabled: the code that could connect refuses to run. The WebView2 component is started with its background services turned off (SmartScreen, component updates, DNS prefetch, reporting).</p>
 </div><div data-es><h2>Matriz de red</h2>
-<p>Para un entorno sensible recomendamos la <strong>edición sin red</strong>. Su comportamiento en red cabe en una tabla:</p>
+<p>Para un entorno sensible, se recomienda la <strong>edición sin red</strong>. Su comportamiento de red cabe en una tabla:</p>
 <div class="tbl-wrap"><table class="tbl">
   <tr><th>Función</th><th>Edición sin red</th></tr>
   <tr><td>Reconocimiento de voz</td><td>Local</td></tr>
@@ -182,7 +182,7 @@
 </table></div>
 <p>Otras ediciones pueden comprobar actualizaciones y descargar modelos de lista cerrada, verificados por huella; estas funciones pueden desactivarse.</p>
 <p>En la edición sin red, las funciones de conexión no solo están desactivadas: el código que podría conectarse se niega a ejecutarse. El componente WebView2 se inicia con sus servicios de fondo desactivados (SmartScreen, actualizaciones de componentes, prefetch de DNS, informes).</p></div><div data-de><h2>Netzwerkmatrix</h2>
-<p>Für eine sensible Umgebung empfehlen wir die <strong>Offline-Edition</strong>. Ihr Netzwerkverhalten lässt sich in einer Tabelle darstellen:</p>
+<p>Für eine sensible Umgebung wird die <strong>netzwerklose Edition</strong> empfohlen. Ihr Netzwerkverhalten lässt sich in einer Tabelle darstellen:</p>
 <div class="tbl-wrap"><table class="tbl">
   <tr><th>Funktion</th><th>Offline-Edition</th></tr>
   <tr><td>Spracherkennung</td><td>Lokal</td></tr>
@@ -239,14 +239,14 @@
 
 <section class="reveal" id="verifier">
 <div data-fr>
-  <h2>Vérifier vous-même l'absence de connexion</h2>
+  <h2>Vérification indépendante de l'absence de connexion</h2>
   <p>Lancez NiderVoice, dictez quelques phrases, puis exécutez ces commandes dans PowerShell. Elles listent toutes les connexions du programme et de ses sous-processus, y compris WebView2. Le résultat attendu est vide.</p>
 </div>
 <div data-en>
-  <h2>Verify there is no connection yourself</h2>
+  <h2>Independent verification of the absence of connections</h2>
   <p>Start NiderVoice, dictate a few sentences, then run these commands in PowerShell. They list every connection of the program and its child processes, WebView2 included. The expected result is empty.</p>
-</div><div data-es><h2>Verifique que no hay conexión usted mismo</h2>
-  <p>Inicie NiderVoice, dicte unas pocas frases, luego ejecute estos comandos en PowerShell. Estos listan cada conexión del programa y sus procesos secundarios, incluido WebView2. El resultado esperado es vacío.</p></div><div data-de><h2>Überprüfen Sie selbst, dass keine Verbindung besteht</h2>
+</div><div data-es><h2>Verificación independiente de la ausencia de conexión</h2>
+  <p>Inicie NiderVoice, dicte unas pocas frases, luego ejecute estos comandos en PowerShell. Estos listan cada conexión del programa y sus procesos secundarios, incluido WebView2. El resultado esperado es vacío.</p></div><div data-de><h2>Unabhängige Überprüfung, dass keine Verbindung besteht</h2>
   <p>Starten Sie NiderVoice, diktieren Sie einige Sätze, und führen Sie anschließend diese Befehle in PowerShell aus. Sie listen jede Verbindung des Programms und seiner Unterprozesse auf, einschließlich WebView2. Das erwartete Ergebnis ist leer.</p></div>
 <pre class="card" style="overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.6;color:#C9D2DD;white-space:pre"><code>$all = Get-CimInstance Win32_Process
 $ids = @(($all | Where-Object Name -like 'nidervoice*.exe').ProcessId)
@@ -256,17 +256,17 @@ do { $n = $ids.Count
 Get-NetTCPConnection | Where-Object { $ids -contains $_.OwningProcess }
 Get-NetUDPEndpoint   | Where-Object { $ids -contains $_.OwningProcess }</code></pre>
 <div data-fr>
-  <p>Pour une défense en profondeur, vous pouvez aussi bloquer toute connexion sortante du programme dans le pare-feu Windows :</p>
+  <p>Au titre de la défense en profondeur, toute connexion sortante du programme peut également être bloquée dans le pare-feu Windows :</p>
 </div>
 <div data-en>
-  <p>For defence in depth, you can also block all outbound connections of the program in Windows Firewall:</p>
-</div><div data-es><p>Para una defensa en profundidad, también puede bloquear todas las conexiones salientes del programa en el Cortafuegos de Windows:</p></div><div data-de>
-  <p>Für eine mehrschichtige Sicherheit können Sie auch alle ausgehenden Verbindungen des Programms in der Windows Firewall blockieren:</p>
+  <p>As a defence-in-depth measure, any outbound connection from the program may also be blocked in the Windows firewall:</p>
+</div><div data-es><p>Como medida de defensa en profundidad, toda conexión saliente del programa puede bloquearse también en el cortafuegos de Windows:</p></div><div data-de>
+  <p>Im Sinne einer gestaffelten Verteidigung kann zudem jede ausgehende Verbindung des Programms in der Windows-Firewall gesperrt werden:</p>
 </div>
 <pre class="card" style="overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.6;color:#C9D2DD;white-space:pre"><code>New-NetFirewallRule -DisplayName "NiderVoice - sortant bloque" -Direction Outbound `
   -Program "C:\Program Files\NiderVoice\nidervoice.exe" -Action Block</code></pre>
-<div data-fr><p>Adaptez le chemin à votre dossier d'installation. Un script de mesure plus complet, qui compare aussi le cache DNS avant et après, est fourni sur demande.</p></div>
-<div data-en><p>Adjust the path to your installation folder. A fuller measurement script, which also compares the DNS cache before and after, is available on request.</p></div><div data-es><p>Ajuste la ruta a su carpeta de instalación. Un script de medición más completo, que también compara la caché DNS antes y después, está disponible bajo petición.</p></div><div data-de><p>Passen Sie den Pfad zu Ihrem Installationsordner an. Ein umfassenderes Messskript, das auch den DNS-Cache vorher und nachher vergleicht, ist auf Anfrage verfügbar.</p></div>
+<div data-fr><p>Le chemin est à adapter au dossier d'installation. Un script de mesure plus complet, qui compare également le cache DNS avant et après, est fourni sur demande.</p></div>
+<div data-en><p>The path is to be adapted to the installation folder. A more complete measurement script, which also compares the DNS cache before and after, is provided on request.</p></div><div data-es><p>La ruta debe adaptarse a la carpeta de instalación. Se facilita, previa solicitud, un script de medición más completo, que compara además la caché DNS antes y después.</p></div><div data-de><p>Der Pfad ist an den Installationsordner anzupassen. Ein umfassenderes Messskript, das auch den DNS-Cache vorher und nachher vergleicht, wird auf Anfrage bereitgestellt.</p></div>
 </section>
 
 <section class="reveal" id="strategies">
@@ -274,36 +274,36 @@ Get-NetUDPEndpoint   | Where-Object { $ids -contains $_.OwningProcess }</code></
   <h2>Stratégies recommandées</h2>
   <ul>
     <li><strong>Chiffrement du disque</strong> (BitLocker) et verrouillage de session : ils protègent les documents produits, que NiderVoice ne stocke pas lui-même.</li>
-    <li><strong>Synchronisation du presse-papiers entre appareils</strong> : NiderVoice exclut déjà son texte, mais vous pouvez la désactiver pour tout le poste par stratégie de groupe.</li>
-    <li><strong>Accès au micro</strong> : autorisez les applications de bureau à utiliser le micro, en limitant les autres applications selon votre politique.</li>
+    <li><strong>Synchronisation du presse-papiers entre appareils</strong> : NiderVoice en exclut déjà son texte ; elle peut en outre être désactivée pour l'ensemble du poste par stratégie de groupe.</li>
+    <li><strong>Accès au micro</strong> : les applications de bureau sont autorisées à utiliser le micro, les autres applications étant limitées selon la politique de l'organisation.</li>
     <li><strong>Règles d'exécution</strong> (AppLocker, WDAC) : autorisez NiderVoice par son empreinte, puis par son certificat une fois la signature disponible.</li>
   </ul>
-  <p><strong>Modèles de stratégie NiderVoice (ADMX)</strong> <span class="status dev"><i></i>En développement</span> : pour imposer depuis votre console les modèles autorisés, les réglages et les fonctions disponibles.</p>
+  <p><strong>Modèles de stratégie NiderVoice (ADMX)</strong> <span class="status dev"><i></i>En développement</span> : pour imposer depuis la console d'administration les modèles autorisés, les réglages et les fonctions disponibles.</p>
 </div>
 <div data-en>
   <h2>Recommended policies</h2>
   <ul>
     <li><strong>Disk encryption</strong> (BitLocker) and session locking: they protect the documents produced, which NiderVoice does not store itself.</li>
-    <li><strong>Clipboard sync across devices</strong>: NiderVoice already excludes its text, but you can disable it for the whole workstation via Group Policy.</li>
-    <li><strong>Microphone access</strong>: allow desktop apps to use the microphone, restricting other apps according to your policy.</li>
+    <li><strong>Clipboard synchronisation across devices</strong>: NiderVoice already excludes its text from it; it may in addition be disabled for the whole workstation by group policy.</li>
+    <li><strong>Microphone access</strong>: desktop applications are allowed to use the microphone, with other applications restricted according to the organisation's policy.</li>
     <li><strong>Execution rules</strong> (AppLocker, WDAC): allow NiderVoice by fingerprint, then by certificate once signing is available.</li>
   </ul>
-  <p><strong>NiderVoice policy templates (ADMX)</strong> <span class="status dev"><i></i>In development</span>: to enforce allowed models, settings and available features from your console.</p>
+  <p><strong>NiderVoice policy templates (ADMX)</strong> <span class="status dev"><i></i>In development</span>: to enforce from the administration console the authorised models, the settings and the available functions.</p>
 </div><div data-es><h2>Políticas recomendadas</h2>
 <ul>
   <li><strong>Cifrado de disco</strong> (BitLocker) y bloqueo de sesión: protegen los documentos producidos, que NiderVoice no almacena por sí mismo.</li>
-  <li><strong>Sincronización del portapapeles entre dispositivos</strong>: NiderVoice ya excluye su texto, pero puede desactivarse para todo el equipo mediante Directiva de Grupo.</li>
-  <li><strong>Acceso al micrófono</strong>: permitir que las aplicaciones de escritorio utilicen el micrófono, restringiendo otras aplicaciones según su política.</li>
+  <li><strong>Sincronización del portapapeles entre dispositivos</strong>: NiderVoice ya excluye su texto de ella; además, puede desactivarse para todo el puesto mediante directiva de grupo.</li>
+  <li><strong>Acceso al micrófono</strong>: se autoriza a las aplicaciones de escritorio a utilizar el micrófono, limitando las demás aplicaciones según la política de la organización.</li>
   <li><strong>Reglas de ejecución</strong> (AppLocker, WDAC): permitir NiderVoice por huella, luego por certificado una vez disponible la firma.</li>
 </ul>
-<p><strong>Plantillas de políticas de NiderVoice (ADMX)</strong> <span class="status dev"><i></i>En desarrollo</span>: para aplicar modelos permitidos, ajustes y características disponibles desde su consola.</p></div><div data-de><h2>Empfohlene Richtlinien</h2>
+<p><strong>Plantillas de directiva NiderVoice (ADMX)</strong> <span class="status dev"><i></i>En desarrollo</span>: para imponer desde la consola de administración los modelos autorizados, los ajustes y las funciones disponibles.</p></div><div data-de><h2>Empfohlene Richtlinien</h2>
 <ul>
   <li><strong>Festplattenverschlüsselung</strong> (BitLocker) und Sitzungssperre: Sie schützen die erstellten Dokumente, die NiderVoice selbst nicht speichert.</li>
-  <li><strong>Zwischenablage-Synchronisation über Geräte hinweg</strong>: NiderVoice schließt seinen Text bereits aus, aber Sie können sie für den gesamten Arbeitsplatz über die Gruppenrichtlinie deaktivieren.</li>
-  <li><strong>Mikrofonzugriff</strong>: Erlauben Sie Desktop-Apps den Zugriff auf das Mikrofon und beschränken Sie andere Apps gemäß Ihrer Richtlinie.</li>
+  <li><strong>Geräteübergreifende Synchronisierung der Zwischenablage</strong>: NiderVoice schließt seinen Text bereits davon aus; sie kann darüber hinaus per Gruppenrichtlinie für den gesamten Arbeitsplatz deaktiviert werden.</li>
+  <li><strong>Mikrofonzugriff</strong>: Desktop-Anwendungen wird die Nutzung des Mikrofons gestattet, andere Anwendungen werden gemäß der Richtlinie der Organisation eingeschränkt.</li>
   <li><strong>Ausführungsregeln</strong> (AppLocker, WDAC): Erlauben Sie NiderVoice zunächst per Prüfsumme, dann per Zertifikat, sobald die Signierung verfügbar ist.</li>
 </ul>
-<p><strong>NiderVoice-Richtlinienvorlagen (ADMX)</strong> <span class="status dev"><i></i>In Entwicklung</span>: Um zulässige Modelle, Einstellungen und verfügbare Funktionen von Ihrer Konsole aus durchzusetzen.</p></div>
+<p><strong>NiderVoice-Richtlinienvorlagen (ADMX)</strong> <span class="status dev"><i></i>In Entwicklung</span>: um über die Verwaltungskonsole die zugelassenen Modelle, die Einstellungen und die verfügbaren Funktionen vorzugeben.</p></div>
 </section>
 
 <section class="reveal" id="versions">
@@ -315,7 +315,7 @@ Get-NetUDPEndpoint   | Where-Object { $ids -contains $_.OwningProcess }</code></
     <li>la liste des empreintes SHA-256 de tous les fichiers installés ;</li>
     <li>une fiche de version pour le service informatique.</li>
   </ul>
-  <p>L'édition sans réseau ne se met jamais à jour seule : c'est votre service informatique qui déploie chaque nouvelle version, après l'avoir contrôlée.</p>
+  <p>L'édition sans réseau ne se met jamais à jour d'elle-même : le service informatique déploie chaque nouvelle version, après l'avoir contrôlée.</p>
 </div>
 <div data-en>
   <h2>Versions and fingerprints</h2>
@@ -325,7 +325,7 @@ Get-NetUDPEndpoint   | Where-Object { $ids -contains $_.OwningProcess }</code></
     <li>the list of SHA-256 fingerprints of all installed files;</li>
     <li>a release sheet for the IT department.</li>
   </ul>
-  <p>The offline edition never updates itself: your IT department deploys each new version after checking it.</p>
+  <p>The offline edition never updates itself: the IT department deploys each new version, after having checked it.</p>
 </div><div data-es><h2>Versiones y huellas</h2>
 <p>Cada versión incluye:</p>
 <ul>
@@ -333,18 +333,18 @@ Get-NetUDPEndpoint   | Where-Object { $ids -contains $_.OwningProcess }</code></
   <li>la lista de huellas SHA-256 de todos los archivos instalados;</li>
   <li>una ficha de versión para el departamento de informática.</li>
 </ul>
-<p>La edición sin red nunca se actualiza por sí misma: su departamento de informática despliega cada nueva versión después de verificarla.</p></div><div data-de><h2>Versionen und Prüfsummen</h2>
+<p>La edición sin red nunca se actualiza por sí sola: el departamento de informática despliega cada nueva versión, tras haberla controlado.</p></div><div data-de><h2>Versionen und Prüfsummen</h2>
 <p>Jede Version enthält:</p>
 <ul>
   <li>die SHA-256-Prüfsumme des Installers;</li>
   <li>die Liste der SHA-256-Prüfsummen aller installierten Dateien;</li>
   <li>ein Versionsblatt für die IT-Abteilung.</li>
 </ul>
-<p>Die Offline-Edition aktualisiert sich nie selbst: Ihre IT-Abteilung setzt jede neue Version nach Prüfung ein.</p></div>
+<p>Die netzwerklose Edition aktualisiert sich niemals selbst: Die IT-Abteilung stellt jede neue Version bereit, nachdem sie sie geprüft hat.</p></div>
 </section>
 <section class="reveal" id="questions">
 <h2><span data-fr>Questions fréquentes</span><span data-en>Frequently asked questions</span><span data-es>Preguntas frecuentes</span><span data-de>Häufige Fragen</span></h2>
-<div><details class="qa"><summary><span data-fr>Quelle configuration faut-il ?</span><span data-en>What hardware is needed?</span><span data-es>¿Qué configuración se necesita?</span><span data-de>Welche Ausstattung ist nötig?</span></summary><p data-fr>Un poste Windows. La carte graphique accélère la reconnaissance mais n'est pas obligatoire : tout fonctionne aussi sur le processeur. Un modèle occupe environ 700 Mo sur le disque.</p><p data-en>A Windows workstation. A graphics card speeds up recognition but is not required: everything also runs on the CPU. A model takes about 700 MB on disk.</p><p data-es>Un equipo Windows. La tarjeta gráfica acelera el reconocimiento pero no es obligatoria: todo funciona también con el procesador. Un modelo ocupa unos 700 MB en disco.</p><p data-de>Ein Windows-Arbeitsplatz. Eine Grafikkarte beschleunigt die Erkennung, ist aber nicht erforderlich: Alles läuft auch auf dem Prozessor. Ein Modell belegt etwa 700 MB auf der Festplatte.</p></details><details class="qa"><summary><span data-fr>Comment se font les mises à jour ?</span><span data-en>How are updates handled?</span><span data-es>¿Cómo se hacen las actualizaciones?</span><span data-de>Wie erfolgen Updates?</span></summary><p data-fr>La recherche de mises à jour est désactivée par défaut : le logiciel ne contacte aucun serveur. Votre service informatique déploie chaque nouvelle version, signée, quand il le décide. L'édition sans réseau ne contient même pas de module de mise à jour.</p><p data-en>Update checks are off by default: the software contacts no server. Your IT department deploys each new, signed version when it decides to. The offline edition does not even contain an update module.</p><p data-es>La búsqueda de actualizaciones está desactivada por defecto: el programa no contacta con ningún servidor. Su departamento de informática despliega cada nueva versión, firmada, cuando lo decide. La edición sin red ni siquiera contiene un módulo de actualización.</p><p data-de>Die Suche nach Updates ist standardmäßig ausgeschaltet: Die Software kontaktiert keinen Server. Ihre IT-Abteilung verteilt jede neue, signierte Version, wann sie es entscheidet. Die Offline-Edition enthält nicht einmal ein Update-Modul.</p></details><details class="qa"><summary><span data-fr>Le logiciel fonctionne-t-il sans Internet ?</span><span data-en>Does the software work without Internet?</span><span data-es>¿Funciona el programa sin Internet?</span><span data-de>Funktioniert die Software ohne Internet?</span></summary><p data-fr>Oui, entièrement : la reconnaissance, le dictionnaire et l'insertion du texte se font sur le poste.</p><p data-en>Yes, entirely: recognition, the dictionary and text insertion all happen on the workstation.</p><p data-es>Sí, por completo: el reconocimiento, el diccionario y la inserción del texto se realizan en el equipo.</p><p data-de>Ja, vollständig: Erkennung, Wörterbuch und Texteinfügung finden auf dem Arbeitsplatz statt.</p></details><details class="qa"><summary><span data-fr>Et avec Citrix ?</span><span data-en>What about Citrix?</span><span data-es>¿Y con Citrix?</span><span data-de>Und mit Citrix?</span></summary><p data-fr>NiderVoice, installé sur le poste, dicte dans les applications ouvertes par Citrix. Si la session bloque le presse-papiers, le texte est saisi touche par touche.</p><p data-en>NiderVoice, installed on the workstation, dictates into applications opened through Citrix. If the session blocks the clipboard, the text is typed keystroke by keystroke.</p><p data-es>NiderVoice, instalado en el equipo, dicta en las aplicaciones abiertas mediante Citrix. Si la sesión bloquea el portapapeles, el texto se introduce tecla a tecla.</p><p data-de>NiderVoice, auf dem Arbeitsplatz installiert, diktiert in über Citrix geöffnete Anwendungen. Blockiert die Sitzung die Zwischenablage, wird der Text Taste für Taste eingegeben.</p></details><details class="qa"><summary><span data-fr>Peut-on charger un autre modèle ?</span><span data-en>Can another model be loaded?</span><span data-es>¿Se puede cargar otro modelo?</span><span data-de>Kann ein anderes Modell geladen werden?</span></summary><p data-fr>Seulement un modèle vérifié : signé par NiderLabs, ou figurant sur la liste fermée d'empreintes des modèles publics. Tout autre fichier est refusé, pour que vous sachiez exactement quel modèle tourne sur vos postes.</p><p data-en>Only a verified model: signed by NiderLabs, or on the closed list of fingerprints of public models. Any other file is refused, so that you know exactly which model runs on your workstations.</p><p data-es>Solo un modelo verificado: firmado por NiderLabs o incluido en la lista cerrada de huellas de los modelos públicos. Cualquier otro archivo se rechaza, para que sepa exactamente qué modelo funciona en sus equipos.</p><p data-de>Nur ein geprüftes Modell: von NiderLabs signiert oder auf der geschlossenen Prüfsummenliste öffentlicher Modelle. Jede andere Datei wird abgelehnt, damit Sie genau wissen, welches Modell auf Ihren Arbeitsplätzen läuft.</p></details></div>
+<div><details class="qa"><summary><span data-fr>Quelle configuration faut-il ?</span><span data-en>What hardware is needed?</span><span data-es>¿Qué configuración se necesita?</span><span data-de>Welche Ausstattung ist nötig?</span></summary><p data-fr>Un poste Windows. La carte graphique accélère la reconnaissance mais n'est pas obligatoire : tout fonctionne aussi sur le processeur. Un modèle occupe environ 700 Mo sur le disque.</p><p data-en>A Windows workstation. A graphics card speeds up recognition but is not required: everything also runs on the CPU. A model takes about 700 MB on disk.</p><p data-es>Un equipo Windows. La tarjeta gráfica acelera el reconocimiento pero no es obligatoria: todo funciona también con el procesador. Un modelo ocupa unos 700 MB en disco.</p><p data-de>Ein Windows-Arbeitsplatz. Eine Grafikkarte beschleunigt die Erkennung, ist aber nicht erforderlich: Alles läuft auch auf dem Prozessor. Ein Modell belegt etwa 700 MB auf der Festplatte.</p></details><details class="qa"><summary><span data-fr>Comment se font les mises à jour ?</span><span data-en>How are updates handled?</span><span data-es>¿Cómo se hacen las actualizaciones?</span><span data-de>Wie erfolgen Updates?</span></summary><p data-fr>La recherche de mises à jour est désactivée par défaut : le logiciel ne contacte aucun serveur. Le service informatique déploie chaque nouvelle version, signée, au moment qu'il choisit. L'édition sans réseau ne contient aucun module de mise à jour.</p><p data-en>Checking for updates is disabled by default: the software contacts no server. The IT department deploys each new, signed version at the time of its choosing. The offline edition contains no update module at all.</p><p data-es>La búsqueda de actualizaciones está desactivada por defecto: el software no contacta con ningún servidor. El departamento de informática despliega cada nueva versión, firmada, en el momento que decide. La edición sin red no contiene ningún módulo de actualización.</p><p data-de>Die Suche nach Aktualisierungen ist standardmäßig deaktiviert: Die Software kontaktiert keinen Server. Die IT-Abteilung stellt jede neue, signierte Version zu dem von ihr gewählten Zeitpunkt bereit. Die netzwerklose Edition enthält kein Aktualisierungsmodul.</p></details><details class="qa"><summary><span data-fr>Le logiciel fonctionne-t-il sans Internet ?</span><span data-en>Does the software work without Internet?</span><span data-es>¿Funciona el programa sin Internet?</span><span data-de>Funktioniert die Software ohne Internet?</span></summary><p data-fr>Oui, entièrement : la reconnaissance, le dictionnaire et l'insertion du texte se font sur le poste.</p><p data-en>Yes, entirely: recognition, the dictionary and text insertion all happen on the workstation.</p><p data-es>Sí, por completo: el reconocimiento, el diccionario y la inserción del texto se realizan en el equipo.</p><p data-de>Ja, vollständig: Erkennung, Wörterbuch und Texteinfügung finden auf dem Arbeitsplatz statt.</p></details><details class="qa"><summary><span data-fr>Et avec Citrix ?</span><span data-en>What about Citrix?</span><span data-es>¿Y con Citrix?</span><span data-de>Und mit Citrix?</span></summary><p data-fr>NiderVoice, installé sur le poste, dicte dans les applications ouvertes par Citrix. Si la session bloque le presse-papiers, le texte est saisi touche par touche.</p><p data-en>NiderVoice, installed on the workstation, dictates into applications opened through Citrix. If the session blocks the clipboard, the text is typed keystroke by keystroke.</p><p data-es>NiderVoice, instalado en el equipo, dicta en las aplicaciones abiertas mediante Citrix. Si la sesión bloquea el portapapeles, el texto se introduce tecla a tecla.</p><p data-de>NiderVoice, auf dem Arbeitsplatz installiert, diktiert in über Citrix geöffnete Anwendungen. Blockiert die Sitzung die Zwischenablage, wird der Text Taste für Taste eingegeben.</p></details><details class="qa"><summary><span data-fr>Peut-on charger un autre modèle ?</span><span data-en>Can another model be loaded?</span><span data-es>¿Se puede cargar otro modelo?</span><span data-de>Kann ein anderes Modell geladen werden?</span></summary><p data-fr>Uniquement un modèle vérifié : signé par NiderLabs, ou figurant sur la liste fermée d'empreintes des modèles publics. Tout autre fichier est refusé, de sorte que l'organisation connaît avec exactitude le modèle exécuté sur ses postes.</p><p data-en>Only a verified model: signed by NiderLabs, or included in the closed list of fingerprints of public models. Any other file is rejected, so that the organisation knows exactly which model is running on its workstations.</p><p data-es>Únicamente un modelo verificado: firmado por NiderLabs o incluido en la lista cerrada de huellas de los modelos públicos. Cualquier otro archivo es rechazado, de modo que la organización conoce con exactitud el modelo que se ejecuta en sus puestos.</p><p data-de>Ausschließlich ein geprüftes Modell: von NiderLabs signiert oder in der geschlossenen Liste der Prüfsummen öffentlicher Modelle enthalten. Jede andere Datei wird zurückgewiesen, sodass die Organisation genau weiß, welches Modell auf ihren Arbeitsplätzen läuft.</p></details></div>
 <p class="small" style="margin-top:20px"><a href="/questions/"><span data-fr>Toutes les questions sur NiderVoice</span><span data-en>All questions about NiderVoice</span><span data-es>Todas las preguntas sobre NiderVoice</span><span data-de>Alle Fragen zu NiderVoice</span></a></p>
 </section>
 
