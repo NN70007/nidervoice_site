@@ -68,3 +68,16 @@
   }
   size();
 })();
+
+/* Adresses e-mail protégées : reconstituées ici, jamais écrites en clair dans les pages. */
+(function () {
+  function mel() {
+    var e = document.querySelectorAll(".mel[data-u]"), i, a, m, s;
+    for (i = 0; i < e.length; i++) {
+      a = e[i]; m = a.getAttribute("data-u") + "@" + a.getAttribute("data-d");
+      if (a.tagName === "A") { s = a.getAttribute("data-s"); a.setAttribute("href", "mailto:" + m + (s ? "?subject=" + s : "")); }
+      if (a.hasAttribute("data-voir")) a.textContent = m;
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mel); else mel();
+})();

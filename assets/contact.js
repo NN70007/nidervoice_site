@@ -42,7 +42,7 @@
     if (manque.length) return { erreur: M.req[langue()] + manque.join(", ") + "." };
     if (v.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email)) return { erreur: M.mail[langue()] };
     var sujet = (form.getAttribute("data-sujet") || location.hostname) + (v.objet ? " – " + v.objet : "") + (v.nom ? " – " + v.nom : "");
-    return { a: form.getAttribute("data-to"), valeurs: v, sujet: sujet, corps: lignes.join("\n") + "\n\n" + (v.message || "") + "\n" };
+    return { a: form.getAttribute("data-u") + "@" + form.getAttribute("data-d"), valeurs: v, sujet: sujet, corps: lignes.join("\n") + "\n\n" + (v.message || "") + "\n" };
   }
   function dire(form, texte, erreur) {
     var s = form.querySelector(".cf-status"); if (!s) return;

@@ -249,3 +249,5 @@ footer.big .legal{display:flex;justify-content:space-between;gap:20px;flex-wrap:
 .cf-card{border:1px solid var(--line2);border-radius:18px;background:linear-gradient(180deg,var(--panel),#0D131D);padding:32px;max-width:860px;margin-bottom:36px}
 .cf-card .cf{--cf-tx:var(--tx);--cf-lab:var(--mut);--cf-bd:var(--line2);--cf-bg:rgba(255,255,255,.04);--cf-focus:var(--sky);--cf-err:#FF9A8B;--cf-btn-bg:#F6F8FB;--cf-btn-tx:#0A0E15;--cf-note:var(--dim)}
 @media(max-width:720px){.cf-card{padding:22px}}
+.cf-ou{margin:18px 0 0;font-size:14.5px;color:var(--mut)}
+.cf-ou a{color:var(--sky)}
