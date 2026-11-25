@@ -222,3 +222,26 @@ footer.big .legal{display:flex;justify-content:space-between;gap:20px;flex-wrap:
 .qa p .status{margin-right:8px}
 .qa:last-child{border-bottom:0}
 .qa:first-child{border-top:0}
+
+/* Formulaire de contact (prépare un e-mail, n'envoie rien) */
+.cf{display:grid;gap:14px;color:var(--cf-tx)}
+.cf-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.cf-row.cf-un{grid-template-columns:minmax(0,1fr)}
+.cf label{display:block;font-size:13.5px;margin-bottom:6px;color:var(--cf-lab)}
+.cf input,.cf select,.cf textarea{width:100%;box-sizing:border-box;font:inherit;font-size:15.5px;line-height:1.4;padding:12px 14px;border-radius:10px;border:1px solid var(--cf-bd);background:var(--cf-bg);color:var(--cf-tx)}
+.cf select option{color:#0B1F33;background:#fff}
+.cf textarea{min-height:128px;resize:vertical}
+.cf input:focus,.cf select:focus,.cf textarea:focus{outline:2px solid var(--cf-focus);outline-offset:1px}
+.cf [aria-invalid="true"]{border-color:var(--cf-err)}
+.cf-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.cf button{font:inherit;font-size:15px;font-weight:500;cursor:pointer;border-radius:999px;padding:13px 22px;border:1px solid var(--cf-btn-bg);background:var(--cf-btn-bg);color:var(--cf-btn-tx)}
+.cf button[type="button"]{background:transparent;color:var(--cf-tx);border-color:var(--cf-bd)}
+.cf button:focus-visible{outline:2px solid var(--cf-focus);outline-offset:2px}
+.cf-note{font-size:13px;line-height:1.5;color:var(--cf-note);margin:0}
+.cf-status{font-size:14px;line-height:1.5;min-height:1.5em;margin:0;color:var(--cf-tx)}
+.cf-status.cf-erreur{color:var(--cf-err)}
+@media(max-width:720px){.cf-row{grid-template-columns:minmax(0,1fr)}}
+@media print{.cf{display:none}}
+.cf-card{border:1px solid var(--line2);border-radius:18px;background:linear-gradient(180deg,var(--panel),#0D131D);padding:32px;max-width:860px;margin-bottom:36px}
+.cf-card .cf{--cf-tx:var(--tx);--cf-lab:var(--mut);--cf-bd:var(--line2);--cf-bg:rgba(255,255,255,.04);--cf-focus:var(--sky);--cf-err:#FF9A8B;--cf-btn-bg:#F6F8FB;--cf-btn-tx:#0A0E15;--cf-note:var(--dim)}
+@media(max-width:720px){.cf-card{padding:22px}}
