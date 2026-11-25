@@ -198,6 +198,7 @@ footer.big .legal{display:flex;justify-content:space-between;gap:20px;flex-wrap:
   .head-visual{display:none}
   a{color:#1F5FA8;text-decoration:none}
   .print-only{display:block!important}
+  pre{white-space:pre-wrap!important;overflow:visible!important;word-break:break-word}
 }
 .print-only{display:none}
 @media print{.reveal{opacity:1!important;transform:none!important}}
