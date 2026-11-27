@@ -4,6 +4,7 @@
 // Données : le texte de la feuille (dans la page seulement) ; préférences d'affichage (thème, taille) dans ce navigateur.
 import * as moteur from "./moteur.js";
 import { reseau } from "./reseau.js";
+import * as retours from "./retours.js";
 
 const $ = (id) => document.getElementById(id);
 const feuille = $("text");
@@ -12,6 +13,8 @@ let pret = false; // modèle chargé
 let arreter = null; // fonction d'arrêt pendant une dictée
 let enCours = false; // démarrage ou arrêt en cours
 let derniere = { valeur: null, pos: -1 }; // état de la feuille juste après la dernière insertion
+let interne = false; // vrai pendant une insertion faite par la dictée
+let modele = "";
 
 /* ---------- Préférences d'affichage ---------- */
 
@@ -116,7 +119,9 @@ function inserer(brut) {
     let k = 0;
     const lim = Math.min(debut, nouveau.length);
     while (k < lim && nouveau[k] === valeur[k]) k++;
-    remplacer(k, fin, nouveau.slice(k));
+    interne = true;
+    try { remplacer(k, fin, nouveau.slice(k)); } finally { interne = false; }
+    retours.dicte(k, nouveau.length, nouveau.slice(k), feuille.value);
   }
   derniere = { valeur: feuille.value, pos: feuille.selectionEnd };
 }
@@ -201,7 +206,13 @@ function effacer() {
   feuille.focus();
   feuille.select();
   if (!document.execCommand("delete")) feuille.value = "";
-  message("Texte effacé.", () => { feuille.value = ancien + feuille.value; feuille.focus(); feuille.setSelectionRange(ancien.length, ancien.length); });
+  retours.modifie(feuille.value);
+  message("Texte effacé.", () => {
+    feuille.value = ancien + feuille.value;
+    retours.modifie(feuille.value);
+    feuille.focus();
+    feuille.setSelectionRange(ancien.length, ancien.length);
+  });
 }
 
 $("rec").addEventListener("click", basculer);
@@ -230,6 +241,7 @@ $("unlock").addEventListener("submit", async (ev) => {
         : "Préparation du modèle : " + faits + " / " + total + (cache ? "" : " (sans cache)");
     });
     pret = true;
+    modele = info.modele;
     $("unlock").classList.add("cache");
     $("work").classList.remove("cache");
     $("tech").textContent = "Moteur : processeur, " + reseau.pluriel(info.coeurs, "cœur") + (info.reduit ? " (mode réduit)" : "")
@@ -256,6 +268,87 @@ $("changeForm").addEventListener("submit", async (ev) => {
   } catch (e) {
     $("changeMsg").textContent = e.message;
   }
+});
+
+/* ---------- Fiche de retour : mots corrigés à la main ---------- */
+
+let attente = 0;
+feuille.addEventListener("input", () => {
+  if (interne) return;
+  retours.modifie(feuille.value);
+  clearTimeout(attente);
+  attente = setTimeout(majFiche, 1500);
+});
+
+function majFiche() {
+  const n = retours.actualiser();
+  $("fiche").classList.toggle("cache", n === 0);
+  $("ficheTx").textContent = reseau.pluriel(n, "mot") + " à apprendre";
+  if ($("ficheFen").open) remplirFiche();
+}
+
+function remplirFiche() {
+  const paires = retours.liste();
+  $("ficheVide").classList.toggle("cache", paires.length > 0);
+  $("ficheListe").replaceChildren(...paires.map((x) => {
+    const li = document.createElement("li");
+    const lab = document.createElement("label");
+    const c = document.createElement("input");
+    c.type = "checkbox";
+    c.checked = x.coche;
+    c.addEventListener("change", () => { retours.cocher(x.cle, c.checked); majEnvoi(); });
+    const t = document.createElement("span");
+    const e = document.createElement(x.ecrit ? "s" : "i");
+    e.textContent = x.ecrit || "ajouté";
+    const v = document.createElement("b");
+    v.textContent = x.voulu;
+    t.append(e, " → ", v);
+    lab.append(c, t);
+    if (x.nomPropre) {
+      const a = document.createElement("small");
+      a.textContent = "Majuscule : seulement un nom de maladie, de signe ou de classification, jamais une personne.";
+      lab.append(a);
+    }
+    const r = document.createElement("button");
+    r.type = "button";
+    r.className = "icone petit";
+    r.textContent = "×";
+    r.title = "Retirer de la liste";
+    r.setAttribute("aria-label", r.title);
+    r.addEventListener("click", () => { retours.retirer(x.cle); majFiche(); remplirFiche(); });
+    li.append(lab, r);
+    return li;
+  }));
+  majEnvoi();
+}
+
+function majEnvoi() {
+  const n = retours.liste().filter((x) => x.coche).length;
+  $("ficheEnvoyer").disabled = n === 0 || !!arreter;
+  $("ficheEnvoyer").textContent = n ? "Envoyer " + reseau.pluriel(n, "mot") + " coché" + (n > 1 ? "s" : "") : "Cochez les mots à envoyer";
+}
+
+$("fiche").addEventListener("click", () => { majFiche(); remplirFiche(); $("ficheMsg").textContent = ""; $("ficheFen").showModal(); });
+$("ficheOuvrir").addEventListener("click", () => { $("reglages").close(); majFiche(); remplirFiche(); $("ficheMsg").textContent = ""; $("ficheFen").showModal(); });
+$("ficheAjout").addEventListener("submit", (ev) => {
+  ev.preventDefault();
+  if (retours.ajouter($("ajEcrit").value, $("ajVoulu").value)) {
+    $("ajEcrit").value = ""; $("ajVoulu").value = ""; $("ficheMsg").textContent = "";
+    majFiche(); remplirFiche();
+  } else {
+    $("ficheMsg").textContent = "Refusé : 1 à 3 mots, 40 caractères au plus, sans chiffres.";
+  }
+});
+$("ficheEnvoyer").addEventListener("click", async () => {
+  $("ficheEnvoyer").disabled = true;
+  try {
+    const n = await retours.envoyer(csrf, $("app").dataset.pk, modele);
+    $("ficheMsg").textContent = reseau.pluriel(n, "mot") + " envoyé" + (n > 1 ? "s" : "") + ", chiffré" + (n > 1 ? "s" : "") + " pour le PC d'entraînement.";
+  } catch (e) {
+    $("ficheMsg").textContent = e.message;
+  }
+  majFiche();
+  remplirFiche();
 });
 
 /* ---------- Moniteur réseau ---------- */

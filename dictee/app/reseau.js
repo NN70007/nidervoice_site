@@ -16,6 +16,7 @@ function nature(url, type) {
     if (n === "manifest.json") return "Liste des fichiers du modèle";
   }
   if (url.pathname.endsWith("/cle.php")) return "Nouveau verrou (changement de phrase)";
+  if (url.pathname.endsWith("/retour.php")) return "Mots corrigés (chiffrés)";
   if (type === "navigation") return "Page";
   if (/\.woff2$/.test(url.pathname)) return "Police de caractères";
   if (/\.svg$/.test(url.pathname)) return "Logo";

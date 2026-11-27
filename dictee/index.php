@@ -7,6 +7,7 @@
 declare(strict_types=1);
 const NV_APP = 'dictee';
 require_once __DIR__ . '/lib/base.php';
+require_once __DIR__ . '/../depot/cle.php'; // clé PUBLIQUE de CHX, pour chiffrer la fiche de retour
 
 if (!nv_https() && !nv_dev()) {
     header('Location: https://' . ($_SERVER['HTTP_HOST'] ?? 'nidervoice.com') . '/dictee/', true, 301);
@@ -139,6 +140,17 @@ td.n{text-align:right;white-space:nowrap}
 .chiffres b{display:block;font-size:22px;font-weight:500;font-variant-numeric:tabular-nums}
 .chiffres span{font-size:12.5px;color:var(--doux)}
 
+.lien{border:0;background:none;padding:0;color:var(--lien);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:inherit}
+.attention{border-left:3px solid var(--alerte);padding:6px 0 6px 12px;color:var(--encre)!important}
+.fiche{list-style:none;margin:10px 0 14px;padding:0;max-height:16rem;overflow:auto}
+.fiche li{display:flex;align-items:flex-start;gap:8px;padding:8px 2px;border-bottom:1px solid var(--trait)}
+.fiche label{flex:1;display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:center;font-weight:400;font-size:15px;margin:0;cursor:pointer}
+.fiche s,.fiche i{color:var(--pale)}.fiche small{grid-column:2;color:var(--alerte);font-size:12.5px}
+.fiche input{width:17px;height:17px;accent-color:var(--accent)}
+.icone.petit{width:28px;height:28px;font-size:18px}
+.ajout input{flex:1;min-width:10rem}
+.envoi{margin:14px 0 6px}
+
 /* Message temporaire */
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:10px 12px 10px 18px;border-radius:12px;background:var(--encre);color:var(--fond);font-size:14.5px;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:20}
 #toast button{border:0;background:transparent;color:inherit;font-weight:600;text-decoration:underline;cursor:pointer;padding:4px 6px}
@@ -149,15 +161,18 @@ td.n{text-align:right;white-space:nowrap}
 .pied p{margin:0}
 .pied-tx{display:flex;flex-direction:column;gap:2px;line-height:1.45}
 .pied a{color:var(--doux);text-decoration:none}.pied a:hover{text-decoration:underline}
-#reseau{margin-left:auto;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--trait);border-radius:999px;background:transparent;padding:5px 12px;font-size:13px;color:var(--doux);cursor:pointer}
+.pastille{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--trait);border-radius:999px;background:transparent;padding:4px 12px 4px 9px;font-size:13px;color:var(--doux);cursor:pointer}
+.pastille svg{width:15px;height:15px}
+.temoins{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+#reseau{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--trait);border-radius:999px;background:transparent;padding:5px 12px;font-size:13px;color:var(--doux);cursor:pointer}
 #reseau:hover{border-color:var(--pale);color:var(--encre)}
 #reseau .temoin{width:8px;height:8px;border-radius:50%;background:var(--ok)}
 #reseau.alerte .temoin{background:var(--alerte)}
-@media (max-width:640px){.marque span{display:none}kbd{display:none}.etat{order:3;flex-basis:100%;padding:0 4px}.actions{margin-left:auto}#reseau{text-align:left}#rec{min-width:0}#reseau{margin-left:0}.chiffres{grid-template-columns:1fr}}
+@media (max-width:640px){.marque span{display:none}kbd{display:none}.etat{order:3;flex-basis:100%;padding:0 4px}.actions{margin-left:auto}#reseau{text-align:left}.temoins{margin-left:0}#rec{min-width:0}#reseau{margin-left:0}.chiffres{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.niveau i{transition:none}}
 </style>
 <?php if ($s): ?>
-<script type="module" src="app/page.js?v=<?= $v('page.js') + $v('moteur.js') + $v('reseau.js') ?>"></script>
+<script type="module" src="app/page.js?v=<?= $v('page.js') + $v('moteur.js') + $v('reseau.js') + $v('retours.js') ?>"></script>
 <?php endif; ?>
 </head>
 <body>
@@ -193,7 +208,7 @@ td.n{text-align:right;white-space:nowrap}
     <button type="submit" class="bouton">Se connecter</button>
   </form>
 <?php else: ?>
-<div id="app" data-csrf="<?= h($s['csrf']) ?>">
+<div id="app" data-csrf="<?= h($s['csrf']) ?>" data-pk="<?= h(NV_DEPOT_PK) ?>">
   <form id="unlock" class="carte">
     <h1>Déverrouiller le modèle</h1>
     <p>La phrase secrète reste dans ce navigateur : elle déchiffre le modèle en mémoire et n'est jamais envoyée.</p>
@@ -257,6 +272,8 @@ td.n{text-align:right;white-space:nowrap}
       </form>
     </details>
     <hr class="sep">
+    <p>Un mot mal reconnu ? Corrigez-le dans la feuille : il apparaît dans la <button type="button" class="lien" id="ficheOuvrir">fiche des mots à apprendre</button>.</p>
+    <hr class="sep">
     <p id="tech"></p>
     <form method="post"><input type="hidden" name="action" value="logout"><input type="hidden" name="csrf" value="<?= h($s['csrf']) ?>"><button type="submit" class="bouton leger">Se déconnecter</button></form>
   </div>
@@ -277,6 +294,22 @@ td.n{text-align:right;white-space:nowrap}
     <p>Pour un contrôle indépendant de la page : ouvrez l'outil « Réseau » du navigateur (touche F12), ou coupez Internet une fois le modèle chargé : la dictée continue de fonctionner.</p>
   </div>
 </dialog>
+<dialog id="ficheFen" class="large">
+  <div class="fen-tete"><h2>Mots à apprendre</h2><button type="button" class="icone" data-fermer aria-label="Fermer"><?= $icone('<path d="M6 6l12 12M18 6L6 18"/>') ?></button></div>
+  <div class="fen-corps">
+    <p>Les mots dictés que vous avez corrigés à la main. Ils servent à un réentraînement ciblé du modèle. Rien n'est envoyé sans votre clic.</p>
+    <p class="attention">Cochez seulement des termes médicaux ou techniques. Jamais un nom de patient, une date, ni une phrase du compte rendu.</p>
+    <p id="ficheVide" class="note">Aucune correction pour l'instant. Corrigez un mot dans un passage dicté, ou ajoutez-le ci-dessous.</p>
+    <ul id="ficheListe" class="fiche"></ul>
+    <form id="ficheAjout" class="ligne ajout">
+      <input type="text" id="ajEcrit" maxlength="40" placeholder="Écrit par erreur (facultatif)" aria-label="Écrit par erreur" autocomplete="off">
+      <input type="text" id="ajVoulu" maxlength="40" placeholder="Mot attendu" aria-label="Mot attendu" required autocomplete="off">
+      <button type="submit" class="bouton leger">Ajouter</button>
+    </form>
+    <div class="ligne envoi"><button type="button" id="ficheEnvoyer" class="bouton" disabled>Cochez les mots à envoyer</button><span id="ficheMsg" class="note"></span></div>
+    <p class="note">Au plus 3 mots de chaque côté, sans chiffres. La liste est chiffrée dans ce navigateur et ne peut être lue que sur le PC d'entraînement ; l'envoi apparaît dans le moniteur réseau.</p>
+  </div>
+</dialog>
 <div id="toast" class="cache" role="status"><span id="toastTx"></span><button type="button" id="toastBtn">Annuler</button></div>
 <?php endif; ?>
 </main>
@@ -285,7 +318,10 @@ td.n{text-align:right;white-space:nowrap}
   <div class="pied-tx"><p>Outil de saisie de texte par la voix · Aucune information à visée diagnostique ou thérapeutique</p>
   <p><a href="/mentions-legales/">Mentions légales</a> · <a href="/confidentialite/">Confidentialité</a> · © 2026 NiderLabs</p></div>
 <?php if ($s): ?>
+  <div class="temoins">
+  <button type="button" id="fiche" class="pastille cache" aria-haspopup="dialog"><?= $icone('<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>') ?><span id="ficheTx"></span></button>
   <button type="button" id="reseau" class="cache" aria-haspopup="dialog"><span class="temoin"></span><span id="reseauTx"></span></button>
+  </div>
 <?php endif; ?>
 </footer>
 </body>
