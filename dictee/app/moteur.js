@@ -122,7 +122,7 @@ async function chargerModele(manifeste, progres) {
 
 async function chargerMiseEnForme() {
   try {
-    const r = await fetch(ici("medtext.wasm"), { credentials: "same-origin" });
+    const r = await fetch(ici("medtext.wasm"), { credentials: "same-origin", cache: "no-cache" }); // toujours la dernière version
     const { instance } = await WebAssembly.instantiate(await r.arrayBuffer(), {});
     mise = instance.exports;
   } catch { mise = null; }

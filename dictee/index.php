@@ -246,8 +246,9 @@ td.n{text-align:right;white-space:nowrap}
       <dt>« point d'exclamation »</dt><dd>!</dd>
       <dt>« ouvrez / fermez la parenthèse »</dt><dd>( )</dd>
       <dt>« à la ligne »</dt><dd>nouvelle ligne</dd>
+      <dt>« deux points à la ligne »</dt><dd>deux-points, puis nouvelle ligne</dd>
       <dt>« point à la ligne »</dt><dd>point, puis nouvelle ligne</dd>
-      <dt>« nouveau paragraphe »</dt><dd>ligne vide</dd>
+      <dt>« paragraphe » ou « nouveau paragraphe »</dt><dd>ligne vide</dd>
       <dt>« effacer ça »</dt><dd>retire la dernière phrase</dd>
     </dl>
     <h3>Clavier</h3>
