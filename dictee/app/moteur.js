@@ -7,8 +7,8 @@
 import * as ort from "./ort/ort.wasm.min.mjs";
 import { ParakeetModel } from "./parakeet.min.js";
 
-const CACHE = "nv-modele-p5b-v1"; // à changer à chaque nouveau modèle
-const ANCIENS_CACHES = ["nv-modele-p5-v1", "nv-modele-p4-v1"];
+const CACHE = "nv-modele-p5c-v1"; // à changer à chaque nouveau modèle
+const ANCIENS_CACHES = ["nv-modele-p5b-v1", "nv-modele-p5-v1", "nv-modele-p4-v1"];
 const TAUX = 16000; // échantillons par seconde
 const PERIODE_MS = 700; // fréquence du découpage
 const SILENCE_S = 0.45; // pause qui termine un morceau
@@ -197,11 +197,14 @@ function motCourant(mot) {
 
 const minusculeSiCourant = (m) => (/^\p{Lu}\p{Ll}+$/u.test(m) && motCourant(m) ? m.toLowerCase() : m);
 
-/** Garde seulement les mots : la ponctuation vient des commandes dictées, pas du modèle. */
+/**
+ * Garde les mots et les virgules du modèle (Vox Caladrii les place de lui-même depuis P5c) ; les autres signes
+ * viennent des commandes dictées. Une virgule du modèle suivie de « virgule » dictée n'en donne qu'une (mise en forme).
+ */
 function sansPonctuationDuModele(t) {
   let e = t.replace(/(\d)([,.])(?=\d)/g, (_, chiffre, sep) => chiffre + (sep === "," ? "\u0001" : "\u0002"));
   e = e.replace(/[.!?…]+\s*([\p{L}'’-]+)/gu, (_, mot) => " " + minusculeSiCourant(mot));
-  e = e.replace(/[.,;:!?…]+/g, " ");
+  e = e.replace(/[.;:!?…]+/g, " ").replace(/\s+,/g, ",").replace(/,{2,}/g, ",");
   e = e.replace(/^\s*([\p{L}'’-]+)/u, (_, mot) => minusculeSiCourant(mot));
   return e.replace(/\u0001/g, ",").replace(/\u0002/g, ".").replace(/\s+/g, " ").trim();
 }
