@@ -9,8 +9,9 @@ const dictees = []; // [debut, fin] en ms depuis l'ouverture ; fin = Infinity pe
 let rafraichir = () => {};
 
 function nature(url, type) {
-  const n = url.searchParams.get("n") || "";
-  if (url.pathname.endsWith("/f.php")) {
+  const intranet = url.pathname.includes("/modele/"); // version intranet : modèle servi comme fichiers ordinaires
+  const n = intranet ? url.pathname.split("/").pop() : url.searchParams.get("n") || "";
+  if (url.pathname.endsWith("/f.php") || intranet) {
     if (/^m\d_\d{4}\.bin$/.test(n)) return "Modèle chiffré (morceaux)";
     if (n === "cle.json") return "Verrou du modèle";
     if (n === "manifest.json") return "Liste des fichiers du modèle";
@@ -20,6 +21,7 @@ function nature(url, type) {
   if (type === "navigation") return "Page";
   if (/\.woff2$/.test(url.pathname)) return "Police de caractères";
   if (/\.svg$/.test(url.pathname)) return "Logo";
+  if (/\.css$/.test(url.pathname)) return "Mise en page";
   if (/\.wasm$/.test(url.pathname)) return "Moteur de calcul";
   if (/\.m?js$/.test(url.pathname)) return "Code de la page";
   return "Autre";
