@@ -1,0 +1,41 @@
+NiderVoice Dictée — version intranet
+=====================================
+
+Logiciel de saisie de texte par la voix, dans le navigateur. Il ne fournit aucune information à visée
+diagnostique ou thérapeutique. Le texte produit doit être relu et validé par l'utilisateur.
+
+Ce que fait cette version
+- La reconnaissance vocale se fait entièrement dans le navigateur de chaque utilisateur.
+- Le serveur de l'établissement ne sert que des fichiers : la page, son code et le modèle de reconnaissance,
+  chiffré. Il ne reçoit ni son, ni texte, ni phrase secrète. Aucun programme ne tourne sur le serveur.
+- Aucune connexion vers Internet : ni vers NiderLabs, ni vers un autre site. La règle de sécurité de la page (CSP)
+  l'interdit, et le moniteur réseau en bas de la page affiche les échanges mesurés par le navigateur.
+- Rien n'est enregistré : le texte n'existe que dans la page, jusqu'à sa fermeture.
+
+Installation (service informatique)
+1. Copier tout le contenu de ce dossier dans le dossier d'un site web interne.
+2. Servir le site en HTTPS (certificat de l'établissement) : sans HTTPS, le navigateur refuse le micro.
+3. Appliquer les en-têtes de sécurité : web.config (IIS, prêt à l'emploi) ou nginx-exemple.conf (à adapter).
+   Sans les en-têtes COOP/COEP, la dictée fonctionne mais avec un seul cœur du processeur (plus lente).
+4. Restreindre l'accès au site selon les règles de l'établissement (authentification, réseau autorisé).
+5. Vérifier l'intégrité des fichiers avec SHA256SUMS.txt.
+
+Phrase secrète
+- Le modèle (dossier modele/) est chiffré. Il se déverrouille dans le navigateur avec la phrase secrète,
+  remise à part avec ce paquet.
+- Pour la changer : Réglages → « Changer ma phrase secrète ». Le navigateur télécharge un nouveau fichier
+  cle.json, que le service informatique dépose à la place de modele/cle.json. L'ancienne phrase ne fonctionne
+  plus ensuite. Rien n'est envoyé au serveur.
+
+Postes utilisateurs
+- Navigateur récent : Chrome, Edge ou Firefox. Micro autorisé pour le site.
+- Le premier chargement télécharge le modèle depuis le serveur interne (environ 935 Mo), puis il est gardé dans le
+  cache du navigateur.
+- Mémoire : prévoir au moins 4 Go libres par poste pendant la dictée.
+
+Contrôle indépendant
+- Outil « Réseau » du navigateur (F12) : pendant la dictée, aucun échange.
+- Débrancher le réseau une fois le modèle chargé : la dictée continue de fonctionner.
+
+Contact sécurité : voir https://nidervoice.com/.well-known/security.txt (depuis un poste qui a accès à Internet).
+© 2026 NiderLabs. Code de reconnaissance : parakeet.js (MIT, voir app/LICENSE-parakeet.js.txt) et onnxruntime-web (MIT).

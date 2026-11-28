@@ -1,6 +1,7 @@
 // Moteur de la dictée en ligne : verrou du modèle, chargement, micro, découpage aux pauses, reconnaissance.
 // Accès réseau : seulement vers ce site (f.php pour le modèle chiffré et le verrou, cle.php pour changer
-// de phrase secrète, medtext.wasm et rec-worklet.js au déverrouillage). Le son ne quitte jamais la mémoire.
+// de phrase secrète, medtext.wasm et rec-worklet.js au déverrouillage) ; en version intranet, le dossier modele/
+// du serveur de l'établissement, et aucun envoi. Le son ne quitte jamais la mémoire.
 // Ne fait PAS : aucun envoi de son ni de texte, aucune interprétation du contenu médical.
 // Données : son du micro (mémoire, effacé après chaque passage), clé du modèle (mémoire, non exportée sauf
 // pour être re-verrouillée par une nouvelle phrase dans le navigateur).
@@ -21,6 +22,10 @@ const deB64 = (b) => Uint8Array.from(atob(b), (c) => c.charCodeAt(0));
 const enB64 = (u) => btoa(String.fromCharCode(...u));
 const ici = (nom) => new URL(nom, import.meta.url).href;
 const SESSION_EXPIREE = "Session expirée : rechargez la page pour vous reconnecter.";
+// Version intranet : <html data-modele="modele/"> ; le modèle chiffré est lu comme de simples fichiers du serveur.
+const RACINE = document.documentElement.dataset.modele || "";
+export const intranet = RACINE !== "";
+const adresse = (nom) => (intranet ? RACINE + nom : "f.php?n=" + nom);
 
 ort.env.wasm.wasmPaths = ici("ort/");
 ort.env.wasm.numThreads = self.crossOriginIsolated
@@ -35,7 +40,7 @@ let mise = null; // module medtext.wasm (mise en forme dictée), ou null
 /* ---------- Verrou et modèle chiffré ---------- */
 
 async function lireJson(nom) {
-  const r = await fetch("f.php?n=" + nom, { cache: "no-store", credentials: "same-origin" });
+  const r = await fetch(adresse(nom), { cache: "no-store", credentials: "same-origin" });
   if (r.status === 403) throw new Error(SESSION_EXPIREE);
   if (!r.ok) throw new Error("Fichier " + nom + " indisponible (" + r.status + ").");
   return r.json();
@@ -64,7 +69,7 @@ async function ouvrirVerrou(phrase, verrou) {
 }
 
 async function morceau(nom, cache) {
-  const url = new URL("f.php?n=" + nom, location.href).href;
+  const url = new URL(adresse(nom), location.href).href;
   let r = cache ? await cache.match(url) : null;
   if (!r) {
     r = await fetch(url, { credentials: "same-origin", cache: "no-store" });
@@ -99,7 +104,7 @@ async function chargerModele(manifeste, progres) {
         clair = new Uint8Array(await crypto.subtle.decrypt(
           { name: "AES-GCM", iv, additionalData: octets.encode(f.name + ":" + k) }, cleModele, chiffre));
       } catch {
-        if (cache) await cache.delete(new URL("f.php?n=" + nom, location.href).href);
+        if (cache) await cache.delete(new URL(adresse(nom), location.href).href);
         throw new Error("Morceau " + nom + " abîmé : rechargez la page.");
       }
       donnees.set(clair, k * manifeste.chunk);
@@ -143,8 +148,8 @@ export async function deverrouiller(phrase, progres) {
   };
 }
 
-/** Re-verrouille la clé du modèle avec une nouvelle phrase (dans le navigateur) et envoie ce verrou. */
-export async function changerPhrase(nouvelle, csrf) {
+/** Re-verrouille la clé du modèle avec une nouvelle phrase, dans le navigateur. Renvoie le verrou (texte JSON). */
+export async function nouveauVerrou(nouvelle) {
   const sel = crypto.getRandomValues(new Uint8Array(16));
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const iter = 600000;
@@ -153,11 +158,15 @@ export async function changerPhrase(nouvelle, csrf) {
   const enveloppe = new Uint8Array(await crypto.subtle.encrypt(
     { name: "AES-GCM", iv, additionalData: octets.encode("nidervoice-cle") }, kek, brute));
   brute.fill(0);
-  const verrou = { version: 1, kdf: "PBKDF2-SHA256", iter, salt: enB64(sel), iv: enB64(iv), wrapped: enB64(enveloppe) };
+  return JSON.stringify({ version: 1, kdf: "PBKDF2-SHA256", iter, salt: enB64(sel), iv: enB64(iv), wrapped: enB64(enveloppe) });
+}
+
+/** Version en ligne : envoie le nouveau verrou au serveur. Renvoie null si c'est fait, sinon le code d'erreur. */
+export async function changerPhrase(nouvelle, csrf) {
   const r = await fetch("cle.php", {
     method: "POST", credentials: "same-origin",
     headers: { "Content-Type": "application/json", "X-CSRF": csrf },
-    body: JSON.stringify(verrou),
+    body: await nouveauVerrou(nouvelle),
   });
   return r.ok ? null : r.status;
 }

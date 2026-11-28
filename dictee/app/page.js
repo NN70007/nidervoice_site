@@ -261,6 +261,16 @@ $("changeForm").addEventListener("submit", async (ev) => {
   const p1 = $("p1").value, p2 = $("p2").value;
   if (p1 !== p2) { $("changeMsg").textContent = "Les deux phrases ne sont pas identiques."; return; }
   if (p1.length < 20) { $("changeMsg").textContent = "Au moins 20 caractères."; return; }
+  if (moteur.intranet) { // pas d'envoi : le nouveau verrou est téléchargé, à déposer sur le serveur à la place de modele/cle.json
+    const lien = document.createElement("a");
+    lien.href = URL.createObjectURL(new Blob([await moteur.nouveauVerrou(p1)], { type: "application/json" }));
+    lien.download = "cle.json";
+    lien.click();
+    setTimeout(() => URL.revokeObjectURL(lien.href), 1000);
+    $("changeMsg").textContent = "Nouveau verrou téléchargé : à remplacer dans modele/cle.json sur le serveur.";
+    $("p1").value = ""; $("p2").value = "";
+    return;
+  }
   try {
     const echec = await moteur.changerPhrase(p1, csrf);
     $("changeMsg").textContent = echec ? "Échec de l'enregistrement (" + echec + ")." : "Nouvelle phrase enregistrée. L'ancienne ne fonctionne plus.";
@@ -281,6 +291,7 @@ feuille.addEventListener("input", () => {
 });
 
 function majFiche() {
+  if (moteur.intranet) return; // version intranet : aucun envoi, pas de fiche
   const n = retours.actualiser();
   $("fiche").classList.toggle("cache", n === 0);
   $("ficheTx").textContent = reseau.pluriel(n, "mot") + " à apprendre";
@@ -328,28 +339,30 @@ function majEnvoi() {
   $("ficheEnvoyer").textContent = n ? "Envoyer " + reseau.pluriel(n, "mot") + " coché" + (n > 1 ? "s" : "") : "Cochez les mots à envoyer";
 }
 
-$("fiche").addEventListener("click", () => { majFiche(); remplirFiche(); $("ficheMsg").textContent = ""; $("ficheFen").showModal(); });
-$("ficheOuvrir").addEventListener("click", () => { $("reglages").close(); majFiche(); remplirFiche(); $("ficheMsg").textContent = ""; $("ficheFen").showModal(); });
-$("ficheAjout").addEventListener("submit", (ev) => {
-  ev.preventDefault();
-  if (retours.ajouter($("ajEcrit").value, $("ajVoulu").value)) {
-    $("ajEcrit").value = ""; $("ajVoulu").value = ""; $("ficheMsg").textContent = "";
-    majFiche(); remplirFiche();
-  } else {
-    $("ficheMsg").textContent = "Refusé : 1 à 3 mots, 40 caractères au plus, sans chiffres.";
-  }
-});
-$("ficheEnvoyer").addEventListener("click", async () => {
-  $("ficheEnvoyer").disabled = true;
-  try {
-    const n = await retours.envoyer(csrf, $("app").dataset.pk, modele);
-    $("ficheMsg").textContent = reseau.pluriel(n, "mot") + " envoyé" + (n > 1 ? "s" : "") + ", chiffré" + (n > 1 ? "s" : "") + " pour le PC d'entraînement.";
-  } catch (e) {
-    $("ficheMsg").textContent = e.message;
-  }
-  majFiche();
-  remplirFiche();
-});
+if (!moteur.intranet) { // version intranet : pas de fiche de retour
+  $("fiche").addEventListener("click", () => { majFiche(); remplirFiche(); $("ficheMsg").textContent = ""; $("ficheFen").showModal(); });
+  $("ficheOuvrir").addEventListener("click", () => { $("reglages").close(); majFiche(); remplirFiche(); $("ficheMsg").textContent = ""; $("ficheFen").showModal(); });
+  $("ficheAjout").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    if (retours.ajouter($("ajEcrit").value, $("ajVoulu").value)) {
+      $("ajEcrit").value = ""; $("ajVoulu").value = ""; $("ficheMsg").textContent = "";
+      majFiche(); remplirFiche();
+    } else {
+      $("ficheMsg").textContent = "Refusé : 1 à 3 mots, 40 caractères au plus, sans chiffres.";
+    }
+  });
+  $("ficheEnvoyer").addEventListener("click", async () => {
+    $("ficheEnvoyer").disabled = true;
+    try {
+      const n = await retours.envoyer(csrf, $("app").dataset.pk, modele);
+      $("ficheMsg").textContent = reseau.pluriel(n, "mot") + " envoyé" + (n > 1 ? "s" : "") + ", chiffré" + (n > 1 ? "s" : "") + " pour le PC d'entraînement.";
+    } catch (e) {
+      $("ficheMsg").textContent = e.message;
+    }
+    majFiche();
+    remplirFiche();
+  });
+}
 
 /* ---------- Moniteur réseau ---------- */
 
